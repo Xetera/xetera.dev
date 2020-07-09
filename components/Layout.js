@@ -39,7 +39,7 @@ export default function Layout({ children }) {
   return (
     <div
       className="max-w-screen-sm px-4 xl:py-8 lg:py-4 py-0 mx-auto"
-      style={{ maxWidth: !isRoot && "42rem" }}
+      style={{ maxWidth: "42rem" }}
     >
       <header>{header}</header>
       <main>{children}</main>

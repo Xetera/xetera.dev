@@ -13,7 +13,7 @@ export default function Home({ posts }) {
       <Bio />
       <Hr />
       <main className="flex relative flex-col xl:flex-row">
-        <div className="xl:w-1/2 xl:absolute xl:right-100 xl:mr-5">
+        <div className="xl:w-1/4 xl:absolute xl:right-100 xl:mr-5">
           <Sidebar />
         </div>
         <div className="w-auto">
