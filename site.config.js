@@ -2,14 +2,14 @@ export default {
   siteMetadata: {
     title: "Next.js Starter Blog",
     author: {
-      name: "Jose Felix",
+      name: process.env.SITE_NAME,
       summary: "who works building clean user interfaces with React.",
     },
     description: "A blog created with Next.js and Tailwind.css",
-    siteUrl: "https://nextjs-starter-blog-demo.netlify.app/",
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
     language: "en-US",
     social: {
-      twitter: "Jose_R_Felix",
+      twitter: "_Xetera",
     },
   },
 };

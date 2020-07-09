@@ -1,5 +1,6 @@
 import ReactMarkdown from "react-markdown/with-html";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import dark from "react-syntax-highlighter/dist/cjs/styles/prism/pojoaque";
 
 import Layout from "components/Layout";
 import Image from "components/Image";
@@ -7,7 +8,11 @@ import SEO from "components/Seo";
 import { getPostBySlug, getPostsSlugs } from "utils/posts";
 
 const CodeBlock = ({ language, value }) => {
-  return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>;
+  return (
+    <SyntaxHighlighter language={language} style={dark}>
+      {value}
+    </SyntaxHighlighter>
+  );
 };
 
 const MarkdownImage = ({ alt, src }) => (
@@ -29,9 +34,13 @@ export default function Post({ post, frontmatter }) {
 
       <article>
         <header>
-          <h1 className="my-0">{frontmatter.title}</h1>
-          <p className="text-xs">{frontmatter.date}</p>
+          <h1 className="my-0 text-blue-100">{frontmatter.title}</h1>
+          <p className="my-2 text-gray-400">{frontmatter.description}</p>
+          <time dateTime={frontmatter.date} className="text-s mb-5 block">
+            {frontmatter.date}
+          </time>
         </header>
+        <hr className="bg-green-400" />
         <ReactMarkdown
           escapeHtml={false}
           source={post.content}
