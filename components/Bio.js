@@ -10,7 +10,7 @@ export default function Bio() {
       <div className="flex sm:items-center mt-8 mb-6 sm:flex-row flex-col items-start">
         <Image
           className="flex-shrink-0 w-12 h-12 mb-4 sm:mb-0 mr-4 rounded-full"
-          src={require("../content/assets/avatar.png?resize&size=50")}
+          src={require("../content/assets/avatar.png?resize&size=100&quality=100")}
           alt="Profile"
         />
         <p className="mb-0 text-md text-gray-400">

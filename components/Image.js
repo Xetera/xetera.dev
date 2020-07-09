@@ -16,7 +16,7 @@ export function TechImage({ name, alt, ...rest }) {
   return (
     <Image
       style={{ width: "30px" }}
-      src={require(`../content/assets/tech/${name}?resize&size=30`)}
+      src={require(`../content/assets/tech/${name}?resize&size=60&quality=100`)}
       className="my-0"
       alt={alt}
       {...rest}
