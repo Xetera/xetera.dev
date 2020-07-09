@@ -5,7 +5,7 @@ export default function Image({ alt, src, previewSrc, className, ...rest }) {
     <img
       className={`lazyload blur-up ${className}`}
       alt={alt}
-      src={previewSrc}
+      src={previewSrc ?? src}
       data-srcset={src}
       {...rest}
     />
@@ -13,6 +13,19 @@ export default function Image({ alt, src, previewSrc, className, ...rest }) {
 }
 
 export function TechImage({ name, alt, ...rest }) {
+  return (
+    <Image
+      style={{ width: "30px" }}
+      src={require(`../content/assets/tech/${name}?resize&size=30`)}
+      className="my-0"
+      alt={alt}
+      {...rest}
+    />
+  );
+}
+
+// for some reason I can't make the resize a variable in the component????
+export function TechImageSmall({ name, alt, ...rest }) {
   return (
     <Image
       style={{ width: "25px" }}

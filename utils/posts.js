@@ -1,6 +1,7 @@
 import matter from "gray-matter";
 import fs from "fs";
 import path from "path";
+import readingTime from "reading-time";
 
 // Get day in format: Month day, Year. e.g. April 19, 2020
 function getFormattedDate(date) {
@@ -22,11 +23,13 @@ export function getSortedPosts() {
         .toString();
 
       // Parse markdown and get frontmatter data.
-      const { data } = matter(markdownWithMetadata);
+      const { data, content } = matter(markdownWithMetadata);
+      const readTime = readingTime(content);
 
       const frontmatter = {
         ...data,
         date: getFormattedDate(data.date),
+        readTime: readTime.text,
       };
 
       // Remove .md file extension from post name
@@ -68,6 +71,7 @@ export function getPostBySlug(slug) {
   const frontmatter = {
     ...data,
     date: getFormattedDate(data.date),
+    readTime: readingTime(content).text,
   };
 
   return { frontmatter, post: { content, excerpt } };

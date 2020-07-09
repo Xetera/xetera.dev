@@ -11,6 +11,9 @@ SutroTheme.overrideThemeStyles = ({ rhythm }, options) => ({
   a: {
     color: "rgb(81, 196, 211)",
   },
+  li: {
+    listStyleType: "katakana",
+  },
   "h1,h2,h3,h4,h5,h6": {
     marginTop: rhythm(1 / 2),
   },

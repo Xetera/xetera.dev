@@ -1,4 +1,4 @@
-import Image, { TechImage } from "./Image";
+import Image, { TechImageSmall } from "./Image";
 import ExternalLink from "./ExternalLink";
 import { getSiteMetaData } from "utils/helpers";
 
@@ -7,19 +7,19 @@ export default function Bio() {
 
   return (
     <>
-      <div className="flex items-center my-8">
+      <div className="flex sm:items-center mt-8 mb-6 sm:flex-row flex-col items-start">
         <Image
-          className="flex-shrink-0 w-12 h-12 mb-0 mr-4 rounded-full"
-          src={require("../content/assets/avatar.png")}
-          previewSrc={require("../content/assets/avatar.png?lqip")}
+          className="flex-shrink-0 w-12 h-12 mb-4 sm:mb-0 mr-4 rounded-full"
+          src={require("../content/assets/avatar.png?resize&size=50")}
           alt="Profile"
         />
         <p className="mb-0 text-md text-gray-400">
           Hi, I'm a full-stack developer. Working on products that people love
-          using gets me up in the morning.
+          using gets me up in the morning. Currently building{" "}
+          <ExternalLink href="https://dev.kiyomi.io">kiyomi.io</ExternalLink>
         </p>
       </div>
-      <div className="mb-6">
+      <div className="mb-8">
         <div
           className="grid gap-5 grid-flow-col"
           style={{ width: "max-content" }}
@@ -28,14 +28,22 @@ export default function Bio() {
             href="https://github.com/xetera"
             className="flex items-center text-sm"
           >
-            <TechImage name="github.png" alt="github" className="mr-2 mb-0" />{" "}
+            <TechImageSmall
+              name="github.png"
+              alt="github"
+              className="mr-3 mb-0"
+            />{" "}
             Github
           </ExternalLink>
           <ExternalLink
             href="https://twitter.com/_Xetera"
             className="flex items-center text-sm"
           >
-            <TechImage name="twitter.png" alt="twitter" className="mr-2 mb-0" />{" "}
+            <TechImageSmall
+              name="twitter.png"
+              alt="twitter"
+              className="mr-3 mb-0"
+            />{" "}
             Twitter
           </ExternalLink>
         </div>

@@ -7597,6 +7597,11 @@ readdirp@~3.4.0:
   dependencies:
     picomatch "^2.2.1"
 
+reading-time@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/reading-time/-/reading-time-1.2.0.tgz#ced71c06715762f805506328dcc1fd45d8249ac4"
+  integrity sha512-5b4XmKK4MEss63y0Lw0vn0Zn6G5kiHP88mUnD8UeEsyORj3sh1ghTH0/u6m1Ax9G2F4wUZrknlp6WlIsCvoXVA==
+
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
@@ -8918,11 +8923,6 @@ typeface-noto-sans@^0.0.72:
   version "0.0.72"
   resolved "https://registry.yarnpkg.com/typeface-noto-sans/-/typeface-noto-sans-0.0.72.tgz#44f1022fe094595240c89f1e362517b1fe35be6c"
   integrity sha512-a5wI6LUIQ/6XRRf9x/ZXjO4NwfTfcPmkMVe0SoUKVWw/s7GGWERAK73PKFLEmKKGaN59OkwFsotPgYtea0d34A==
-
-typeface-open-sans@^0.0.75:
-  version "0.0.75"
-  resolved "https://registry.yarnpkg.com/typeface-open-sans/-/typeface-open-sans-0.0.75.tgz#20d0c330f14c0c40463c334adbedd6005389abe4"
-  integrity sha512-0lLmB7pfj113OP4T78SbpSmC4OCdFQ0vUxdSXQccsSb6qF76F92iEuC/DghFgmPswTyidk8+Hwf+PS/htiJoRQ==
 
 typeface-poppins@^0.0.72:
   version "0.0.72"
