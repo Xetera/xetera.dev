@@ -1,0 +1,31 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  background: #112130;
+}
+
+a {
+  color: rgb(81, 196, 211);
+}
+
+/* For highlighting code stuff */
+p > code {
+  background: #1d3348;
+  padding: 3px;
+  border-radius: 6px;
+}
+
+li {
+  list-style-type: katakana;
+  list-style-type: bulletpoint;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: "Jetbrains Mono", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
+    monospace;
+  font-size: 14px;
+  tab-size: 2;
+}
