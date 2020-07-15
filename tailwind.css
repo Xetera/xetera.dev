@@ -18,7 +18,8 @@ p > code {
 }
 
 li {
-  list-style-type: katakana;
+  list-style-type: korean-hangul-formal;
+  list-style-type: hangul;
   list-style-type: bulletpoint;
 }
 
@@ -29,3 +30,22 @@ pre[class*="language-"] {
   font-size: 14px;
   tab-size: 2;
 }
+
+:not(pre) > code[class*="language-"] {
+  white-space: normal;
+  border-radius: 0.2em;
+  padding: 0.2em 0.4em;
+}
+
+.token.function {
+  color: #f9c685;
+}
+
+hr {
+  background: #293a4a;
+  height: 2px;
+}
+
+/* .hvariable {
+  color: rgb(43, 61, 226);
+} */

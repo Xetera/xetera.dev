@@ -32,10 +32,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
-          "gatsby-remark-reading-time",
+        extensions: [".md", ".mdx"],
+        gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -69,13 +69,15 @@ module.exports = {
         ],
       },
     },
+    "gatsby-plugin-twitter",
+    "gatsby-remark-reading-time",
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     "gatsby-plugin-postcss",
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        trackingId: `UA-133545986-8`,
       },
     },
     `gatsby-plugin-feed`,

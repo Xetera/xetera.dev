@@ -1,14 +1,17 @@
 import React from "react"
 import { Hr } from "../components/Layout"
 import Layout from "../components/Layout"
-import { Link } from "gatsby"
-import PostData from "../components/PostShared"
+import { Link, graphql } from "gatsby"
+import PostData, { Tags } from "../components/PostShared"
 import SEO from "../components/Seo"
+import { FaTag, FaTags } from "react-icons/fa"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 export default function Post({ data, pageContext, location }) {
-  const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata.title
+  const post = data.mdx
   const { previous, next } = pageContext
+  const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
+  const hasTags = post.frontmatter?.tags?.length > 0
   return (
     <Layout location={location}>
       <SEO
@@ -25,16 +28,22 @@ export default function Post({ data, pageContext, location }) {
             {post.frontmatter.description}
           </p>
           <PostData
-            className="mb-5"
+            className={hasTags ? "mb-2" : "mb-5"}
             date={post.frontmatter.date}
             readingTime={post.fields.readingTime.text}
           />
+          {hasTags && (
+            <div className="flex items-center mb-5 text-gray-500">
+              <TagIcon className="mr-3 text-lg mt-1" title="Tags" />
+              <Tags
+                tags={post.frontmatter?.tags ?? []}
+                fontClass="lg:text-sm text-xs"
+              />
+            </div>
+          )}
           <Hr />
         </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          className="mb-4"
-        />
+        <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
       </article>
       <Hr />
       <nav>
@@ -73,10 +82,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       fields {
         readingTime {
           text
@@ -84,6 +93,7 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        tags
         date(formatString: "MMMM DD, YYYY")
         description
       }

@@ -43,7 +43,7 @@ export default function Bio() {
           fixed={data.avatar.data.fixed}
           alt="Profile"
         />
-        <p className="mb-0 text-md text-gray-400">
+        <p className="mb-0 lg:text-lg text-gray-400">
           Hi, I'm a full-stack developer. Working on products that people love
           using gets me up in the morning. Currently building{" "}
           <ExternalLink href="https://dev.kiyomi.io">kiyomi.io</ExternalLink>

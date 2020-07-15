@@ -8,7 +8,7 @@ const classes = "font-white no-underline"
 
 export function Hr() {
   return (
-    <hr className="mb-5" style={{ background: "#293a4a", height: "2px" }} />
+    <hr className="mb-5" />
   )
 }
 

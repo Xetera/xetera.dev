@@ -2,15 +2,14 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/Bio"
-import PostData from "../components/PostShared"
+import PostData, { Tags } from "../components/PostShared"
 import Layout, { Hr } from "../components/Layout"
 import SEO from "../components/Seo"
 
 import Sidebar from "../components/Sidebar"
 
 const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+  const posts = data.allMdx.edges
 
   return (
     <Layout location={location}>
@@ -45,6 +44,7 @@ const BlogIndex = ({ data, location }) => {
                   <p className="m-0 text-gray-400">
                     {node.frontmatter.description}
                   </p>
+                  <Tags tags={node.frontmatter?.tags ?? []} fontClass="text-sm" />
                 </section>
               </article>
             )
@@ -64,7 +64,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           excerpt
@@ -78,6 +78,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+            tags
           }
         }
       }

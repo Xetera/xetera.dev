@@ -49,7 +49,7 @@ export default function Sidebar() {
     return all
   }, {})
   return (
-    <div>
+    <div className="xs:flex-col md:flex xl:block">
       {Object.entries(sorted).map(([section, icons]) => (
         <Section title={section} key={section}>
           {icons.map(icon => (
