@@ -1,4 +1,3 @@
-import "./Popup.css"
 import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -9,9 +8,7 @@ export const ToastContext = React.createContext({
 
 export function Toastable({ text, children, className = "" }) {
   const { setJsx } = React.useContext(ToastContext)
-  console.log("rendering")
   function onEnter() {
-    console.log("yes")
     setJsx(children)
   }
   function onLeave() {
@@ -53,7 +50,7 @@ export default function Popup({ className }) {
               opacity: 0,
               y: 0,
             }}
-            className={`bottom-auto flex popup bg-blue-900 rounded absolute py-3 px-4 text-blue-100 ${className} shadow-xl text-sm leading-normal md:max-w-md max-w-full md:mx-auto mx-4`}
+            className={`bottom-auto items-center flex popup bg-blue-900 rounded absolute py-3 px-4 text-blue-100 ${className} shadow-xl md:text-sm text-xs leading-normal md:max-w-lg max-w-full md:mx-auto mx-4`}
             style={{
               position: "fixed",
               bottom: "0",
@@ -62,11 +59,14 @@ export default function Popup({ className }) {
               transform: "translateX(-50%)",
             }}
           >
-            {jsx ??
-              "Angular is a really nice meme that is wrapped around another meme"}
+            {jsx ?? "Oh no this toast isn't meant to be blank!"}
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   )
+}
+
+export function ToastImg({ src }) {
+  return <img src={src} style={{ width: "30px" }} className="mr-2 mb-0" />
 }

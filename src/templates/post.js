@@ -7,7 +7,7 @@ import Popup from "../components/Popup"
 import SEO from "../components/Seo"
 import { FaTag, FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Toastable } from "../components/Popup"
+import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 
 export default function Post({ data, pageContext, location }) {
@@ -39,16 +39,17 @@ export default function Post({ data, pageContext, location }) {
             />
             {hasTags && (
               <div className="flex items-center mb-5 text-gray-500">
-                <TagIcon className="mr-3 text-lg" title="Tags" />
+                <TagIcon className="mr-3 md:text-lg text-sm" title="Tags" />
                 <Tags
                   tags={post.frontmatter?.tags ?? []}
+                  className="flex flex-row align-start flex-shrink"
                   fontClass="lg:text-sm text-xs"
                 />
               </div>
             )}
             <Hr />
           </header>
-          <MDXProvider components={{ Toastable }}>
+          <MDXProvider components={{ Toastable, ToastImg }}>
             <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
           </MDXProvider>
         </article>
@@ -74,7 +75,7 @@ export default function Post({ data, pageContext, location }) {
             </li>
           </ul>
         </nav>
-        <Popup className="">Here is a test meme</Popup>
+        <Popup />
       </Layout>
     </>
   )

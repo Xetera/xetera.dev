@@ -14,7 +14,7 @@ export default function PostData({ date, readingTime, className }) {
 
 export function Tags({ tags, className, fontClass }) {
   return (
-    <div className={`container flex-col ${className}`}>
+    <div className={`${className ?? ""}`}>
       {tags.map(tag => (
         <div
           className={`rounded-md inline-flex mr-2 bg-gray-800 px-3 font-normal text-gray-300 ${fontClass}`}

@@ -35,6 +35,7 @@ export default function Bio() {
       }
     }
   `)
+  console.log(data.site)
   return (
     <>
       <div className="flex sm:items-center mt-8 mb-6 sm:flex-row flex-col items-start">

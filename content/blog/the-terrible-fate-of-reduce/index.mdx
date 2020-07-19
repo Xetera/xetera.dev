@@ -91,7 +91,7 @@ The answer to this is in how JS and other popular languages try to fit features 
 
 ```hs
 flat :: [[a]] -> [a]
-flat = foldr (++) []
+flat = foldl (++) []
 ```
 
 <br />
@@ -120,7 +120,7 @@ flat :: [[a]] -> [a]
 We're stating that a `flat` function takes an input of 2 nested arrays and returns a singly nested array:
 
 ```hs
-flat = foldr (++) []
+flat = foldl (++) []
 ```
 
 <br />

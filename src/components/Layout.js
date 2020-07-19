@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { SITE_TITLE } from "./data"
 import { FaHandPointLeft } from "react-icons/fa"
+import Helmet from "gatsby-plugin-react-helmet"
 import ExternalLink from "./ExternalLink"
 import Popup, { ToastContext } from "./Popup"
 

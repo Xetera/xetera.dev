@@ -19,9 +19,9 @@ p > code {
 }
 
 li {
+  list-style-type: disc;
   list-style-type: korean-hangul-formal;
-  list-style-type: hangul;
-  list-style-type: bulletpoint;
+  /* list-style-type: hangul; */
 }
 
 code[class*="language-"],

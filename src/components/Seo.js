@@ -69,6 +69,15 @@ const SEO = ({ description, lang, meta, title }) => {
     >
       <meta name="theme-color" content={site.siteMetadata.themeColor} />
       <meta name="description" content={metaDescription} />
+      {/* <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${site.siteMetadata.analytics}`}
+      ></script>
+      <script type="application/ld+json">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('config', '${site.siteMetadata.analytics}');
+      `}</script> */}
     </Helmet>
   )
 }

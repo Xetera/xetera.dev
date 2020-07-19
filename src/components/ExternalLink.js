@@ -1,8 +1,10 @@
 import React from "react"
+import { OutboundLink } from "gatsby-plugin-google-analytics"
+
 export default function ExternalLink({ children, ...rest }) {
   return (
-    <a rel="external noopener noreferrer" target="_blank" {...rest}>
+    <OutboundLink rel="external noopener noreferrer" target="_blank" {...rest}>
       {children}
-    </a>
+    </OutboundLink>
   )
 }
