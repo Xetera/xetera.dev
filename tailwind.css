@@ -6,8 +6,9 @@ body {
   background: #112130;
 }
 
-a {
+article a {
   color: rgb(81, 196, 211);
+  text-decoration: underline;
 }
 
 /* For highlighting code stuff */

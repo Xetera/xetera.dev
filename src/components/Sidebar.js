@@ -25,7 +25,7 @@ function Section({ children, title }) {
 export default function Sidebar() {
   const data = useStaticQuery(graphql`
     query Sidebar {
-      icons: allFile(filter: { absolutePath: { regex: "//tech/" } }) {
+      icons: allFile(filter: { absolutePath: { regex: "^//tech//" } }) {
         edges {
           node {
             name
@@ -53,7 +53,6 @@ export default function Sidebar() {
       {Object.entries(sorted).map(([section, icons]) => (
         <Section title={section} key={section}>
           {icons.map(icon => (
-            // <h1>{JSON.stringify(icon)}</h1>
             <Technology
               fixed={icon.image.fixed}
               name={icon.name}
@@ -62,13 +61,6 @@ export default function Sidebar() {
           ))}
         </Section>
       ))}
-      {/* <Section title="Learning">
-        <Technology tech="rust.png" name="Rust" />
-      </Section>
-      <Section title="Wanting">
-        <Technology tech="elixir.png" name="Elixir" />
-        <Technology tech="rabbitmq.png" name="RabbitMQ" />
-      </Section> */}
     </div>
   )
 }

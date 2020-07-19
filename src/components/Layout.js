@@ -3,16 +3,16 @@ import { Link } from "gatsby"
 import { SITE_TITLE } from "./data"
 import { FaHandPointLeft } from "react-icons/fa"
 import ExternalLink from "./ExternalLink"
+import Popup, { ToastContext } from "./Popup"
 
 const classes = "font-white no-underline"
 
 export function Hr() {
-  return (
-    <hr className="mb-5" />
-  )
+  return <hr className="mb-5" />
 }
 
 export default function Layout({ location, children }) {
+  const [toastJsx, setToastJsx] = React.useState(null)
   const rootPath = `${__PATH_PREFIX__}/`
   const isRoot = location.pathname === rootPath
   const header = (
@@ -36,17 +36,14 @@ export default function Layout({ location, children }) {
   )
 
   return (
-    <div
-      className="max-w-screen-sm px-4 xl:py-12 py-4 mx-auto"
-      style={{ maxWidth: "42rem" }}
-    >
-      <header>{header}</header>
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with{" "}
-        <ExternalLink href="https://www.gatsbyjs.org/">Gatsby</ExternalLink>{" "}
-        &#128293;
-      </footer>
-    </div>
+    <ToastContext.Provider value={{ jsx: toastJsx, setJsx: setToastJsx }}>
+      <div
+        className="max-w-screen-sm px-4 xl:py-12 py-4 mx-auto relative"
+        style={{ maxWidth: "42rem" }}
+      >
+        <header>{header}</header>
+        <main>{children}</main>
+      </div>
+    </ToastContext.Provider>
   )
 }
