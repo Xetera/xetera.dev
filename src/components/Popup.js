@@ -31,7 +31,10 @@ export function Toastable({ text, children, className = "" }) {
 export default function Popup({ className }) {
   const { jsx } = React.useContext(ToastContext)
   const hovered = Boolean(jsx)
-  const targetY = window.innerWidth > 600 ? "-2.5rem" : "-1rem"
+  const targetY =
+    typeof window !== "undefined" && window.innerWidth > 600
+      ? "-2.5rem"
+      : "-1rem"
   return (
     <div className="w-screen fixed max-w-md" style={{ maxWidth: "42rem" }}>
       <AnimatePresence>

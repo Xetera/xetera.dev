@@ -11,7 +11,6 @@ import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 
 export default function Post({ data, pageContext, location }) {
-  console.log(data)
   const post = data.mdx
   const { previous, next } = pageContext
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
