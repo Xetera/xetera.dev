@@ -1,5 +1,10 @@
 module.exports = {
-  purge: ["./**/{pages,components,tailwind}/**/*.{js,jsx,ts,tsx,css}"],
+  purge: {
+    options: {
+      whitelist: ["my-2", "mb-3", "md:text-lg", "lg:text-sm"],
+    },
+    content: ["./**/{pages,components,tailwind}/**/*.{js,jsx,ts,tsx,css}"],
+  },
   theme: {
     extend: {
       minWidth: {
@@ -18,4 +23,4 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
-};
+}
