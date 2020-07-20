@@ -38,7 +38,7 @@ export default function Post({ data, pageContext, location }) {
             />
             {hasTags && (
               <div className="flex items-center mb-5 text-gray-500">
-                <TagIcon className="mr-3 md:text-lg text-sm" title="Tags" />
+                <TagIcon className="mr-3" title="Tags" />
                 <Tags
                   tags={post.frontmatter?.tags ?? []}
                   className="flex flex-row align-start flex-shrink"
@@ -55,7 +55,7 @@ export default function Post({ data, pageContext, location }) {
         <Hr />
         <nav>
           <ul
-            className="flex flex-wrap justify-between p-0 m-0 lg:text-base text-sm"
+            className="flex flex-wrap justify-between p-0 m-0 text-sm"
             style={{ listStyle: `none` }}
           >
             <li style={{ listStyle: "none" }}>
