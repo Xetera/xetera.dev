@@ -56,7 +56,7 @@ export default function Bio() {
           style={{ width: "max-content" }}
         >
           <ExternalLink
-            href={`https://github.com/${data.site.siteMetadata.social.github}`}
+            href={`https://github.com/xetera`}
             className="flex items-center text-sm"
           >
             <Img
