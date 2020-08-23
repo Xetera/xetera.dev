@@ -7,6 +7,13 @@ const SEO = ({ description, lang, meta, title }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
+        preview: file(absolutePath: { regex: "/assets/preview.png/" }) {
+          image: childImageSharp {
+            fluid(maxWidth: 1920) {
+              ...GatsbyImageSharpFluid_noBase64
+            }
+          }
+        }
         site {
           siteMetadata {
             title
@@ -23,7 +30,6 @@ const SEO = ({ description, lang, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const siteTitle = site.siteMetadata.title
-  console.log(metaDescription)
 
   return (
     <Helmet
@@ -49,24 +55,19 @@ const SEO = ({ description, lang, meta, title }) => {
           property: `og:type`,
           content: `website`,
         },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.social.twitter,
-        },
-        {
-          name: `twitter:siteTitle`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
       ].concat(meta)}
     >
+      <meta name="twitter:card" content="summary" />
+      <meta
+        name="twitter:creator"
+        content={`@${site.siteMetadata.social.twitter}`}
+      />
+      <meta
+        name="twitter:site"
+        content={`@${site.siteMetadata.social.twitter}`}
+      />
+      <meta name="twitter:siteTitle" content={title} />
+      <meta name="twitter:description" content={metaDescription} />
       <meta name="theme-color" content={site.siteMetadata.themeColor} />
       <meta name="description" content={metaDescription} />
       {/* <script
