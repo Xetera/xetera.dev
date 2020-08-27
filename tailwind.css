@@ -16,6 +16,7 @@ p > code {
   background: #1d3348;
   padding: 3px;
   border-radius: 6px;
+  border: 1px solid #100833;
 }
 
 li {
