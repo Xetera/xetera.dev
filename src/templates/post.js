@@ -16,7 +16,6 @@ export default function Post({ data, pageContext, location }) {
   const { previous, next } = pageContext
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
-  console.log(post.frontmatter)
   return (
     <>
       {post.frontmatter.draft && (
