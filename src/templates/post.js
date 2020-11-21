@@ -22,7 +22,7 @@ export default function Post({ data, pageContext, location }) {
         <Headroom>
           <div className="bg-lightBlue-900 max-w-screen">
             <p
-              className="text-lightBlue-400 py-3 px-4 m-0 m-auto md:text-base text-sm flex items-center"
+              className="py-3 px-4 m-0 m-auto md:text-base text-sm flex items-center"
               style={{ maxWidth: "42rem" }}
             >
               <img
