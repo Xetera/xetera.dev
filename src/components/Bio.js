@@ -19,13 +19,6 @@ export default function Bio() {
       twitter: file(absolutePath: { regex: "/twitter.png/" }) {
         ...SocialMedia
       }
-      avatar: file(absolutePath: { regex: "/avatar.png/" }) {
-        data: childImageSharp {
-          fixed(width: 50, height: 50) {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
       site {
         siteMetadata {
           social {
@@ -35,50 +28,42 @@ export default function Bio() {
       }
     }
   `)
-  console.log(data.site)
   return (
     <>
-      <div className="flex sm:items-center mt-8 mb-6 sm:flex-row flex-col items-start">
-        <Img
-          className="flex-shrink-0 w-12 h-12 mb-4 sm:mb-0 mr-4 rounded-full"
-          fixed={data.avatar.data.fixed}
-          alt="Profile"
-        />
-        <p className="mb-0 lg:text-lg text-gray-400">
-          Hi, I'm a full-stack developer. Working on products that people love
-          using gets me up in the morning. Currently building{" "}
-          <ExternalLink href="https://dev.kiyomi.io">kiyomi.io</ExternalLink>
+      <div className="flex sm:items-center mb-4 sm:flex-row flex-col items-start">
+        <p className="mb-0 lg:text-lg text-gray-300">
+          Hi I'm Ali, I'm currently a full-stack developer at{" "}
+          <ExternalLink href="https://top.gg">top.gg</ExternalLink>. I enjoy
+          writing, among other things, although you'll soon come to find out
+          that I am not very good at it.
         </p>
       </div>
-      <div className="mb-8">
+      <div className="mb-2">
+        {/* <p className="mb-2 text-gray-400">Follow me on social media</p>
         <div
-          className="grid gap-4 grid-flow-col"
+          className="grid gap-4 grid-flow-col mb-6"
           style={{ width: "max-content" }}
         >
           <ExternalLink
             href={`https://github.com/xetera`}
-            className="flex items-center text-sm"
+            className="flex items-center text-sm bg-gray-500 px-5 py-2 text-gray-100 rounded focus:ring"
           >
-            <Img
-              fixed={data.github.data.fixed}
-              alt="github"
-              className="mr-3 mb-0 rounded-full"
-            />{" "}
             Github
           </ExternalLink>
           <ExternalLink
             href={`https://twitter.com/${data.site.siteMetadata.social.twitter}`}
-            className="flex items-center text-sm"
+            className="flex items-center text-sm bg-blue-400 text-blue-100 px-5 py-2 rounded focus:ring"
           >
-            <Img
-              name="twitter.png"
-              alt="twitter"
-              className="mr-3 mb-0 rounded-full"
-              fixed={data.twitter.data.fixed}
-            />{" "}
             Twitter
           </ExternalLink>
-        </div>
+        </div> */}
+        <p className="text-gray-400 text-sm leading-6">
+          <i>
+            Views expressed on this blog are probably an amalgamation of
+            different people's opinions, maybe not my own but definitely not my
+            employer's.
+          </i>
+        </p>
       </div>
     </>
   )

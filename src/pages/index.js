@@ -1,6 +1,5 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
 import Bio from "../components/Bio"
 import PostData, { Tags } from "../components/PostShared"
 import Layout, { Hr } from "../components/Layout"
@@ -15,36 +14,38 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location}>
       <SEO title="Home" />
       <Bio />
-      <Hr />
-      <main className="flex relative flex-col xl:flex-row">
-        <div className="xl:w-1/4 xl:absolute xl:right-100 xl:mr-5">
+      <main className="flex relative xl:flex-row flex-col-reverse">
+        <div className="xl:w-1/4 xl:absolute xl:right-100 xl:mr-5 h-full mb-6">
           <Sidebar />
         </div>
-        <div className="w-auto">
+        <div className="w-auto grid mb-6" style={{ gap: "2.4rem" }}>
           {posts.map(({ node }) => {
             const title = node.frontmatter.title ?? node.fields.slug
             return (
-              <article key={title} className="mb-8">
+              <article key={title}>
                 <header>
                   <PostData
-                    className="mb-1"
+                    className="mb-1 text-sm"
                     date={node.frontmatter.date}
                     readingTime={node.fields.readingTime.text}
                   />
                   <h3 className="mb-1 my-0">
                     <Link
                       to={node.fields.slug}
-                      className="text-2xl text-blue-100 no-underline font-bold"
+                      className="text-xl text-gray-200 no-underline font-bold"
                     >
                       {title}
                     </Link>
                   </h3>
                 </header>
                 <section>
-                  <p className="m-0 text-gray-400">
+                  <p className="mb-2 font-medium text-gray-400 text-base">
                     {node.frontmatter.description}
                   </p>
-                  <Tags tags={node.frontmatter?.tags ?? []} fontClass="text-sm" />
+                  <Tags
+                    tags={node.frontmatter?.tags ?? []}
+                    fontClass="text-sm"
+                  />
                 </section>
               </article>
             )
@@ -64,7 +65,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { ne: true } } }
+    ) {
       edges {
         node {
           excerpt

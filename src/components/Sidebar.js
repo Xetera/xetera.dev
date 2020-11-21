@@ -4,17 +4,20 @@ import Img from "gatsby-image"
 
 function Technology({ fixed, name }) {
   return (
-    <div className="flex items-center my-3">
+    <div className="flex items-center">
       <Img fixed={fixed} alt={name} />
-      <p className="ml-3 mb-0 text-sm font-normal text-gray-500">{name}</p>
+      <p className="ml-3 mb-0 text-sm font-normal text-gray-300">{name}</p>
     </div>
   )
 }
 
 function Section({ children, title }) {
   return (
-    <section className="container mx-auto mb-8">
-      <h3 className="mb-5 font-bold text-gray-400 text-base uppercase">
+    <section
+      className="container mx-auto flex flex-col gap-4"
+      style={{ minWidth: 180 }}
+    >
+      <h3 className="m-0 font-bold text-gray-400 text-base uppercase">
         {title}
       </h3>
       {children}
@@ -49,7 +52,7 @@ export default function Sidebar() {
     return all
   }, {})
   return (
-    <div className="xs:flex-col md:flex xl:block">
+    <div className="grid sticky top-10 gap-8 md:gap-7 grid-flow-col xl:grid-flow-row overflow-auto">
       {Object.entries(sorted).map(([section, icons]) => (
         <Section title={section} key={section}>
           {icons.map(icon => (

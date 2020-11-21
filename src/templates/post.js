@@ -9,26 +9,48 @@ import { FaTag, FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
+import Headroom from "react-headroom"
 
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
   const { previous, next } = pageContext
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
+  console.log(post.frontmatter)
   return (
     <>
+      {post.frontmatter.draft && (
+        <Headroom>
+          <div className="bg-lightBlue-900 max-w-screen">
+            <p
+              className="text-lightBlue-400 py-3 px-4 m-0 m-auto md:text-base text-sm flex items-center"
+              style={{ maxWidth: "42rem" }}
+            >
+              <img
+                className="w-5 mr-4"
+                src="https://images.emojiterra.com/twitter/v13.0/512px/1f97a.png"
+              ></img>{" "}
+              You're viewing a draft. This post is not published.
+            </p>
+          </div>
+        </Headroom>
+      )}
       <Layout location={location}>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: ` #gatsby-focus-wrapper { overflow: hidden; } `,
+          }}
+        />
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
-
-        <article>
+        <article className="text-gray-200">
           <header>
-            <h1 className="my-0 text-blue-100 lg:text-5xl md:text-4xl text-3xl leading-tight font-black">
+            <h1 className="mb-5 md:text-4xl text-3xl font-black">
               {post.frontmatter.title}
             </h1>
-            <p className="my-2 md:text-lg text-gray-400">
+            <p className="my-2 text-lg text-gray-400">
               {post.frontmatter.description}
             </p>
             <PostData
@@ -46,13 +68,13 @@ export default function Post({ data, pageContext, location }) {
                 />
               </div>
             )}
-            <Hr />
           </header>
-          <MDXProvider components={{ Toastable, ToastImg }}>
-            <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
-          </MDXProvider>
+          <section>
+            <MDXProvider components={{ Toastable, ToastImg }}>
+              <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
+            </MDXProvider>
+          </section>
         </article>
-        <Hr />
         <nav>
           <ul
             className="flex flex-wrap justify-between p-0 m-0 text-sm"
@@ -96,6 +118,7 @@ export const pageQuery = graphql`
         }
       }
       frontmatter {
+        draft
         title
         tags
         date(formatString: "MMMM DD, YYYY")

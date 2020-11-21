@@ -10,6 +10,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.6",
     "@mdx-js/react": "^1.6.6",
+    "autoprefixer": "^9",
     "date-fns": "^2.14.0",
     "framer-motion": "^2.1.0",
     "gatsby": "^2.23.12",
@@ -36,28 +37,32 @@
     "gatsby-remark-smartypants": "^2.3.6",
     "gatsby-source-filesystem": "^2.3.14",
     "gatsby-transformer-sharp": "^2.5.7",
+    "postcss": "^7",
     "postcss-import": "^12.0.1",
     "postcss-preset-env": "^6.7.0",
     "prism-themes": "^1.4.0",
     "prismjs": "^1.21.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-headroom": "^3.0.0",
     "react-helmet": "^5.2.1",
     "react-icons": "^3.10.0",
     "react-typography": "^0.16.19",
+    "tailwindcss": "^2.0.1-compat",
+    "typeface-inter": "^1.1.13",
     "typeface-jetbrains-mono": "^1.0.5",
     "typeface-merriweather": "0.0.72",
     "typeface-montserrat": "0.0.75",
     "typeface-noto-sans": "^0.0.72",
+    "typeface-nunito": "^1.1.13",
+    "typeface-overpass": "^1.1.13",
     "typeface-poppins": "^0.0.72",
     "typography": "^0.16.19",
     "typography-theme-sutro": "^0.16.19",
     "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.4",
-    "prettier": "2.0.5",
-    "tailwindcss": "^1.4.6"
+    "prettier": "2.0.5"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "keywords": [

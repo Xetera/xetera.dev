@@ -5,7 +5,7 @@ delete SutroTheme.googleFonts
 
 SutroTheme.overrideThemeStyles = ({ rhythm }, options) => ({
   "p,span,div,time": {
-    color: "rgb(233, 233, 233)",
+    color: "rgb(213 216 218)",
     fontWeight: "400",
   },
   a: {
@@ -31,6 +31,7 @@ const typography = new Typography({
     "sans-serif",
   ],
   bodyFontFamily: [
+    "Nunito",
     "Noto Sans",
     "Helvetica Neue",
     "Helvetica",
