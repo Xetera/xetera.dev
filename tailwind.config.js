@@ -17,6 +17,7 @@ module.exports = {
         "md:text-lg",
         "md:text-4xl",
         "lg:text-sm",
+        "text-3xl",
         "lg:text-base",
         "text",
         "text-lg",
