@@ -21,23 +21,28 @@ SutroTheme.overrideThemeStyles = ({ rhythm }, options) => ({
 })
 SutroTheme.scaleRatio = 5 / 2
 
+const fontStack = [
+  "system-ui",
+  "-apple-system",
+  "Segoe UI",
+  "Roboto",
+  "Ubuntu",
+  "Cantarell",
+  "Noto Sans",
+  "sans-serif",
+  "BlinkMacSystemFont",
+  "Helvetica Neue",
+  "Arial",
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji",
+]
+
 const typography = new Typography({
   ...SutroTheme,
-  headerFontFamily: [
-    "Poppins",
-    "Helvetica Neue",
-    "Helvetica",
-    "Arial",
-    "sans-serif",
-  ],
-  bodyFontFamily: [
-    "Nunito",
-    "Noto Sans",
-    "Helvetica Neue",
-    "Helvetica",
-    "Arial",
-    "sans-serif",
-  ],
+  headerFontFamily: fontStack,
+  bodyFontFamily: fontStack,
 })
 
 // Hot reload typography in development.

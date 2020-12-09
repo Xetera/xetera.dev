@@ -65,6 +65,13 @@ export const pageQuery = graphql`
         title
       }
     }
+    cover: file(name: { regex: "/frontpage/" }) {
+      image: childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { draft: { ne: true } } }

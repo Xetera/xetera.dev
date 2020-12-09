@@ -11,16 +11,28 @@ import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 import Headroom from "react-headroom"
 
+const EndingText = ({ children }) => (
+  <i className="text-blueGray-500 font-semibold">{children}</i>
+)
+
+const NavigatorTitle = ({ children, pos }) => (
+  <p className={`font-semibold mb-1 font-blueGray-500 text-${pos}`}>
+    {children}
+  </p>
+)
+
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
+  console.log(post.frontmatter)
   const { previous, next } = pageContext
+  console.log(previous)
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
   return (
     <>
       {post.frontmatter.draft && (
         <Headroom>
-          <div className="bg-lightBlue-900 max-w-screen">
+          <div className="bg-theme-light max-w-screen">
             <p
               className="py-3 px-4 m-0 m-auto md:text-base text-sm flex items-center"
               style={{ maxWidth: "42rem" }}
@@ -34,7 +46,11 @@ export default function Post({ data, pageContext, location }) {
           </div>
         </Headroom>
       )}
-      <Layout location={location}>
+      <Layout
+        location={location}
+        imageTop={post.frontmatter.imageTop?.image.fluid}
+        imageBottom={post.frontmatter.imageBottom?.image.fluid}
+      >
         <style
           dangerouslySetInnerHTML={{
             __html: ` #gatsby-focus-wrapper { overflow: hidden; } `,
@@ -74,39 +90,57 @@ export default function Post({ data, pageContext, location }) {
             </MDXProvider>
           </section>
         </article>
-        <nav>
-          <ul
-            className="flex flex-wrap justify-between p-0 m-0 text-sm"
-            style={{ listStyle: `none` }}
-          >
-            <li style={{ listStyle: "none" }}>
-              {previous && (
-                <Link to={previous.fields.slug} rel="prev">
-                  ← {previous.frontmatter.title}
-                </Link>
-              )}
+        <Popup />
+      </Layout>
+      <nav className="p-4 flex items-center justify-center border-0 border-t-2 border-theme-light border-solid">
+        <div className="max-w-screen-lg margin-auto">
+          <ul className="flex flex-wrap justify-between p-0 m-0 text-sm w-full">
+            <li className="m-0 mr-2 list-none">
+              <NavigatorTitle pos="right">Previous Article</NavigatorTitle>
+              <p className="text-right m-0">
+                {previous ? (
+                  <>
+                    <Link to={previous.fields.slug} rel="prev">
+                      {previous.frontmatter.title}
+                    </Link>
+                    {previous.readingTime}
+                  </>
+                ) : (
+                  <EndingText>Bruh, you're at the beginning</EndingText>
+                )}
+              </p>
             </li>
-            <li style={{ listStyle: "none" }}>
-              {next && (
+            <li className="list-none m-0 ml-2">
+              <NavigatorTitle pos="left">Next Article</NavigatorTitle>
+              {next ? (
                 <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title} →
+                  {next.frontmatter.title}
                 </Link>
+              ) : (
+                <EndingText>This was the last one my dude</EndingText>
               )}
             </li>
           </ul>
-        </nav>
-        <Popup />
-      </Layout>
+        </div>
+      </nav>
     </>
   )
 }
 export const pageQuery = graphql`
+  fragment Cover on File {
+    image: childImageSharp {
+      fluid(quality: 90, maxWidth: 1920) {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
   query BlogPostBySlug($slug: String!) {
     site {
       siteMetadata {
         title
       }
     }
+
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
@@ -122,6 +156,12 @@ export const pageQuery = graphql`
         tags
         date(formatString: "MMMM DD, YYYY")
         description
+        imageTop {
+          ...Cover
+        }
+        imageBottom {
+          ...Cover
+        }
       }
     }
   }

@@ -38,11 +38,26 @@ module.exports = {
   theme: {
     colors: {
       ...require("tailwindcss/colors"),
+      theme: {
+        DEFAULT: "#0a131f",
+        alt: "#0f1a27",
+        light: "#15222f",
+        lighter: "#202c3d",
+      },
       alt: {
-        DEFAULT: "rgb(11 26 39)",
+        DEFAULT: "#0d1117",
       },
     },
     extend: {
+      spacing: {
+        inherit: "inherit",
+        vh: "100vh",
+        "neg-vh": "-100vh",
+        "half-vh": "50vh",
+        "neg-half-vh": "-50vh",
+        "quarter-vh": "25vh",
+        "neg-quarter-vh": "-25vh",
+      },
       minWidth: {
         content: "min-content",
       },
