@@ -10,22 +10,57 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 import Headroom from "react-headroom"
+import { WideBanner } from "../components/Markdown"
 
 const EndingText = ({ children }) => (
   <i className="text-blueGray-500 font-semibold">{children}</i>
 )
 
 const NavigatorTitle = ({ children, pos }) => (
-  <p className={`font-semibold mb-1 font-blueGray-500 text-${pos}`}>
+  <p
+    className={`font-bold mb-1 font-blueGray-500 ${
+      pos === "left" ? "text-right" : "text-left"
+    }`}
+  >
     {children}
   </p>
 )
 
+const Navigator = ({ pos, link }) => {
+  const isLeft = pos === "left"
+  const hasLink = Boolean(link)
+  return (
+    <div
+      className={`p-4 ${
+        isLeft ? "text-right" : "text-left"
+      } m-0 list-none flex-1 ${hasLink && "hover:bg-theme"}`}
+    >
+      <Link to={link?.fields.slug} rel="prev" className="hover:no-underline">
+        <NavigatorTitle pos={pos}>
+          {isLeft ? "← Previous" : "Next"} Article {!isLeft && "→"}
+        </NavigatorTitle>
+        <p className="m-0 text-blueGray-300">
+          {link ? (
+            <>
+              {link.frontmatter.title}
+              {link.readingTime}
+            </>
+          ) : (
+            <EndingText pos={pos}>
+              {isLeft
+                ? "Bruh, you're at the beginning"
+                : "This was the last one my dude"}
+            </EndingText>
+          )}
+        </p>
+      </Link>
+    </div>
+  )
+}
+
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
-  console.log(post.frontmatter)
   const { previous, next } = pageContext
-  console.log(previous)
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
   return (
@@ -48,8 +83,8 @@ export default function Post({ data, pageContext, location }) {
       )}
       <Layout
         location={location}
-        imageTop={post.frontmatter.imageTop?.image.fluid}
-        imageBottom={post.frontmatter.imageBottom?.image.fluid}
+        imageTop={post.frontmatter.imageTop}
+        imageBottom={post.frontmatter.imageBottom}
       >
         <style
           dangerouslySetInnerHTML={{
@@ -65,7 +100,7 @@ export default function Post({ data, pageContext, location }) {
             <h1 className="mb-5 md:text-4xl text-3xl font-black">
               {post.frontmatter.title}
             </h1>
-            <p className="my-2 text-lg text-gray-400">
+            <p className="my-2 text-lg text-gray-400 font-medium">
               {post.frontmatter.description}
             </p>
             <PostData
@@ -85,43 +120,18 @@ export default function Post({ data, pageContext, location }) {
             )}
           </header>
           <section>
-            <MDXProvider components={{ Toastable, ToastImg }}>
+            <MDXProvider components={{ Toastable, ToastImg, WideBanner }}>
               <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
             </MDXProvider>
           </section>
         </article>
         <Popup />
       </Layout>
-      <nav className="p-4 flex items-center justify-center border-0 border-t-2 border-theme-light border-solid">
-        <div className="max-w-screen-lg margin-auto">
-          <ul className="flex flex-wrap justify-between p-0 m-0 text-sm w-full">
-            <li className="m-0 mr-2 list-none">
-              <NavigatorTitle pos="right">Previous Article</NavigatorTitle>
-              <p className="text-right m-0">
-                {previous ? (
-                  <>
-                    <Link to={previous.fields.slug} rel="prev">
-                      {previous.frontmatter.title}
-                    </Link>
-                    {previous.readingTime}
-                  </>
-                ) : (
-                  <EndingText>Bruh, you're at the beginning</EndingText>
-                )}
-              </p>
-            </li>
-            <li className="list-none m-0 ml-2">
-              <NavigatorTitle pos="left">Next Article</NavigatorTitle>
-              {next ? (
-                <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title}
-                </Link>
-              ) : (
-                <EndingText>This was the last one my dude</EndingText>
-              )}
-            </li>
-          </ul>
-        </div>
+      <nav className="border-0 border-t-2 border-theme-light border-solid bg-theme-alt">
+        <section className="justify-center flex flex-row p-0 m-0 text-sm w-fullgap-4">
+          <Navigator pos="left" link={previous} />
+          <Navigator pos="right" link={next} />
+        </section>
       </nav>
     </>
   )
@@ -130,7 +140,7 @@ export const pageQuery = graphql`
   fragment Cover on File {
     image: childImageSharp {
       fluid(quality: 90, maxWidth: 1920) {
-        ...GatsbyImageSharpFluid
+        ...GatsbyImageSharpFluid_withWebp
       }
     }
   }
@@ -157,10 +167,16 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         description
         imageTop {
-          ...Cover
+          src {
+            ...Cover
+          }
+          opacity
         }
         imageBottom {
-          ...Cover
+          src {
+            ...Cover
+          }
+          opacity
         }
       }
     }

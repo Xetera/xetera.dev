@@ -6,9 +6,14 @@ tags:
   - Kpop
   - Life
 draft: true
-imageTop: ./bp.png
-imageBottom: ./animebg.png
+imageTop:
+  src: ./twice.jpg
+imageBottom:
+  src: ./animebg.png
+  opacity: 0.06
 ---
+
+import { FaExclamationCircle } from "react-icons/fa"
 
 <div
   style="
@@ -17,15 +22,18 @@ imageBottom: ./animebg.png
   left: 50%;
   right: 50%;
   margin-left: -50vw;
-  margin-right: -50vw;
-  background: rgba(11, 26, 39, 0.5);"
+  margin-right: -50vw"
+  className="bg-theme-alt border-theme-light border-y-2 border-solid"
 >
   <div
     style="max-width: 42rem; margin: 0 auto"
     className="p-4 text-blueGray-400"
   >
-    <h2 className="text-base mt-0 mb-1">Important Disclaimer</h2>
-    <p className="mb-0 text-blueGray-400">
+    <h2 className="text-base font-bold mt-0 mb-1 text-blueGray-400 items-center flex">
+      <FaExclamationCircle className="text-base mr-2" />
+      Important Disclaimer
+    </h2>
+    <p className="mb-0 text-blueGray-300">
       I am very much a kpop fan myself. I have more in common with the people I
       criticize than you might think and that irony is not lost on me. There are
       going to be links throughout the article to kpop songs I like and you
@@ -54,7 +62,7 @@ export const Fancam = ({ children }) => (
   </Toastable>
 )
 
-<section style="background: rgb(11 26 39);">
+<section className="bg-theme-alt">
 
 <span className="flex flex-row p-4 text-coolGray-400 justify-between text-xs md:text-sm">
   <div className="flex items-center">
@@ -96,7 +104,7 @@ export const Fancam = ({ children }) => (
   </Toastable>
 </span>
 
-<div className="p-4" style="background: #0a1621">
+<div className="p-4 bg-theme-light">
 
 <span className="flex flex-row">
   <div className="mr-4">

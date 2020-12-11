@@ -11,13 +11,15 @@ export function Hr() {
   return <hr className="mb-5" />
 }
 
-const imageStyle = {
-  pointerEvents: "none",
-  width: "100%",
-  position: "absolute",
-  opacity: 0.03,
-  objectFit: "cover",
-  objectPosition: "top top",
+function imageStyle(opacity) {
+  return {
+    pointerEvents: "none",
+    width: "100%",
+    position: "absolute",
+    opacity: opacity ?? 0.05,
+    objectFit: "cover",
+    objectPosition: "top",
+  }
 }
 
 export default function Layout({ children, header, imageTop, imageBottom }) {
@@ -27,7 +29,7 @@ export default function Layout({ children, header, imageTop, imageBottom }) {
     <div className="bg-theme">
       <nav className="bg-theme-alt px-4 py-3 border-0 border-b-2 border-theme-light border-solid">
         <div className="flex justify-center max-w-screen-xl m-auto">
-          <Link to="/" className="hover:no-underline">
+          <Link to="/" className="hover:no-underline" prefetch>
             <h1 className="margin-0 text-lg m-0 font-black text-blueGray-400 hover:text-blueGray-300">
               {SITE_TITLE}
             </h1>
@@ -39,10 +41,10 @@ export default function Layout({ children, header, imageTop, imageBottom }) {
           {imageTop && (
             <div className="lg:mb-quarter-vh">
               <Image
-                fluid={imageTop}
+                fluid={imageTop.src.image.fluid}
                 className="absolute left-0 top-0 h-half-vh lg:h-inherit"
                 style={{
-                  ...imageStyle,
+                  ...imageStyle(imageTop.opacity),
                   WebkitMaskImage:
                     "-webkit-gradient(linear, 0% 84%, 0% 100%, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0)))",
                 }}
@@ -59,10 +61,10 @@ export default function Layout({ children, header, imageTop, imageBottom }) {
           {imageBottom && (
             <div className="lg:mt-quarter-vh">
               <Image
-                fluid={imageBottom}
+                fluid={imageBottom.src.image.fluid}
                 className="absolute bottom-0 left-0 mb-0"
                 style={{
-                  ...imageStyle,
+                  ...imageStyle(imageBottom.opacity),
                   WebkitMaskImage:
                     "-webkit-gradient(linear, 0% 53%, 0% 0%, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0)))",
                 }}
