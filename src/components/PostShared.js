@@ -18,7 +18,7 @@ export function Tags({ tags, className, fontClass }) {
       {tags.map(tag => (
         <p
           key={tag}
-          className={`rounded-md inline-flex mr-2 bg-theme-alt px-3 py-1 font-normal text-xs mb-0 text-gray-300 ${fontClass}`}
+          className={`rounded-md inline-flex mr-2 bg-theme-alt px-3 py-1 font-normal text-xs mb-0 text-gray-300 ${fontClass} z-10`}
         >
           {tag}
         </p>

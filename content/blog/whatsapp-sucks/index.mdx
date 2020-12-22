@@ -1,14 +1,14 @@
 ---
 title: 💬 Whatsapp Doesn't Deserve Your Business
 date: "2020-12-09"
-description: You should stop using it but you probably can't.
+description: Or at least not mine.
 tags:
   - Rant
 draft: true
 imageTop: &img
   src: ./whatsapp.jpg
-  opacity: 0.15
-# imageBottom: *img
+  opacity: 0.12
+imageBottom: *img
 ---
 
 <a
@@ -22,46 +22,92 @@ imageTop: &img
 
 This was one of the headlines that WhatsApp was praised for in 2015, attributing it to their use of Erlang. The engineer inside me still feels giddy at the thought of this since I'm a big fan of functional programming fan myself, but something about this headline doesn't sit right with me anymore. Every time I go to [https://web.whatsapp.com](https://web.whatsapp.com) to check my messages from the last 3 people in my friend circle who still use this app, and I wait for the page to load for 10 minutes only to realize that my phone hasn't been turned on for some time --and that I need to enter my password on my phone to use a chat app on desktop-- I think of this headline and it makes me angrier every time.
 
-The last time I was using this app regularly was around 4 years ago. That was back in the olden times when there were no stickers and ehh... uhm... yeah that's it actually. Everything else was exactly the same. WhatsApp, with their team of the last 50 Erlang developers on Earth, have been busy doing absolutely nothing, at least on the user-facing side.
+# Laziness
 
-Within debates I've had with people on this matter, something I've heard come up almost every single time is an argument along the lines of:
+The last time I was using this app regularly was around 4 years ago. That was back in the olden times when there were no stickers and ehh... uhm... yeah that's it actually. Everything else was exactly the same. WhatsApp, with their team of the last 50 Erlang developers on Earth, have been busy doing absolutely nothing, at least on the user-facing side. Meanwhile they've been growing to a mind-blowing scale of [100 billion messages sent per day](https://techcrunch.com/2020/10/29/whatsapp-is-now-delivering-roughly-100-billion-messages-a-day/), which is more messages that gets sent through the global SMS infrastructure. This is even more impressive considering that they don't allow consumer bots on their platform the way Slack or Discord does, but perhaps less so, when you realize that there is still widespread businesses automation.
 
-export const WaIcon = ({ ...props }) => (
-  <img
-    src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png"
-    {...props}
+The reason why this bothers me is because WhatsApp enjoys the leisure of a term I'm about to coin right now on the spot, called privacy-oriented laziness. Which is where your design decisions as a tech company based on privacy are a form of marketing for your users and a way of doing less work for your engineers. Building a system that tracks all of its users, while potentially very useful for growing a business, is a huge hassle engineering wise. Duckduckgo for example, doesn't have to deal with the work that goes into building a personalized search engine because that's just not what they do. WhatsApp doesn't store any messages from users for the sake of being privacy focused but that also means they have a lot less to worry about. Of course, when you're at the scale of WhatsApp, every technical problem is a massive challenge that requires completely rethinking the problem itself and not having to store messages doesn't end up being as big of a win. But the domain of problems that you're solving ends up being significantly smaller than if you had to worry about storing trillions of data points a month just for user messages alone.
+
+To me, this makes the fact that they're not doing anything even more egregious. But this doesn't seem to be the case for a lot of other people. While debating others about this, this is the kind of situation I ended up finding myself in a lot of the times.
+
+import Wa from "./whatsapp.png"
+import Boomer from "./peepoboomer.png"
+import Xetera from "../../assets/avatar.png"
+import NodReaction from "./prollynod.gif"
+import Downvote from "./downvote.png"
+import Angery from "./angery.png"
+import Uhuh from "./uhuh.png"
+
+<WideBanner
+  centered
+  style={{ background: "#36393f" }}
+  className="py-2 my-6"
+  innerClassName="grid gap-3"
+>
+  <DiscordMessage
+    message="Hey man, why does a chat program need features? Isn't it enough for it to just allow you to chat with people?"
+    username="Definitely Not a Facebook Employee"
+    roleColor="text-pink-700"
+    date="Today at 5:05 AM"
+    avatar={Wa}
+    reactions={[{ image: NodReaction, reactCount: 12, reacted: false }]}
   />
-)
-
-<WideBanner centered style={{ background: "#36393f" }}>
-  <div className="mb-2 flex" style={{ color: "#dcddde", lineHeight: "1.4" }}>
-    <WaIcon className="mr-3 md:w-10 md:h-10 w-8 h-8" />
-    <div>
-      <div className="flex items-baseline mb-1">
-        <p className="text-pink-700 font-bold" style={{ fontSize: "14px" }}>
-          Definitely Not Facebook Employee
-          <datetime
-            className="text-coolGray-500 ml-2 font-normal"
-            style={{ fontSize: "12px" }}
-          >
-            Today at 5:05 AM
-          </datetime>
-        </p>
-      </div>
-      <p style={{ fontSize: "16px" }} className="mb-1">
-        Hey man, why does a chat program need features? Isn't it enough for it
-        to just allow you to chat with people?
-      </p>
-    </div>
-  </div>
+  <DiscordMessage
+    message="If I can chat on it, it's good bro."
+    username="Boomer"
+    roleColor="text-orange-700"
+    date="Today at 5:10 AM"
+    avatar={Boomer}
+  />
+  <DiscordMessage
+    message="But there are so many problems with it, shouldn't you expect an app to be good and improving?"
+    username="Xetera"
+    roleColor="text-white"
+    date="Today at 5:12 AM"
+    reactions={[
+      { image: Downvote, reactCount: 35 },
+      { image: Angery, reactCount: 27 },
+    ]}
+    avatar={Xetera}
+  />
+  <DiscordMessage
+    message="That's the most ridiculous thing I've ever heard."
+    username="Definitely Not a Facebook Employee"
+    roleColor="text-pink-700"
+    date="Today at 5:13 AM"
+    avatar={Wa}
+    reactions={[{ image: Uhuh, reactCount: 0, reacted: true }]}
+  />
 </WideBanner>
 
-Let's think about this for a second.
+# It's just messaging app bro, why feature?
 
-## I just send message bro, why feature?
+Every time someone says this, the WhatsApp product manager drools all over his office desk. Why would a messaging app be subject
+to lesser standards you expect from other apps? I have 3 ideas for why I think this
+might be the case.
 
-Every time someone says this, WhatsApp product manager just drools all
+1. **You haven't experienced the features available in other, better, apps and don't know there's something else out there.**
 
-and it was pretty good at that! But as other apps started gaining popularity, this
-fact about WhatsApp has not changed. When Even before being acquired by Facebook,
+This is certainly
+possible, I didn't have problems with WhatsApp before I discovered what Discord lets
+you do, now it's indistinguishable from SMS to me.
+
+2. **You haven't experienced the pain of the problems that exist in the current app.**
+
+No app is perfect, there's
+always something to fix and make life easier for the users. WhatsApp is certainly
+in this stage and the problems it has is painfully obvious.
+
+3. **You are over the age of 65.**
+
+Yeah
+
+and it was pretty good at that! But as other apps started gaining popularity,
+this fact about WhatsApp has not changed. When Even before being acquired by Facebook,
 WhatsApp has been arguably one of the most complacent companies to date.
+
+<hr />
+
+#### Funny footnote
+
+While writing this post I sent something in WhatsApp that I had to delete later but accidentally ended up pressing `delete for me` instead of `delete for everyone` and completely lost the ability to delete it for everyone. Fuck this app AAAAAAAAAAAAAAAAAAAAAA.

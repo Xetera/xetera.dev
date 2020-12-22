@@ -52,7 +52,7 @@ export default function Sidebar() {
     return all
   }, {})
   return (
-    <div className="grid sticky top-10 gap-8 md:gap-7 grid-flow-col xl:grid-flow-row overflow-auto">
+    <div className="grid sticky top-10 gap-8 md:gap-7 grid-flow-col md:grid-flow-row overflow-auto">
       {Object.entries(sorted).map(([section, icons]) => (
         <Section title={section} key={section}>
           {icons.map(icon => (

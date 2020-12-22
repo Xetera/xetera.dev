@@ -1,5 +1,4 @@
 import React from "react"
-import { Hr } from "../components/Layout"
 import Layout from "../components/Layout"
 import { Link, graphql } from "gatsby"
 import PostData, { Tags } from "../components/PostShared"
@@ -10,7 +9,8 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 import Headroom from "react-headroom"
-import { WideBanner } from "../components/Markdown"
+import * as MarkdownComponents from "../components/Markdown"
+import Navbar from "../components/Navbar"
 
 const EndingText = ({ children }) => (
   <i className="text-blueGray-500 font-semibold">{children}</i>
@@ -63,11 +63,13 @@ export default function Post({ data, pageContext, location }) {
   const { previous, next } = pageContext
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
+  const { imageTop, imageBottom } = post.frontmatter
+  const isDraft = post.frontmatter.draft
   return (
     <>
       {post.frontmatter.draft && (
         <Headroom>
-          <div className="bg-theme-light max-w-screen">
+          <div className="bg-theme-light max-w-screen z-10">
             <p
               className="py-3 px-4 m-0 m-auto md:text-base text-sm flex items-center"
               style={{ maxWidth: "42rem" }}
@@ -81,10 +83,12 @@ export default function Post({ data, pageContext, location }) {
           </div>
         </Headroom>
       )}
+      <Navbar />
       <Layout
         location={location}
-        imageTop={post.frontmatter.imageTop}
-        imageBottom={post.frontmatter.imageBottom}
+        imageTop={imageTop}
+        imageBottom={imageBottom}
+        article
       >
         <style
           dangerouslySetInnerHTML={{
@@ -95,7 +99,7 @@ export default function Post({ data, pageContext, location }) {
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
-        <article className="text-gray-200">
+        <article className="text-gray-200 leading-relaxed lg:leading-loose my-8 md:my-24 px-6">
           <header>
             <h1 className="mb-5 md:text-4xl text-3xl font-black">
               {post.frontmatter.title}
@@ -120,26 +124,30 @@ export default function Post({ data, pageContext, location }) {
             )}
           </header>
           <section>
-            <MDXProvider components={{ Toastable, ToastImg, WideBanner }}>
+            <MDXProvider
+              components={{ Toastable, ToastImg, ...MarkdownComponents }}
+            >
               <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
             </MDXProvider>
           </section>
         </article>
         <Popup />
       </Layout>
-      <nav className="border-0 border-t-2 border-theme-light border-solid bg-theme-alt">
-        <section className="justify-center flex flex-row p-0 m-0 text-sm w-fullgap-4">
-          <Navigator pos="left" link={previous} />
-          <Navigator pos="right" link={next} />
-        </section>
-      </nav>
+      {!isDraft && (
+        <nav className="border-0 border-t-2 border-theme-light border-solid bg-theme-alt">
+          <section className="justify-center flex flex-row p-0 m-0 text-sm w-fullgap-4">
+            <Navigator pos="left" link={previous} />
+            <Navigator pos="right" link={next} />
+          </section>
+        </nav>
+      )}
     </>
   )
 }
 export const pageQuery = graphql`
   fragment Cover on File {
     image: childImageSharp {
-      fluid(quality: 90, maxWidth: 1920) {
+      fluid(quality: 90, srcSetBreakpoints: [400, 1200, 1920], maxWidth: 1920) {
         ...GatsbyImageSharpFluid_withWebp
       }
     }

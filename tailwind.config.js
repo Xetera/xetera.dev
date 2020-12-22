@@ -18,6 +18,8 @@ module.exports = {
         inherit: "inherit",
         vh: "100vh",
         "neg-vh": "-100vh",
+        "3-quarter-vh": "75vh",
+        "neg-3-quarter-vh": "-75vh",
         "half-vh": "50vh",
         "neg-half-vh": "-50vh",
         "quarter-vh": "25vh",
@@ -30,7 +32,7 @@ module.exports = {
         "100": "100%",
       },
       gridTemplateColumns: {
-        body: "200px auto",
+        body: "250px auto",
       },
     },
   },

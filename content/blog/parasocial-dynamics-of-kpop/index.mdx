@@ -9,39 +9,24 @@ draft: true
 imageTop:
   src: ./twice.jpg
 imageBottom:
-  src: ./animebg.png
-  opacity: 0.06
+  src: ./gidle.jpeg
+  opacity: 0.1
 ---
 
 import { FaExclamationCircle } from "react-icons/fa"
 
-<div
-  style="
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw"
-  className="bg-theme-alt border-theme-light border-y-2 border-solid"
->
-  <div
-    style="max-width: 42rem; margin: 0 auto"
-    className="p-4 text-blueGray-400"
-  >
-    <h2 className="text-base font-bold mt-0 mb-1 text-blueGray-400 items-center flex">
-      <FaExclamationCircle className="text-base mr-2" />
-      Important Disclaimer
-    </h2>
-    <p className="mb-0 text-blueGray-300">
-      I am very much a kpop fan myself. I have more in common with the people I
-      criticize than you might think and that irony is not lost on me. There are
-      going to be links throughout the article to kpop songs I like and you
-      better listen to them all or I will sue you.
-    </p>
-  </div>
-</div>
-<br />
+<WideBanner centered bordered>
+  <h2 className="text-base font-bold mt-0 mb-1 items-center flex">
+    <FaExclamationCircle className="text-base mr-2" />
+    Important Disclaimer
+  </h2>
+  <p className="mb-0 ">
+    I am very much a kpop fan myself. I have more in common with the people I
+    criticize than you might think and that irony is not lost on me. There are
+    going to be links throughout the article to kpop songs I like and you better
+    listen to them all or I will sue you.
+  </p>
+</WideBanner>
 
 <div className="relative">
 
@@ -81,10 +66,9 @@ export const Fancam = ({ children }) => (
 
 <p className="py-2 px-4 mb-0">Stan Loona guys!!</p>
 
-<img
-  src="https://i.pinimg.com/originals/43/f0/ae/43f0ae4fcabe3b8752e1a367f99c0ad6.gif"
-  className="w-full mb-0"
-/>
+<video className="w-full mb-0" autoplay loop playsinline>
+  <source src="./loona.mp4" />
+</video>
 
 <span>
   <Toastable

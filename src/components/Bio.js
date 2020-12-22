@@ -1,7 +1,7 @@
 import React from "react"
-import Img from "gatsby-image"
 import ExternalLink from "./ExternalLink"
 import { useStaticQuery, graphql } from "gatsby"
+import { BackgroundImage } from "./Image"
 
 export default function Bio() {
   const data = useStaticQuery(graphql`
@@ -19,6 +19,17 @@ export default function Bio() {
       twitter: file(absolutePath: { regex: "/twitter.png/" }) {
         ...SocialMedia
       }
+      cover: file(absolutePath: { regex: "/dreamcatcher.jpg/" }) {
+        image: childImageSharp {
+          fluid(
+            quality: 100
+            srcSetBreakpoints: [640, 1600, 1920, 2400]
+            maxWidth: 2400
+          ) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
       site {
         siteMetadata {
           social {
@@ -30,41 +41,33 @@ export default function Bio() {
   `)
   return (
     <>
-      <div className="flex sm:items-center mb-4 sm:flex-row flex-col items-start">
-        <p className="mb-0 lg:text-lg text-gray-300">
-          Hi I'm Ali, I'm currently a full-stack developer at{" "}
-          <ExternalLink href="https://top.gg">top.gg</ExternalLink>. I enjoy
-          writing, among other things, although you'll soon come to find out
-          that I am not very good at it.
-        </p>
-      </div>
-      <div className="mb-2">
-        {/* <p className="mb-2 text-gray-400">Follow me on social media</p>
-        <div
-          className="grid gap-4 grid-flow-col mb-6"
-          style={{ width: "max-content" }}
-        >
-          <ExternalLink
-            href={`https://github.com/xetera`}
-            className="flex items-center text-sm bg-gray-500 px-5 py-2 text-gray-100 rounded focus:ring"
-          >
-            Github
-          </ExternalLink>
-          <ExternalLink
-            href={`https://twitter.com/${data.site.siteMetadata.social.twitter}`}
-            className="flex items-center text-sm bg-blue-400 text-blue-100 px-5 py-2 rounded focus:ring"
-          >
-            Twitter
-          </ExternalLink>
-        </div> */}
-        <p className="text-gray-400 text-sm leading-6">
-          <i>
-            Views expressed on this blog are probably an amalgamation of
-            different people's opinions, maybe not my own but definitely not my
-            employer's.
-          </i>
-        </p>
-      </div>
+      <BackgroundImage
+        image={data.cover.image.fluid}
+        pos="top"
+        options={{
+          opacity: 0.07,
+          height: "100%",
+          WebkitMaskImage:
+            "-webkit-gradient(linear, 0% 44%, 0% 100%, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0)))",
+        }}
+      />
+      <article className="max-w-6xl mx-auto relative">
+        <section className="flex sm:items-center justify-center flex-col align-start lg:h-3-quarter-vh h-half-vh my-16 mx-6 text-center">
+          <h1 className="lg:text-6xl mb-1">Hi, I'm Ali</h1>
+          <p className="font-semibold text-blueGray-300">
+            I make websites and stuff.
+          </p>
+          <p className="mb-0 lg:text-lg text-blueGray-300 max-w-xl text-left">
+            I'm currently a full-stack developer at{" "}
+            <ExternalLink href="https://top.gg" className="no-underline">
+              top.gg
+            </ExternalLink>
+            . I enjoy design and writing on the side. I'm not really sure what
+            to write here which is worrying considering this is a blog.
+          </p>
+        </section>
+      </article>
+      <div className="mb-2"></div>
     </>
   )
 }

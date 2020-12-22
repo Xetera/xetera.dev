@@ -4,8 +4,8 @@ import SutroTheme from "typography-theme-sutro"
 delete SutroTheme.googleFonts
 
 SutroTheme.overrideThemeStyles = ({ rhythm }, options) => ({
-  "p,span,div,time": {
-    color: "rgb(213 216 218)",
+  "*": {
+    color: "rgb(214 213 218)",
     fontWeight: "400",
   },
   a: {
