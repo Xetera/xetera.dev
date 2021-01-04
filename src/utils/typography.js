@@ -5,7 +5,6 @@ delete SutroTheme.googleFonts
 
 SutroTheme.overrideThemeStyles = ({ rhythm }, options) => ({
   "*": {
-    color: "rgb(214 213 218)",
     fontWeight: "400",
   },
   a: {

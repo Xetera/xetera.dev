@@ -1,0 +1,88 @@
+body {
+  background: #0a131f;
+}
+
+article a {
+  color: rgb(81, 196, 211);
+  text-decoration: underline;
+}
+
+/* For highlighting code stuff */
+code {
+  background: #0a121d;
+  padding: 0.3em 0.6em !important;
+  border-radius: 2px;
+  border: 1px solid #192535;
+}
+
+li {
+  /* list-style-type: hangul; */
+  list-style-type: korean-hangul-formal;
+  list-style-type: disc;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  background: #0a121d; /* rgba(10, 19, 31, var(--tw-bg-opacity)); */
+  padding: 1em;
+  font-family: "Jetbrains Mono", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
+    monospace;
+  font-size: 14px;
+  tab-size: 2;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* white-space: pre-wrap; */
+  line-height: 2;
+}
+
+blockquote {
+  color: inherit;
+  font-size: 1rem;
+  font-style: normal;
+  border-left: 5px solid rgba(15, 26, 39, var(--tw-bg-opacity));
+}
+
+.highlight-line {
+  background-color: rgba(53, 59, 69, 0.5);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.3em solid #2d568b;
+}
+
+.token.function {
+  color: #f9c685;
+}
+
+hr {
+  background: #293a4a;
+  height: 2px;
+}
+
+/* .hvariable {
+  color: rgb(43, 61, 226);
+} */
+
+::selection {
+  background: rgb(94 98 216 / 62%);
+}
+
+/**
+ * If you only want to use line numbering
+ */
+
+.gatsby-highlight {
+  line-height: 1.7;
+  border-radius: 0.3em;
+  /* margin: 0.5em 0; */
+  /* padding: 1em; */
+  overflow: auto;
+}
+
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding: 0;
+  padding-left: 2.8em;
+  overflow: initial;
+}

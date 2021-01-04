@@ -1,4 +1,32 @@
 import React from "react"
+import Prism from "prism-react-renderer/prism"
+import Highlight, { defaultProps } from "prism-react-renderer"
+import Theme from "prism-react-renderer/themes/vsDark"
+import json5 from "json5"
+import rangeParser from "parse-numeric-range"
+export * from "./memes/Chatbox"
+;(typeof global !== "undefined" ? global : window).Prism = Prism
+require("prismjs/components/prism-typescript")
+require("prismjs/components/prism-haskell")
+
+const languageMappings = {
+  js: {
+    className: "bg-yellow-700 text-yellow-100",
+    name: "Javascript",
+  },
+  py: {
+    className: "bg-yellow-900 text-yellow-400",
+    name: "Python",
+  },
+  ts: {
+    className: "bg-blue-600 text-blue-200",
+    name: "Typescript",
+  },
+  hs: {
+    className: "bg-purple-800 text-purple-300",
+    name: "Haskell",
+  },
+}
 
 export function WideBanner({
   title,
@@ -7,6 +35,8 @@ export function WideBanner({
   bordered,
   className = "",
   innerClassName = "",
+  noBg,
+  noPadding,
   ...rest
 }) {
   return (
@@ -19,14 +49,14 @@ export function WideBanner({
         marginRight: "-50vw",
         ...(rest?.style ?? {}),
       }}
-      className={`bg-theme-alt ${
+      className={`${!noBg ? "bg-theme-alt" : ""} ${
         bordered &&
-        "border-theme-light border-t-2 border-b-2 border-l-0 border-r-0 border-solid"
+        "border-theme-light border-t-1 border-b-1 border-l-0 border-r-0 border-solid"
       } relative mb-6 ${className}`}
     >
       <div
         style={{ maxWidth: "42rem" }}
-        className={`py-4 px-6 text-blueGray-400 ${
+        className={`${!noPadding ? "py-4 px-6" : ""} text-blueGray-400 ${
           centered && "m-auto"
         } ${innerClassName}`}
       >
@@ -80,10 +110,18 @@ export function DiscordMessage({
   roleColor,
   date,
   avatar,
+  className = "",
   reactions = [],
 }) {
   return (
-    <div className="mb-2 flex" style={{ color: "#dcddde", lineHeight: "1.4" }}>
+    <div
+      className={`mb-2 flex ${className}`}
+      style={{
+        color: "#dcddde",
+        lineHeight: "1.4",
+        background: "#36393f",
+      }}
+    >
       <img
         className="mb-0 mr-3 md:w-10 md:h-10 w-8 h-8 rounded-full"
         src={avatar}
@@ -110,4 +148,99 @@ export function DiscordMessage({
       </div>
     </div>
   )
+}
+
+const calculateLinesToHighlight = meta => {
+  const RE = /([\d,-]+)/
+  if (RE.test(meta)) {
+    const strlineNumbers = RE.exec(meta)[1]
+    const lineNumbers = rangeParser(strlineNumbers)
+    return index => lineNumbers.includes(index + 1)
+  } else {
+    return () => false
+  }
+}
+
+export const overrides = {
+  pre(props) {
+    return <div {...props} />
+  },
+  code({ children, className, metastring }) {
+    const extraProps = json5.parse(metastring ?? "{}") ?? {}
+    if (typeof extraProps.lang === "undefined") {
+      extraProps.lang = true
+    }
+    console.log(extraProps)
+    const shouldHighlightLine = calculateLinesToHighlight(extraProps.h)
+    const language = className.replace(/language-/, "") || ""
+    const highlighterClass = languageMappings[language]
+    const isPreTitle = extraProps.title?.startsWith("/")
+    const TitleType = isPreTitle ? "pre" : "div"
+
+    return (
+      <>
+        {extraProps.title && (
+          <TitleType className="w-full px-4 py-2 mb-0 bg-theme-alt text-sm text-blueGray-500 rounded-t">
+            {extraProps.title}
+          </TitleType>
+        )}
+        <Highlight
+          {...defaultProps}
+          code={children}
+          language={language}
+          theme={Theme}
+        >
+          {({ className, tokens, getLineProps, getTokenProps }) => (
+            <pre
+              className={`${className} border-1 border-theme-alt border-solid relative mb-7`}
+            >
+              {highlighterClass && extraProps.lang && (
+                <p
+                  className={`absolute font-extralight top-0 right-2 py-1 px-2 text-xs opacity-80 rounded-b ${highlighterClass.className}`}
+                >
+                  {highlighterClass.name}
+                </p>
+              )}
+              {tokens.map((line, i) => {
+                // Remove the last empty line:
+                let lineNumberElem
+                if (
+                  line.length === 1 &&
+                  line[0].empty === true &&
+                  i === tokens.length - 1
+                ) {
+                  lineNumberElem = null
+                } else if (extraProps.lines) {
+                  lineNumberElem = (
+                    <span className="mr-4 text-blueGray-600 select-none">
+                      {i + 1}
+                    </span>
+                  )
+                }
+                // For some reason prism-react-renderer likes adding 1 extra line
+                // at the end of every codeblock so we remove it here
+                if (i === tokens.length - 1) {
+                  return null
+                }
+                const lineProps = getLineProps({ line, key: i })
+
+                if (shouldHighlightLine(i)) {
+                  lineProps.className = `${lineProps.className} highlight-line`
+                }
+
+                return (
+                  <div key={i} {...lineProps}>
+                    {lineNumberElem}
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
+                )
+              })}
+            </pre>
+          )}
+        </Highlight>
+      </>
+    )
+  },
 }

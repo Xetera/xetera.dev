@@ -1,0 +1,8 @@
+projects:
+  project:
+    schema: http://localhost:8000/___graphql
+    documents: project2/queries.graphql
+    extensions:
+      endpoints:
+        default:
+          url: http://localhost:8000/___graphql

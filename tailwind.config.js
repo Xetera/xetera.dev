@@ -1,9 +1,13 @@
 module.exports = {
   purge: ["./src/**/*.{js,jsx}", "./content/**/*.{md,mdx}"],
   theme: {
+    borderWidth: {
+      1: "1px",
+    },
     colors: {
       ...require("tailwindcss/colors"),
       theme: {
+        dark: "#0a121d",
         DEFAULT: "#0a131f",
         alt: "#0f1a27",
         light: "#15222f",

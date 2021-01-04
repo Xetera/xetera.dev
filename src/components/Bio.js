@@ -51,7 +51,7 @@ export default function Bio() {
             "-webkit-gradient(linear, 0% 44%, 0% 100%, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0)))",
         }}
       />
-      <article className="max-w-6xl mx-auto relative">
+      <article className="max-w-6xl mx-auto relative text-blueGray-300">
         <section className="flex sm:items-center justify-center flex-col align-start lg:h-3-quarter-vh h-half-vh my-16 mx-6 text-center">
           <h1 className="lg:text-6xl mb-1">Hi, I'm Ali</h1>
           <p className="font-semibold text-blueGray-300">

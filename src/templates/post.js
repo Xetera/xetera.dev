@@ -9,8 +9,10 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 import Headroom from "react-headroom"
-import * as MarkdownComponents from "../components/Markdown"
+import * as AllMarkdownComponents from "../components/Markdown"
 import Navbar from "../components/Navbar"
+const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
+const MarkdownComponents = rest
 
 const EndingText = ({ children }) => (
   <i className="text-blueGray-500 font-semibold">{children}</i>
@@ -18,7 +20,7 @@ const EndingText = ({ children }) => (
 
 const NavigatorTitle = ({ children, pos }) => (
   <p
-    className={`font-bold mb-1 font-blueGray-500 ${
+    className={`font-bold mb-1 text-blueGray-300 ${
       pos === "left" ? "text-right" : "text-left"
     }`}
   >
@@ -69,14 +71,14 @@ export default function Post({ data, pageContext, location }) {
     <>
       {post.frontmatter.draft && (
         <Headroom>
-          <div className="bg-theme-light max-w-screen z-10">
+          <div className="bg-theme-light max-w-screen z-10 text-blueGray-400">
             <p
               className="py-3 px-4 m-0 m-auto md:text-base text-sm flex items-center"
               style={{ maxWidth: "42rem" }}
             >
               <img
                 className="w-5 mr-4"
-                src="https://images.emojiterra.com/twitter/v13.0/512px/1f97a.png"
+                src="https://images.emojiterra.com/twitter/v13.0/128px/1f97a.png"
               ></img>{" "}
               You're viewing a draft. This post is not published.
             </p>
@@ -101,20 +103,31 @@ export default function Post({ data, pageContext, location }) {
         />
         <article className="text-gray-200 leading-relaxed lg:leading-loose my-8 md:my-24 px-6">
           <header>
+            <span className="flex font-semibold text-base">
+              <time
+                dateTime={post.frontmatter.date}
+                className="text-s block text-gray-400 text-blueGray-500"
+              >
+                {post.frontmatter.date}
+              </time>
+              <span className="mx-2 text-gray-700 font-bold">·</span>
+              <p className="mb-0 text-blueGray-500">
+                {post.fields.readingTime.text}
+              </p>
+            </span>
             <h1 className="mb-5 md:text-4xl text-3xl font-black">
               {post.frontmatter.title}
             </h1>
-            <p className="my-2 text-lg text-gray-400 font-medium">
+            <p className="my-6 text-lg text-gray-400 font-medium">
               {post.frontmatter.description}
             </p>
-            <PostData
-              className={hasTags ? "mb-3" : "mb-4"}
-              date={post.frontmatter.date}
-              readingTime={post.fields.readingTime.text}
-            />
             {hasTags && (
               <div className="flex items-center mb-5 text-gray-500">
-                <TagIcon className="mr-3" title="Tags" />
+                {/* <TagIcon
+                  className="mr-3"
+                  title="Tags"
+                  style={{ fill: "#4e5c7b" }}
+                /> */}
                 <Tags
                   tags={post.frontmatter?.tags ?? []}
                   className="flex flex-row align-start flex-shrink"
@@ -123,9 +136,14 @@ export default function Post({ data, pageContext, location }) {
               </div>
             )}
           </header>
-          <section>
+          {/* <hr style={{ margin: "3em -50vw" }} className="bg-theme-alt" /> */}
+          <section style={{ color: "#bbc0c7" }}>
             <MDXProvider
-              components={{ Toastable, ToastImg, ...MarkdownComponents }}
+              components={{
+                ...MarkdownComponents,
+                ...MarkdownOverrides,
+                Toastable,
+              }}
             >
               <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
             </MDXProvider>

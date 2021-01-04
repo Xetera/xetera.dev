@@ -58,12 +58,6 @@ module.exports = {
               rel: "nofollow noopener external",
             },
           },
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              showLineNumbers: true,
-            },
-          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],

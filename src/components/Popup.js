@@ -53,7 +53,7 @@ export default function Popup({ className }) {
               opacity: 0,
               y: 0,
             }}
-            className={`bottom-auto items-center flex popup bg-blueGray-800 rounded absolute py-3 px-4 text-blue-100 ${className} shadow-xl md:text-sm text-xs leading-normal md:max-w-lg max-w-full md:mx-auto mx-4 shadow-lg`}
+            className={`bottom-auto items-center flex popup bg-theme-dark rounded absolute py-3 px-4 text-blue-100 ${className} shadow-xl md:text-sm text-xs leading-normal md:max-w-lg max-w-full md:mx-auto mx-4 border-1 border-theme-alt border-solid`}
             style={{
               position: "fixed",
               bottom: "0",
