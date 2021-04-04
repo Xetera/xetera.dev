@@ -1,0 +1,297 @@
+---
+title: 🖼️ Optimizing images with WebP in Node.js
+date: "2021-04-04"
+description: Use ffmpeg to improve your images but watch out for one thing...
+tags:
+  - Guide
+  - Bug
+---
+
+import HandongWebp from "./handong.webp"
+import HandongPng from "./handong.png"
+import FeelsGood from "./feelsgood.png"
+import Image from "gatsby-image"
+
+export const ExampleImage = ({ title, text, size, children }) => {
+  return (
+    <article>
+      {children}
+      <div class="flex justify-between items-center smt-0 lg:mt-0 mb-3 text-coolGray-200">
+        <h3 class="m-0">{title}</h3>
+        <div class="bg-theme-alt px-2 rounded">
+          <b class="m-0 text-sm">{size}</b>
+        </div>
+      </div>
+      <p class="leading-5 text-sm m-0">{text}</p>
+    </article>
+  )
+}
+
+If you're going to be accepting and serving images in your webserver, it's a good idea to make sure they don't take up HUGE amounts of space. Storage doens't grow on trees you know.
+
+<div class="gap-5 grid sm:grid-cols-2 w-full mb-4">
+
+  <ExampleImage src={HandongPng} title="Virgin PNG" size="6.75MB"
+  text="That's crazy. Nobody wants to download this file and you don't want to serve
+it either.">
+<div class="rounded overflow-hidden unnest-margin mb-4">
+
+![images are bad](./handong.png)
+
+</div>
+  </ExampleImage>
+  <ExampleImage title="Chad WebP" size="422KB" text={
+    <>
+    Now this is the good stuff. Look at how much smaller that is. Imagine not
+    using webp in {new Date().getFullYear()}.
+    </>
+  }>
+<div class="rounded overflow-hidden unnest-margin mb-4">
+
+![](./handong.webp)
+
+</div>
+  </ExampleImage>
+</div>
+
+<hr />
+
+export const Reduction = () => (
+  <Toastable text="6x+ reduction in file size" className="text-indigo-300">
+    The example image is optimized to load faster on your browser. These values
+    are from the raw images that were used.
+  </Toastable>
+)
+
+Can you see the difference? I sure can't. Try opening them in a new tab and zoom in, it's still not noticable. That's <Reduction /> for free. There are some implications of using improved file formats of course. A browser first has to be able to support the file format that you're using so outdated browsers like Internet Explorer and Safari don't support it fully.
+
+## Getting Started
+
+Let's get started by installing the basics. Make sure you use the `npm` version of these commands if you're not on yarn.
+
+```
+$ yarn add fluent-ffmpeg
+```
+
+If you're not familiar with ffmpeg, it's the god tool for working with any kind of media. Images, sound, videos, gifs, subtitles. It'll take anything and modify it in any way you want. Here's a simple example.
+
+```
+$ ffmpeg -i image.png image.jpeg
+```
+
+Nothing too fancy here, we're simply setting `cat.png` as the input file and turning it into a `cat.jpeg`. We can also pass in any kind of option we want. If we're converting to WebP, we can control the quality of the resulting file through these options.
+
+```
+$ ffmpeg -i image.png -quality 50 image.webp
+```
+
+This will produce a fairly low quality but an amazingly small webp version of our image. The default ffmpeg value for webp images is 75 which I find to be adequate but you can feel free to play around with it as you like.
+
+CLI programs can be a bit of a pain to run so let's jump on fluent-ffmpeg which is a more convenient version of the api.
+
+```ts {title: "lib/image.ts"}
+import ffmpeg from "fluent-ffmpeg"
+import * as fs from "fs"
+import { Readable } from "stream"
+
+function convertImage(imagePath: string, outputName: string) {
+  ffmpeg().input(image).saveToFile(outputName)
+}
+
+convertImage("./image.png", "./image.webp")
+```
+
+This is nice, but not very practical, let's look at an express example where a user uploads an image using `multipart/form-data`.
+
+```ts {lines: true}
+import express from "express"
+import multer from "multer"
+import fs from "fs/promises"
+import { convertImage } from "./lib/image.ts"
+
+const upload = multer({ dest: "uploads/" })
+
+const app = express()
+
+app.post("/profile", upload.single("avatar"), async (req, res, next) => {
+  convertImage(req.file.path, "./image.webp")
+  // image.webp is now available on disk
+})
+```
+
+That's it, that's all you need to convert images to webp, wasn't so problematic was it? Except there's a problem, this method of doing conversions is extremely inefficient. We're writing the original file to disk first even though we just end up reading it again right afterwards. Thankfully multer allows only saving things in memory without writing to disk with the following.
+
+```ts {lang:false}
+const upload = multer({ storage: multer.memoryStorage() })
+```
+
+> <p class="text-sm leading-7">
+>   There are basically no other multipart parsers that do this. I spent many
+>   hours looking and multer was the only one. Kinda crazy...
+> </p>
+
+Storing images in memory is represented as a `Buffer` and ffmpeg by default takes a file path. Being a CLI program, we can pipe a stream of bytes into it in the CLI like this.
+
+```
+$ cat image.png | ffmpeg -i pipe:0 image.webp
+```
+
+We're
+
+I requires the input to be a `ReadableStream`. The conversion is a bit hacky and it involves manually disabling some internal methods but it's doable and works just fine.
+
+```ts {title: "lib/image.ts"}
+import { Readable } from "stream"
+
+function convertImage(image: Readable, outputName: string) {
+  ffmpeg().input(image).saveToFile(outputName)
+}
+
+export function bufferToStream(buffer: Buffer): Readable {
+  const readable = new Readable()
+  readable._read = () => {}
+  readable.push(buffer)
+  readable.push(null)
+  return readable
+}
+```
+
+which lets us patch the previous function like so.
+
+```ts {lines: true}
+import express from "express"
+import multer from "multer"
+import fs from "fs/promises"
+import { bufferToStream, convertImage } from "./lib/image.ts"
+
+const upload = multer({ storage: multer.memoryStorage() })
+
+const app = express()
+
+app.post("/profile", upload.single("avatar"), async (req, res, next) => {
+  const stream = bufferToStream(req.file.buffer)
+  convertImage(stream, "./image.webp")
+  // image.webp is now available on disk
+})
+```
+
+This works pretty well but we still have the same issue on the _other end_. We're saving an image to disk but often we want to do something like upload it to S3 or save it somewhere else. In this case we're going to pretend we want an output we can pass along to the AWS sdk to upload on S3 instead of saving on disk. https://wasabi.com is a great service for this.
+
+Thankfully, ffmpeg allows outputting a stream just as it allows for a stream input. To do that we will use a `PassThrough` stream which, as the name states, just passes the stream through. We use this to capture the output of the conversion.
+
+```ts {title: "lib/image.ts"}
+import { Readable, PassThrough } from "stream"
+
+function convertImage(image: Readable, outputFormat: string) {
+  const passthrough = new PassThrough()
+  ffmpeg()
+    .input(image)
+    .outputFormat(outputFormat)
+    .stream(passthrough, { end: true })
+  return passthrough
+}
+```
+
+Now that we're passing a stream to ffmpeg it can no longer infer what filetype it needs to turn the image into so we need to explicitly tell it that we're looking to convert to a specific format.
+
+For testing purposes, we can try writing this to a file manually.
+
+```ts
+app.post("/profile", upload.single("avatar"), (req, res, next) => {
+  const stream = bufferToStream(req.file.buffer)
+  const output = convertImage(stream, "webp")
+  output.pipe(fs.createWriteStream("./image.webp"))
+})
+```
+
+Aaand it work- wait... what the hell is this?
+
+![](./wtf.png)
+
+## Debugging stream issues
+
+The exact same command we tried worked with a file, why is it not working with a stream as opposed to a file target?
+
+For starters, the webp spec needs to have the block size the image uses at the image header.
+
+![](./spec.png)
+
+A working webp image will have a file size signature like this where the image size is between the 4 and 7 indexes.
+
+![](./working.png)
+
+However, when we pipe the data directly out of ffmpeg without writing to disk using this command (which is the equivalent of the original problematic js code).
+
+```
+$ cat image.png | ffmpeg -i pipe:0 -f webp pipe:1 > output.webp
+```
+
+The exact same file looks like this... why?
+
+![](./converted.png)
+
+Ffmpeg doesn't know the size of the image as it's going over it so it uses 4 null bytes `00 00 00 00` as a placeholder and plans to seek back to the beginning of the image when it's done to replace it with the size of the image. Except when piping to stdout, ffmpeg is unable to seek back. Try to see if you can spot where the missing `2e 8a 03 00` bytes might have gone instead of the header.
+
+![](./tail.png)
+
+I'm not sure why, but instead of warning you that piping a webp output to stdout will not work, ffmpeg decides to go ahead and just do it anyways and adds the file size at the end of the image. This will likely be fixed in the future by failing with a warning, but as of version 4.2.4, ffmpeg does weird things with webp outputs. (The same thing applies for other file formats that have block sizes in the header like flac files).
+
+## Putting it Together
+
+So we have to do this manually in our code. One problem we run into is streams are not directly editable and we have to consume the stream and concat the chunks into a single buffer.
+
+```ts {title: "lib/image.ts"}
+import { Readable, PassThrough } from "stream"
+
+function convertImage(image: Readable, outputFormat: string): Promise<Buffer> {
+  return new Promise((res, rej) => {
+    const chunks: Buffer[] = []
+    const passthrough = new PassThrough()
+    ffmpeg()
+      .input(image)
+      .outputFormat(outputFormat)
+      .stream(passthrough, { end: true })
+    passthrough.on("data", data => chunks.push(data))
+    passthrough.on("end", () => {
+      const originalImage = Buffer.concat(chunks)
+      const editedImage = originalImage.copyWithin(4, -4).slice(0, -4)
+      return res(editedImage)
+    })
+  })
+}
+```
+
+Here, we're grabbing every byte of the buffer from -4 representing the last 4 bytes of the image and copy it starting from the 4th index, we then trim the extra 4 bytes at the end that ffmpeg added.
+
+Now we can publish to s3 easily with
+
+```ts {lines: true, name: "lib/upload"}
+import express from "express"
+import multer from "multer"
+import { credentials } from "./config"
+import { bufferToStream, convertImage } from "./lib/image.ts"
+
+const upload = multer({ storage: multer.memoryStorage() })
+const app = express()
+
+export const wasabi = new S3({
+  endpoint: new Endpoint("s3.wasabisys.com"),
+  credentials,
+  s3ForcePathStyle: true,
+})
+
+app.post("/profile", upload.single("avatar"), async (req, res, next) => {
+  const stream = bufferToStream(req.file.buffer)
+  const output = await convertImage(stream, "webp")
+  await wasabi
+    .putObject({
+      Bucket: process.env.MY_BUCKET,
+      ContentType: "image/webp",
+      Key: "test.webp",
+      Data: output,
+    })
+    .promise()
+})
+```
+
+And that's all! You have an optimized webp optimized image uploader for your app. You might want to also convert to some fallback formats like jpeg if you want to support older browsers just in case.

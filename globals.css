@@ -57,8 +57,12 @@ blockquote {
 }
 
 hr {
-  background: #293a4a;
-  height: 2px;
+  background: rgba(18, 29, 41, 0.5);
+  height: 1px;
+}
+
+.unnest-margin p {
+  margin: 0;
 }
 
 /* .hvariable {

@@ -118,7 +118,7 @@ export default function Post({ data, pageContext, location }) {
             <h1 className="mb-5 md:text-4xl text-3xl font-black">
               {post.frontmatter.title}
             </h1>
-            <p className="my-6 text-lg text-gray-400 font-medium">
+            <p className="my-6 text-lg text-coolGray-400 font-medium">
               {post.frontmatter.description}
             </p>
             {hasTags && (

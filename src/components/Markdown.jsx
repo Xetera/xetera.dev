@@ -22,6 +22,10 @@ const languageMappings = {
     className: "bg-blue-600 text-blue-200",
     name: "Typescript",
   },
+  bash: {
+    className: "bg-blue-600 text-blue-200",
+    name: "Bash",
+  },
   hs: {
     className: "bg-purple-800 text-purple-300",
     name: "Haskell",
@@ -172,7 +176,7 @@ export const overrides = {
     }
     console.log(extraProps)
     const shouldHighlightLine = calculateLinesToHighlight(extraProps.h)
-    const language = className.replace(/language-/, "") || ""
+    const language = className?.replace(/language-/, "") || ""
     const highlighterClass = languageMappings[language]
     const isPreTitle = extraProps.title?.startsWith("/")
     const TitleType = isPreTitle ? "pre" : "div"
