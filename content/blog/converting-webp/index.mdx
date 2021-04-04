@@ -136,9 +136,7 @@ Storing images in memory is represented as a `Buffer` and ffmpeg by default take
 $ cat image.png | ffmpeg -i pipe:0 image.webp
 ```
 
-We're
-
-I requires the input to be a `ReadableStream`. The conversion is a bit hacky and it involves manually disabling some internal methods but it's doable and works just fine.
+In fluent-ffmpeg, this requires the input to be a `ReadableStream`. The conversion is a bit hacky and it involves manually disabling some internal methods but it's doable and works just fine.
 
 ```ts {title: "lib/image.ts"}
 import { Readable } from "stream"
