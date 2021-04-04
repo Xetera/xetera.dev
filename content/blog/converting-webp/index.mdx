@@ -107,7 +107,7 @@ This is nice, but not very practical, let's look at an express example where a u
 import express from "express"
 import multer from "multer"
 import fs from "fs/promises"
-import { convertImage } from "./lib/image.ts"
+import { convertImage } from "./lib/image"
 
 const upload = multer({ dest: "uploads/" })
 
@@ -160,7 +160,7 @@ which lets us patch the previous function like so.
 import express from "express"
 import multer from "multer"
 import fs from "fs/promises"
-import { bufferToStream, convertImage } from "./lib/image.ts"
+import { bufferToStream, convertImage } from "./lib/image"
 
 const upload = multer({ storage: multer.memoryStorage() })
 
