@@ -94,6 +94,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    "gatsby-plugin-open-graph-images",
     "gatsby-plugin-netlify-cache",
   ],
 }

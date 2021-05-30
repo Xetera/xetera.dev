@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, meta, title }) => {
+const SEO = ({ description, lang, meta = [], title, image }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -23,7 +23,52 @@ const SEO = ({ description, lang, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const siteTitle = site.siteMetadata.title
-
+  const data = [
+    {
+      name: `description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:siteTitle`,
+      content: title,
+    },
+    {
+      property: `og:description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:type`,
+      content: `website`,
+    },
+    {
+      name: `twitter:card`,
+      content: `summary`,
+    },
+    {
+      name: `twitter:creator`,
+      content: site.siteMetadata.social.twitter,
+    },
+    {
+      name: `twitter:siteTitle`,
+      content: title,
+    },
+    {
+      name: `twitter:description`,
+      content: metaDescription,
+    },
+    {
+      name: "og:image",
+      content: `http://localhost:9000/__generated/${image.path}`,
+    },
+    {
+      name: "og:image:height",
+      content: image.size.height,
+    },
+    {
+      name: "og:image:width",
+      content: image.size.width,
+    },
+  ]
   return (
     <Helmet
       htmlAttributes={{
@@ -31,52 +76,12 @@ const SEO = ({ description, lang, meta, title }) => {
       }}
       title={title}
       titleTemplate={`%s | ${siteTitle}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:siteTitle`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.social.twitter,
-        },
-        {
-          name: `twitter:siteTitle`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
     >
+      {data.concat(meta).map(({ name, content }) => (
+        <meta name={name} content={content} key={name} />
+      ))}
       <meta name="theme-color" content={site.siteMetadata.themeColor} />
       <meta name="description" content={metaDescription} />
-      {/* <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${site.siteMetadata.analytics}`}
-      ></script>
-      <script type="application/ld+json">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('config', '${site.siteMetadata.analytics}');
-      `}</script> */}
     </Helmet>
   )
 }

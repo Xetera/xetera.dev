@@ -1,28 +1,55 @@
 import React from "react"
+import { Link as GatsbyLink } from "gatsby"
+import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
+import { forwardRef } from "@chakra-ui/system"
 
-export default function PostData({ date, readingTime, className }) {
+export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
   return (
-    <div className={`flex flex-row ${className}`}>
-      <time dateTime={date} className="text-s block text-gray-400">
+    <Flex
+      alignItems="center"
+      mb={2}
+      color="gray.500"
+      fontSize="14px"
+      ref={ref}
+      {...props}
+    >
+      <Box as="time" dateTime="date">
         {date}
-      </time>
-      <span className="mx-2 text-gray-700 font-bold">·</span>
-      <p className="text-s m-0 text-gray-400">{readingTime}</p>
-    </div>
+      </Box>
+      <Box mx="10px">·</Box>
+      <Text>{readingTime}</Text>
+    </Flex>
   )
-}
+})
 
-export function Tags({ tags, className, fontClass }) {
+export function PostList({ node }) {
+  const title = node.frontmatter.title ?? node.fields.slug
+  const { description, date } = node.frontmatter
+
   return (
-    <div className={`${className ?? ""}`}>
-      {tags.map(tag => (
-        <p
-          key={tag}
-          className={`rounded-md inline-flex mr-2 bg-theme-alt px-3 py-1 font-normal text-xs mb-0 text-blueGray-400 ${fontClass} z-10`}
+    <GatsbyLink
+      to={node.fields.slug}
+      className="no-link"
+      style={{
+        textDecoration: "none",
+      }}
+      key={node.fields.slug}
+    >
+      <Flex as="article" flexFlow="column">
+        <PostHead date={date} readingTime={node.fields.readingTime.text} />
+        <Heading
+          as="h2"
+          fontSize="18px"
+          layerStyle="textPrimary"
+          fontWeight="bold"
+          mb={2}
         >
-          {tag}
-        </p>
-      ))}
-    </div>
+          {title}
+        </Heading>
+        <Text as="p" fontSize="16px" color="text.secondary">
+          {description}
+        </Text>
+      </Flex>
+    </GatsbyLink>
   )
 }

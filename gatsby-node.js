@@ -1,10 +1,15 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const puppeteer = require("puppeteer")
+const ReactDOMServer = require("react-dom/server")
+const { createOpenGraphImage } = require("gatsby-plugin-open-graph-images")
+const { postPreviewDimensions } = require("./src/shared")
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/post.jsx`)
+  const blogPostPreview = path.resolve(`./src/templates/preview.jsx`)
   const result = await graphql(
     `
       {
@@ -35,27 +40,37 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create blog posts pages.
   const posts = result.data.allMdx.edges
 
-  posts.forEach((post, index) => {
-    const previousNode = posts[index + 1]
-    const previous =
-      index === posts.length - 1 ||
-      (previousNode && previousNode.node.frontmatter.draft)
-        ? null
-        : previousNode.node
-    const nextNode = posts[index - 1]
-    const next =
-      index === 0 || (nextNode && nextNode.node.frontmatter.draft)
-        ? null
-        : nextNode.node
+  // sometimes there are drafts that we don't want to display
+  // so the next post needs to be one that isn't a draft
+  const findNonDraft = nodes =>
+    nodes.find(node => !node.node.frontmatter.draft)?.node ?? null
+
+  posts.forEach(async (post, index) => {
+    const previousNodes = posts.slice(index + 1)
+
+    const previous = findNonDraft(previousNodes)
+    const nextNodes = posts.slice(0, index)
+    const next = findNonDraft(nextNodes.reverse())
+
+    const { slug } = post.node.fields
+    const context = {
+      slug,
+      previous,
+      next,
+    }
+
+    const previewPath = `${slug.replace(/\//g, "")}.png`
+    context.ogImage = createOpenGraphImage(createPage, {
+      path: previewPath,
+      component: blogPostPreview,
+      size: postPreviewDimensions,
+      context,
+    })
 
     createPage({
-      path: post.node.fields.slug,
+      path: slug,
       component: blogPost,
-      context: {
-        slug: post.node.fields.slug,
-        previous,
-        next,
-      },
+      context,
     })
   })
 }

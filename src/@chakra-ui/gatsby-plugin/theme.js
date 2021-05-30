@@ -103,6 +103,7 @@ export default extendTheme({
     "2xl": "32px",
     "3xl": "38px",
     "4xl": "48px",
+    "5xl": "56px",
   },
   styles: {
     global: props => ({

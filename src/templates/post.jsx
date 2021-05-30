@@ -15,12 +15,13 @@ import { Toastable, ToastImg } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 import Headroom from "react-headroom"
 import * as AllMarkdownComponents from "../components/Markdown"
-import { Box, Flex, Grid, Heading, Link, Text } from "@chakra-ui/layout"
+import * as Chakra from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import GatsbyImage from "gatsby-image"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
+const { Box, Flex, Grid, Heading, Link, Stack, Text } = Chakra
 
 const EndingText = ({ children }) => (
   <i className="text-blueGray-500 font-semibold">{children}</i>
@@ -84,12 +85,11 @@ export const maxWidth = "49rem"
 
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
-  const { previous, next } = pageContext
+  const { previous, next, ogImage } = pageContext
   const brand = useBrandColor()
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
   const { imageTop, imageBottom } = post.frontmatter
-  console.log({ imageTop })
   const isDraft = post.frontmatter.draft
   return (
     <>
@@ -98,6 +98,7 @@ export default function Post({ data, pageContext, location }) {
           <SEO
             title={post.frontmatter.title}
             description={post.frontmatter.description || post.excerpt}
+            image={ogImage}
           />
           <style
             dangerouslySetInnerHTML={{
@@ -151,7 +152,7 @@ export default function Post({ data, pageContext, location }) {
               </Heading>
               <Text
                 fontSize={["lg", "xl"]}
-                fontWeight="semibold"
+                fontWeight="medium"
                 lineHeight="1.4"
               >
                 {post.frontmatter.description}
@@ -167,10 +168,10 @@ export default function Post({ data, pageContext, location }) {
                   components={{
                     ...MarkdownComponents,
                     ...MarkdownOverrides,
+                    ...Chakra,
+                    ChakraImage: Image,
                     Toastable,
-                    Box: Box,
-                    Flex: Flex,
-
+                    Hr,
                     a: ({ children, ...props }) => (
                       <Link color={brand} {...props}>
                         {children}

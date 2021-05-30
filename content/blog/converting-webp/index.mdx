@@ -12,18 +12,31 @@ import HandongPng from "./handong.png"
 import FeelsGood from "./feelsgood.png"
 import Image from "gatsby-image"
 
-export const ExampleImage = ({ title, text, size, children }) => {
+export const ExampleImage = ({ title, text, size, children, src }) => {
   return (
-    <article>
-      {children}
-      <div class="flex justify-between items-center smt-0 lg:mt-0 mb-3 text-coolGray-200">
-        <h3 class="m-0">{title}</h3>
-        <div class="bg-theme-alt px-2 rounded">
-          <b class="m-0 text-sm">{size}</b>
-        </div>
-      </div>
-      <p class="leading-5 text-sm m-0">{text}</p>
-    </article>
+    <Box as="article">
+      <Box borderRadius="md" overflow="hidden" maxWidth="100%" mb={4}>
+        <ChakraImage src={src} />
+      </Box>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        mb={3}
+        layerStyle="textSecondary"
+      >
+        <Heading as="h3" fontSize="lg" mb={0}>
+          {title}
+        </Heading>
+        <Box px={2} layerStyle="bgSecondary" borderRadius="md">
+          <Text as="b" mb={0} fontSize="md">
+            {size}
+          </Text>
+        </Box>
+      </Flex>
+      <Text mb={0} fontSize="sm">
+        {text}
+      </Text>
+    </Box>
   )
 }
 
@@ -33,19 +46,16 @@ File formats are another portion of that puzzle. Not all formats were created th
 
 WebP is one of those file formats that allow for lossy compression in a way that (on average) makes high resolution images look better than what JPEG provides.
 
-<div class="gap-5 grid sm:grid-cols-2 w-full mb-4">
+<Grid gridTemplateColumns={["1fr", null, "1fr 1fr"]} mb={4} gap={4}>
   <ExampleImage
     src={HandongPng}
     title="Virgin PNG"
     size="7.1MB"
     text="That's crazy. Nobody wants to download this file and you don't want to serve
 it either."
-  >
-    <div class="rounded overflow-hidden unnest-margin mb-2">
-      <img src={HandongPng} class="mb-0" />
-    </div>
-  </ExampleImage>
+  />
   <ExampleImage
+    src={HandongWebp}
     title="Chad WebP"
     size="433KB"
     text={
@@ -54,14 +64,10 @@ it either."
         not using webp in {new Date().getFullYear()}.
       </>
     }
-  >
-    <div class="rounded overflow-hidden unnest-margin mb-2">
-      <img src={HandongWebp} class="mb-0" />
-    </div>
-  </ExampleImage>
-</div>
+  />
+</Grid>
 
-<hr />
+<Hr />
 
 export const Reduction = () => (
   <Toastable text="6x+ reduction in file size" className="text-indigo-300">
