@@ -1,9 +1,16 @@
 import React from "react"
 import ExternalLink from "./ExternalLink"
+import Image from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { BackgroundImage } from "./Image"
+import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
+// import { Image } from "@chakra-ui/image"
+import { useBreakpointValue } from "@chakra-ui/media-query"
+import { RiGithubFill, RiGithubLine, RiTwitterFill } from "react-icons/ri"
+import { forwardRef } from "@chakra-ui/system"
+import { useBrandColor } from "../hooks/color"
 
-export default function Bio() {
+const Bio = forwardRef((props, ref) => {
   const data = useStaticQuery(graphql`
     fragment SocialMedia on File {
       data: childImageSharp {
@@ -13,20 +20,10 @@ export default function Bio() {
       }
     }
     query BioQuery {
-      github: file(absolutePath: { regex: "/github.png/" }) {
-        ...SocialMedia
-      }
-      twitter: file(absolutePath: { regex: "/twitter.png/" }) {
-        ...SocialMedia
-      }
-      cover: file(absolutePath: { regex: "/dreamcatcher.jpg/" }) {
-        image: childImageSharp {
-          fluid(
-            quality: 100
-            srcSetBreakpoints: [640, 1600, 1920, 2400]
-            maxWidth: 2400
-          ) {
-            ...GatsbyImageSharpFluid_withWebp
+      avatar: file(absolutePath: { regex: "/avatar.png/" }) {
+        data: childImageSharp {
+          fixed(width: 200, height: 200) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
@@ -39,35 +36,64 @@ export default function Bio() {
       }
     }
   `)
+  const avatar = data.avatar.data.fixed
+  const brand = useBrandColor()
   return (
-    <>
-      <BackgroundImage
-        image={data.cover.image.fluid}
-        pos="top"
-        options={{
-          opacity: 0.07,
-          height: "100%",
-          WebkitMaskImage:
-            "-webkit-gradient(linear, 0% 44%, 0% 100%, from(rgb(0, 0, 0)), to(rgba(0, 0, 0, 0)))",
-        }}
-      />
-      <article className="max-w-6xl mx-auto relative text-blueGray-300">
-        <section className="flex sm:items-center justify-center flex-col align-start lg:h-3-quarter-vh h-half-vh my-16 mx-6 text-center">
-          <h1 className="lg:text-6xl mb-1">Hi, I'm Ali</h1>
-          <p className="font-semibold text-blueGray-300">
-            I make websites and stuff.
-          </p>
-          <p className="mb-0 lg:text-lg text-blueGray-300 max-w-xl text-left">
-            I'm currently a full-stack developer at{" "}
-            <ExternalLink href="https://top.gg" className="no-underline">
-              top.gg
-            </ExternalLink>
-            . I enjoy design and writing on the side. I'm not really sure what
-            to write here which is worrying considering this is a blog.
-          </p>
-        </section>
-      </article>
-      <div className="mb-2"></div>
-    </>
+    <Stack lineHeight="1.8" spacing={4} ref={ref} {...props}>
+      <Flex
+        borderWidth="5px"
+        borderColor={brand}
+        width="min-content"
+        mb={2}
+        p={2}
+        transition="all 0.4s ease"
+      >
+        <Image fixed={avatar} loading="lazy" />
+      </Flex>
+      <Heading fontWeight="black" fontSize="3xl">
+        Hi, I’m Xetera.
+      </Heading>
+      <Stack spacing={4} fontSize="16px">
+        <Text>
+          I'm currently a full-stack developer at{" "}
+          <Link
+            href="https://top.gg"
+            rel="external nofollower noopener"
+            color={brand}
+          >
+            Top.gg
+          </Link>
+          . I like to wear many hats when necessary and make cool ideas come to
+          life.
+        </Text>
+        <Text>
+          I’m a simp for functional programming and anti-abuse engineering. I
+          also enjoy design and writing on the side when I can find the time.
+        </Text>
+        <Text>
+          I have watched <Link color={brand}>{`{placeholder}`}</Link> animes so
+          far and I’m rank <Link color={brand}>123,456 in osu.</Link> I find
+          myself enjoying these technologies as of recently.
+        </Text>
+      </Stack>
+      <Stack spacing={4} direction="row">
+        <Link
+          href="https://github.com/xetera"
+          color="unset"
+          _hover={{ color: "white" }}
+        >
+          <RiGithubFill size={28} />
+        </Link>
+        <Link
+          href="https://twitter.com/_Xetera"
+          color="unset"
+          _hover={{ color: "blue.400" }}
+        >
+          <RiTwitterFill size={28} />
+        </Link>
+      </Stack>
+    </Stack>
   )
-}
+})
+
+export default Bio

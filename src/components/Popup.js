@@ -1,5 +1,7 @@
 import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { maxWidth } from "../templates/post"
+import { Box, Flex } from "@chakra-ui/layout"
 
 export const ToastContext = React.createContext({
   jsx: null,
@@ -15,18 +17,23 @@ export function Toastable({ text, children, className = "" }) {
     setJsx(null)
   }
   return (
-    <span
+    <Box
+      as="span"
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onTouchStart={onEnter}
       onTouchEnd={onLeave}
-      className={`${className} cursor-pointer underline`}
-      style={{ textDecorationStyle: "wavy" }}
+      className={`${className}`}
+      textDecoration="underline"
+      textDecorationStyle="wavy"
+      cursor="pointer"
     >
       {text}
-    </span>
+    </Box>
   )
 }
+
+const MotionFlex = motion(Flex)
 
 export default function Popup({ className }) {
   const { jsx } = React.useContext(ToastContext)
@@ -36,10 +43,15 @@ export default function Popup({ className }) {
       ? "-2.5rem"
       : "-1rem"
   return (
-    <div className="w-screen fixed max-w-md" style={{ maxWidth: "42rem" }}>
+    <Box
+      width="100%"
+      position="fixed"
+      className="w-screen fixed max-w-md"
+      style={{ maxWidth: maxWidth }}
+    >
       <AnimatePresence>
         {hovered && (
-          <motion.div
+          <MotionFlex
             transition={{ type: "tween", duration: 0.24 }}
             initial={{
               opacity: 0,
@@ -53,6 +65,15 @@ export default function Popup({ className }) {
               opacity: 0,
               y: 0,
             }}
+            bottom="auto"
+            alignItems="center"
+            borderRadius="md"
+            layerStyle="bgSecondary"
+            position="absolute"
+            mx={["auto"]}
+            maxWidth="lg"
+            py={3}
+            px={4}
             className={`bottom-auto items-center flex popup bg-theme-dark rounded absolute py-3 px-4 text-blue-100 ${className} shadow-xl md:text-sm text-xs leading-normal md:max-w-lg max-w-full md:mx-auto mx-4 border-1 border-theme-alt border-solid`}
             style={{
               position: "fixed",
@@ -63,10 +84,10 @@ export default function Popup({ className }) {
             }}
           >
             {jsx ?? "Oh no this toast isn't meant to be blank!"}
-          </motion.div>
+          </MotionFlex>
         )}
       </AnimatePresence>
-    </div>
+    </Box>
   )
 }
 

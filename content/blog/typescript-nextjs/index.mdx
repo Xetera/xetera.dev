@@ -9,20 +9,22 @@ tags:
 
 import { RiQuestionLine } from "react-icons/ri"
 
-<WideBanner centered bordered>
-  <div className="flex items-center">
-    <RiQuestionLine className="mr-2" />
+<Box layerStyle="bgSecondary" p={6} mb={6}>
+  <Flex alignItems="center">
+    <Box mr={2}>
+      <RiQuestionLine />
+    </Box>
     <strong>Info</strong>
-  </div>
-  <p className="mb-0">
+  </Flex>
+  <Text mb={0}>
     This post is specifically aimed at{" "}
     <a href="https://github.com/prisma/prisma" rel="external">
       Prisma
     </a>{" "}
     users but you should be able to use it with any ORM (or no ORM ot all if you
     roll that way).
-  </p>
-</WideBanner>
+  </Text>
+</Box>
 
 One of the most annoying things about integrating different technologies together is losing static typing along the way. This is my biggest complaint when it comes to working with databases without an ORM, but is also a big issue with HTTP APIs. GraphQL and [GraphQL Code Generator](https://github.com/dotansimha/graphql-code-generator) solve this problem beautifully, but GraphQL can still be very frustrating to work with from time to time due to its immature ecosystem. Sometimes you just want to be able to use HTTP and call it a day.
 
