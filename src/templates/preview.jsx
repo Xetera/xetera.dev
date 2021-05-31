@@ -107,7 +107,7 @@ export default function PostPreview(props) {
         >
           <Image
             objectFit="cover"
-            src={thumbnail.src ?? "https://my.simp.pics/0N_S2_VawgUgB8sW.webp"}
+            src={thumbnail.src ?? props.data.avatar.image.data}
             objectPosition={thumbnail.objectPosition ?? "40%"}
             background="gray.900"
           />
@@ -125,6 +125,16 @@ export const query = graphql`
   }
 
   query PreviewPage($slug: String!) {
+    avatar: file(absolutePath: { regex: "/avatar.png/" }) {
+      image: childImageSharp {
+        data: gatsbyImageData(
+          width: 600
+          height: 600
+          layout: FIXED
+          quality: 100
+        )
+      }
+    }
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)

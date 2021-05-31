@@ -2,9 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 import PostPreview from "../templates/preview"
 
-export default props => {
+const Test = props => {
   return <PostPreview {...props} />
 }
+
+export default Test
 
 export const pageQuery = graphql`
   fragment Cover on File {

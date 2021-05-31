@@ -1,12 +1,36 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
-const puppeteer = require("puppeteer")
-const ReactDOMServer = require("react-dom/server")
-const { createOpenGraphImage } = require("gatsby-plugin-open-graph-images")
-const { postPreviewDimensions } = require("./src/shared")
-const fs = require("fs")
+import path from "path"
+import { createFilePath } from "gatsby-source-filesystem"
+import { createOpenGraphImage } from "gatsby-plugin-open-graph-images"
+import { postPreviewDimensions } from "./src/shared"
+import { getAnilist, getOsu } from "./fetcher"
 
-exports.createPages = async ({ graphql, actions }) => {
+export const sourceNodes = async ({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
+  console.log("creating nodes!")
+  const [anilist, osu] = await Promise.all([getAnilist(), getOsu()])
+  actions.createNode({
+    ...anilist,
+    id: createNodeId(`user-information-anilist`),
+    internal: {
+      type: `Anilist`,
+      contentDigest: createContentDigest(anilist),
+    },
+  })
+  actions.createNode({
+    ...osu,
+    user_id: osu.id,
+    id: createNodeId(`user-information-osu`),
+    internal: {
+      type: `Osu`,
+      contentDigest: createContentDigest(osu),
+    },
+  })
+}
+
+export const createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(
@@ -63,8 +87,7 @@ exports.createPages = async ({ graphql, actions }) => {
       previous,
       next,
     }
-
-    const previewPath = `${slug.replace(/\//g, "")}.png`
+    const previewPath = `/${slug.replace(/\//g, "")}/thumbnail.png`
 
     createPage({
       path: slug,
@@ -72,7 +95,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         ...context,
         ogImage: createOpenGraphImage(createPage, {
-          path: `/${slug}/thumbnail.png`,
+          path: previewPath,
           component: blogPostPreview,
           size: postPreviewDimensions,
           context,
@@ -82,7 +105,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+export const onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `Mdx`) {
@@ -95,14 +118,10 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 }
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+export const onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
   })
-}
-
-exports.onPostBuild = async () => {
-  // await fs.promises.rmdir(path.join(__dirname, "public", "__generated"))
 }

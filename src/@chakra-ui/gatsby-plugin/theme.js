@@ -18,7 +18,7 @@ export const colors = {
   },
   textTertiary: {
     light: "gray.600",
-    dark: "gray.500",
+    dark: "gray.400",
   },
   text: {
     primary: "gray.50",
@@ -38,7 +38,8 @@ const fontFamily =
 
 export default extendTheme({
   config: {
-    useSystemColorMode: true,
+    initialColorMode: "dark",
+    useSystemColorMode: false,
   },
   fonts: {
     heading: fontFamily,

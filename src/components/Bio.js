@@ -9,30 +9,14 @@ import { useBreakpointValue } from "@chakra-ui/media-query"
 import { RiGithubFill, RiGithubLine, RiTwitterFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
 import { useBrandColor } from "../hooks/color"
+import { format } from "date-fns"
 
 const Bio = forwardRef((props, ref) => {
-  const data = useStaticQuery(graphql`
-    fragment SocialMedia on File {
-      data: childImageSharp {
-        gatsbyImageData(width: 25, height: 25, layout: FIXED)
-      }
-    }
-
-    query BioQuery {
-      avatar: file(absolutePath: { regex: "/avatar.png/" }) {
-        data: childImageSharp {
-          gatsbyImageData(width: 200, height: 200, layout: FIXED, quality: 100)
-        }
-      }
-      site {
-        siteMetadata {
-          social {
-            twitter
-          }
-        }
-      }
-    }
-  `)
+  const data = useStaticQuery(staticQuery)
+  console.log({ data })
+  const osuRank = Intl.NumberFormat("default").format(
+    data.osu.statistics.globalRank
+  )
   const brand = useBrandColor()
   return (
     <Stack lineHeight="1.8" spacing={4} ref={ref} {...props}>
@@ -67,9 +51,30 @@ const Bio = forwardRef((props, ref) => {
           also enjoy design and writing on the side when I can find the time.
         </Text>
         <Text>
-          I have watched <Link color={brand}>{`{placeholder}`}</Link> animes so
-          far and I’m rank <Link color={brand}>123,456 in osu.</Link> I find
-          myself enjoying these technologies as of recently.
+          As of{" "}
+          <Text
+            as="time"
+            dateTime={data.site.buildtime}
+            layerStyle="textTertiary"
+          >
+            {data.site.buildTime}
+          </Text>{" "}
+          I have watched{" "}
+          <Link
+            color={brand}
+            href="https://anilist.co/user/Xetera"
+            rel="noopener external noreferrer"
+          >
+            {data.anilist.user.statistics.anime.count} animes
+          </Link>{" "}
+          and I’m rank{" "}
+          <Link
+            color={brand}
+            href={`https://osu.ppy.sh/users/${data.osu.id}`}
+            rel="noopener external noreferrer"
+          >
+            #{osuRank} in osu.
+          </Link>
         </Text>
       </Stack>
       <Stack spacing={4} direction="row">
@@ -93,3 +98,42 @@ const Bio = forwardRef((props, ref) => {
 })
 
 export default Bio
+
+const staticQuery = graphql`
+  fragment SocialMedia on File {
+    data: childImageSharp {
+      gatsbyImageData(width: 25, height: 25, layout: FIXED)
+    }
+  }
+
+  query BioQuery {
+    avatar: file(absolutePath: { regex: "/avatar.png/" }) {
+      data: childImageSharp {
+        gatsbyImageData(width: 200, height: 200, layout: FIXED, quality: 100)
+      }
+    }
+    site {
+      buildTime(formatString: "MMMM Do, YYYY")
+      siteMetadata {
+        social {
+          twitter
+        }
+      }
+    }
+    anilist {
+      user {
+        statistics {
+          anime {
+            count
+          }
+        }
+      }
+    }
+    osu {
+      id
+      statistics {
+        globalRank: global_rank
+      }
+    }
+  }
+`
