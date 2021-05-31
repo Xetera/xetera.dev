@@ -25,6 +25,16 @@ export const pageQuery = graphql`
         title
       }
     }
+    avatar: file(absolutePath: { regex: "/avatar.png/" }) {
+      image: childImageSharp {
+        data: gatsbyImageData(
+          width: 600
+          height: 600
+          layout: FIXED
+          quality: 100
+        )
+      }
+    }
     mdx(fields: { slug: { eq: "/parasocial-dynamics-of-kpop/" } }) {
       id
       excerpt(pruneLength: 160)

@@ -84,7 +84,7 @@ export default function PostPreview(props) {
               {data.frontmatter.description}
             </Text>
           </VStack>
-          <HStack spacing={6}>
+          <HStack spacing={6} zIndex="2">
             {data.frontmatter.tags?.map(tag => (
               <Tag
                 key={tag}
@@ -105,11 +105,13 @@ export default function PostPreview(props) {
           height="100%"
           width="100%"
         >
-          <Image
-            objectFit="cover"
-            src={thumbnail.src ?? props.data.avatar.image.data}
-            objectPosition={thumbnail.objectPosition ?? "40%"}
-            background="gray.900"
+          <GatsbyImage
+            imgStyle={{
+              objectFit: "cover",
+              objectPosition: thumbnail.objectPosition ?? "40%",
+              // background: "gray.900",
+            }}
+            image={thumbnail.src ?? props.data.avatar.image.data}
           />
         </Flex>
       </Grid>
