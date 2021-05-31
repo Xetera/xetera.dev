@@ -18,58 +18,62 @@ import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
-import GatsbyImage from "gatsby-image"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link, Stack, Text } = Chakra
 
-const EndingText = ({ children }) => (
-  <i className="text-blueGray-500 font-semibold">{children}</i>
-)
-
-const NavigatorTitle = ({ children, pos }) => (
-  <p
-    className={`font-bold mb-1 text-blueGray-300 ${
-      pos === "left" ? "text-right" : "text-left"
-    }`}
-  >
-    {children}
-  </p>
-)
-
 const Navigator = ({ pos, link }) => {
   const isLeft = pos === "left"
+  const brand = useBrandColor()
   const hasLink = Boolean(link)
-  return (
-    <div
-      className={`p-4 ${
-        isLeft ? "text-right" : "text-left"
-      } m-0 list-none flex-1 ${hasLink && "hover:bg-theme"}`}
+
+  const data = (
+    <Box
+      p={4}
+      m={0}
+      height="100%"
+      overflow="hidden"
+      borderRadius="sm"
+      borderWidth="1px"
+      layerStyle={["borderSubtle", hasLink ? "bgSecondary" : null]}
     >
-      <GatsbyLink
-        to={link?.fields.slug}
-        rel="prev"
-        className="hover:no-underline"
+      <Heading
+        fontSize="md"
+        as="h3"
+        fontWeight="bold"
+        mb={1}
+        layerStyle={hasLink ? "textPrimary" : "textSecondary"}
       >
-        <NavigatorTitle pos={pos}>
-          {isLeft ? "← Previous" : "Next"} Article {!isLeft && "→"}
-        </NavigatorTitle>
-        <p className="m-0 text-blueGray-300">
-          {link ? (
-            <>
-              {link.frontmatter.title}
-              {link.readingTime}
-            </>
-          ) : (
-            <EndingText pos={pos}>
-              {isLeft
-                ? "Bruh, you're at the beginning"
-                : "This was the last one my dude"}
-            </EndingText>
-          )}
-        </p>
-      </GatsbyLink>
-    </div>
+        {isLeft ? "Previous" : "Next"} Article
+      </Heading>
+      {link ? (
+        <Text as="p" mb={0} color={brand} fontSize="md">
+          {link.frontmatter.title}
+          {link.readingTime}
+        </Text>
+      ) : (
+        <Text mb={0} as="i" layerStyle="textTertiary" fontSize="md">
+          {isLeft
+            ? "Wow you just read the first post. Why are you even here?"
+            : "Sheeesh, you just read the last post."}
+        </Text>
+      )}
+    </Box>
+  )
+
+  if (!link) {
+    return data
+  }
+
+  return (
+    <Link
+      as={GatsbyLink}
+      to={link.fields.slug}
+      textDecoration="none !important"
+      height="100%"
+    >
+      {data}
+    </Link>
   )
 }
 
@@ -126,11 +130,8 @@ export default function Post({ data, pageContext, location }) {
               </Flex>
             </Box>
           )}
-          <Box
-            as="article"
-            className="text-gray-200 leading-relaxed lg:leading-loose my-8 md:my-24 px-6"
-          >
-            <Grid as="header" gap={2}>
+          <Grid as="article" gap={2}>
+            <Grid gap={2} as="header">
               <Flex alignItems="center" layerStyle="textTertiary">
                 <Text
                   as="time"
@@ -157,86 +158,116 @@ export default function Post({ data, pageContext, location }) {
               >
                 {post.frontmatter.description}
               </Text>
-              {imageTop && (
+              {/* {imageTop && (
                 <Box my={3} borderRadius="sm" overflow="hidden">
-                  <GatsbyImage fluid={imageTop.src.image.fluid} />
+                  <GatsbyImage
+                    image={imageTop.src.childImageSharp.gatsbyImageData}
+                  />
                 </Box>
-              )}
-              <Hr />
-              <Box as="section" fontSize="lg" lineHeight="1.8">
-                <MDXProvider
-                  components={{
-                    ...MarkdownComponents,
-                    ...MarkdownOverrides,
-                    ...Chakra,
-                    ChakraImage: Image,
-                    Toastable,
-                    Hr,
-                    a: ({ children, ...props }) => (
-                      <Link color={brand} {...props}>
-                        {children}
-                      </Link>
-                    ),
-                    Text,
-                    h6: makeHeader("h6"),
-                    h5: makeHeader("h5"),
-                    h4: makeHeader("h4"),
-                    h3: makeHeader("h3"),
-                    h2: makeHeader("h2"),
-                    h1: makeHeader("h1"),
-                    blockquote: ({ children, ...props }) => (
-                      <Box
-                        as="blockquote"
-                        layerStyle="borderSubtle"
-                        // borderColor="text.secondary"
-                        borderLeftWidth="2px"
-                        borderLeft="solid"
-                        paddingInlineStart={4}
-                        {...props}
-                      >
-                        {children}
-                      </Box>
-                    ),
-                    p: ({ children, ...props }) => (
-                      <Text
-                        as="p"
-                        fontSize="lg"
-                        // lineHeight="1.8"
-                        mb={6}
-                        {...props}
-                      >
-                        {children}
-                      </Text>
-                    ),
-                  }}
-                >
-                  <MDXRenderer className="mb-4">{post.body}</MDXRenderer>
-                </MDXProvider>
-              </Box>
+              )} */}
             </Grid>
-          </Box>
+            <Hr />
+            <Box as="section" fontSize="lg" lineHeight="1.8">
+              <MDXProvider
+                components={{
+                  ...MarkdownComponents,
+                  ...MarkdownOverrides,
+                  ...Chakra,
+                  maxWidth,
+                  ChakraImage: Image,
+                  Toastable,
+                  Hr,
+                  a: ({ children, ...props }) => (
+                    <Link color={brand} {...props}>
+                      {children}
+                    </Link>
+                  ),
+                  Text,
+                  h6: makeHeader("h6"),
+                  h5: makeHeader("h5"),
+                  h4: makeHeader("h4"),
+                  h3: makeHeader("h3"),
+                  h2: makeHeader("h2"),
+                  h1: makeHeader("h1"),
+                  // code: ({ children, ...props }) => (
+                  //   <Box
+                  //     as="code"
+                  //     layerStyle="borderSublte"
+                  //     borderWidth="1px"
+                  //     {...props}
+                  //   >
+                  //     {children}
+                  //   </Box>
+                  // ),
+                  blockquote: ({ children, ...props }) => (
+                    <Box
+                      as="blockquote"
+                      layerStyle="borderSubtle"
+                      // borderColor="text.secondary"
+                      borderLeftWidth="2px"
+                      borderLeft="solid"
+                      paddingInlineStart={4}
+                      {...props}
+                    >
+                      {children}
+                    </Box>
+                  ),
+                  p: ({ children, ...props }) => (
+                    <Text
+                      as="p"
+                      fontSize="lg"
+                      // lineHeight="1.8"
+                      mb={6}
+                      {...props}
+                    >
+                      {children}
+                    </Text>
+                  ),
+                }}
+              >
+                <MDXRenderer>{post.body}</MDXRenderer>
+              </MDXProvider>
+            </Box>
+            {!isDraft && (
+              <>
+                <Hr />
+                <Box as="footer">
+                  <Grid
+                    as="section"
+                    gridAutoFlow="row"
+                    alignItems="center"
+                    justifyCntent="center"
+                    gridTemplateColumns={["1fr", null, null, "1fr 1fr"]}
+                    flexDirection={["row", "column"]}
+                    gap={4}
+                    m={0}
+                    p={0}
+                    className="justify-center flex flex-row p-0 m-0 text-sm w-fullgap-4"
+                  >
+                    <Navigator pos="left" link={previous} />
+                    <Navigator pos="right" link={next} />
+                  </Grid>
+                </Box>
+              </>
+            )}
+          </Grid>
           <Popup />
         </LayoutContent>
       </Layout>
-      {!isDraft && (
-        <nav className="border-0 border-t-2 border-theme-light border-solid bg-theme-alt">
-          <section className="justify-center flex flex-row p-0 m-0 text-sm w-fullgap-4">
-            <Navigator pos="left" link={previous} />
-            <Navigator pos="right" link={next} />
-          </section>
-        </nav>
-      )}
     </>
   )
 }
 export const pageQuery = graphql`
   fragment Cover on File {
     image: childImageSharp {
-      fluid(quality: 90, srcSetBreakpoints: [400, 1200, 1920], maxWidth: 1920) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+      gatsbyImageData(
+        quality: 90
+        breakpoints: [400, 1200, 1920]
+        layout: FULL_WIDTH
+      )
     }
   }
+
   query BlogPostBySlug($slug: String!) {
     site {
       siteMetadata {

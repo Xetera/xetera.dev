@@ -3,25 +3,27 @@ import { graphql } from "gatsby"
 import PostPreview from "../templates/preview"
 
 export default props => {
-  console.log({ props })
   return <PostPreview {...props} />
 }
 
 export const pageQuery = graphql`
   fragment Cover on File {
     image: childImageSharp {
-      fluid(quality: 90, srcSetBreakpoints: [400, 1200, 1920], maxWidth: 1920) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+      gatsbyImageData(
+        quality: 90
+        breakpoints: [400, 1200, 1920]
+        layout: FULL_WIDTH
+      )
     }
   }
+
   query TestPage {
     site {
       siteMetadata {
         title
       }
     }
-    mdx(fields: { slug: { eq: "/typescript-nextjs/" } }) {
+    mdx(fields: { slug: { eq: "/parasocial-dynamics-of-kpop/" } }) {
       id
       excerpt(pruneLength: 160)
       body

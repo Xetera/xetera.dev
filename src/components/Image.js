@@ -1,5 +1,5 @@
 import React from "react"
-import Image from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image";
 
 function imageStyle(options = {}) {
   return {
@@ -15,15 +15,14 @@ function imageStyle(options = {}) {
 export function BackgroundImage({ image, options, pos }) {
   const isTop = pos === "top"
   return (
-    <Image
-      fluid={image}
+    <GatsbyImage
+      image={image}
       className={`absolute left-0 right-0 ${
         isTop ? "top-0" : "bottom-0"
       } h-half-vh lg:h-inherit h-half-vh md:h-screen`}
       style={imageStyle(options)}
       imgStyle={{
         objectPosition: isTop ? "center top" : "center bottom",
-      }}
-    />
-  )
+      }} />
+  );
 }

@@ -1,6 +1,8 @@
+import { Box, Flex, Grid, Text } from "@chakra-ui/layout"
 import React from "react"
 
 const whatsappBackground = "#262d31"
+const whatsappBackgroundSelf = "rgb(5, 97, 98)"
 
 export function WhatsappMessage({
   other = false,
@@ -14,68 +16,87 @@ export function WhatsappMessage({
   const textStyle = {
     color: "rgba(241, 241, 241, 0.9)",
   }
+  const bubbleColor = other ? whatsappBackground : whatsappBackgroundSelf
   const timeComp = (
-    <time
-      className="inline-block self-end"
-      style={{
-        fontSize: "12px",
-        color: "rgba(241, 241, 241, 0.6)",
-        margin: "-10px 0 -5px 12px",
-      }}
+    <Text
+      as="time"
+      display="inline-block"
+      alignSelf="flex-end"
+      m="-10px 0 -5px 12px"
+      fontSize="xs"
+      whiteSpace="nowrap"
+      color="rgba(241, 241, 241, 0.6)"
     >
       {time}
-    </time>
+    </Text>
   )
   return (
-    <div
-      className="grid gap-1 leading-4 "
-      style={{
-        opacity: "100%",
-        maxWidth: 330,
-        lineHeight: "19px",
-        fontSize: "14px",
-      }}
+    <Grid
+      alignSelf={other ? "flex-start" : "flex-end"}
+      gap={1}
+      opacity="100%"
+      maxWidth="330px"
+      lineHeight="19px"
+      fontSize="sm"
     >
-      <span
-        style={{ background: whatsappBackground, padding: "6px 7px 8px 9px" }}
-        className="p-2 flex flex-col relative rounded-b-lg rounded-r-lg"
+      <Flex
+        background={bubbleColor}
+        padding="6px 7px 8px 9px"
+        p={2}
+        flexFlow="column"
+        position="relative"
+        {...(other ? { borderRightRadius: "lg" } : { borderLeftRadius: "lg" })}
+        borderBottomRadius="lg"
       >
-        <svg
+        <Box
+          as="svg"
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
-          className="svg-triangle absolute right-full top-0"
-          width="10"
-          height="10"
-          style={{ fill: whatsappBackground }}
+          position="absolute"
+          {...(other ? { right: "100%" } : { left: "100%" })}
+          top={0}
+          width="10px"
+          height="10px"
+          fill={other ? whatsappBackground : whatsappBackgroundSelf}
         >
-          <polygon points="0,0 20,0 20,20" />
-        </svg>
-        <div className="flex mb-1">
-          <span className={`font-semibold mr-2`} style={{ color }}>
-            {number}
-          </span>
-          <span style={{ color: "rgba(241,241,242, 0.4)" }}>~{username}</span>
-        </div>
-        <div className="flex justify-between">
-          <p className="m-0" style={textStyle}>
+          {other ? (
+            <polygon points="0,0 10,0 10,10" />
+          ) : (
+            <polygon points="10,0 0,10 0,0" />
+          )}
+        </Box>
+        {username && (
+          <Flex mb={1} className="flex mb-1">
+            <Text color={color} fontWeight="semibold" mr={2} lineHeight="19px">
+              {number}
+            </Text>
+            <Text color="rgba(241,241,242, 0.4)" lineHeight="19px">
+              ~{username}
+            </Text>
+          </Flex>
+        )}
+        <Flex justifyContent="space-between">
+          <Text m={0} {...textStyle} lineHeight="19px">
             {head}
-          </p>
+          </Text>
           {timeComp}
-        </div>
-      </span>
+        </Flex>
+      </Flex>
       {tail.map(message => (
-        <span
-          style={{
-            background: whatsappBackground,
-            padding: "6px 7px 8px 9px",
-            ...textStyle,
-          }}
-          className="rounded-lg p-2 py-1 flex relative w-min whitespace-nowrap"
+        <Flex
+          background={bubbleColor}
+          p="6px 7px 8px 9px"
+          position="relative"
+          width="min-content"
+          whiteSpace="nowrap"
+          borderRadius="md"
         >
-          <p className="m-0">{message}</p>
+          <Text m={0} lineHeight="19px" color={textStyle.color}>
+            {message}
+          </Text>
           {timeComp}
-        </span>
+        </Flex>
       ))}
-    </div>
+    </Grid>
   )
 }

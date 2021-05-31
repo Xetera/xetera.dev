@@ -1,6 +1,6 @@
 import React from "react"
 import ExternalLink from "./ExternalLink"
-import Image from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { BackgroundImage } from "./Image"
 import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
@@ -14,17 +14,14 @@ const Bio = forwardRef((props, ref) => {
   const data = useStaticQuery(graphql`
     fragment SocialMedia on File {
       data: childImageSharp {
-        fixed(width: 25, height: 25) {
-          ...GatsbyImageSharpFixed
-        }
+        gatsbyImageData(width: 25, height: 25, layout: FIXED)
       }
     }
+
     query BioQuery {
       avatar: file(absolutePath: { regex: "/avatar.png/" }) {
         data: childImageSharp {
-          fixed(width: 200, height: 200) {
-            ...GatsbyImageSharpFixed
-          }
+          gatsbyImageData(width: 200, height: 200, layout: FIXED, quality: 100)
         }
       }
       site {
@@ -36,7 +33,6 @@ const Bio = forwardRef((props, ref) => {
       }
     }
   `)
-  const avatar = data.avatar.data.fixed
   const brand = useBrandColor()
   return (
     <Stack lineHeight="1.8" spacing={4} ref={ref} {...props}>
@@ -48,7 +44,7 @@ const Bio = forwardRef((props, ref) => {
         p={2}
         transition="all 0.4s ease"
       >
-        <Image fixed={avatar} loading="lazy" />
+        <GatsbyImage image={data.avatar.data.gatsbyImageData} loading="lazy" />
       </Flex>
       <Heading fontWeight="black" fontSize="3xl">
         Hi, I’m Xetera.

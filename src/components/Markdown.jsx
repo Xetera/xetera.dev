@@ -6,7 +6,7 @@ import ThemeLight from "prism-react-renderer/themes/github"
 import json5 from "json5"
 import rangeParser from "parse-numeric-range"
 import { maxWidth } from "../templates/post"
-import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
+import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout"
 import { layoutContentPadding } from "./Layout"
 import { Image } from "@chakra-ui/image"
 import { forwardRef, useColorMode } from "@chakra-ui/system"
@@ -38,17 +38,19 @@ const languageMappings = {
   },
 }
 
-export function WideBanner({
-  title,
-  children,
-  centered,
-  bordered,
-  className = "",
-  innerClassName = "",
-  noBg,
-  noPadding,
-  ...rest
-}) {
+export const WideBanner = forwardRef((props, ref) => {
+  const {
+    title,
+    children,
+    centered,
+    bordered,
+    className = "",
+    inner = {},
+    noBg,
+    noPadding,
+    ...rest
+  } = props
+  console.log({ inner })
   return (
     <Box
       width="100vw"
@@ -58,17 +60,19 @@ export function WideBanner({
       marginRight="-50vw"
       position="relative"
       mb={6}
-      layerStyle="bgSecondary"
-      {...(rest?.style ?? {})}
+      // layerStyle="bgSecondary"
+      ref={ref}
       className={`${!noBg ? "bg-theme-alt" : ""} ${
         bordered &&
         "border-theme-light border-t-1 border-b-1 border-l-0 border-r-0 border-solid"
       } mb-6 ${className}`}
+      {...rest}
     >
-      <Box
+      <Grid
         className="widebanner"
         maxWidth={maxWidth}
         px={layoutContentPadding}
+        {...inner}
         {...(centered ? { mx: "auto" } : {})}
         {...(!noPadding
           ? {
@@ -85,10 +89,10 @@ export function WideBanner({
           </h2>
         )}
         {children}
-      </Box>
+      </Grid>
     </Box>
   )
-}
+})
 
 export function DiscordReaction({ image, reactCount, reacted: _reacted }) {
   const [reacts, setReacts] = React.useState(reactCount)
@@ -100,26 +104,27 @@ export function DiscordReaction({ image, reactCount, reacted: _reacted }) {
     setReacted(prev => !prev)
   }
   return (
-    <div
-      className="items-center rounded cursor-pointer mr-1"
+    <Box
+      display={reacts === 9 ? "none" : "inline-flex"}
+      alignItems="center"
+      borderRadius="md"
+      cursor="pointer"
+      mr={1}
+      p="0.125rem 0.375rem"
       onClick={react}
-      style={{
-        display: reacts === 0 ? "none" : "inline-flex",
-        padding: "0.125rem 0.375rem",
-        background: reacted ? "rgba(114,137,218,.3)" : "hsl(0, 0%, 100%, 0.06)",
-      }}
+      background={reacted ? "rgba(114,137,218,.3)" : "hsl(0, 0%, 100%, 0.06)"}
     >
-      <img src={image} className="mb-0" style={{ width: 16, height: 16 }} />
-      <p
-        className="text-xs mb-0 text-center"
-        style={{
-          marginLeft: "0.375rem",
-          color: reacted ? "#7289da" : "#72767d",
-        }}
+      <Image src={image} mb={0} width="16px" height="16px" />
+      <Text
+        fontSize="xs"
+        mb={0}
+        alignText="center"
+        ml={1}
+        color={reacted ? "#7289da" : "#72767d"}
       >
         {reacts}
-      </p>
-    </div>
+      </Text>
+    </Box>
   )
 }
 
@@ -134,6 +139,7 @@ export const DiscordMessage = forwardRef(
       avatar,
       className = "",
       reactions = [],
+      ...props
     },
     ref
   ) => {
@@ -144,6 +150,7 @@ export const DiscordMessage = forwardRef(
         lineHeight="1.4"
         background="#36393f"
         ref={ref}
+        {...props}
       >
         <Box
           as="figure"
@@ -158,8 +165,13 @@ export const DiscordMessage = forwardRef(
           <Image objectFit="cover" src={avatar} />
         </Box>
         <div>
-          <div className="flex items-baseline mb-0">
-            <Heading fontWeight="semibold" mb={0} fontSize="sm">
+          <Flex alignItems="baselin" mb={0} lineHeight="22.5px">
+            <Heading
+              fontSize="15.75px"
+              fontWeight="semibold"
+              mb={1}
+              color={roleColor}
+            >
               {username}
               <Box
                 as="datetime"
@@ -171,9 +183,14 @@ export const DiscordMessage = forwardRef(
                 {date}
               </Box>
             </Heading>
-          </div>
+          </Flex>
           {(messages ?? [message]).map((message, i, arr) => (
-            <Text fontSize="md" mb={i !== arr.length - 1 ? 2 : 0} key={message}>
+            <Text
+              fontSize="md"
+              lineHeight="22.5px"
+              mb={i !== arr.length - 1 ? 2 : 0}
+              key={message}
+            >
               {message}
             </Text>
           ))}

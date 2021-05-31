@@ -4,12 +4,17 @@ const puppeteer = require("puppeteer")
 const ReactDOMServer = require("react-dom/server")
 const { createOpenGraphImage } = require("gatsby-plugin-open-graph-images")
 const { postPreviewDimensions } = require("./src/shared")
+const fs = require("fs")
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const blogPost = path.resolve(`./src/templates/post.jsx`)
-  const blogPostPreview = path.resolve(`./src/templates/preview.jsx`)
+  const blogPost = path.resolve(
+    path.join(__dirname, `./src/templates/post.jsx`)
+  )
+  const blogPostPreview = path.resolve(
+    path.join(__dirname, `./src/templates/preview.jsx`)
+  )
   const result = await graphql(
     `
       {
@@ -60,17 +65,19 @@ exports.createPages = async ({ graphql, actions }) => {
     }
 
     const previewPath = `${slug.replace(/\//g, "")}.png`
-    context.ogImage = createOpenGraphImage(createPage, {
-      path: previewPath,
-      component: blogPostPreview,
-      size: postPreviewDimensions,
-      context,
-    })
 
     createPage({
       path: slug,
       component: blogPost,
-      context,
+      context: {
+        ...context,
+        ogImage: createOpenGraphImage(createPage, {
+          path: `/${slug}/thumbnail.png`,
+          component: blogPostPreview,
+          size: postPreviewDimensions,
+          context,
+        }),
+      },
     })
   })
 }
@@ -94,4 +101,8 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
     },
   })
+}
+
+exports.onPostBuild = async () => {
+  // await fs.promises.rmdir(path.join(__dirname, "public", "__generated"))
 }

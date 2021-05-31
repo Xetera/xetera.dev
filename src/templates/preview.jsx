@@ -13,28 +13,35 @@ import { Image } from "@chakra-ui/image"
 import { Tag } from "@chakra-ui/tag"
 import { themedColors } from "../@chakra-ui/gatsby-plugin/theme"
 import { postPreviewDimensions } from "../shared"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 export default function PostPreview(props) {
   const data = props.data.mdx
   const { thumbnail = {} } = data.frontmatter
+
   return (
     <Flex
       position="relative"
       overflow="hidden"
-      borderRadius="md"
       background="gray.900"
       width={`${postPreviewDimensions.width}px`}
       height={`${postPreviewDimensions.height}px`}
     >
       {data.frontmatter.imageTop && (
-        <Image
-          objectFit="cover"
+        <GatsbyImage
+          // layout="fixed"
+          width="100%"
           height="100%"
-          zIndex="-1"
-          position="absolute"
-          opacity="0.25"
-          filter="blur(10px)"
-          src={data.frontmatter.imageTop.src.image.fluid.src}
+          style={{
+            objectFit: "cover",
+            height: "100%",
+            width: "100%",
+            // zIndex: "-1",
+            position: "absolute",
+            opacity: "0.15",
+            filter: "blur(7px)",
+          }}
+          image={data.frontmatter.imageTop.src.image.gatsbyImageData}
         />
       )}
       <Grid gridTemplateColumns="70% 30%" alignItems="center">
@@ -44,7 +51,7 @@ export default function PostPreview(props) {
           height="100%"
           padding={12}
         >
-          <VStack spacing={4} m={0} alignItems="flex-start">
+          <VStack spacing={4} m={0} alignItems="flex-start" zIndex={2}>
             <Flex
               flexFlow="row"
               fontSize="xl"
@@ -53,19 +60,19 @@ export default function PostPreview(props) {
               alignItems="center"
             >
               <Text
-                as="datetime"
+                as="time"
                 color="inherit"
                 dateTime={data.frontmatter.date}
                 textShadow="1px 1px rgba(0, 0, 0, 0.8)"
               >
                 {data.frontmatter.date}
               </Text>
-              <Box mx="15px" color="inherit" fontSize="md">
+              <Box mx="15px" color="inherit" fontSize="14px">
                 ●
               </Box>
               <Text color="inherit">{data.fields.readingTime.text}</Text>
             </Flex>
-            <Heading fontSize="5xl" fontWeight="bold">
+            <Heading color="gray.50" fontSize="5xl" fontWeight="bold">
               {data.frontmatter.title}
             </Heading>
             <Text
@@ -113,11 +120,10 @@ export default function PostPreview(props) {
 export const query = graphql`
   fragment CoverStatic on File {
     image: childImageSharp {
-      fluid(quality: 90, maxWidth: 1920) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
   }
+
   query PreviewPage($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
       id

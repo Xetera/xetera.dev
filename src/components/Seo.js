@@ -3,12 +3,13 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, meta = [], title, image }) => {
+const SEO = ({ description, lang, title, image }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
+            siteUrl
             title
             themeColor
             description
@@ -22,43 +23,60 @@ const SEO = ({ description, lang, meta = [], title, image }) => {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const siteTitle = site.siteMetadata.title
+  const siteTitle = title || site.siteMetadata.title
+  console.log({ image })
   const data = [
     {
       name: `description`,
       content: metaDescription,
     },
     {
-      property: `og:siteTitle`,
-      content: title,
+      name: `og:siteTitle`,
+      content: siteTitle,
     },
     {
-      property: `og:description`,
+      name: `og:description`,
       content: metaDescription,
     },
     {
-      property: `og:type`,
-      content: `website`,
+      name: "og:site_name",
+      content: "Xetera",
     },
     {
       name: `twitter:card`,
-      content: `summary`,
+      content: `summary_large_image`,
     },
     {
       name: `twitter:creator`,
       content: site.siteMetadata.social.twitter,
     },
     {
+      name: "twitter:site",
+      content: site.siteMetadata.social.twitter,
+    },
+    {
       name: `twitter:siteTitle`,
-      content: title,
+      content: siteTitle,
     },
     {
       name: `twitter:description`,
       content: metaDescription,
     },
     {
+      name: "og:title",
+      content: siteTitle,
+    },
+    {
       name: "og:image",
-      content: `http://localhost:9000/__generated/${image.path}`,
+      // og image does some weird shit lol
+      content: `${site.siteMetadata.siteUrl}${image.path.replace(
+        /\/\//g,
+        "/"
+      )}`,
+    },
+    {
+      name: "og:description",
+      content: metaDescription,
     },
     {
       name: "og:image:height",
@@ -77,11 +95,10 @@ const SEO = ({ description, lang, meta = [], title, image }) => {
       title={title}
       titleTemplate={`%s | ${siteTitle}`}
     >
-      {data.concat(meta).map(({ name, content }) => (
+      {data.map(({ name, content }) => (
         <meta name={name} content={content} key={name} />
       ))}
       <meta name="theme-color" content={site.siteMetadata.themeColor} />
-      <meta name="description" content={metaDescription} />
     </Helmet>
   )
 }

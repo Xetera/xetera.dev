@@ -13,11 +13,13 @@ export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
       ref={ref}
       {...props}
     >
-      <Box as="time" dateTime="date">
+      <Box as="time" dateTime="date" color="inherit">
         {date}
       </Box>
-      <Box mx="10px">·</Box>
-      <Text>{readingTime}</Text>
+      <Box mx="10px" color="inherit">
+        ·
+      </Box>
+      <Text color="inherit">{readingTime}</Text>
     </Flex>
   )
 })

@@ -4,24 +4,19 @@ date: "2020-12-09"
 description: Or at least not mine.
 tags:
   - Rant
-# draft: true
-# imageTop: &img
-#   src: ./whatsapp.jpg
-# opacity: 0e12
-# imageBottom: *img
+imageTop: &img
+  src: ./whatsapp.jpg
 ---
 
-<blockquote>
-  <h2>
-    <a
-      href="https://www.wired.com/2015/09/whatsapp-serves-900-million-users-50-engineers/"
-      target="_blank"
-      rel="noopener external"
-    >
-      Why WhatsApp Only Needs 50 Engineers for Its 900M Users
-    </a>
-  </h2>
-</blockquote>
+<h2>
+  <a
+    href="https://www.wired.com/2015/09/whatsapp-serves-900-million-users-50-engineers/"
+    target="_blank"
+    rel="noopener external"
+  >
+    Why WhatsApp Only Needs 50 Engineers for Its 900M Users
+  </a>
+</h2>
 
 This was one of the headlines that WhatsApp was praised for in 2015, attributing it to their use of Erlang. The engineer inside me still feels giddy at the thought of this since I'm a big fan of functional programming fan myself, but something about this headline doesn't sit right with me anymore. Every time I go to [https://web.whatsapp.com](https://web.whatsapp.com) to check my messages from the last 3 people in my friend circle who still use this app, and I wait for the page to load for 10 minutes only to realize that my phone hasn't been turned on for some time --and that I need to enter my password on my phone to use a chat app on desktop-- I think of this headline and it makes me angrier every time.
 
@@ -39,16 +34,11 @@ import Downvote from "./downvote.png"
 import Angery from "./angery.png"
 import Uhuh from "./uhuh.png"
 
-<WideBanner
-  centered
-  style={{ background: "#36393f" }}
-  className="py-2 my-6"
-  innerClassName="grid gap-3"
->
+<WideBanner centered py={2} my={6} background="#36393f" inner={{ gap: 22 }}>
   <DiscordMessage
     message="Hey man, why does a chat program need features? Isn't it enough for it to just allow you to chat with people?"
     username="Definitely Not a Facebook Employee"
-    roleColor="text-pink-700"
+    roleColor="pink.700"
     date="Today at 5:05 AM"
     avatar={Wa}
     reactions={[{ image: NodReaction, reactCount: 12, reacted: false }]}
@@ -56,14 +46,14 @@ import Uhuh from "./uhuh.png"
   <DiscordMessage
     message="If I can chat on it, it's good bro."
     username="Boomer"
-    roleColor="text-orange-700"
+    roleColor="orange.700"
     date="Today at 5:10 AM"
     avatar={Boomer}
   />
   <DiscordMessage
     message="But there are so many problems with it, shouldn't you expect an app to be good and improving?"
     username="Xetera"
-    roleColor="text-white"
+    roleColor="white"
     date="Today at 5:12 AM"
     reactions={[
       { image: Downvote, reactCount: 35 },
@@ -74,7 +64,7 @@ import Uhuh from "./uhuh.png"
   <DiscordMessage
     message="That's the most ridiculous thing I've ever heard."
     username="Definitely Not a Facebook Employee"
-    roleColor="text-pink-700"
+    roleColor="pink.700"
     date="Today at 5:13 AM"
     avatar={Wa}
     reactions={[{ image: Uhuh, reactCount: 0, reacted: true }]}
@@ -134,18 +124,19 @@ Maybe you might claim that
 import WeSmart from "./weSmart.png"
 
 <DiscordMessage
-  className="p-4 rounded"
+  p={4}
+  borderRadius="md"
   message="Yeah but like these apps don't really do the same thing, Discord isn't a chatting app."
   username="My last 2 brain cells"
-  roleColor="text-green-300"
+  roleColor="green.300"
   date="Today at 9:51 AM"
   avatar={WeSmart}
 />
 
-<p className="mb-4 leading-6 text-sm text-gray-400">
+<Text mb={4} fontSize="sm" layerStyle="textTertiary">
   I know it's a little ridiculous to do this joke the style of a Discord chat
   but someone on Discord unironically argued this with me.
-</p>
+</Text>
 
 Other than not storing messages on a server, —which I can guarantee the people you're talking with, including yourself don't actually care about— Discord a superset of WhatsApp in terms of features.
 
@@ -159,26 +150,30 @@ So if all these apps have so many better features, why are people not using them
 
 import WhatsappBackground from "./whatsapp_background.png"
 
-<div
-  className="w-full relative mb-6"
-  style={{
-    width: "100vw",
-    left: "50%",
-    right: "50%",
-    marginLeft: "-50vw",
-    marginRight: "-50vw",
-    backgroundImage: `url(${WhatsappBackground})`,
-    backgroundRepeatY: "repeat",
-    backgroundRepeatX: "repeat",
-  }}
+<Box
+  width="100vw"
+  position="relative"
+  mb={6}
+  left="50%"
+  right="50%"
+  marginLeft="-50vw"
+  marginRight="-50vw"
+  backgroundImage={`url(${WhatsappBackground})`}
+  backgroundRepeatY="repeat"
+  backgroundRepeatX="repeat"
 >
-  <div
-    className="w-screen h-full relative"
-    style={{
-      backgroundColor: `rgba(19, 18, 18, 0.9)`,
-    }}
+  <Box
+    width="100%"
+    height="100%"
+    position="relative"
+    background={`rgba(19, 18, 18, 0.9)`}
   >
-    <div className="m-auto px-6 py-6  grid gap-2" style={{ maxWidth: "42rem" }}>
+    <VStack spacing={6} m="auto" px={6} py={6} maxWidth="49rem">
+      <WhatsappMessage
+        color="rgb(120, 159, 115)"
+        time="9:18 AM"
+        messages={["Hey Discord is really cool you guys", "You wanna switch?"]}
+      />
       <WhatsappMessage
         username="Billy"
         other={true}
@@ -186,7 +181,7 @@ import WhatsappBackground from "./whatsapp_background.png"
         color="rgb(230, 159, 115)"
         time="9:21 AM"
         messages={[
-          "Yeah but like",
+          "Man it's just like",
           "...",
           "I'm already using whatsapp",
           "and so are all my other friends",
@@ -202,15 +197,15 @@ import WhatsappBackground from "./whatsapp_background.png"
         time="9:23 AM"
         messages={["Lmaooo", "Yeah dude we're not switching to Discord"]}
       />
-    </div>
-  </div>
-</div>
+    </VStack>
+  </Box>
+</Box>
 
 The truth is, if you've been using WhatsApp for a long time and all your friends are on it it's kind of difficult to coordinate everyone to jump ship at the same time. That's the vendor lock-in effect that WhatsApp has as its biggest feature...
 
 So while it's true that WhatsApp revolutionized the way we do instant messaging, it just hasn't been keeping up. Just because you're at the top doesn't meaan you can stop trying because someone else (**cough** discord, telegram **cough**) will be catching up with features you should've implemented 5 years ago.
 
-<hr />
+<Hr />
 
 ### Funny footnote
 

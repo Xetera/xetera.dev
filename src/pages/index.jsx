@@ -35,7 +35,7 @@ const BlogIndex = ({ data, location }) => {
             width="100%"
           >
             <Heading fontSize="xl">{posts.length} Posts</Heading>
-            <PostSwitch />
+            {/* <PostSwitch /> */}
           </Flex>
           <Grid gap={10}>
             {posts.map(({ node }) => (

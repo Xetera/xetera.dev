@@ -9,7 +9,7 @@ module.exports = {
       name: process.env.GATSBY_OWNER_FULL_NAME,
     },
     description: "A place for my ramblings.",
-    siteUrl: process.env.GATSBY_SITE_URL,
+    siteUrl: process.env.GATSBY_SITE_URL || "http://localhost:8000",
     themeColor,
     social: {
       twitter: `_Xetera`,
@@ -18,6 +18,7 @@ module.exports = {
   },
   plugins: [
     "gatsby-remark-images",
+    `gatsby-plugin-image`,
     {
       resolve: "@chakra-ui/gatsby-plugin",
       options: {
