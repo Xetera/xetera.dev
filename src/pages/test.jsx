@@ -45,6 +45,14 @@ export const pageQuery = graphql`
         }
       }
       frontmatter {
+        thumbnail {
+          objectPosition
+          src {
+            image: childImageSharp {
+              gatsbyImageData(quality: 100, height: 600, layout: CONSTRAINED)
+            }
+          }
+        }
         draft
         title
         tags

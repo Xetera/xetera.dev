@@ -92,7 +92,7 @@ export default function PostPreview(props) {
                 py={2}
                 px={8}
                 borderRadius="full"
-                background="gray.800"
+                background="rgba(60, 64, 72, 0.67)"
                 color={themedColors.brand.dark}
               >
                 {tag}
@@ -108,10 +108,12 @@ export default function PostPreview(props) {
           <GatsbyImage
             imgStyle={{
               objectFit: "cover",
-              objectPosition: thumbnail.objectPosition ?? "40%",
-              // background: "gray.900",
+              objectPosition: thumbnail?.objectPosition ?? "40%",
             }}
-            image={thumbnail.src ?? props.data.avatar.image.data}
+            image={
+              thumbnail?.src?.image?.gatsbyImageData ??
+              props.data.avatar.image.gatsbyImageData
+            }
           />
         </Flex>
       </Grid>
@@ -129,12 +131,7 @@ export const query = graphql`
   query PreviewPage($slug: String!) {
     avatar: file(absolutePath: { regex: "/avatar.png/" }) {
       image: childImageSharp {
-        data: gatsbyImageData(
-          width: 600
-          height: 600
-          layout: FIXED
-          quality: 100
-        )
+        gatsbyImageData(width: 600, height: 600, layout: FIXED, quality: 100)
       }
     }
     mdx(fields: { slug: { eq: $slug } }) {
@@ -152,6 +149,14 @@ export const query = graphql`
         tags
         date(formatString: "MMMM DD, YYYY")
         description
+        thumbnail {
+          objectPosition
+          src {
+            image: childImageSharp {
+              gatsbyImageData(quality: 100, height: 600, layout: CONSTRAINED)
+            }
+          }
+        }
         imageTop {
           src {
             ...CoverStatic
