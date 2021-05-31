@@ -87,7 +87,10 @@ export const createPages = async ({ graphql, actions }) => {
       previous,
       next,
     }
-    const previewPath = `/${slug.replace(/\//g, "")}/thumbnail.png`
+    const previewPath = `/${slug.replace(
+      /\//g,
+      ""
+    )}/thumbnail.png?t=${Date.now()}`
 
     createPage({
       path: slug,
