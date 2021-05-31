@@ -8,6 +8,7 @@ const SEO = ({ description, lang, title, image }) => {
     graphql`
       query {
         site {
+          buildTime
           siteMetadata {
             siteUrl
             title
@@ -72,7 +73,7 @@ const SEO = ({ description, lang, title, image }) => {
       content: `${site.siteMetadata.siteUrl}${image.path.replace(
         /\/\//g,
         "/"
-      )}`,
+      )}?t=${site.buildTime}`,
     },
     {
       name: "og:description",
