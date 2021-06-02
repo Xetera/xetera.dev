@@ -73,10 +73,10 @@
     "typeface-poppins": "^1.1.13",
     "typography": "^0.16.19",
     "typography-theme-sutro": "^0.16.19",
-    "typography-theme-wordpress-2016": "^0.16.19"
+    "typography-theme-wordpress-2016": "^0.16.19",
+    "esm-wallaby": "^3.2.25"
   },
   "devDependencies": {
-    "esm-wallaby": "^3.2.25",
     "prettier": "2.3.0",
     "puppeteer": "^9.1.1"
   },
