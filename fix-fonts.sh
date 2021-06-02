@@ -1,17 +1,37 @@
 #!/usr/bin/env bash
 
 #check if font is installed
-sudo fc-match "Noto Color Emoji"
+fc-match "Noto Color Emoji"
 
 #if not installed install with following line
-#sudo apt-get install fonts-noto-color-emoji -y
+apt-get install fonts-noto-color-emoji -y
+curl -L https://noto-website-2.storage.googleapis.com/pkgs/NotoColorEmoji-unhinted.zip -o NotoColorEmoji.zip
+unzip NotoColorEmoji.zip
 
-#font will be in shared folder but puppeteer looks into local folder  so copy there
+mkdir "~/.fonts"
 
-#copy font - create folder if not exists
-mkdir -p /usr/local/share/fonts
-cp /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf /usr/local/share/fonts/
-chmod 644 /usr/local/share/fonts/NotoColorEmoji.ttf
+mv NotoColorEmoji.ttf "~/.fonts"
 
-#clear font cache
+cat << EOF > ~/.fonts.conf
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+<alias>
+ <family>sans-serif</family>
+ <prefer>
+   <family>Noto Color Emoji</family>
+   <family>Noto Emoji</family>
+ </prefer>
+</alias>
+
+<alias>
+ <family>serif</family>
+ <prefer>
+   <family>Noto Color Emoji</family>
+   <family>Noto Emoji</family>
+ </prefer>
+</alias>
+</fontconfig>
+EOF
+
 fc-cache -fv
