@@ -167,7 +167,7 @@ export default function Post({ data, pageContext, location }) {
               )} */}
             </Grid>
             <Hr />
-            <Box as="section" fontSize="lg" lineHeight="1.8">
+            <Box as="section" fontSize="lg" lineHeight="1.8" overflow="hidden">
               <MDXProvider
                 components={{
                   ...MarkdownComponents,

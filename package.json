@@ -91,12 +91,12 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true npx --node-arg '-r esm-wallaby' gatsby build --log-pages",
-    "develop": "npx --node-arg '-r esm-wallaby' gatsby develop",
+    "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true npx --node-options '-r esm-wallaby' gatsby build --log-pages",
+    "develop": "npx --node-options '-r esm-wallaby' gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "yarn develop",
-    "serve": "npx --node-arg '-r esm-wallaby' gatsby serve",
-    "clean": "npx --node-arg '-r esm-wallaby' gatsby clean",
+    "serve": "npx --node-options '-r esm-wallaby' gatsby serve",
+    "clean": "npx --node-options '-r esm-wallaby' gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }

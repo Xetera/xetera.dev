@@ -70,7 +70,7 @@ const Bio = forwardRef((props, ref) => {
           and I’m rank{" "}
           <Link
             color={brand}
-            href={`https://osu.ppy.sh/users/${data.osu.id}`}
+            href={`https://osu.ppy.sh/users/${data.osu.user_id}`}
             rel="noopener external noreferrer"
           >
             #{osuRank} in osu.
@@ -109,7 +109,13 @@ const staticQuery = graphql`
   query BioQuery {
     avatar: file(absolutePath: { regex: "/avatar.png/" }) {
       data: childImageSharp {
-        gatsbyImageData(width: 200, height: 200, layout: FIXED, quality: 100)
+        gatsbyImageData(
+          width: 200
+          height: 200
+          layout: FIXED
+          quality: 90
+          placeholder: TRACED_SVG
+        )
       }
     }
     site {
@@ -130,7 +136,7 @@ const staticQuery = graphql`
       }
     }
     osu {
-      id
+      user_id
       statistics {
         globalRank: global_rank
       }

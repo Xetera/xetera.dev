@@ -258,6 +258,7 @@ function Code({ children, className, metastring }) {
             borderWidth="1px"
             layerStyle="borderSubtle"
             position="relative"
+            overflowX="auto"
             transition="all 0.2s"
             fontSize="md"
             mb={7}
