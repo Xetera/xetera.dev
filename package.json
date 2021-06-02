@@ -21,6 +21,7 @@
     "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "date-fns": "^2.22.1",
+    "esm-wallaby": "^3.2.25",
     "framer-motion": "^4.1.17",
     "gatsby": "^3.6.0",
     "gatsby-background-image": "^1.3.1",
@@ -73,8 +74,7 @@
     "typeface-poppins": "^1.1.13",
     "typography": "^0.16.19",
     "typography-theme-sutro": "^0.16.19",
-    "typography-theme-wordpress-2016": "^0.16.19",
-    "esm-wallaby": "^3.2.25"
+    "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
     "prettier": "2.3.0"
@@ -90,12 +90,12 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true npx --node-options '-r esm-wallaby' gatsby build --log-pages",
-    "develop": "npx --node-options '-r esm-wallaby' gatsby develop",
+    "build": "cross-env GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true npx gatsby build --log-pages",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "yarn develop",
-    "serve": "npx --node-options '-r esm-wallaby' gatsby serve",
-    "clean": "npx --node-options '-r esm-wallaby' gatsby clean",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }
