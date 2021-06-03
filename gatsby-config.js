@@ -1,6 +1,6 @@
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` })
 
-const siteTitle = `${process.env.GATSBY_OWNER || "Xetera"}'s Den`
+const siteTitle = `Xetera`
 const themeColor = `#112130`
 module.exports = {
   siteMetadata: {

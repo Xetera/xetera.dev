@@ -3,23 +3,18 @@ import { Link as GatsbyLink, graphql, PageProps } from "gatsby"
 import Bio from "../components/Bio"
 import PostData, { PostList, Tags } from "../components/PostShared"
 import { Layout, LayoutContent } from "../components/Layout"
-import SEO from "../components/Seo"
-import Navbar from "../components/Navbar"
-import ExternalLink from "../components/ExternalLink"
-
-import Sidebar from "../components/Sidebar"
 import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
-import { useBreakpointValue } from "@chakra-ui/media-query"
-import { PostSwitch } from "../components/PostSwitch"
-import { useColorModeValue } from "@chakra-ui/color-mode"
-import { themedColors } from "../@chakra-ui/gatsby-plugin/theme"
 import { useBrandColor } from "../hooks/color"
+import { Helmet } from "react-helmet"
 
 const BlogIndex = ({ data, location }) => {
   const posts = data.allMdx.edges
   const brand = useBrandColor()
   return (
     <Layout>
+      <Helmet>
+        <title>{data.site.siteMetadata.title}</title>
+      </Helmet>
       <LayoutContent
         maxWidth="1200px"
         margin={["0 auto", null, "5% auto", "8% auto"]}
