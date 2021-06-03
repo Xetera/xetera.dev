@@ -28,7 +28,7 @@ const Bio = forwardRef((props, ref) => {
         p={2}
         transition="all 0.4s ease"
       >
-        <GatsbyImage image={data.avatar.data.gatsbyImageData} loading="lazy" />
+        <GatsbyImage image={data.avatar.data.gatsbyImageData} />
       </Flex>
       <Heading fontWeight="black" fontSize="3xl">
         Hi, I’m Xetera.
