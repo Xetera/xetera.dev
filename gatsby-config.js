@@ -16,6 +16,7 @@ module.exports = {
       github: `xetera`,
     },
   },
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   plugins: [
     "gatsby-remark-images",
     `gatsby-plugin-image`,
@@ -97,5 +98,6 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     "gatsby-plugin-open-graph-images",
     "gatsby-plugin-netlify-cache",
+    "gatsby-plugin-webpack-bundle-analyser-v2",
   ],
 }

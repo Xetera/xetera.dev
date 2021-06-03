@@ -1,5 +1,5 @@
 import React from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { maxWidth } from "../templates/post"
 import { Box, Flex } from "@chakra-ui/layout"
 
@@ -33,7 +33,7 @@ export function Toastable({ text, children, className = "" }) {
   )
 }
 
-const MotionFlex = motion(Flex)
+const MotionFlex = m(Flex)
 
 export default function Popup({ className }) {
   const { jsx } = React.useContext(ToastContext)
