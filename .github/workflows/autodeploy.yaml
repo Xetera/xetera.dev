@@ -1,0 +1,16 @@
+name: "Autodeploy"
+
+on:
+  schedule:
+    # deploy every day
+    - cron: "0 0 * * *"
+
+jobs:
+  deploy:
+    name: "Deploy to Netlify"
+    steps:
+      - uses: jsmrcaga/action-netlify-deploy@v1.1.0
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID: 121f7cb0-7b5d-46e1-8d39-89842cb5c6e6
+          NETLIFY_DEPLOY_TO_PROD: true
