@@ -25,7 +25,7 @@ const SEO = ({ description, lang, title, image }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const siteTitle = title || site.siteMetadata.title
-  console.log({ image })
+
   const data = [
     {
       name: `description`,

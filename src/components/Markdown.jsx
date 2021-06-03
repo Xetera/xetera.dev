@@ -50,7 +50,7 @@ export const WideBanner = forwardRef((props, ref) => {
     noPadding,
     ...rest
   } = props
-  console.log({ inner })
+
   return (
     <Box
       width="100vw"

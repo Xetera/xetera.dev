@@ -2,18 +2,15 @@ import React from "react"
 import ExternalLink from "./ExternalLink"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
-import { BackgroundImage } from "./Image"
 import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
 // import { Image } from "@chakra-ui/image"
-import { useBreakpointValue } from "@chakra-ui/media-query"
 import { RiGithubFill, RiGithubLine, RiTwitterFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
 import { useBrandColor } from "../hooks/color"
-import { format } from "date-fns"
 
 const Bio = forwardRef((props, ref) => {
   const data = useStaticQuery(staticQuery)
-  console.log({ data })
+
   const osuRank = Intl.NumberFormat("default").format(
     data.osu.statistics.globalRank
   )

@@ -7,6 +7,5 @@ import { ChakraProvider } from "@chakra-ui/react"
 import theme from "./src/@chakra-ui/gatsby-plugin/theme"
 
 export const wrapRootElement = ({ element, ...rest }) => {
-  console.log({ rest })
   return <ChakraProvider theme={theme}>{element}</ChakraProvider>
 }
