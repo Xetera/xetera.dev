@@ -10,6 +10,7 @@ jobs:
     name: "Deploy to Netlify"
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
