@@ -1,3 +1,4 @@
+const path = require("path")
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` })
 
 const siteTitle = `Xetera`
@@ -18,6 +19,12 @@ module.exports = {
   },
   flags: { PRESERVE_WEBPACK_CACHE: true },
   plugins: [
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        "@assets": path.join(__dirname, "content", "assets"),
+      },
+    },
     "gatsby-remark-images",
     `gatsby-plugin-image`,
     {

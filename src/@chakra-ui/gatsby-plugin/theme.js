@@ -8,6 +8,10 @@ import { extendTheme } from "@chakra-ui/react"
 import { mode } from "@chakra-ui/theme-tools"
 
 export const colors = {
+  discord: {
+    dark: "#36393f",
+    light: "",
+  },
   textPrimary: {
     light: "gray.900",
     dark: "gray.50",

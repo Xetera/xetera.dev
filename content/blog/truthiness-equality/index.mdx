@@ -1,0 +1,71 @@
+---
+title: 📚 Truthiness is not Loose Equality
+date: 2021-06-13
+description: Boolean(x) and x == true are entirely different concepts.
+tags:
+  - Guide
+---
+
+I've noticed a lot of people are confused about this idea. Truthiness makes some level of intuitive sense.
+
+```js
+if ("") {
+  console.log("Never runs")
+}
+```
+
+import Xetera from "@assets/avatars/xetera.png"
+import TzuyuImage from "@assets/avatars/tzuyu.png"
+
+import YooYikes from "@assets/emotes/yooyikes.png"
+
+export const Me = props => (
+  <DiscordMessage
+    username="Xetera"
+    roleColor="pink.300"
+    avatar={Xetera}
+    {...props}
+  />
+)
+
+export const Tzuyu = props => (
+  <DiscordMessage
+    username="Tzuyu"
+    roleColor="blue.400"
+    avatar={TzuyuImage}
+    {...props}
+  />
+)
+
+<WideBanner
+  centered
+  py={2}
+  my={6}
+  background="discord.dark"
+  inner={{ gap: 22 }}
+>
+  <Me
+    message="So why do you think the if statement works if the string isn't empty?"
+    date="Today at 9:42PM"
+  />
+  <Tzuyu
+    message="Because a non-empty string is truthy, right?"
+    date="Today at 9:42PM"
+  />
+  <Me
+    message="Yeah, do you know what that means though?"
+    date="Today at 9:43PM"
+  />
+  <Tzuyu
+    messages={[
+      "Yeah",
+      "I think so",
+      "like if you were comparing 'test' == true it would be truthy",
+    ]}
+    date="Today at 9:44PM"
+    reactions={[{ image: YooYikes, reactCount: 2, reacted: true }]}
+  />
+  <Me message="Have you actually tried that?" date="Today at 9:45PM" />
+  <Tzuyu messages={["no"]} date="Today at 9:45PM" />
+  <Tzuyu messages={["wait wtf"]} date="Today at 9:47PM" />
+</WideBanner>

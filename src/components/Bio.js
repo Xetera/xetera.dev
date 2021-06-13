@@ -104,7 +104,7 @@ const staticQuery = graphql`
   }
 
   query BioQuery {
-    avatar: file(absolutePath: { regex: "/avatar.png/" }) {
+    avatar: file(absolutePath: { regex: "/avatars/xetera.png/" }) {
       data: childImageSharp {
         gatsbyImageData(
           width: 200

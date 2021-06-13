@@ -158,16 +158,9 @@ export default function Post({ data, pageContext, location }) {
               >
                 {post.frontmatter.description}
               </Text>
-              {/* {imageTop && (
-                <Box my={3} borderRadius="sm" overflow="hidden">
-                  <GatsbyImage
-                    image={imageTop.src.childImageSharp.gatsbyImageData}
-                  />
-                </Box>
-              )} */}
             </Grid>
             <Hr />
-            <Box as="section" fontSize="lg" lineHeight="1.8" overflow="hidden">
+            <Box as="section" fontSize="lg" lineHeight="1.8">
               <MDXProvider
                 components={{
                   ...MarkdownComponents,

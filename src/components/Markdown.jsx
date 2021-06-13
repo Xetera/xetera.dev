@@ -149,6 +149,7 @@ export const DiscordMessage = forwardRef(
         color="#dcddde"
         lineHeight="1.4"
         background="#36393f"
+        mb={0}
         ref={ref}
         {...props}
       >
@@ -165,12 +166,12 @@ export const DiscordMessage = forwardRef(
           <Image objectFit="cover" src={avatar} />
         </Box>
         <div>
-          <Flex alignItems="baselin" mb={0} lineHeight="22.5px">
+          <Flex alignItems="baselin" mb={1} lineHeight="22.5px">
             <Heading
               fontSize="15.75px"
               fontWeight="semibold"
-              mb={1}
               color={roleColor}
+              mb={0}
             >
               {username}
               <Box
@@ -186,17 +187,21 @@ export const DiscordMessage = forwardRef(
           </Flex>
           {(messages ?? [message]).map((message, i, arr) => (
             <Text
-              fontSize="md"
+              fontSize="16px"
               lineHeight="22.5px"
-              mb={i !== arr.length - 1 ? 2 : 0}
+              mb={i !== arr.length - 1 ? 1 : 0}
               key={message}
             >
               {message}
             </Text>
           ))}
-          {reactions.map(props => (
-            <DiscordReaction {...props} key={props.image} />
-          ))}
+          {reactions && (
+            <Box mt={2}>
+              {reactions.map(props => (
+                <DiscordReaction {...props} key={props.image} />
+              ))}
+            </Box>
+          )}
         </div>
       </Flex>
     )
