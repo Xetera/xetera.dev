@@ -18,6 +18,7 @@ import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
+import { Table, Td, Th, Tr } from "@chakra-ui/table"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link, Stack, Text } = Chakra
@@ -182,16 +183,14 @@ export default function Post({ data, pageContext, location }) {
                   h3: makeHeader("h3"),
                   h2: makeHeader("h2"),
                   h1: makeHeader("h1"),
-                  // code: ({ children, ...props }) => (
-                  //   <Box
-                  //     as="code"
-                  //     layerStyle="borderSublte"
-                  //     borderWidth="1px"
-                  //     {...props}
-                  //   >
-                  //     {children}
-                  //   </Box>
-                  // ),
+                  table: ({ children, ...props }) => (
+                    <Table mb={6} {...props}>
+                      {children}
+                    </Table>
+                  ),
+                  th: Th,
+                  tr: Tr,
+                  td: Td,
                   blockquote: ({ children, ...props }) => (
                     <Box
                       as="blockquote"

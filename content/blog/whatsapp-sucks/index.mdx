@@ -34,14 +34,21 @@ import Downvote from "./downvote.png"
 import Angery from "./angery.png"
 import Uhuh from "./uhuh.png"
 
-<WideBanner centered py={2} my={6} background="#36393f" inner={{ gap: 22 }}>
+<WideBanner centered py={2} my={6} background="gray.800" inner={{ gap: 22 }}>
   <DiscordMessage
     message="Hey man, why does a chat program need features? Isn't it enough for it to just allow you to chat with people?"
     username="Definitely Not a Facebook Employee"
     roleColor="pink.700"
     date="Today at 5:05 AM"
     avatar={Wa}
-    reactions={[{ image: NodReaction, reactCount: 12, reacted: false }]}
+    reactions={[
+      {
+        image: NodReaction,
+        reactCount: 12,
+        reacted: false,
+        name: ":anodprobably:",
+      },
+    ]}
   />
   <DiscordMessage
     message="If I can chat on it, it's good bro."
@@ -56,8 +63,8 @@ import Uhuh from "./uhuh.png"
     roleColor="white"
     date="Today at 5:12 AM"
     reactions={[
-      { image: Downvote, reactCount: 35 },
-      { image: Angery, reactCount: 27 },
+      { image: Downvote, reactCount: 35, name: ":no:" },
+      { image: Angery, reactCount: 27, name: ":angery:" },
     ]}
     avatar={Xetera}
   />
@@ -67,7 +74,7 @@ import Uhuh from "./uhuh.png"
     roleColor="pink.700"
     date="Today at 5:13 AM"
     avatar={Wa}
-    reactions={[{ image: Uhuh, reactCount: 0, reacted: true }]}
+    reactions={[{ image: Uhuh, reactCount: 0, reacted: true, name: ":uhuh:" }]}
   />
 </WideBanner>
 

@@ -1,3 +1,4 @@
+import "@fontsource/inter/300.css"
 import "@fontsource/inter/400.css"
 import "@fontsource/inter/500.css"
 import "@fontsource/inter/600.css"
@@ -114,6 +115,9 @@ export default extendTheme({
     global: props => ({
       ".widebanner > p": {
         marginBottom: 0,
+      },
+      ".token-line": {
+        whiteSpace: "pre-wrap",
       },
       body: {
         color: mode("gray.700", "gray.300")(props),
