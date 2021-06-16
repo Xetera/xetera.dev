@@ -106,7 +106,7 @@ export default function Post({ data, pageContext, location }) {
           <Grid as="article" gap={2}>
             <Grid gap={2} as="header">
               {post.frontmatter.draft && (
-                <Box>
+                <Box mb={2}>
                   <Flex
                     zIndex={10}
                     width="100%"
@@ -114,11 +114,7 @@ export default function Post({ data, pageContext, location }) {
                     flexFlow="row"
                     maxWidth={maxWidth}
                   >
-                    <Text
-                      color={brand}
-                      fontWeight="semibold"
-                      fontSize={["sm", null, "lg"]}
-                    >
+                    <Text color={brand} fontSize={["sm", null, "lg"]}>
                       🥺 You're viewing a draft. This post is not published.
                     </Text>
                   </Flex>
@@ -281,12 +277,6 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         description
         imageTop {
-          src {
-            ...Cover
-          }
-          opacity
-        }
-        imageBottom {
           src {
             ...Cover
           }

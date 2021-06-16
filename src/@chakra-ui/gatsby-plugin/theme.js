@@ -144,9 +144,10 @@ export default extendTheme({
       },
       ".token-line": {
         whiteSpace: "pre-wrap",
+        wordBreak: "break-word",
       },
       "pre, code, kbd, samp": {
-        fontFamily: "Jetbrains Mono",
+        fontFamily: `ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace`,
       },
       body: {
         lineBreak: "auto",

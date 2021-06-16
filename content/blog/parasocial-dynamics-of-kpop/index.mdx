@@ -18,28 +18,38 @@ imageBottom:
 
 import { FaExclamationCircle } from "react-icons/fa"
 
-<WideBanner centered bordered>
-  <h2 className="text-base font-bold mt-0 mb-1 items-center flex">
-    <FaExclamationCircle className="text-base mr-2" />
+<WideBanner centered bordered layerStyle="bgSecondary">
+  <Heading
+    fontSize="lg"
+    fontWeight="bold"
+    mb={2}
+    display="flex"
+    alignItems="center"
+  >
+    <Box mr={2}>
+      <FaExclamationCircle />
+    </Box>
     Important Disclaimer
-  </h2>
-  <p className="mb-0">
+  </Heading>
+  <Text mb={0}>
     I am very much a kpop fan myself. I have more in common with the people I
     criticize than you might think and that irony is not lost on me. There are
     going to be links throughout the article to kpop songs I like and you better
     listen to them all or I will sue you.
-  </p>
+  </Text>
 </WideBanner>
 
-<div className="relative">
+<Box display="relative">
 
 I'm sure you can relate to this scenario if you have a Twitter account. You're sitting on the couch while on your phone, scrolling through the replies on a Twitter thread about politics and you run into one of these.
 
 export const Gowon = () => (
-  <img
+  <ChakraImage
     src="https://i.pinimg.com/736x/21/d7/ab/21d7abbb541cb5ddf5f97a1564cae656.jpg"
-    className="rounded-full mb-0"
-    style="width: 50px; height: 50px;"
+    borderRadius="9999px"
+    mb={0}
+    width="50px"
+    height="50px"
   />
 )
 
@@ -50,104 +60,124 @@ export const Fancam = ({ children }) => (
   </Toastable>
 )
 
-<section className="bg-theme-alt">
-
-<span className="flex flex-row p-4 text-coolGray-400 justify-between text-xs md:text-sm">
-  <div className="flex items-center">
-    <span className="flex items-center mr-4">
+<Box as="section" layerStyle="bgSecondary" >
+<Flex flexFlow="row" p={4} justifyContent="space-between" fontSize={["xs", null, "sm"]}>
+  <Flex alignItems="center">
+    <Flex as="span" mr={4} alignItems="center">
       <Gowon />
-    </span>
-    <span className="flex flex-col">
+    </Flex>
+    <Flex flexFlow="column">
       <span>Gowon</span>
       <b>@gowonlover2006</b>
-    </span>
-  </div>
-  <span className="mb-0 ml-3 text-coolGray-500 align-right sm:block hidden">
+    </Flex>
+  </Flex>
+  <Box mb={0} ml={3} layerStyle="textTertiary" alignItems="flex-start" display={["none", null, "block"]}>
     Replied to unrelated conversation 365 minutes ago
-  </span>
-</span>
+  </Box>
+</Flex>
 
-<p className="py-2 px-4 mb-0">Stan Loona guys!!</p>
+<Text py={2} px={4} mb={0}>
+  Stan Loona guys!!
+</Text>
 
-<video className="w-full mb-0" autoplay loop playsinline>
+<video width="100%" autoplay loop playsinline>
   <source src="./loona.mp4" />
 </video>
 
-<span>
+<Box>
   <Toastable
     className="no-underline w-min"
     text={
-      <span className="inline-flex items-center text-gray-400 p-4 w-min whitespace-nowrap text-sm">
-        <svg viewBox="0 0 24 24" className="w-5 h-5 mr-2">
+      <Flex
+        as="span"
+        display="inline-flex"
+        alignItems="center"
+        layerStyle="bgSecondary"
+        p={4}
+        width="min-content"
+        whiteSpace="nowrap"
+        fontSize="sm"
+      >
+        <Box as="svg" viewBox="0 0 24 24" w={5} h={5} mr={2}>
           <g style="fill: gray">
             <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path>
           </g>
-        </svg>
+        </Box>
         15 likes
-      </span>
+      </Flex>
     }
   >
     Don't even think about it.
   </Toastable>
-</span>
+</Box>
 
-<div className="p-4 bg-theme-light">
+<Box p={4} layerStyle="bgSecondary">
 
-<span className="flex flex-row">
-  <div className="mr-4">
+<Flex flexFlow="row">
+  <Box mr={4}>
 
-<img
-  src="https://pbs.twimg.com/profile_images/1260213070716121092/1359Rmua_400x400.jpg"
+<ChakraImage
+  src="https://cdn-images.win.gg/resize/w/800/h/600/format/jpg/type/progressive/fit/cover/path/news/319be2a70dd4b557266c6ca2c20f6da7/e9c13bb0c97a92dab83bfeeb59328e60/original.jpg"
+  objectFit="cover"
   title="I'm sorry for using hikaru's picture he doesn't hate kpop stans or anything I just thought it would be funny"
-  className="mb-0 w-9 h-9 rounded-full"
-  style="min-width: 50px; min-height: 50px; margin-bottom: -10px"
+  mb={0}
+  width={6}
+  height={6}
+  borderRadius="999%"
+  minWidth="50px"
+  minHeight="50px"
+  mb={-1}
 />
 
 <div style="background: rgb(61, 84, 102); width: 2px; height: 100%; margin: 0 auto"></div>
-  </div>
+  </Box>
 
 <div>
-  <div classname="text-sm">
-  <span>Lad</span>
-  <b className="ml-2">@man4</b>
-</div>
+  <Flex fontSize="sm">
+  <span>Bruh</span>
+  <Text as="b" ml={1}>@man4</Text>
+</Flex>
 
-<div className="text-sm md:text-base">
+<Text fontSize={["sm", null, "md"]}>
   Oh god not this again. Why is this app filled with <Fancam>fancams</Fancam>?
   This thread doesn't even have anything to do with kpop.
-</div>
+</Text>
 
 </div>
 
-</span>
+</Flex>
 
-<span className="flex flex-row">
+<Flex flexFlow="row">
 
-  <div className="mr-4">
+  <Box mr={4} >
   <div style="background: rgb(61, 84, 102); width: 2px; height: 20px; margin: 0 auto; "></div>
 
-<img
+<ChakraImage
   src="https://i.pinimg.com/736x/21/d7/ab/21d7abbb541cb5ddf5f97a1564cae656.jpg"
-  className="mb-0 w-9 h-9 rounded-full"
-  style="min-width: 50px; min-height: 50px"
+  mb={0}
+  width={6}
+  height={6}
+  borderRadius="999%"
+  minWidth="50px"
+  minHeight="50px"
 />
 
-  </div>
+  </Box>
   <div style="margin-top: 20px">
-    <div className="text-sm">
+    <Box fontSize="sm">
     <span>Gowon</span>
-    <b className="ml-2">@gowonlover2006</b>
-    </div>
-    <div className="text-sm md:text-base">
+    <Text as="b" ml={2}>@gowonlover2006</Text>
+    </Box>
+    <Text  fontSize={["sm", "md"]} className="text-sm md:text-base">
     sksksksk stan loona for clear skin!!!!!
-    </div>
+    </Text>
   </div>
 
-</span>
+</Flex>
 
-</div>
+</Box>
 
-</section>
+</Box>
 
 <br />
 
@@ -239,7 +269,7 @@ For centuries there's been an unchanging formula virtually everyone with a produ
 
 Much like with pop all around the world, you're made aware of the importance the korean music industry places on image, flashy music videos, and really **really** cute girls very early on in your journey into <Hallyu />. But unlike western pop, there's a lot of importance placed on interactions between idols and fans through not only IRL events like concerts and fansigns, but also through different kinds of media like reality tv such as <a href="https://www.youtube.com/watch?v=WBdQnhwO4gQ">Blackpink House</a> or LOONA TV, going on game shows and interacting directly through apps dedicated to connecting fans and artists like VLive and Weverse. Many groups also "humanize" their fanbases by giving fans a unique name such as "Army" used to refer to BTS fans. This is a crucial part of the strong draw that kpop has as it reminds fans that even though idols might seem to be gods to them in their beauty, skill and intelligence, there's a distinctly human part to them that make it much easier for fans to form bonds with members as a community. Even if that bond is strictly one sided.
 
-<div className="mb-2">
+<Box mb={2}>
   <iframe
     width="1280"
     height="720"
@@ -248,7 +278,7 @@ Much like with pop all around the world, you're made aware of the importance the
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen
   ></iframe>
-</div>
+</Box>
 
 > Fans often focus on moments of idols that feel more relatable.
 
@@ -264,57 +294,65 @@ export const Hallyu = () => (
 
 Despite having a global reach, kpop as a genre also seems to be effective at speaking to lonely, depressed or otherwise unhappy group of people. Its undeniably upbeat melodies, relatable lyrics (if you choose to look up the translations lol) and cute boys and girls are carefully chosen to be appealing to a large audience, one that people going through a rough time seem to be a part of more often than not.
 
-<section
-  className="bg-theme-alt"
-  style="
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin: 60px -50vw 0 -50vw"
+<WideBanner
+centered
+mt={16}
+as="section"
+layerStyle="bgSecondary"
 >
-  <div
-    style="max-width: 42rem; margin: 0 auto"
-    className="p-4 py-6 text-blueGray-400"
+  <Box
+    layerStyle="textTertiary"
   >
-    <span
+    <Flex
+      position="absolute"
+      alignItems="center"
+      bottom="100%"
+      py={2}
+      py={[1]}
+      px={3}
+      fontSize="md"
+      layerStyle="bgSecondary"
       className="absolute bottom-100 py-2 lg:py-1 px-3 flex rounded-t-md bg-theme-alt"
     >
+    <Box
+      mr={2}
+    width={["20px", null, "24px"]}
+    >
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-    
-        className="mr-2"
-        width="24px"
     >
   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
 </svg>
+</Box>
       Recommendation
-    </span>
-    <div className="relative">
-      <div className="xl:absolute xl:left-100 xl:top-0 xl:ml-4 xl:w-48 w-full text-base">
-        <h3 className="font-bold mt-0 mb-2">Bolbbalgan4</h3>
-        <p>
+    </Flex>
+    <Box position="relative">
+      <Box position="static"
+        fontSize={["md", null, "lg"]}
+      className="xl:absolute xl:left-100 xl:top-0 xl:ml-4 xl:w-48 w-full text-base">
+        <Heading as="h3" mt={0} mb={2} fontSize="xl">Bolbbalgan4</Heading>
+        <Text mb={2}>
           One of the few popular groups (although technically a solo project
           now) that maintains a chill vibe with their songs without going too
           overboard with the stereotypical kpop flair.
-        </p>
-        <p className="mb-3">
+        </Text>
+        <Text mb={3}>
           Good for getting eased into the genre.
-        </p>
-      </div>
-      <iframe
+        </Text>
+      </Box>
+      <Box as="iframe"
+        height={[48, null, 96]}
+        mb={0}
         className="sm:h-96 h-48 mb-0"
         width="100%"
         src="https://www.youtube-nocookie.com/embed/AsXxuIdpkWM"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-      ></iframe>
-    </div>
+      />
+    </Box>
 
-  </div>
-</section>
-
-<br />
+  </Box>
+</WideBanner>
 
 <div className="relative">
 
@@ -326,4 +364,4 @@ There's a bit of a paradox with how people perceive the kpop community. Looking 
 
 </div>
 
-</div>
+</Box>
