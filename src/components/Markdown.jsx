@@ -11,6 +11,10 @@ import { layoutContentPadding } from "./Layout"
 import { Image } from "@chakra-ui/image"
 import { forwardRef, useColorMode } from "@chakra-ui/system"
 import { Tooltip, useTooltip } from "@chakra-ui/tooltip"
+import typescript from "@assets/tech/typescript.png"
+import javascript from "@assets/tech/javascript.png"
+import haskell from "@assets/tech/haskell.png"
+import python from "@assets/tech/python.png"
 import { useBreakpoint, useBreakpointValue } from "@chakra-ui/react"
 export * from "./memes/Chatbox"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
@@ -21,14 +25,17 @@ const languageMappings = {
   js: {
     className: "bg-yellow-700 text-yellow-100",
     name: "Javascript",
+    image: javascript,
   },
   py: {
     className: "bg-yellow-900 text-yellow-400",
     name: "Python",
+    image: python,
   },
   ts: {
     className: "bg-blue-600 text-blue-200",
     name: "Typescript",
+    image: typescript,
   },
   bash: {
     className: "bg-blue-600 text-blue-200",
@@ -37,6 +44,7 @@ const languageMappings = {
   hs: {
     className: "bg-purple-800 text-purple-300",
     name: "Haskell",
+    image: haskell,
   },
 }
 
@@ -166,7 +174,6 @@ export function DiscordReaction({
         <Text
           fontSize="xs"
           mb={0}
-          alignText="center"
           ml={1}
           color={reacted ? "#7289da" : "#72767d"}
         >
@@ -239,7 +246,7 @@ export const DiscordMessage = forwardRef(
             >
               {username}
               <Box
-                as="datetime"
+                as="time"
                 ml={2}
                 fontWeight="normal"
                 fontSize="xs"
@@ -301,7 +308,7 @@ function Code({ children, className, metastring }) {
   const TitleType = isPreTitle ? "pre" : "div"
 
   return (
-    <Flex flexFlow="column">
+    <Flex flexFlow="column" mb={6}>
       {/* {extraProps.title && (
         <Box
           as={TitleType}
@@ -335,22 +342,7 @@ function Code({ children, className, metastring }) {
             overflowX="auto"
             transition="all 0.2s"
             fontSize={["sm", null, "md"]}
-            mb={7}
           >
-            {/* {highlighterClass && extraProps.lang && (
-              <Text
-                position="absolute"
-                fontWeight="light"
-                top={0}
-                right={0}
-                py={2}
-                px={3}
-                fontSize="xs"
-                opacity="80%"
-              >
-                {highlighterClass.name}
-              </Text>
-            )} */}
             {tokens.map((line, i) => {
               // Remove the last empty line:
               let lineNumberElem
@@ -396,6 +388,22 @@ function Code({ children, className, metastring }) {
           </Text>
         )}
       </Highlight>
+      {highlighterClass && extraProps.lang && (
+        <Flex flexDirection="row" mt={2} alignItems="center">
+          {highlighterClass.image && (
+            <Image
+              src={highlighterClass.image}
+              width="auto"
+              height="15px"
+              // borderRadius="4px"
+              mr={2}
+            />
+          )}
+          <Text fontWeight="light" fontSize="xs" opacity="80%">
+            {highlighterClass.name}
+          </Text>
+        </Flex>
+      )}
     </Flex>
   )
 }

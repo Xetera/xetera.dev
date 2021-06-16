@@ -17,6 +17,7 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
       <Box borderRadius="md" overflow="hidden" maxWidth="100%" mb={4}>
         <ChakraImage
           src={src}
+          layerStyle="bgSecondary"
           height={["400px", null, "470px"]}
           width="100%"
           objectFit="cover"
@@ -32,7 +33,7 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
           {title}
         </Heading>
         <Box px={2} layerStyle="bgSecondary" borderRadius="md">
-          <Text as="b" mb={0} fontSize="md">
+          <Text as="b" mb={0} fontSize="sm">
             {size}
           </Text>
         </Box>

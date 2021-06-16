@@ -93,7 +93,7 @@ export default function PostPreview(props) {
                 px={8}
                 borderRadius="full"
                 background="rgba(60, 64, 72, 0.67)"
-                color={themedColors.brand.dark}
+                color="#b8bcc7"
               >
                 {tag}
               </Tag>
