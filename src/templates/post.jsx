@@ -103,29 +103,27 @@ export default function Post({ data, pageContext, location }) {
               __html: ` #gatsby-focus-wrapper { overflow: hidden; } `,
             }}
           />
-          {post.frontmatter.draft && (
-            <Box>
-              <Flex
-                zIndex={10}
-                width="100%"
-                mx="auto"
-                flexFlow="row"
-                maxWidth={maxWidth}
-              >
-                <Image
-                  mr={4}
-                  width="30px"
-                  height="30px"
-                  src="https://images.emojiterra.com/twitter/v13.0/128px/1f97a.png"
-                />
-                <Text color={brand} fontWeight="semibold" fontSize="sm">
-                  You're viewing a draft. This post is not published.
-                </Text>
-              </Flex>
-            </Box>
-          )}
           <Grid as="article" gap={2}>
             <Grid gap={2} as="header">
+              {post.frontmatter.draft && (
+                <Box>
+                  <Flex
+                    zIndex={10}
+                    width="100%"
+                    mx="auto"
+                    flexFlow="row"
+                    maxWidth={maxWidth}
+                  >
+                    <Text
+                      color={brand}
+                      fontWeight="semibold"
+                      fontSize={["sm", null, "lg"]}
+                    >
+                      🥺 You're viewing a draft. This post is not published.
+                    </Text>
+                  </Flex>
+                </Box>
+              )}
               <Flex alignItems="center" layerStyle="textTertiary">
                 <Text
                   as="time"
