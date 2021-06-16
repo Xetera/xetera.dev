@@ -78,14 +78,14 @@ const Bio = forwardRef((props, ref) => {
         <Link
           href="https://github.com/xetera"
           color="unset"
-          _hover={{ color: "white" }}
+          _hover={{ filter: "brightness(2)" }}
         >
           <RiGithubFill size={28} />
         </Link>
         <Link
           href="https://twitter.com/_Xetera"
           color="unset"
-          _hover={{ color: "blue.400" }}
+          _hover={{ filter: "brightness(2)" }}
         >
           <RiTwitterFill size={28} />
         </Link>

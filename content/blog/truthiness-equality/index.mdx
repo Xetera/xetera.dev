@@ -2,6 +2,7 @@
 title: 📚 Truthiness is not Loose Equality
 date: 2021-06-13
 description: if(x) and x == true are entirely different concepts.
+draft: true
 tags:
   - Guide
 ---
@@ -47,7 +48,7 @@ export const Tzuyu = props => (
   />
 )
 
-<WideBanner centered py={2} my={6} background="gray.800" inner={{ gap: 22 }}>
+<DiscordMessageContainer>
   <Me
     message="So why do you think the if statement works if the string isn't empty?"
     date="Today at 9:42 PM"
@@ -80,11 +81,10 @@ export const Tzuyu = props => (
   <DiscordMessage
     avatar={DubuImage}
     username="Dubu"
-    color="green.100"
     message="lmao"
     date="Today at 9:48 PM"
   />
-</WideBanner>
+</DiscordMessageContainer>
 
 ## Truthiness
 

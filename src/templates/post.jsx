@@ -1,19 +1,12 @@
 import React from "react"
-import {
-  Hr,
-  Layout,
-  LayoutContent,
-  layoutContentPadding,
-} from "../components/Layout"
+import { Hr, Layout, LayoutContent } from "../components/Layout"
 import { Link as GatsbyLink, graphql } from "gatsby"
-import PostData, { Tags } from "../components/PostShared"
 import Popup from "../components/Popup"
 import SEO from "../components/Seo"
 import { FaTag, FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Toastable, ToastImg } from "../components/Popup"
+import { Toastable } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
-import Headroom from "react-headroom"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
@@ -80,7 +73,7 @@ const Navigator = ({ pos, link }) => {
 
 function makeHeader(type) {
   return ({ children, ...props }) => (
-    <Heading as={type} mb={4} fontSize="2xl" {...props}>
+    <Heading as={type} mb={4} fontSize={["xl", null, "2xl"]} {...props}>
       {children}
     </Heading>
   )
@@ -190,7 +183,15 @@ export default function Post({ data, pageContext, location }) {
                   ),
                   th: Th,
                   tr: Tr,
-                  td: Td,
+                  td: ({ children, ...props }) => (
+                    <Td
+                      fontSize={["sm", "md", "lg"]}
+                      verticalAlign="initial"
+                      {...props}
+                    >
+                      {children}
+                    </Td>
+                  ),
                   blockquote: ({ children, ...props }) => (
                     <Box
                       as="blockquote"
@@ -207,7 +208,7 @@ export default function Post({ data, pageContext, location }) {
                   p: ({ children, ...props }) => (
                     <Text
                       as="p"
-                      fontSize="lg"
+                      fontSize={["md", null, "lg"]}
                       // lineHeight="1.8"
                       mb={6}
                       {...props}
@@ -228,7 +229,7 @@ export default function Post({ data, pageContext, location }) {
                     as="section"
                     gridAutoFlow="row"
                     alignItems="center"
-                    justifyCntent="center"
+                    justifyContent="center"
                     gridTemplateColumns={["1fr", null, null, "1fr 1fr"]}
                     flexDirection={["row", "column"]}
                     gap={4}
