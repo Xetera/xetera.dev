@@ -1,23 +1,17 @@
 import React from "react"
-import {
-  Hr,
-  Layout,
-  LayoutContent,
-  layoutContentPadding,
-} from "../components/Layout"
+import { Hr, Layout, LayoutContent } from "../components/Layout"
 import { Link as GatsbyLink, graphql } from "gatsby"
-import PostData, { Tags } from "../components/PostShared"
 import Popup from "../components/Popup"
 import SEO from "../components/Seo"
 import { FaTag, FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Toastable, ToastImg } from "../components/Popup"
+import { Toastable } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
-import Headroom from "react-headroom"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
+import { Table, Td, Th, Tr } from "@chakra-ui/table"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link, Stack, Text } = Chakra
@@ -79,7 +73,7 @@ const Navigator = ({ pos, link }) => {
 
 function makeHeader(type) {
   return ({ children, ...props }) => (
-    <Heading as={type} mb={4} fontSize="2xl" {...props}>
+    <Heading as={type} mb={4} fontSize={["xl", null, "2xl"]} {...props}>
       {children}
     </Heading>
   )
@@ -158,16 +152,9 @@ export default function Post({ data, pageContext, location }) {
               >
                 {post.frontmatter.description}
               </Text>
-              {/* {imageTop && (
-                <Box my={3} borderRadius="sm" overflow="hidden">
-                  <GatsbyImage
-                    image={imageTop.src.childImageSharp.gatsbyImageData}
-                  />
-                </Box>
-              )} */}
             </Grid>
             <Hr />
-            <Box as="section" fontSize="lg" lineHeight="1.8" overflow="hidden">
+            <Box as="section" fontSize="lg" lineHeight="1.8">
               <MDXProvider
                 components={{
                   ...MarkdownComponents,
@@ -189,16 +176,22 @@ export default function Post({ data, pageContext, location }) {
                   h3: makeHeader("h3"),
                   h2: makeHeader("h2"),
                   h1: makeHeader("h1"),
-                  // code: ({ children, ...props }) => (
-                  //   <Box
-                  //     as="code"
-                  //     layerStyle="borderSublte"
-                  //     borderWidth="1px"
-                  //     {...props}
-                  //   >
-                  //     {children}
-                  //   </Box>
-                  // ),
+                  table: ({ children, ...props }) => (
+                    <Table mb={6} {...props}>
+                      {children}
+                    </Table>
+                  ),
+                  th: Th,
+                  tr: Tr,
+                  td: ({ children, ...props }) => (
+                    <Td
+                      fontSize={["sm", "md", "lg"]}
+                      verticalAlign="initial"
+                      {...props}
+                    >
+                      {children}
+                    </Td>
+                  ),
                   blockquote: ({ children, ...props }) => (
                     <Box
                       as="blockquote"
@@ -215,7 +208,7 @@ export default function Post({ data, pageContext, location }) {
                   p: ({ children, ...props }) => (
                     <Text
                       as="p"
-                      fontSize="lg"
+                      fontSize={["md", null, "lg"]}
                       // lineHeight="1.8"
                       mb={6}
                       {...props}
@@ -236,7 +229,7 @@ export default function Post({ data, pageContext, location }) {
                     as="section"
                     gridAutoFlow="row"
                     alignItems="center"
-                    justifyCntent="center"
+                    justifyContent="center"
                     gridTemplateColumns={["1fr", null, null, "1fr 1fr"]}
                     flexDirection={["row", "column"]}
                     gap={4}

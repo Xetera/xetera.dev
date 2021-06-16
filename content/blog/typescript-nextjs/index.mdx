@@ -11,7 +11,7 @@ tags:
 
 import { RiQuestionLine } from "react-icons/ri"
 
-<Box layerStyle="bgSecondary" p={6} mb={6}>
+<WideBanner centered layerStyle="bgSecondary">
   <Flex alignItems="center">
     <Box mr={2}>
       <RiQuestionLine />
@@ -26,7 +26,7 @@ import { RiQuestionLine } from "react-icons/ri"
     users but you should be able to use it with any ORM (or no ORM ot all if you
     roll that way).
   </Text>
-</Box>
+</WideBanner>
 
 One of the most annoying things about integrating different technologies together is losing static typing along the way. This is my biggest complaint when it comes to working with databases without an ORM, but is also a big issue with HTTP APIs. GraphQL and [GraphQL Code Generator](https://github.com/dotansimha/graphql-code-generator) solve this problem beautifully, but GraphQL can still be very frustrating to work with from time to time due to its immature ecosystem. Sometimes you just want to be able to use HTTP and call it a day.
 
@@ -80,6 +80,7 @@ import ThisArrow from "./thisarrow.gif"
 import ThisTbh from "./thistbh.png"
 
 <DiscordMessage
+  background="gray.800"
   p={4}
   mb={6}
   borderRadius="md"

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import Prism from "prism-react-renderer/prism"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import Theme from "prism-react-renderer/themes/vsDark"
@@ -10,6 +10,8 @@ import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout"
 import { layoutContentPadding } from "./Layout"
 import { Image } from "@chakra-ui/image"
 import { forwardRef, useColorMode } from "@chakra-ui/system"
+import { Tooltip, useTooltip } from "@chakra-ui/tooltip"
+import { useBreakpoint, useBreakpointValue } from "@chakra-ui/react"
 export * from "./memes/Chatbox"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
 require("prismjs/components/prism-typescript")
@@ -94,39 +96,98 @@ export const WideBanner = forwardRef((props, ref) => {
   )
 })
 
-export function DiscordReaction({ image, reactCount, reacted: _reacted }) {
+export function DiscordReaction({
+  image,
+  reactCount,
+  reacted: _reacted,
+  name,
+}) {
   const [reacts, setReacts] = React.useState(reactCount)
   const [reacted, setReacted] = React.useState(_reacted)
+  let mounted = useRef()
+  const t = useTooltip()
   React.useEffect(() => {
+    mounted.current = true
+  }, [])
+  React.useEffect(() => {
+    if (!mounted.current) {
+      return
+    }
     setReacts(prev => (reacted ? prev + 1 : prev - 1))
   }, [reacted])
   function react() {
     setReacted(prev => !prev)
   }
-  return (
-    <Box
-      display={reacts === 9 ? "none" : "inline-flex"}
+
+  const tooltip = (
+    <Flex
       alignItems="center"
+      px={2}
+      py={2}
+      m={0}
       borderRadius="md"
-      cursor="pointer"
-      mr={1}
-      p="0.125rem 0.375rem"
-      onClick={react}
-      background={reacted ? "rgba(114,137,218,.3)" : "hsl(0, 0%, 100%, 0.06)"}
+      overflow="hidden"
     >
-      <Image src={image} mb={0} width="16px" height="16px" />
-      <Text
-        fontSize="xs"
-        mb={0}
-        alignText="center"
-        ml={1}
-        color={reacted ? "#7289da" : "#72767d"}
-      >
-        {reacts}
+      <Image src={image} width="40px" height="40px" mr={2} />
+      <Text layerStyle="discordTextColor" mb={0} lineHeight="19px">
+        {reacted
+          ? reacts === 1
+            ? `You reacted with ${name}`
+            : `You and ${reacts - 1} others reacted with ${name}`
+          : `${reacts} ${
+              reacts === 1 ? "person" : "people"
+            } reacted with ${name}`}
       </Text>
-    </Box>
+    </Flex>
+  )
+  return (
+    <Tooltip
+      arrowShadowColor="gray.900"
+      layerStyle="discordBackground"
+      openDelay={500}
+      label={tooltip}
+      placement="top"
+      arrowPadding={0}
+      closeOnClick={false}
+    >
+      <Box
+        display={reacts === 9 ? "none" : "inline-flex"}
+        borderWidth="1px"
+        layerStyle="borderSubtle"
+        alignItems="center"
+        borderRadius="md"
+        cursor="pointer"
+        mr={1}
+        p="0.125rem 0.375rem"
+        onClick={react}
+        background={reacted ? "rgba(114,137,218,.3)" : "hsl(0, 0%, 100%, 0.06)"}
+      >
+        <Image src={image} mb={0} width="16px" height="16px" />
+        <Text
+          fontSize="xs"
+          mb={0}
+          alignText="center"
+          ml={1}
+          color={reacted ? "#7289da" : "#72767d"}
+        >
+          {reacts}
+        </Text>
+      </Box>
+    </Tooltip>
   )
 }
+
+export const DiscordMessageContainer = ({ children }) => (
+  <WideBanner
+    centered
+    py={2}
+    my={6}
+    layerStyle="discordBackground"
+    inner={{ gap: 22 }}
+  >
+    {children}
+  </WideBanner>
+)
 
 export const DiscordMessage = forwardRef(
   (
@@ -148,7 +209,8 @@ export const DiscordMessage = forwardRef(
         mb={2}
         color="#dcddde"
         lineHeight="1.4"
-        background="#36393f"
+        // background="#36393f"
+        mb={0}
         ref={ref}
         {...props}
       >
@@ -156,21 +218,24 @@ export const DiscordMessage = forwardRef(
           as="figure"
           mb={0}
           mr={3}
-          width={[8, 10]}
-          height={[8, 10]}
+          width={[10]}
+          height={[10]}
           borderRadius="full"
           overflow="hidden"
-          minWidth="2.5rem"
+          flexBasis={[10]}
+          flexGrow={0}
+          flexShrink={0}
         >
-          <Image objectFit="cover" src={avatar} />
+          <Image objectFit="cover" src={avatar} height={[10]} width={[10]} />
         </Box>
         <div>
-          <Flex alignItems="baselin" mb={0} lineHeight="22.5px">
+          <Flex alignItems="baselin" mb={1} lineHeight="22.5px">
             <Heading
               fontSize="15.75px"
               fontWeight="semibold"
-              mb={1}
+              {...(!roleColor ? { layerStyle: "discordTextColor" } : {})}
               color={roleColor}
+              mb={0}
             >
               {username}
               <Box
@@ -178,6 +243,7 @@ export const DiscordMessage = forwardRef(
                 ml={2}
                 fontWeight="normal"
                 fontSize="xs"
+                color="#72767d"
                 layerStyle="textTertiary"
               >
                 {date}
@@ -186,17 +252,23 @@ export const DiscordMessage = forwardRef(
           </Flex>
           {(messages ?? [message]).map((message, i, arr) => (
             <Text
-              fontSize="md"
+              fontSize="16px"
+              fontWeight="normal"
+              layerStyle="discordTextColor"
               lineHeight="22.5px"
-              mb={i !== arr.length - 1 ? 2 : 0}
+              mb={i !== arr.length - 1 ? 1 : 0}
               key={message}
             >
               {message}
             </Text>
           ))}
-          {reactions.map(props => (
-            <DiscordReaction {...props} key={props.image} />
-          ))}
+          {reactions && (
+            <Box mt={2}>
+              {reactions.map(props => (
+                <DiscordReaction {...props} key={props.image} />
+              ))}
+            </Box>
+          )}
         </div>
       </Flex>
     )
@@ -215,6 +287,7 @@ const calculateLinesToHighlight = meta => {
 }
 
 function Code({ children, className, metastring }) {
+  const shouldDisplayLineNumbers = useBreakpointValue([false, false, true])
   const extraProps = json5.parse(metastring ?? "{}") ?? {}
   const { colorMode } = useColorMode()
   if (typeof extraProps.lang === "undefined") {
@@ -228,8 +301,8 @@ function Code({ children, className, metastring }) {
   const TitleType = isPreTitle ? "pre" : "div"
 
   return (
-    <>
-      {extraProps.title && (
+    <Flex flexFlow="column">
+      {/* {extraProps.title && (
         <Box
           as={TitleType}
           width="full"
@@ -243,7 +316,7 @@ function Code({ children, className, metastring }) {
         >
           {extraProps.title}
         </Box>
-      )}
+      )} */}
       <Highlight
         {...defaultProps}
         code={children}
@@ -253,17 +326,18 @@ function Code({ children, className, metastring }) {
         {({ className, tokens, getLineProps, getTokenProps }) => (
           <Text
             as="pre"
-            py={2}
-            px={4}
-            borderWidth="1px"
+            py={[0, null, 2]}
+            px={[0, null, 4]}
+            borderWidth={[0, null, "1px"]}
+            wordBreak="break-all"
             layerStyle="borderSubtle"
             position="relative"
             overflowX="auto"
             transition="all 0.2s"
-            fontSize="md"
+            fontSize={["sm", null, "md"]}
             mb={7}
           >
-            {highlighterClass && extraProps.lang && (
+            {/* {highlighterClass && extraProps.lang && (
               <Text
                 position="absolute"
                 fontWeight="light"
@@ -276,7 +350,7 @@ function Code({ children, className, metastring }) {
               >
                 {highlighterClass.name}
               </Text>
-            )}
+            )} */}
             {tokens.map((line, i) => {
               // Remove the last empty line:
               let lineNumberElem
@@ -312,7 +386,7 @@ function Code({ children, className, metastring }) {
 
               return (
                 <div key={i} {...lineProps}>
-                  {lineNumberElem}
+                  {shouldDisplayLineNumbers && lineNumberElem}
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
@@ -322,13 +396,17 @@ function Code({ children, className, metastring }) {
           </Text>
         )}
       </Highlight>
-    </>
+    </Flex>
   )
 }
 
 export const overrides = {
   pre(props) {
-    return <div {...props} />
+    return <Flex as="pre" flexDirection="column" flexGrow="1" {...props} />
   },
-  code: Code,
+  code: ({ children, ...props }) => (
+    <Code variant="outline" {...props}>
+      {children}
+    </Code>
+  ),
 }

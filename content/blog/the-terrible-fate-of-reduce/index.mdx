@@ -135,14 +135,34 @@ But we choose not to because it doesn't feel natural in JS (Also Typescript, as 
 
 It seems like the syntax alone does not solve this problem. Fold/Reduce seems to be a good concept that works in the right languages, but not so much in javascript.
 
-<WideBanner className="w-full bg-blueGray-900" noBg centered>
-  <div class="py-4 justify-between items-center flex lg:flex-row flex-col rounded text-blue-200">
-    <div class="flex items-center lg:mb-0 mb-0">
-      <FaExclamationTriangle class="mr-3 md:text-lg mb-0" />
-      <h3 class="my-0 md:text-lg sm:text-base font-black inline">Warning</h3>
-    </div>
-    <p class="font-black my-0 inline">Opinion Ahead</p>
-  </div>
+<WideBanner layerStyle="bgSecondary" centered>
+  <Flex
+    justifyContent="space-between"
+    py={4}
+    alignItems="center"
+    flexDirection={["col", null, "row"]}
+    borderRadius="md"
+    layerStyle="textTertiary"
+    fontSize={["md", null, "lg"]}
+  >
+    <Flex alignItems="center" mb={0}>
+      <Box mr={3} mb={0}>
+        <FaExclamationTriangle />
+      </Box>
+      <Heading
+        as="h3"
+        my={0}
+        fontWeight="black"
+        color="inherit"
+        fontSize="inherit"
+      >
+        Warning
+      </Heading>
+    </Flex>
+    <Text fontWeight="black" my={0} color="inherit">
+      Opinion Ahead
+    </Text>
+  </Flex>
 </WideBanner>
 
 I think reduce is fine to use, don't try to use it like you're writing Haskell but the idea is valuable. If your code is too smart, that's a problem that goes beyond just reduce. Reduce is innocent.

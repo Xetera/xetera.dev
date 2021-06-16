@@ -15,7 +15,12 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
   return (
     <Box as="article">
       <Box borderRadius="md" overflow="hidden" maxWidth="100%" mb={4}>
-        <ChakraImage src={src} />
+        <ChakraImage
+          src={src}
+          height={["400px", null, "470px"]}
+          width="100%"
+          objectFit="cover"
+        />
       </Box>
       <Flex
         justifyContent="space-between"
