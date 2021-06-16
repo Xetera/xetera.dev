@@ -137,7 +137,7 @@ export default extendTheme({
         padding: "1px 5px",
       },
       a: {
-        lineBreak: "anywhere",
+        wordBreak: "break-word",
       },
       ".widebanner > p": {
         marginBottom: 0,
