@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, title, image }) => {
+const SEO = ({ description, lang = "en", title, image, canonical }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -23,6 +23,7 @@ const SEO = ({ description, lang, title, image }) => {
     `
   )
 
+  const { siteUrl } = site.siteMetadata
   const metaDescription = description || site.siteMetadata.description
   const siteTitle = title || site.siteMetadata.title
 
@@ -68,37 +69,43 @@ const SEO = ({ description, lang, title, image }) => {
       content: siteTitle,
     },
     {
-      name: "og:image",
-      // og image does some weird shit lol
-      content: `${site.siteMetadata.siteUrl}${image.path.replace(
-        /\/\//g,
-        "/"
-      )}?t=${site.buildTime}`,
-    },
-    {
       name: "og:description",
       content: metaDescription,
     },
-    {
-      name: "og:image:height",
-      content: image.size.height,
-    },
-    {
-      name: "og:image:width",
-      content: image.size.width,
-    },
   ]
+  if (image) {
+    data.push(
+      {
+        name: "og:image",
+        // og image does some weird shit lol
+        content: `${site.siteMetadata.siteUrl}${
+          image.path.replace(/\/{1,}/g, "/")
+          //cache busting
+        }?t=${site.buildTime}`,
+      },
+      {
+        name: "og:image:height",
+        content: image.size.height,
+      },
+      {
+        name: "og:image:width",
+        content: image.size.width,
+      }
+    )
+  }
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${siteTitle}`}
     >
       {data.map(({ name, content }) => (
         <meta name={name} content={content} key={name} />
       ))}
+      {canonical && (
+        <link rel="canonical" href={new URL(canonical, siteUrl).href} />
+      )}
       <meta name="theme-color" content={site.siteMetadata.themeColor} />
     </Helmet>
   )

@@ -25,7 +25,12 @@ export default function Navbar() {
           <RiArrowLeftFill size={iconSize} />
         </Link>
       )}
-      <Box onClick={toggleColorMode} cursor="pointer" as="button">
+      <Box
+        onClick={toggleColorMode}
+        cursor="pointer"
+        as="button"
+        aria-label="theme switch"
+      >
         {colorMode === "light" ? (
           <RiMoonLine size={iconSize} />
         ) : (

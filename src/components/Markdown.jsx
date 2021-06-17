@@ -37,9 +37,9 @@ const languageMappings = {
     name: "Typescript",
     image: typescript,
   },
-  bash: {
+  sh: {
     className: "bg-blue-600 text-blue-200",
-    name: "Bash",
+    name: "Shell",
   },
   hs: {
     className: "bg-purple-800 text-purple-300",
@@ -309,21 +309,21 @@ function Code({ children, className, metastring }) {
 
   return (
     <Flex flexFlow="column" mb={6}>
-      {/* {extraProps.title && (
+      {extraProps.title && (
         <Box
           as={TitleType}
           width="full"
-          px={4}
-          py={2}
+          py={1}
           mb={0}
-          layerStyle="bgSecondary"
-          fontSize="sm"
+          // layerStyle="bgSecondary"
+          fontSize={["xs", null, "sm"]}
           borderTopRadius="sm"
+          borderTopRadius="2px"
           className="w-full px-4 py-2 mb-0 bg-theme-alt text-sm text-blueGray-500 rounded-t"
         >
           {extraProps.title}
         </Box>
-      )} */}
+      )}
       <Highlight
         {...defaultProps}
         code={children}

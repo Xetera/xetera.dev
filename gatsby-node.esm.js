@@ -4,12 +4,19 @@ import { createOpenGraphImage } from "gatsby-plugin-open-graph-images"
 import { postPreviewDimensions } from "./src/shared"
 import { getAnilist, getOsu } from "./fetcher"
 
+const blogPostPreview = path.resolve(
+  path.join(__dirname, `./src/templates/preview.jsx`)
+)
+
+const staticPagePreview = path.resolve(
+  path.join(__dirname, `./src/templates/static-preview.jsx`)
+)
+
 export const sourceNodes = async ({
   actions,
   createNodeId,
   createContentDigest,
 }) => {
-  console.log("creating nodes!")
   const [anilist, osu] = await Promise.all([getAnilist(), getOsu()])
   actions.createNode({
     ...anilist,
@@ -30,14 +37,44 @@ export const sourceNodes = async ({
   })
 }
 
+const staticPreviewMapping = {
+  "/": () => ({
+    title: "It's me Xetera.",
+    description: "I'm a developer I guess",
+  }),
+}
+
+export const onCreatePage = async props => {
+  const { actions, page } = props
+  const fetcher = staticPreviewMapping[page.path]
+  if (fetcher) {
+    const { title, description } = fetcher()
+    const newPage = { ...page }
+    const previewPath = `${page.path.replace(/\/{1,}/g, "/")}thumbnail.png`
+    actions.deletePage(page)
+    actions.createPage({
+      ...newPage,
+      context: {
+        ...newPage.context,
+        ogImage: createOpenGraphImage(actions.createPage, {
+          path: previewPath,
+          component: staticPagePreview,
+          size: postPreviewDimensions,
+          context: {
+            title,
+            description,
+          },
+        }),
+      },
+    })
+  }
+}
+
 export const createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(
     path.join(__dirname, `./src/templates/post.jsx`)
-  )
-  const blogPostPreview = path.resolve(
-    path.join(__dirname, `./src/templates/preview.jsx`)
   )
   const result = await graphql(
     `
@@ -94,6 +131,7 @@ export const createPages = async ({ graphql, actions }) => {
       component: blogPost,
       context: {
         ...context,
+        slug,
         ogImage: createOpenGraphImage(createPage, {
           path: previewPath,
           component: blogPostPreview,

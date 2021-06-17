@@ -9,13 +9,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/layout"
-import { Image } from "@chakra-ui/image"
 import { Tag } from "@chakra-ui/tag"
-import { themedColors } from "../@chakra-ui/gatsby-plugin/theme"
 import { postPreviewDimensions } from "../shared"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 export default function PostPreview(props) {
+  console.log(props.pageContext)
   const data = props.data.mdx
   const { thumbnail = {} } = data.frontmatter
 

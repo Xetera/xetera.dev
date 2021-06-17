@@ -94,6 +94,7 @@ export default function Post({ data, pageContext, location }) {
       <Layout imageTop={imageTop} imageBottom={imageBottom} article>
         <LayoutContent mx="auto" maxWidth={maxWidth} mt={[8, 12, 24]}>
           <SEO
+            canonical={post.slug}
             title={post.frontmatter.title}
             description={post.frontmatter.description || post.excerpt}
             image={ogImage}
@@ -266,6 +267,7 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       body
       fields {
+        slug
         readingTime {
           text
         }

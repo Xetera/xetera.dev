@@ -6,12 +6,15 @@ import { Layout, LayoutContent } from "../components/Layout"
 import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
 import { Helmet } from "react-helmet"
+import SEO from "../components/Seo"
 
-const BlogIndex = ({ data, location }) => {
+const BlogIndex = ({ data, pageContext }) => {
+  console.log({ pageContext })
   const posts = data.allMdx.edges
   const brand = useBrandColor()
   return (
     <Layout>
+      <SEO canonical="/" image={pageContext.ogImage} />
       <Helmet>
         <title>{data.site.siteMetadata.title}</title>
       </Helmet>

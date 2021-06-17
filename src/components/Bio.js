@@ -25,7 +25,10 @@ const Bio = forwardRef((props, ref) => {
         p={2}
         transition="all 0.4s ease"
       >
-        <GatsbyImage image={data.avatar.data.gatsbyImageData} />
+        <GatsbyImage
+          image={data.avatar.data.gatsbyImageData}
+          alt="Avatar image"
+        />
       </Flex>
       <Heading fontWeight="black" fontSize="3xl">
         Hi, I’m Xetera.
@@ -79,6 +82,7 @@ const Bio = forwardRef((props, ref) => {
           href="https://github.com/xetera"
           color="unset"
           _hover={{ filter: "brightness(2)" }}
+          aria-label="github link"
         >
           <RiGithubFill size={28} />
         </Link>
@@ -86,6 +90,7 @@ const Bio = forwardRef((props, ref) => {
           href="https://twitter.com/_Xetera"
           color="unset"
           _hover={{ filter: "brightness(2)" }}
+          aria-label="twitter link"
         >
           <RiTwitterFill size={28} />
         </Link>

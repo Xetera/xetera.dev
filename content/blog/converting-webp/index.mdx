@@ -89,13 +89,13 @@ There are some implications of using improved file formats of course. A browser 
 
 Let's get started with converting images in Javascript by installing the basic dependencies. Make sure you use the `npm` version of these commands if you're not on yarn.
 
-```
+```sh
 $ yarn add fluent-ffmpeg
 ```
 
 We're going to be using ffmpeg to do our image conversions. If you're not familiar with ffmpeg, it's the god tool for working with any kind of media. Images, sound, videos, gifs, subtitles. It'll take anything and modify it in any way you want. Here's a simple example that works on the commandline.
 
-```
+```sh
 $ ffmpeg -i image.png image.jpeg
 ```
 
@@ -107,7 +107,7 @@ export const Jpeg = () => (
 
 Nothing too fancy here, we're simply setting `image.png` as the input file and turning it into a `image.jpeg`. Ffmpeg is able to infer that we want a <Jpeg /> output We can also pass in any kind of option we want. If we're converting to WebP, we can control the quality of the resulting file through these options.
 
-```
+```sh
 $ ffmpeg -i image.png -quality 50 image.webp
 ```
 
