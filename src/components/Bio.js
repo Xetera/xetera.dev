@@ -47,7 +47,7 @@ const Bio = forwardRef((props, ref) => {
           life.
         </Text>
         <Text>
-          I’m a simp for functional programming and anti-abuse engineering. I
+          I’m a simp for functional programming and anti-abuse trust & safety. I
           also enjoy design and writing on the side when I can find the time.
         </Text>
         <Text>

@@ -79,23 +79,23 @@ import Dahyun from "./dahyun_confused.jpg"
 import ThisArrow from "./thisarrow.gif"
 import ThisTbh from "./thistbh.png"
 
-<DiscordMessage
-  background="gray.800"
-  p={4}
-  mb={6}
-  borderRadius="md"
-  message="Hold on, am I going to have to import an API endpoint file in my frontend now? This is going to create issues importing backend code for sure."
-  username="You, reading this"
-  roleColor="text-blue-300"
-  date="Today at 4:20 PM"
-  avatar={Dahyun}
-  reactions={[
-    { image: ThisArrow, reactCount: 7 },
-    { image: ThisTbh, reactCount: 12 },
-  ]}
-/>
+<DiscordMessageContainer mb={6}>
+  <DiscordMessage
+    borderRadius="md"
+    message="Hold on, am I going to have to import an API endpoint file in my frontend now? This is going to create issues importing backend code for sure."
+    username="You, reading this"
+    roleColor="blue.300"
+    date="Today at 4:20 PM"
+    avatar={Dahyun}
+    reactions={[
+      { image: ThisArrow, reactCount: 7, name: ":this:" },
+      { image: ThisTbh, reactCount: 12, name: ":thistbh:" },
+    ]}
+  />
+</DiscordMessageContainer>
 
-But not to worry, as of [Typescript 3.8](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html), we can import _just_ types from a typescript file, meaning it's possible to do this:
+But not to worry, as of [Typescript 3.8](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html),
+we can import _just_ types from a typescript file, meaning it's possible to do this:
 
 ```ts {title: "/pages/home.tsx"}
 import type { HomeResponse } from "./api/home.ts"

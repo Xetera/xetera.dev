@@ -140,11 +140,7 @@ export default function Post({ data, pageContext, location }) {
               >
                 {post.frontmatter.title}
               </Heading>
-              <Text
-                fontSize={["lg", "xl"]}
-                fontWeight="medium"
-                lineHeight="1.4"
-              >
+              <Text fontSize={["lg", "xl"]} fontWeight="medium">
                 {post.frontmatter.description}
               </Text>
             </Grid>

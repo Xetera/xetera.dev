@@ -3,15 +3,12 @@ import { Link as GatsbyLink, graphql, PageProps } from "gatsby"
 import Bio from "../components/Bio"
 import PostData, { PostList, Tags } from "../components/PostShared"
 import { Layout, LayoutContent } from "../components/Layout"
-import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
-import { useBrandColor } from "../hooks/color"
+import { Flex, Grid, Heading, Stack } from "@chakra-ui/layout"
 import { Helmet } from "react-helmet"
 import SEO from "../components/Seo"
 
 const BlogIndex = ({ data, pageContext }) => {
-  console.log({ pageContext })
   const posts = data.allMdx.edges
-  const brand = useBrandColor()
   return (
     <Layout>
       <SEO canonical="/" image={pageContext.ogImage} />

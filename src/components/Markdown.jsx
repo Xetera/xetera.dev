@@ -196,6 +196,22 @@ export const DiscordMessageContainer = ({ children }) => (
   </WideBanner>
 )
 
+export const DiscordMessageText = forwardRef(({ children, ...props }, ref) => {
+  return (
+    <Text
+      fontSize="16px"
+      fontWeight="normal"
+      layerStyle="discordTextColor"
+      lineHeight="22.5px"
+      mb={1}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </Text>
+  )
+})
+
 export const DiscordMessage = forwardRef(
   (
     {
@@ -205,6 +221,7 @@ export const DiscordMessage = forwardRef(
       roleColor,
       date,
       avatar,
+      pinged,
       className = "",
       reactions = [],
       ...props
@@ -257,19 +274,16 @@ export const DiscordMessage = forwardRef(
               </Box>
             </Heading>
           </Flex>
-          {(messages ?? [message]).map((message, i, arr) => (
-            <Text
-              fontSize="16px"
-              fontWeight="normal"
-              layerStyle="discordTextColor"
-              lineHeight="22.5px"
-              mb={i !== arr.length - 1 ? 1 : 0}
-              key={message}
-            >
-              {message}
-            </Text>
-          ))}
-          {reactions && (
+          {(messages ?? [message]).map((message, i, arr) =>
+            typeof message === "string" ? (
+              <DiscordMessageText mb={i !== arr.length - 1 ? 1 : 0}>
+                {message}
+              </DiscordMessageText>
+            ) : (
+              message
+            )
+          )}
+          {reactions?.length > 0 && (
             <Box mt={2}>
               {reactions.map(props => (
                 <DiscordReaction {...props} key={props.image} />
@@ -306,23 +320,49 @@ function Code({ children, className, metastring }) {
   const highlighterClass = languageMappings[language]
   const isPreTitle = extraProps.title?.startsWith("/")
   const TitleType = isPreTitle ? "pre" : "div"
+  const displayTop = extraProps.title || (highlighterClass && extraProps.lang)
 
   return (
     <Flex flexFlow="column" mb={6}>
-      {extraProps.title && (
-        <Box
-          as={TitleType}
-          width="full"
-          py={1}
-          mb={0}
-          // layerStyle="bgSecondary"
-          fontSize={["xs", null, "sm"]}
-          borderTopRadius="sm"
-          borderTopRadius="2px"
-          className="w-full px-4 py-2 mb-0 bg-theme-alt text-sm text-blueGray-500 rounded-t"
-        >
-          {extraProps.title}
-        </Box>
+      {displayTop && (
+        <Flex justifyContent="flex-end" alignItems="center" mb={2}>
+          {extraProps.title && (
+            <Box
+              as={TitleType}
+              width="full"
+              mb={0}
+              // layerStyle="bgSecondary"
+              fontSize={["xs", null, "sm"]}
+              borderTopRadius="sm"
+              borderTopRadius="2px"
+              layerStyle="textSecondary"
+            >
+              {extraProps.title}
+            </Box>
+          )}
+          {highlighterClass && extraProps.lang && (
+            <Flex
+              flexDirection="row"
+              flexShrink={0}
+              alignItems="center"
+              justifySelf="flex-end"
+            >
+              <Text fontSize="xs" layerStyle="textTertiary">
+                {highlighterClass.name}
+              </Text>
+              {highlighterClass.image && (
+                <Image
+                  src={highlighterClass.image}
+                  width="auto"
+                  height="15px"
+                  display={["none", "block"]}
+                  // borderRadius="4px"
+                  ml={2}
+                />
+              )}
+            </Flex>
+          )}
+        </Flex>
       )}
       <Highlight
         {...defaultProps}
@@ -330,12 +370,12 @@ function Code({ children, className, metastring }) {
         language={language}
         theme={colorMode === "dark" ? Theme : ThemeLight}
       >
-        {({ className, tokens, getLineProps, getTokenProps }) => (
+        {({ tokens, getLineProps, getTokenProps }) => (
           <Text
             as="pre"
-            py={[0, null, 2]}
-            px={[0, null, 4]}
-            borderWidth={[0, null, "1px"]}
+            py={[2]}
+            px={[4]}
+            borderWidth={["1px"]}
             wordBreak="break-all"
             layerStyle="borderSubtle"
             position="relative"
@@ -388,22 +428,6 @@ function Code({ children, className, metastring }) {
           </Text>
         )}
       </Highlight>
-      {highlighterClass && extraProps.lang && (
-        <Flex flexDirection="row" mt={2} alignItems="center">
-          {highlighterClass.image && (
-            <Image
-              src={highlighterClass.image}
-              width="auto"
-              height="15px"
-              // borderRadius="4px"
-              mr={2}
-            />
-          )}
-          <Text fontWeight="light" fontSize="xs" opacity="80%">
-            {highlighterClass.name}
-          </Text>
-        </Flex>
-      )}
     </Flex>
   )
 }

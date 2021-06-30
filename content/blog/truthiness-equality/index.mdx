@@ -2,7 +2,6 @@
 title: 📚 Truthiness is not Loose Equality
 date: 2021-06-13
 description: if(x) and x == true are entirely different concepts.
-draft: true
 tags:
   - Guide
 ---
@@ -145,6 +144,10 @@ if (array.length) {
 
 to make sure an array isn't empty. The same coercion happens when using the loose comparison operator `==`, so why is plopping things inside `if` statements acceptable but using `==` isn't?
 
-For one, `ToBoolean` is a unary function, meaning it has a single input and so it's a lot easier to wrap one's head around than `==` which is a binary operator with 2 inputs. But another reason is because loose comparison is actually a recursive operator. That's right, loose comparison is implemented recursively. Meaning that comparison between two non-matching data types could recurse as much as 4 times, converting the inputs in each iteration into a different one and re-running the equality check.
+For one, `ToBoolean` is a unary function, meaning it has a single input and so it's a lot easier to wrap one's head around than `==` which is a binary operator with 2 inputs. But another reason is because loose comparison is actually a recursive operator...
+
+That's right, loose comparison is implemented recursively. Meaning that comparison between two non-matching data types could recurse as much as 4 times, converting the inputs in each iteration into a different one and re-running the equality check.
 
 There's [an extremely useful website](https://felix-kling.de/js-loose-comparison/) on this topic that visually shows exactly how this process works between different kinds of inputs.
+
+But basically in summary, equality is defined separately from truthiness. The only similarity they share is that truthiness is a form of coercion and loose equality can make use of a similar type of coercion although equality itself does not rely on the concept of truthiness.

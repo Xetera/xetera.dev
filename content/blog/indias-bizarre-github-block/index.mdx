@@ -1,0 +1,208 @@
+---
+title: 🚫 India Banned my Documentation Site
+date: 2021-07-01
+description: Your requested URL has been blocked as per the directions received from Department of Telecommuncations, Government of India.
+draft: true
+tags:
+  - Investigation
+---
+
+A few days ago I got a ping from one of the moderators in the [Top.gg](https://top.gg) Discord server about something unexpected.
+
+import Marco from "./marco.png"
+
+export const marcoProps = {
+  username: "marco_rennmaus | Rennmoose2",
+  roleColor: "red.300",
+  avatar: Marco,
+}
+
+export const xetProps = {
+  username: "Xetera",
+  roleColor: "blue.300",
+  avatar: Xetera,
+}
+
+<DiscordMessageContainer mb={6}>
+  <DiscordMessage
+    messages={[
+      <DiscordMessageText>
+        Hey xet apparently{" "}
+        <Link
+          rel="external nofollower"
+          target="_blank"
+          href="https://docs.top.gg"
+        >
+          https://docs.top.gg
+        </Link>{" "}
+        is banned in India?
+      </DiscordMessageText>,
+      "might wanna check this one out",
+      "one of the users is having problems with it",
+    ]}
+    date="like probably 5 minutes ago"
+    {...marcoProps}
+  />
+</DiscordMessageContainer>
+
+I'm sorry? Why would a documentation site get banned by the Indian government? Surely this is a mistake. Anyways, best to check it out to see what's going on.
+
+import ProofXet from "./proof-xet.png"
+import ProofOriginal from "./proof-original.png"
+import MaverickWolf from "./maverick-wolf.png"
+
+<DiscordMessageContainer mb={6}>
+  <DiscordMessage
+    messages={[
+      <ChakraImage src={ProofOriginal} mb={2} />,
+      "any reason why?",
+      "you have some expired license for that URL or something?",
+    ]}
+    username="Maverick Wolf"
+    roleColor="green.300"
+    date="06/28/2021"
+    avatar={MaverickWolf}
+  />
+  <DiscordMessage
+    messages={[
+      "let me check a vpn",
+      "huh, weird",
+      <ChakraImage src={ProofXet} mb={2} />,
+      "could be getting caught in a wide net cast on some subdomains",
+    ]}
+    date="06/28/2021"
+    {...xetProps}
+  />
+  <DiscordMessage
+    messages={["well uhm", "how to fix kekw"]}
+    date="like probably 5 minutes ago"
+    {...marcoProps}
+  />
+  <DiscordMessage
+    messages={[
+      "apparently some indian isps briefly banned google docs in 2014",
+      "could be some sort of clash with that?",
+      "docs.google.com, docs.top.gg",
+    ]}
+    date="06/28/2021"
+    {...xetProps}
+  />
+</DiscordMessageContainer>
+
+Ok well, this is a strange situation but that seems like a fairly reasonable lead.
+
+But turns out Google sites were never blocked to begin with.
+
+> In an order dated 23 June 2014, the Delhi High Court upon a request made by Sony Entertainment ordered 472 file sharing and file hosting websites blocked, including The Pirate Bay, Google Docs, Google Videos, and Google's URL shorterner (goo.gl) [...] However, it was reported on 7 July 2014 that an updated court order blocks just 219 sites. Included are many file storage and torrent websites, **but no Google sites.**
+
+Ok, time to start looking somewhere else. Should I just be getting in touch with the Department of Telecommunications at this point? I know plenty of Indian developers in different communities I hang out in, maybe they can help me figure out what's going on.
+
+I'm also not convinced this is a global ban. We have a lot of Indian users and someone would've either let us know about this ban a long time ago, or there would be more than 1 person with the same problem right now. It seems very odd that there's only one person banned by the government.
+
+import WindowsUser from "./windows-user.png"
+import Sky from "./sky-avatar.png"
+
+export const windowsUserProps = {
+  username: "windows user",
+  avatar: WindowsUser,
+}
+
+export const skyProps = {
+  username: "Sky",
+  avatar: Sky,
+  roleColor: "teal.400",
+}
+
+<DiscordMessageContainer mb={6}>
+  <DiscordMessage
+    messages={[
+      "does anyone know how I can get in touch with department of telecommunications in india lol",
+    ]}
+    {...xetProps}
+    date="06/28/2021"
+  />
+  <DiscordMessage
+    messages={["any reason for that?"]}
+    date="06/28/2021"
+    {...windowsUserProps}
+  />
+  <DiscordMessage
+    messages={[
+      "one of the sites I work on is blocked by them and my indian users can't access the site",
+      "it's literally just api documentation. I have no idea why it would be blocked",
+    ]}
+    {...xetProps}
+    date="06/28/2021"
+  />
+  <DiscordMessage
+    messages={[
+      "That's the Indian government for you",
+      "You can always try writing an email to them",
+    ]}
+    date="06/28/2021"
+    {...windowsUserProps}
+  />
+</DiscordMessageContainer>
+
+Well, it sure would be nice to write them an email but I don't think they want me or really anyone emailing them.
+
+![dot contact us page](./dot-contact-us.png)
+
+Just seems to give out very strong "feel free to think about contacting us" vibes rather than a proper contact us page.
+
+It's 10am and I don't exactly feel like making an international call inquiring the status of my national ban right now. Let's check if anyone else is having problems reaching the site. That should help narrow things down a bit.
+
+import ProofSky from "./proof-sky.png"
+
+<DiscordMessageContainer>
+  <DiscordMessage
+    messages={[
+      <DiscordMessageText>
+        <Link
+          rel="external nofollower"
+          target="_blank"
+          href="https://docs.top.gg"
+        >
+          https://docs.top.gg
+        </Link>{" "}
+        if any of you are in India and want to check for me
+      </DiscordMessageText>,
+    ]}
+    date="06/28/2021"
+    {...xetProps}
+  />
+  <DiscordMessage
+    messages={["sigh", <ChakraImage src={ProofSky} mb={2} />]}
+    date="06/28/2021"
+    {...skyProps}
+  />
+  <DiscordMessage
+    messages={["Working for me"]}
+    date="06/28/2021"
+    {...windowsUserProps}
+  />
+  <DiscordMessage
+    messages={["I'm in kolkata, india", "using jio as ISP"]}
+    date="06/28/2021"
+    {...skyProps}
+  />
+  <DiscordMessage
+    messages={["I'm in noida"]}
+    date="06/28/2021"
+    {...windowsUserProps}
+  />
+  <DiscordMessage
+    messages={["Are you using your ISP's DNS though?"]}
+    date="06/28/2021"
+    {...xetProps}
+  />
+  <DiscordMessage
+    messages={["Oh right, it works with cloudflare DNS"]}
+    date="06/28/2021"
+    {...skyProps}
+  />
+</DiscordMessageContainer>
+
+Oh so it's a DNS issue then. Looks like it's banned at the DNS level for Indian citizens and windows user is using a google/cloudflare DNS already.
+
+> On December 17, 2014, the Indian Department of Telecom issued an order to ISPs to block 32 websites. The notice was made public on December 31, 2014 and it included GitHub, GitHub's Gist, Vimeo, the Internet Archive, and various pastebin services.
