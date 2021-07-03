@@ -56,8 +56,7 @@ function makeLayer(name, variants) {
 
 export default extendTheme({
   config: {
-    initialColorMode: "dark",
-    useSystemColorMode: false,
+    useSystemColorMode: true,
   },
   fonts: {
     heading: fontFamily,
