@@ -105,7 +105,6 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     "gatsby-plugin-open-graph-images",
-    "gatsby-plugin-netlify-cache",
     "gatsby-plugin-webpack-bundle-analyser-v2",
   ],
 }
