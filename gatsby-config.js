@@ -17,7 +17,7 @@ module.exports = {
       github: `xetera`,
     },
   },
-  flags: { PRESERVE_WEBPACK_CACHE: true },
+  flags: { FAST_DEV: true },
   plugins: [
     {
       resolve: "gatsby-plugin-root-import",
