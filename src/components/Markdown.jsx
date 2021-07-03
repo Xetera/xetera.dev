@@ -76,7 +76,7 @@ export const WideBanner = forwardRef((props, ref) => {
       mb={6}
       // layerStyle="bgSecondary"
       ref={ref}
-      className={`${!noBg ? "bg-theme-alt" : ""} ${
+      className={`${
         bordered &&
         "border-theme-light border-t-1 border-b-1 border-l-0 border-r-0 border-solid"
       } mb-6 ${className}`}
@@ -231,6 +231,20 @@ export const DiscordMessageText = forwardRef(({ children, ...props }, ref) => {
   )
 })
 
+const DiscordMessageAvatar = ({ avatar, username }) => {
+  const [loaded, setLoaded] = React.useState(false)
+  return (
+    <SkeletonCircle isLoaded={loaded} height={[10]} width={[10]}>
+      <Image
+        aria-label={`Avatar for ${username}`}
+        objectFit="cover"
+        src={avatar}
+        onLoad={() => setLoaded(true)}
+      />
+    </SkeletonCircle>
+  )
+}
+
 export const DiscordMessage = forwardRef(
   (
     {
@@ -247,7 +261,6 @@ export const DiscordMessage = forwardRef(
     },
     ref
   ) => {
-    const [loaded, setLoaded] = React.useState(false)
     return (
       <Flex
         mb={2}
@@ -270,14 +283,7 @@ export const DiscordMessage = forwardRef(
           flexGrow={0}
           flexShrink={0}
         >
-          <SkeletonCircle isLoaded={loaded} height={[10]} width={[10]}>
-            <Image
-              aria-label={`Avatar for ${username}`}
-              objectFit="cover"
-              src={avatar}
-              onLoad={() => setLoaded(true)}
-            />
-          </SkeletonCircle>
+          <DiscordMessageAvatar avatar={avatar} username={username} />
         </Box>
         <div>
           <Flex alignItems="baselin" mb={1} lineHeight="22.5px">
