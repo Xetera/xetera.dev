@@ -7,10 +7,8 @@ import { useBrandColor } from "../hooks/color"
 export default function StaticPreview({ pageContext, image = avatar }) {
   const { title, description } = pageContext
 
-  console.log({ title, description })
   const width = `${postPreviewDimensions.width}px`
   const height = `${postPreviewDimensions.height}px`
-  const brand = useBrandColor()
   return (
     <Flex
       position="relative"
@@ -36,19 +34,6 @@ export default function StaticPreview({ pageContext, image = avatar }) {
           position="static"
           zIndex={1}
         >
-          {/* <Flex
-            borderWidth="3px"
-            borderColor={brand}
-            m={5}
-            p={2}
-            left="0"
-            bottom="0"
-            transition="all 0.4s ease"
-            overflow="hidden"
-            position="absolute"
-          >
-            <Image src={image} height="110px" width="110px" />
-          </Flex> */}
           <Heading fontSize="6xl" fontWeight="black" mb={3}>
             {title}
           </Heading>

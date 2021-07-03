@@ -47,9 +47,20 @@ const Navigator = ({ pos, link }) => {
         </Text>
       ) : (
         <Text mb={0} as="i" layerStyle="textTertiary" fontSize="md">
-          {isLeft
-            ? "Wow you just read the first post. Why are you even here?"
-            : "Sheeesh, you just read the last post."}
+          {isLeft ? (
+            "Wow you just read the first post. Why are you even here?"
+          ) : (
+            <>
+              <Link
+                rel="noopener noreferrer"
+                href="https://www.youtube.com/watch?v=co1VrBdaRhA"
+                target="_blank"
+              >
+                Sheeesh
+              </Link>
+              , you just read the last post
+            </>
+          )}
         </Text>
       )}
     </Box>
@@ -145,7 +156,7 @@ export default function Post({ data, pageContext, location }) {
               </Text>
             </Grid>
             <Hr />
-            <Box as="section" fontSize="lg" lineHeight="1.8">
+            <Box as="section" fontSize="lg" lineHeight="1.7">
               <MDXProvider
                 components={{
                   ...MarkdownComponents,

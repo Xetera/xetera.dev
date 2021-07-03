@@ -15,7 +15,11 @@ import typescript from "@assets/tech/typescript.png"
 import javascript from "@assets/tech/javascript.png"
 import haskell from "@assets/tech/haskell.png"
 import python from "@assets/tech/python.png"
-import { useBreakpoint, useBreakpointValue } from "@chakra-ui/react"
+import {
+  SkeletonCircle,
+  useBreakpoint,
+  useBreakpointValue,
+} from "@chakra-ui/react"
 export * from "./memes/Chatbox"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
 require("prismjs/components/prism-typescript")
@@ -101,6 +105,21 @@ export const WideBanner = forwardRef((props, ref) => {
         {children}
       </Grid>
     </Box>
+  )
+})
+
+export const DiscordMention = forwardRef((props, ref) => {
+  return (
+    <Flex
+      cursor="pointer"
+      borderRadius="md"
+      background="hsla(235,calc(1*85.6%),64.7%,0.3)"
+      px={1}
+      mr={1}
+      display="inline-flex"
+    >
+      {props.children}
+    </Flex>
   )
 })
 
@@ -228,6 +247,7 @@ export const DiscordMessage = forwardRef(
     },
     ref
   ) => {
+    const [loaded, setLoaded] = React.useState(false)
     return (
       <Flex
         mb={2}
@@ -250,7 +270,14 @@ export const DiscordMessage = forwardRef(
           flexGrow={0}
           flexShrink={0}
         >
-          <Image objectFit="cover" src={avatar} height={[10]} width={[10]} />
+          <SkeletonCircle isLoaded={loaded} height={[10]} width={[10]}>
+            <Image
+              aria-label={`Avatar for ${username}`}
+              objectFit="cover"
+              src={avatar}
+              onLoad={() => setLoaded(true)}
+            />
+          </SkeletonCircle>
         </Box>
         <div>
           <Flex alignItems="baselin" mb={1} lineHeight="22.5px">

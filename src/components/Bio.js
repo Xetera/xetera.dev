@@ -16,7 +16,7 @@ const Bio = forwardRef((props, ref) => {
   )
   const brand = useBrandColor()
   return (
-    <Stack lineHeight="1.8" spacing={4} ref={ref} {...props}>
+    <Stack lineHeight="1.7" spacing={4} ref={ref} {...props}>
       <Flex
         borderWidth="5px"
         borderColor={brand}

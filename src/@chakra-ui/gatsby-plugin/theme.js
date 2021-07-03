@@ -175,7 +175,7 @@ export default extendTheme({
           colors.textSecondary.light,
           colors.textSecondary.dark
         )(props),
-        lineHeight: "1.8",
+        lineHeight: "1.7",
         transition: "all 0.4s",
       }),
     },

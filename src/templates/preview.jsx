@@ -14,7 +14,6 @@ import { postPreviewDimensions } from "../shared"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 export default function PostPreview(props) {
-  console.log(props.pageContext)
   const data = props.data.mdx
   const { thumbnail = {} } = data.frontmatter
 
@@ -28,17 +27,15 @@ export default function PostPreview(props) {
     >
       {data.frontmatter.imageTop && (
         <GatsbyImage
-          // layout="fixed"
           width="100%"
           height="100%"
           style={{
             objectFit: "cover",
             height: "100%",
             width: "100%",
-            // zIndex: "-1",
             position: "absolute",
             opacity: "0.15",
-            filter: "blur(7px)",
+            filter: "blur(3px)",
           }}
           image={data.frontmatter.imageTop.src.image.gatsbyImageData}
         />
@@ -75,7 +72,7 @@ export default function PostPreview(props) {
               {data.frontmatter.title}
             </Heading>
             <Text
-              color="gray.100"
+              color="gray.300"
               fontWeight="medium"
               fontSize="2xl"
               lineHeight="1.4"
