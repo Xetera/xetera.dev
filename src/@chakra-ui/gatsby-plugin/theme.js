@@ -4,7 +4,6 @@ import "@fontsource/inter/500.css"
 import "@fontsource/inter/600.css"
 import "@fontsource/inter/700.css"
 import "@fontsource/inter/900.css"
-
 import { extendTheme } from "@chakra-ui/react"
 import { mode } from "@chakra-ui/theme-tools"
 
@@ -47,16 +46,17 @@ const fontFamily =
 
 function makeLayer(name, variants) {
   return {
-    [name]: variants[0],
-    _dark: {
-      [name]: variants[1],
+    [name]: variants[1],
+    _light: {
+      [name]: variants[0],
     },
   }
 }
 
 export default extendTheme({
   config: {
-    useSystemColorMode: true,
+    initialColorMode: "dark",
+    useSystemColorMode: false,
   },
   fonts: {
     heading: fontFamily,
