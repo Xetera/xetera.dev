@@ -65,54 +65,23 @@ export default extendTheme({
   layerStyles: {
     discordBackground: makeLayer("background", ["#fbfbfb", "gray.800"]),
     discordTextColor: makeLayer("color", ["#2e3338", "#dcddde"]),
-    bgSubtle: {
-      background: "gray.100",
-      _dark: {
-        background: "#1e2131",
-      },
-    },
-    borderSubtle: {
-      borderColor: "gray.100",
-      _dark: {
-        borderColor: "#1e2131",
-      },
-    },
-    bgPrimary: {
-      background: "white",
-      _dark: {
-        background: "gray.900",
-      },
-    },
-    bgSecondary: {
-      background: "gray.100",
-      _dark: {
-        background: "#1b1d29",
-      },
-    },
-    bgTertiary: {
-      background: "gray.200",
-      _dark: {
-        background: "#232735",
-      },
-    },
-    textPrimary: {
-      color: colors.textPrimary.light,
-      _dark: {
-        color: colors.textPrimary.dark,
-      },
-    },
-    textSecondary: {
-      color: colors.textSecondary.light,
-      _dark: {
-        color: colors.textSecondary.dark,
-      },
-    },
-    textTertiary: {
-      color: colors.textTertiary.light,
-      _dark: {
-        color: colors.textTertiary.dark,
-      },
-    },
+    bgSubtle: makeLayer("background", ["gray.100", "#1e2131"]),
+    borderSubtle: makeLayer("borderSubtle", ["gray.100", "#1e2131"]),
+    bgPrimary: makeLayer("background", ["white", "gray.900"]),
+    bgSecondary: makeLayer("background", ["gray.100", "#1b1d29"]),
+    bgTertiary: makeLayer("background", ["gray.200", "#232735"]),
+    textPrimary: makeLayer("color", [
+      colors.textPrimary.light,
+      colors.textPrimary.dark,
+    ]),
+    textSecondary: makeLayer("color", [
+      colors.textSecondary.light,
+      colors.textSecondary.dark,
+    ]),
+    textTertiary: makeLayer("color", [
+      colors.textTertiary.light,
+      colors.textTertiary.dark,
+    ]),
   },
   fontSizes: {
     xs: "12px",
