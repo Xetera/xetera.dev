@@ -2,8 +2,8 @@ import React from "react"
 import { Link as GatsbyLink } from "gatsby"
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
-import { useColorModePreference, useColorModeValue } from "@chakra-ui/react"
-import { colors } from "../@chakra-ui/gatsby-plugin/theme"
+import { RoughNotation } from "react-rough-notation"
+import { useBrandColor } from "../hooks/color"
 
 export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
   return (
@@ -29,10 +29,7 @@ export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
 export function PostList({ node }) {
   const title = node.frontmatter.title ?? node.fields.slug
   const { description, date } = node.frontmatter
-  const color = useColorModeValue(
-    colors.brandLight.light,
-    colors.brandLight.dark
-  )
+  const color = useBrandColor()
   const [hover, setHover] = React.useState(false)
 
   return (
@@ -53,16 +50,19 @@ export function PostList({ node }) {
         <PostHead date={date} readingTime={node.fields.readingTime.text} />
         <Heading
           as="h2"
+          display="inline"
           fontSize="22px"
           layerStyle="textPrimary"
           fontWeight="bold"
-          textDecoration={hover ? "underline" : "none"}
-          textDecorationStyle="wavy"
-          textDecorationColor={hover ? color : "transparent"}
-          // color={hover ? `${color} !important` : "inherit"}
-          mb={2}
+          // textDecoration={hover ? "underline" : "none"}
+          // textDecorationStyle="dashed"
+          // textDecorationColor={hover ? color : "transparent"}
+          // transition="all 0.4s ease-in-out"
+          mb={1}
         >
-          {title}
+          <RoughNotation type="highlight" color={color} show={hover}>
+            {title}
+          </RoughNotation>
         </Heading>
         <Text as="p" fontSize="18px" color="text.secondary">
           {description}

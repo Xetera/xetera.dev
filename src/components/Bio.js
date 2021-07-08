@@ -6,7 +6,7 @@ import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
 // import { Image } from "@chakra-ui/image"
 import { RiGithubFill, RiGithubLine, RiTwitterFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
-import { useBrandColor } from "../hooks/color"
+import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 
 const Bio = forwardRef((props, ref) => {
   const data = useStaticQuery(staticQuery)
@@ -14,12 +14,17 @@ const Bio = forwardRef((props, ref) => {
   const osuRank = Intl.NumberFormat("default").format(
     data.osu.statistics.globalRank
   )
-  const brand = useBrandColor()
+  const brand = useBrandSecondaryColor()
   return (
     <Stack lineHeight="1.7" spacing={4} ref={ref} {...props}>
       <Flex
+        sx={{}}
         borderWidth="5px"
         borderColor={brand}
+        // background="linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)"
+        // backgroundSize="400px 400px"
+        // backgroundSize: 400% 400%;
+        // animation="gradient 1s ease infinite"
         width="min-content"
         mb={2}
         p={2}

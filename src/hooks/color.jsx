@@ -1,6 +1,13 @@
 import { useColorModeValue } from "@chakra-ui/color-mode"
-import { themedColors } from "../@chakra-ui/gatsby-plugin/theme"
+import { colors } from "../@chakra-ui/gatsby-plugin/theme"
+
+export function useBrandSecondaryColor() {
+  return useColorModeValue(
+    colors.brandSecondary.light,
+    colors.brandSecondary.dark
+  )
+}
 
 export function useBrandColor() {
-  return useColorModeValue(themedColors.brand.light, themedColors.brand.dark)
+  return useColorModeValue(colors.brand.light, colors.brand.dark)
 }

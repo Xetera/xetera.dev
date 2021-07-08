@@ -1,5 +1,6 @@
 import "typeface-jetbrains-mono"
-import "./src/font.css"
+import "./static/fonts/wotfard/stylesheet.css"
+// import "./src/font.css"
 import React from "react"
 import {
   ChakraProvider,

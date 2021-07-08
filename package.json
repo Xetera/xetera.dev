@@ -63,6 +63,7 @@
     "react-headroom": "^3.0.0",
     "react-helmet": "^6.0.0",
     "react-icons": "^4.2.0",
+    "react-rough-notation": "^1.0.1",
     "react-typography": "^0.16.19",
     "typeface-inter": "^3.18.1",
     "typeface-jetbrains-mono": "^2.0.0",

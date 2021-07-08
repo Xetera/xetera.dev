@@ -17,6 +17,7 @@ export const LayoutContent = forwardRef((props, ref) => {
     <Grid
       as="main"
       layerStyle="textPrimary"
+      fontWeight="regular"
       gap={12}
       p={layoutContentPadding}
       ref={ref}

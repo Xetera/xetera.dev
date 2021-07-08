@@ -430,6 +430,7 @@ function Code({ children, className, metastring }) {
                 lineNumberElem = (
                   <Box
                     as="span"
+                    fontSize="sm"
                     mr={4}
                     userSelect="none"
                     layerStyle="textTertiary"

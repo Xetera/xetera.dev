@@ -15,16 +15,16 @@ import { MDXProvider } from "@mdx-js/react"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import * as ChakraReact from "@chakra-ui/react"
-import { useBrandColor } from "../hooks/color"
+import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
+import { RoughNotation } from "react-rough-notation"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link, Stack, Text } = Chakra
 
 const Navigator = ({ pos, link }) => {
   const isLeft = pos === "left"
-  const brand = useBrandColor()
   const hasLink = Boolean(link)
 
   const data = (
@@ -47,9 +47,8 @@ const Navigator = ({ pos, link }) => {
         {isLeft ? "Previous" : "Next"} Article
       </Heading>
       {link ? (
-        <Text as="p" mb={0} color={brand} fontSize="md">
+        <Text as="p" mb={0} fontSize="md" layerStyle="textSecondary">
           {link.frontmatter.title}
-          {link.readingTime}
         </Text>
       ) : (
         <Text mb={0} as="i" layerStyle="textTertiary" fontSize="md">
@@ -101,7 +100,7 @@ export const maxWidth = "49rem"
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
-  const brand = useBrandColor()
+  const brand = useBrandSecondaryColor()
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
   const { imageTop, imageBottom } = post.frontmatter
@@ -109,7 +108,11 @@ export default function Post({ data, pageContext, location }) {
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom} article>
-        <Box layerStyle="bgSecondary" pt={[8, 12, 24]}>
+        <Box
+          layerStyle={["bgSecondary", "borderSubtlePrimary"]}
+          pt={[8, 12, 24]}
+          borderBottomWidth="1px"
+        >
           <Grid
             gap={2}
             as="header"

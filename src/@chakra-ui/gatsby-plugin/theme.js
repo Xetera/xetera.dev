@@ -21,12 +21,20 @@ export const colors = {
     dark: "gray.300",
   },
   textTertiary: {
-    light: "gray.600",
+    light: "#38404e",
     dark: "gray.400",
   },
+  bgPrimary: {
+    light: "white",
+    dark: "gray.900",
+  },
   bgSecondary: {
-    light: "gray.100",
-    dark: "#1b1d29",
+    light: "#e8f6ff",
+    dark: "#181b2b",
+  },
+  bgTertiary: {
+    light: "gray.200",
+    dark: "#232735",
   },
   borderSubtle: {
     dark: "#1e2131",
@@ -40,16 +48,13 @@ export const colors = {
     light: "hsl(333deg, 100%, 45%)",
     dark: "hsl(333deg, 100%, 45%)",
   },
+  brandSecondary: {
+    dark: "#62daff",
+    light: "#256bc1",
+  },
   brandLight: {
     dark: "hsl(333deg, 100%, 55%)",
     dark: "hsl(333deg, 100%, 55%)",
-  },
-}
-
-export const themedColors = {
-  brand: {
-    dark: "#EAE3A8",
-    light: "#256bc1",
   },
 }
 
@@ -75,21 +80,31 @@ export default extendTheme({
     body: fontFamily,
   },
   layerStyles: {
-    discordBackground: makeLayer("background", ["#fbfbfb", "gray.800"]),
+    discordBackground: makeLayer("background", [
+      "#fbfbfb",
+      colors.bgSecondary.dark,
+    ]),
     discordTextColor: makeLayer("color", ["#2e3338", "#dcddde"]),
-    bgSubtle: makeLayer("background", ["gray.100", "#1e2131"]),
     borderSubtle: makeLayer("borderColor", ["gray.100", "#282c3e"]),
-    bgPrimary: makeLayer("background", ["white", "gray.900"]),
+    borderSubtlePrimary: makeLayer("borderColor", ["gray.100", "#1f2231"]),
     textBrand: makeLayer("color", [colors.brand.light, colors.brand.dark]),
     textBrandLight: makeLayer("color", [
       colors.brandLight.light,
       colors.brandLight.dark,
     ]),
+    bgSubtle: makeLayer("background", ["gray.100", "#1e2131"]),
+    bgPrimary: makeLayer("background", [
+      colors.bgPrimary.light,
+      colors.bgPrimary.dark,
+    ]),
     bgSecondary: makeLayer("background", [
       colors.bgSecondary.light,
       colors.bgSecondary.dark,
     ]),
-    bgTertiary: makeLayer("background", ["gray.200", "#232735"]),
+    bgTertiary: makeLayer("background", [
+      colors.bgTertiary.light,
+      colors.bgTertiary.dark,
+    ]),
     textPrimary: makeLayer("color", [
       colors.textPrimary.light,
       colors.textPrimary.dark,
@@ -145,14 +160,17 @@ export default extendTheme({
         lineBreak: "auto",
         transition: "all 0.4s ease-in-out",
         color: mode("gray.700", "gray.300")(props),
-        background: mode("white", "gray.900")(props),
+        background: mode("white", "#141621")(props),
       },
     }),
   },
   components: {
     Link: {
       baseStyle: props => ({
-        color: mode(themedColors.brand.light, themedColors.brand.dark)(props),
+        color: mode(
+          colors.brandSecondary.light,
+          colors.brandSecondary.dark
+        )(props),
       }),
     },
     Heading: {
