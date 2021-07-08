@@ -19,7 +19,7 @@ const BlogIndex = ({ data, pageContext }) => {
         maxWidth="1200px"
         margin={["0 auto", null, "5% auto", "8% auto"]}
         gridAutoFlow={["row", null, null]}
-        gridTemplateColumns={["1fr", null, null, "1fr 1fr"]}
+        gridTemplateColumns={["1fr", null, null, "3fr 4fr"]}
       >
         <Bio as="section" />
         <Stack as="section" flexFlow="column" spacing={6} width="100%">
@@ -29,7 +29,14 @@ const BlogIndex = ({ data, pageContext }) => {
             alignItems="center"
             width="100%"
           >
-            <Heading fontSize="xl">{posts.length} Posts</Heading>
+            <Heading
+              fontSize="lg"
+              textTransform="uppercase"
+              letterSpacing="1.5px"
+              fontWeight="bold"
+            >
+              {posts.length} Posts
+            </Heading>
             {/* <PostSwitch /> */}
           </Flex>
           <Grid gap={10}>

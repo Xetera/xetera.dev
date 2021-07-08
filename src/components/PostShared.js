@@ -2,6 +2,8 @@ import React from "react"
 import { Link as GatsbyLink } from "gatsby"
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
+import { useColorModePreference, useColorModeValue } from "@chakra-ui/react"
+import { colors } from "../@chakra-ui/gatsby-plugin/theme"
 
 export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
   return (
@@ -27,6 +29,8 @@ export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
 export function PostList({ node }) {
   const title = node.frontmatter.title ?? node.fields.slug
   const { description, date } = node.frontmatter
+  const color = useColorModeValue(colors.brand.light, colors.brand.dark)
+  const [hover, setHover] = React.useState(false)
 
   return (
     <GatsbyLink
@@ -37,20 +41,31 @@ export function PostList({ node }) {
       }}
       key={node.fields.slug}
     >
-      <Flex as="article" flexFlow="column">
+      <Flex
+        as="article"
+        flexFlow="column"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
         <PostHead date={date} readingTime={node.fields.readingTime.text} />
         <Heading
           as="h2"
-          fontSize="18px"
+          fontSize="22px"
           layerStyle="textPrimary"
           fontWeight="bold"
+          transition="all 0.5s ease-in-out"
+          color={hover ? `${color} !important` : "inherit"}
           mb={2}
         >
           {title}
         </Heading>
-        <Text as="p" fontSize="16px" color="text.secondary">
+        <Text as="p" fontSize="18px" color="text.secondary">
           {description}
         </Text>
+        {/* <Text>Read more</Text> */}
+        {/* <Text as="p">
+          {node.excerpt}
+        </Text> */}
       </Flex>
     </GatsbyLink>
   )

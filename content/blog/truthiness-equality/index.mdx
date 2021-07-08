@@ -47,6 +47,8 @@ export const Tzuyu = props => (
   />
 )
 
+export const C = ({ children }) => <code className=".">{children}</code>
+
 <DiscordMessageContainer>
   <Me
     message="So why do you think the if statement works if the string isn't empty?"
@@ -61,13 +63,18 @@ export const Tzuyu = props => (
     messages={[
       "Yeah",
       "I think so",
-      "like if you were comparing 'test' == true it would be truthy",
+      <DiscordMessageText>
+        like if you were comparing{" "}
+        <InlineCode layerStyle="bgTertiary">"test" == true</InlineCode>{" "}
+        it would be truthy
+      </DiscordMessageText>
     ]}
     date="Today at 9:44 PM"
     reactions={[
       { image: YooYikes, reactCount: 2, reacted: true, name: ":yooyikes:" },
     ]}
-  />
+/>
+
   <Me message="Have you actually tried that?" date="Today at 9:45 PM" />
   <Tzuyu messages={["no"]} date="Today at 9:45 PM" />
   <Tzuyu

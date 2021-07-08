@@ -18,6 +18,7 @@ import python from "@assets/tech/python.png"
 import {
   SkeletonCircle,
   useBreakpoint,
+  Code as ChakraCode,
   useBreakpointValue,
 } from "@chakra-ui/react"
 export * from "./memes/Chatbox"
@@ -388,8 +389,7 @@ function Code({ children, className, metastring }) {
                   src={highlighterClass.image}
                   width="auto"
                   height="15px"
-                  display={["none", "block"]}
-                  // borderRadius="4px"
+                  display="block"
                   ml={2}
                 />
               )}
@@ -465,12 +465,26 @@ function Code({ children, className, metastring }) {
   )
 }
 
+export const InlineCode = forwardRef(({ children, ...props }) => (
+  <Box as="code" {...props}>
+    {children}
+  </Box>
+))
+
 export const overrides = {
   pre(props) {
-    return <Flex as="pre" flexDirection="column" flexGrow="1" {...props} />
+    return (
+      <Flex
+        as="pre"
+        flexDirection="column"
+        flexGrow="1"
+        // color="red"
+        {...props}
+      />
+    )
   },
   code: ({ children, ...props }) => (
-    <Code variant="outline" {...props}>
+    <Code variant="outline" {...props} color="blue" fontSize="0.8em">
       {children}
     </Code>
   ),

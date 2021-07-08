@@ -1,5 +1,10 @@
 import React from "react"
-import { Hr, Layout, LayoutContent } from "../components/Layout"
+import {
+  Hr,
+  Layout,
+  LayoutContent,
+  layoutContentPadding,
+} from "../components/Layout"
 import { Link as GatsbyLink, graphql } from "gatsby"
 import Popup from "../components/Popup"
 import SEO from "../components/Seo"
@@ -103,59 +108,74 @@ export default function Post({ data, pageContext, location }) {
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom} article>
-        <LayoutContent mx="auto" maxWidth={maxWidth} mt={[8, 12, 24]}>
+        <Box layerStyle="bgSecondary" pt={[8, 12, 24]}>
+          <Grid
+            gap={2}
+            as="header"
+            p={layoutContentPadding}
+            mx="auto"
+            maxWidth={maxWidth}
+          >
+            {post.frontmatter.draft && (
+              <Box mb={2}>
+                <Flex
+                  zIndex={10}
+                  width="100%"
+                  mx="auto"
+                  flexFlow="row"
+                  maxWidth={maxWidth}
+                >
+                  <Text color={brand} fontSize={["sm", null, "lg"]}>
+                    🥺 You're viewing a draft. This post is not published.
+                  </Text>
+                </Flex>
+              </Box>
+            )}
+            <Flex alignItems="center" layerStyle="textTertiary">
+              <Text as="time" dateTime={post.frontmatter.date} color="gray.500">
+                {post.frontmatter.date}
+              </Text>
+              <Box mx="10px">·</Box>
+              <Text color="gray.500">{post.fields.readingTime.text}</Text>
+            </Flex>
+            <Heading
+              as="h1"
+              fontSize={["xl", "2xl", "3xl"]}
+              lineHeight="1.4"
+              fontWeight="black"
+            >
+              {post.frontmatter.title}
+            </Heading>
+            <Text
+              fontSize={["lg", "xl"]}
+              fontWeight="medium"
+              layerStyle="textTertiary"
+            >
+              {post.frontmatter.description}
+            </Text>
+          </Grid>
+          {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path
+              fill="#0099ff"
+              fill-opacity="1"
+              d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+          </svg> */}
+        </Box>
+        <LayoutContent mx="auto" maxWidth={maxWidth}>
           <SEO
             canonical={post.slug}
             title={post.frontmatter.title}
             description={post.frontmatter.description || post.excerpt}
             image={ogImage}
           />
+
           <style
             dangerouslySetInnerHTML={{
               __html: ` #gatsby-focus-wrapper { overflow: hidden; } `,
             }}
           />
           <Grid as="article" gap={2}>
-            <Grid gap={2} as="header">
-              {post.frontmatter.draft && (
-                <Box mb={2}>
-                  <Flex
-                    zIndex={10}
-                    width="100%"
-                    mx="auto"
-                    flexFlow="row"
-                    maxWidth={maxWidth}
-                  >
-                    <Text color={brand} fontSize={["sm", null, "lg"]}>
-                      🥺 You're viewing a draft. This post is not published.
-                    </Text>
-                  </Flex>
-                </Box>
-              )}
-              <Flex alignItems="center" layerStyle="textTertiary">
-                <Text
-                  as="time"
-                  dateTime={post.frontmatter.date}
-                  color="gray.500"
-                >
-                  {post.frontmatter.date}
-                </Text>
-                <Box mx="10px">·</Box>
-                <Text color="gray.500">{post.fields.readingTime.text}</Text>
-              </Flex>
-              <Heading
-                as="h1"
-                fontSize={["xl", "2xl", "3xl"]}
-                lineHeight="1.4"
-                fontWeight="black"
-              >
-                {post.frontmatter.title}
-              </Heading>
-              <Text fontSize={["lg", "xl"]} fontWeight="medium">
-                {post.frontmatter.description}
-              </Text>
-            </Grid>
-            <Hr />
             <Box as="section" fontSize="lg" lineHeight="1.7">
               <MDXProvider
                 components={{
