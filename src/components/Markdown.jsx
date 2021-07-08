@@ -465,8 +465,8 @@ function Code({ children, className, metastring }) {
   )
 }
 
-export const InlineCode = forwardRef(({ children, ...props }) => (
-  <Box as="code" {...props}>
+export const InlineCode = forwardRef(({ children, ...props }, ref) => (
+  <Box as="code" {...props} ref={ref}>
     {children}
   </Box>
 ))

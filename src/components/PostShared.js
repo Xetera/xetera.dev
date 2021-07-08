@@ -29,7 +29,10 @@ export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
 export function PostList({ node }) {
   const title = node.frontmatter.title ?? node.fields.slug
   const { description, date } = node.frontmatter
-  const color = useColorModeValue(colors.brand.light, colors.brand.dark)
+  const color = useColorModeValue(
+    colors.brandLight.light,
+    colors.brandLight.dark
+  )
   const [hover, setHover] = React.useState(false)
 
   return (
@@ -53,8 +56,11 @@ export function PostList({ node }) {
           fontSize="22px"
           layerStyle="textPrimary"
           fontWeight="bold"
-          transition="all 0.5s ease-in-out"
-          color={hover ? `${color} !important` : "inherit"}
+          transition="all 0.2s ease-in-out"
+          textDecoration={hover ? "underline" : "none"}
+          textDecorationStyle="wavy"
+          textDecorationColor={hover ? color : "transparent"}
+          // color={hover ? `${color} !important` : "inherit"}
           mb={2}
         >
           {title}

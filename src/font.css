@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Wotfard";
+  src: url("/fonts/wotfard/wotfard-regular-webfont.eot");
+  src: url("/fonts/wotfard/wotfard-regular-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/wotfard/wotfard-regular-webfont.woff2") format("woff2"),
+    url("/fonts/wotfard/wotfard-regular-webfont.ttf") format("truetype");
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}

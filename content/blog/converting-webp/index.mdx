@@ -19,6 +19,11 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
           src={src}
           layerStyle="bgSecondary"
           height={["400px", null, "470px"]}
+          fallback={
+            <Flex sx={{ aspectRatio: "176/235" }} width="100%" height="100%">
+              <Skeleton width="100%" height="100%" />
+            </Flex>
+          }
           width="100%"
           objectFit="cover"
         />
@@ -33,9 +38,9 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
           {title}
         </Heading>
         <Box px={2} layerStyle="bgSecondary" borderRadius="md">
-          <Text as="b" mb={0} fontSize="sm">
+          <InlineCode mb={0} fontSize="sm" fontWeight="bold">
             {size}
-          </Text>
+          </InlineCode>
         </Box>
       </Flex>
       <Text mb={0} fontSize="sm">

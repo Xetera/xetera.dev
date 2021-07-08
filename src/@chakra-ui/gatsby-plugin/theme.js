@@ -41,8 +41,8 @@ export const colors = {
     dark: "hsl(333deg, 100%, 45%)",
   },
   brandLight: {
-    light: "hsl(0deg, 50%, 41%)",
-    dark: "hsl(333deg, 100%, 85%)",
+    dark: "hsl(333deg, 100%, 55%)",
+    dark: "hsl(333deg, 100%, 55%)",
   },
 }
 
@@ -54,7 +54,7 @@ export const themedColors = {
 }
 
 const fontFamily =
-  "'Wotfard', 'system-ui',-apple-system,'Segoe UI','Roboto','Ubuntu','Cantarell','Noto Sans',sans-serif,'BlinkMacSystemFont','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji'"
+  "'Wotfard',-apple-system,'Segoe UI','Roboto','Ubuntu','Cantarell','Noto Sans',sans-serif,'BlinkMacSystemFont','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji'"
 
 function makeLayer(name, variants) {
   return {
@@ -163,7 +163,7 @@ export default extendTheme({
     },
     Text: {
       baseStyle: props => ({
-        color: mode(colors.textPrimary.light, colors.textPrimary.dark)(props),
+        // color: mode(colors.textPrimary.light, colors.textPrimary.dark)(props),
         lineHeight: "1.7",
         transition: "all 0.4s",
       }),

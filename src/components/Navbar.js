@@ -22,7 +22,7 @@ export default function Navbar() {
         <div />
       ) : (
         <Link to="/">
-          <RiArrowLeftFill size={iconSize} />
+          <RiArrowLeftFill size={iconSize ?? 27} />
         </Link>
       )}
       <Box

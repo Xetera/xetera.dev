@@ -14,6 +14,7 @@ import { Toastable } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
+import * as ChakraReact from "@chakra-ui/react"
 import { useBrandColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
@@ -182,6 +183,7 @@ export default function Post({ data, pageContext, location }) {
                   ...MarkdownComponents,
                   ...MarkdownOverrides,
                   ...Chakra,
+                  ...ChakraReact,
                   maxWidth,
                   ChakraImage: Image,
                   Toastable,
