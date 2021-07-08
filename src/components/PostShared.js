@@ -56,7 +56,6 @@ export function PostList({ node }) {
           fontSize="22px"
           layerStyle="textPrimary"
           fontWeight="bold"
-          transition="all 0.2s ease-in-out"
           textDecoration={hover ? "underline" : "none"}
           textDecorationStyle="wavy"
           textDecorationColor={hover ? color : "transparent"}

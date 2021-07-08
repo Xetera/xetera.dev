@@ -191,18 +191,20 @@ export function DiscordReaction({
         background={reacted ? "rgba(114,137,218,.3)" : "hsl(0, 0%, 100%, 0.06)"}
       >
         <Image src={image} mb={0} width="16px" height="16px" />
-        <Text
+        <Box
           fontSize="xs"
           mb={0}
           ml={1}
           color={reacted ? "#7289da" : "#72767d"}
         >
           {reacts}
-        </Text>
+        </Box>
       </Box>
     </Tooltip>
   )
 }
+
+const innerGap = { gap: 22 }
 
 export const DiscordMessageContainer = ({ children }) => (
   <WideBanner
@@ -210,7 +212,7 @@ export const DiscordMessageContainer = ({ children }) => (
     py={2}
     my={6}
     layerStyle="discordBackground"
-    inner={{ gap: 22 }}
+    inner={innerGap}
   >
     {children}
   </WideBanner>
@@ -413,7 +415,6 @@ function Code({ children, className, metastring }) {
             layerStyle="borderSubtle"
             position="relative"
             overflowX="auto"
-            transition="all 0.2s"
             fontSize={["sm", null, "md"]}
           >
             {tokens.map((line, i) => {

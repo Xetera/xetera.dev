@@ -23,7 +23,6 @@ const Bio = forwardRef((props, ref) => {
         width="min-content"
         mb={2}
         p={2}
-        transition="all 0.4s ease"
       >
         <GatsbyImage
           image={data.avatar.data.gatsbyImageData}

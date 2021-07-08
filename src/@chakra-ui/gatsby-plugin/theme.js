@@ -143,6 +143,7 @@ export default extendTheme({
       },
       body: {
         lineBreak: "auto",
+        transition: "all 0.4s ease-in-out",
         color: mode("gray.700", "gray.300")(props),
         background: mode("white", "gray.900")(props),
       },
@@ -152,20 +153,17 @@ export default extendTheme({
     Link: {
       baseStyle: props => ({
         color: mode(themedColors.brand.light, themedColors.brand.dark)(props),
-        transition: "all 0.4s",
       }),
     },
     Heading: {
       baseStyle: props => ({
         color: mode(colors.textPrimary.light, colors.textPrimary.dark)(props),
-        transition: "all 0.4s",
       }),
     },
     Text: {
       baseStyle: props => ({
         // color: mode(colors.textPrimary.light, colors.textPrimary.dark)(props),
         lineHeight: "1.7",
-        transition: "all 0.4s",
       }),
     },
   },
