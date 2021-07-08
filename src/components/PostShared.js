@@ -64,7 +64,7 @@ export function PostList({ node }) {
             {title}
           </RoughNotation>
         </Heading>
-        <Text as="p" fontSize="18px" color="text.secondary">
+        <Text as="p" fontSize="18px" layerStyle="textSecondary">
           {description}
         </Text>
         {/* <Text>Read more</Text> */}
