@@ -18,16 +18,11 @@ const Bio = forwardRef((props, ref) => {
   return (
     <Stack lineHeight="1.7" spacing={4} ref={ref} {...props}>
       <Flex
-        sx={{}}
-        borderWidth="5px"
+        borderRadius="md"
+        overflow="hidden"
         borderColor={brand}
-        // background="linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)"
-        // backgroundSize="400px 400px"
-        // backgroundSize: 400% 400%;
-        // animation="gradient 1s ease infinite"
         width="min-content"
         mb={2}
-        p={2}
       >
         <GatsbyImage
           image={data.avatar.data.gatsbyImageData}
