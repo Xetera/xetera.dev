@@ -72,7 +72,8 @@ export default function Popup({ className }) {
             }}
             bottom="auto"
             alignItems="center"
-            borderRadius="md"
+            borderTopRightRadius="md"
+            borderBottomRightRadius="md"
             position="absolute"
             bottom={2}
             mx={[4, null, "auto"]}
