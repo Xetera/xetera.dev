@@ -29,7 +29,7 @@ export const colors = {
     dark: "gray.900",
   },
   bgSecondary: {
-    light: "#e8f6ff",
+    light: "#f5fbff",
     dark: "#181b2b",
   },
   bgTertiary: {

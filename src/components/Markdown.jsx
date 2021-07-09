@@ -389,8 +389,10 @@ function Code({ children, className, metastring }) {
               {highlighterClass.image && (
                 <Image
                   src={highlighterClass.image}
+                  borderRadius="sm"
+                  overflow="hidden"
                   width="auto"
-                  height="15px"
+                  height="20px"
                   display="block"
                   ml={2}
                 />
