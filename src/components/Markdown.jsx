@@ -70,17 +70,13 @@ export const WideBanner = forwardRef((props, ref) => {
     <Box
       width="100vw"
       left="50%"
-      right="50%"
       marginLeft="-50vw"
       marginRight="-50vw"
       position="relative"
+      overflow="hidden"
       mb={6}
       // layerStyle="bgSecondary"
       ref={ref}
-      className={`${
-        bordered &&
-        "border-theme-light border-t-1 border-b-1 border-l-0 border-r-0 border-solid"
-      } mb-6 ${className}`}
       {...rest}
     >
       <Grid

@@ -1,21 +1,24 @@
 import React from "react"
+import ReactDOM from "react-dom"
 import { m, AnimatePresence } from "framer-motion"
 import { maxWidth } from "../templates/post"
 import { Box, Flex } from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
+import { forwardRef } from "@chakra-ui/react"
 
 export const ToastContext = React.createContext({
   jsx: null,
   setJsx: null,
 })
 
-export function Toastable({ text, children, className = "" }) {
+export const Toastable = forwardRef(({ text, children, ...rest }, ref) => {
+  const [hovering, setHovering] = React.useState(null)
   const { setJsx } = React.useContext(ToastContext)
   function onEnter() {
     setJsx(children)
   }
   function onLeave() {
-    setJsx(null)
+    setJsx(false)
   }
   return (
     <Box
@@ -27,13 +30,25 @@ export function Toastable({ text, children, className = "" }) {
       textDecoration="underline"
       textDecorationStyle="wavy"
       cursor="pointer"
+      ref={ref}
+      {...rest}
     >
       {text}
     </Box>
   )
-}
+})
 
 const MotionFlex = m(Flex)
+
+export function PopupPortal({ children }) {
+  const [location, setLocation] = React.useState(null)
+  React.useEffect(() => {
+    setLocation(document.querySelector("#___gatsby"))
+  }, [])
+  console.log(location)
+  if (!location) return null
+  return ReactDOM.createPortal(children, location)
+}
 
 export default function Popup({ className }) {
   const { jsx } = React.useContext(ToastContext)
@@ -55,6 +70,7 @@ export default function Popup({ className }) {
         {hovered && (
           <MotionFlex
             maxWidth={maxWidth}
+            width="100%"
             borderLeft={`2px solid ${brand}`}
             layerStyle="bgPrimary"
             transition={{ type: "tween", duration: 0.24 }}

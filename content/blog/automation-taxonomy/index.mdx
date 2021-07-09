@@ -25,55 +25,75 @@ import { RiExternalLinkLine } from "react-icons/ri"
 </Link>
 
 export const Cell = ({ options, title }) => (
-  <Flex
-    as="section"
-    flexDirection="column"
-    layerStyle={["bgSecondary", "textPrimary"]}
-    height="100%"
-    sx={{ aspectRatio: "1/1" }}
-    fontSize="md"
-    position="relative"
-    lineHeight={6}
-    width="100%"
-  >
-    <Text
-      textAlign="center"
-      fontSize={["sm", "md"]}
-      layerStyle="textTertiary"
-      py={2}
+  <Box layerStyle="borderSubtle" borderWidth="1px">
+    <Flex
+      as="section"
+      flexDirection="column"
+      layerStyle={["textPrimary"]}
+      height="100%"
+      sx={{ aspectRatio: "1/1" }}
+      fontSize="md"
+      position="relative"
+      lineHeight={6}
+      width="100%"
     >
-      {title}
-    </Text>
-    <UnorderedList
-      px={4}
-      pb={4}
-      m={0}
-      as="li"
-      styleType="hangul"
-      stylePosition="inside"
-      fontSize={["sm", "md"]}
-      spacing={1}
-      height="min-content"
-    >
-      {options?.map(option => (
-        <ListItem key={option}>{option}</ListItem>
-      ))}
-    </UnorderedList>
-  </Flex>
+      <Text
+        textAlign="center"
+        fontSize={["sm", "md"]}
+        layerStyle="textTertiary"
+        py={2}
+      >
+        {title}
+      </Text>
+      <OrderedList
+        px={4}
+        pb={4}
+        m={0}
+        as="li"
+        styleType="hangul"
+        stylePosition="inside"
+        fontSize={["sm", "md"]}
+        spacing={1}
+        height="min-content"
+      >
+        {options?.map(option => (
+          <ListItem key={option}>{option}</ListItem>
+        ))}
+      </OrderedList>
+    </Flex>
+  </Box>
 )
 
-That's a pretty scary headline. But what does bots really mean in this case?
+That's a pretty scary sounding headline. But what does bots really mean in this case?
 
-<Heading textAlign="center" fontSize="xl" mb={4}>
-  Alignment Chart
-</Heading>
+`Bots` on the internet come in many different shapes and sizes. Some are good, some are purely nefarious and a lot of the other ones sit on a spectrum in between. It's hard to look at a headline like this alone and figure out whether or not that's a bad thing.
+
+import { Text, Heading, Flex } from "@chakra-ui/layout"
+
+export const Botanists = () => (
+  <Toastable text="botanists" color="green.300">
+    <Flex flexDirection="column">
+      <Flex alignItems="baseline">
+        <Heading mr={1} fontSize="md">
+          Bontany
+        </Heading>
+        <Text fontSize="xs" layerStyle="textTertiary">
+          • Noun
+        </Text>
+      </Flex>
+      <Text>The scientific study of bots.</Text>
+    </Flex>
+  </Toastable>
+)
+
+To have a better idea of where certain bots fit in (my) moral axiom, I will be using an extremely scientifically rigorous model used by the brightest behaviorologists and <Botanists /> of our generation.
 
 <Grid
   gridTemplateColumns={["repeat(auto-fill, minmax(200px, 1fr))"]}
   maxWidth={["250px", "100%"]}
   margin="auto"
   gridAutoRows="1fr"
-  gap="5px"
+  gap="8px"
 >
   <Cell
     title="Lawful Good"
@@ -94,3 +114,86 @@ That's a pretty scary headline. But what does bots really mean in this case?
   <Cell title="Netural Evil" options={["Votebotting", "Ticket botting"]} />
   <Cell title="Chaotic Evil" options={["DDOS"]} />
 </Grid>
+
+<Hr />
+
+export const StickyTop = ({ children }) => (
+  <Flex
+    layerStyle="bgSecondary"
+    position="sticky"
+    top={0}
+    px={4}
+    py={1}
+    borderLeft="1px"
+  >
+    {children}
+  </Flex>
+)
+
+# Good
+
+### Lawful Good
+
+These are your standard search engines. They're the reason why the internet works in the first place, and they're also the reason why majority of the reason why sites can't have unbrella bans over any kind of automation.
+
+SPACER SPACER
+
+SPACER SPACER
+
+SPACER SPACER
+
+SPACER SPACER
+
+SPACER SPACER
+
+SPACER SPACER
+
+SPACER SPACER
+
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER
+SPACER SPACER

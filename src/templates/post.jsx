@@ -10,7 +10,7 @@ import Popup from "../components/Popup"
 import SEO from "../components/Seo"
 import { FaTag, FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { Toastable } from "../components/Popup"
+import PopupPortal, { Toastable } from "../components/Popup"
 import { MDXProvider } from "@mdx-js/react"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
@@ -18,11 +18,11 @@ import * as ChakraReact from "@chakra-ui/react"
 import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
-import { useColorModeValue } from "@chakra-ui/react"
+import { Text, useColorModeValue } from "@chakra-ui/react"
 import { colors } from "../@chakra-ui/gatsby-plugin/theme"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
-const { Box, Flex, Grid, Heading, Link, Text } = Chakra
+const { Box, Flex, Grid, Heading, Link } = Chakra
 
 const Navigator = ({ pos, link }) => {
   const isLeft = pos === "left"
@@ -178,11 +178,11 @@ export default function Post({ data, pageContext, location }) {
             image={ogImage}
           />
 
-          <style
+          {/* <style
             dangerouslySetInnerHTML={{
               __html: ` #gatsby-focus-wrapper { overflow: hidden; } `,
             }}
-          />
+          /> */}
           <Grid as="article" gap={2}>
             <Box as="section" fontSize="lg" lineHeight="1.7">
               <MDXProvider
@@ -192,6 +192,7 @@ export default function Post({ data, pageContext, location }) {
                   ...Chakra,
                   ...ChakraReact,
                   maxWidth,
+                  Text,
                   ChakraImage: Image,
                   Toastable,
                   Hr,
@@ -200,7 +201,6 @@ export default function Post({ data, pageContext, location }) {
                       {children}
                     </Link>
                   ),
-                  Text,
                   h6: makeHeader("h6"),
                   h5: makeHeader("h5"),
                   h4: makeHeader("h4"),
@@ -274,7 +274,9 @@ export default function Post({ data, pageContext, location }) {
               </>
             )}
           </Grid>
-          <Popup />
+          <PopupPortal>
+            <Popup />
+          </PopupPortal>
         </LayoutContent>
       </Layout>
     </>
