@@ -24,7 +24,7 @@ export const layoutContentPadding = [6, 8]
 
 export const LayoutContent = forwardRef((props, ref) => {
   return (
-    <Box width="100%">
+    <Box width="100%" overflow="hidden">
       <Grid
         as="main"
         layerStyle="textPrimary"
