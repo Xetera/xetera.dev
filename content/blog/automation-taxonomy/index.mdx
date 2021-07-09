@@ -44,19 +44,21 @@ export const Cell = ({ options, title }) => (
     >
       {title}
     </Text>
-    <Grid
+    <UnorderedList
       px={4}
       pb={4}
+      m={0}
       as="li"
-      sx={{ listStyle: "hangul" }}
-      Size={["sm", "md"]}
-      gap={2}
+      styleType="hangul"
+      stylePosition="inside"
+      fontSize={["sm", "md"]}
+      spacing={1}
       height="min-content"
     >
       {options?.map(option => (
-        <li key={option}>{option}</li>
+        <ListItem key={option}>{option}</ListItem>
       ))}
-    </Grid>
+    </UnorderedList>
   </Flex>
 )
 
@@ -70,7 +72,7 @@ That's a pretty scary headline. But what does bots really mean in this case?
   gridTemplateColumns={["repeat(auto-fill, minmax(200px, 1fr))"]}
   maxWidth={["250px", "100%"]}
   margin="auto"
-  gridAtoRows="1fr"
+  gridAutoRows="1fr"
   gap="5px"
 >
   <Cell
