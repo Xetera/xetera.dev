@@ -6,9 +6,19 @@ import Navbar from "./Navbar"
 import { forwardRef } from "@chakra-ui/system"
 import { domAnimation, LazyMotion } from "framer-motion"
 
-export function Hr() {
-  return <Box as="hr" my={3} layerStyle="bgSubtle" border="none" height="1px" />
-}
+export const Hr = forwardRef((props, ref) => {
+  return (
+    <Box
+      as="hr"
+      my={3}
+      layerStyle="bgSubtle"
+      border="none"
+      height="1px"
+      {...props}
+      ref={ref}
+    />
+  )
+})
 
 export const layoutContentPadding = [6, 8]
 

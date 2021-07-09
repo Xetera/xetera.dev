@@ -40,6 +40,10 @@ export const colors = {
     dark: "#1e2131",
     light: "gray.100",
   },
+  borderSubtlePrimary: {
+    light: "gray.100",
+    dark: "#1f2231",
+  },
   text: {
     primary: "gray.50",
     secondary: "gray.300",
@@ -86,7 +90,10 @@ export default extendTheme({
     ]),
     discordTextColor: makeLayer("color", ["#2e3338", "#dcddde"]),
     borderSubtle: makeLayer("borderColor", ["gray.100", "#282c3e"]),
-    borderSubtlePrimary: makeLayer("borderColor", ["gray.100", "#1f2231"]),
+    borderSubtlePrimary: makeLayer("borderColor", [
+      colors.borderSubtlePrimary.light,
+      colors.borderSubtlePrimary.dark,
+    ]),
     textBrand: makeLayer("color", [colors.brand.light, colors.brand.dark]),
     textBrandLight: makeLayer("color", [
       colors.brandLight.light,

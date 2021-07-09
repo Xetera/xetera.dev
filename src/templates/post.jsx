@@ -19,6 +19,8 @@ import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
 import { RoughNotation } from "react-rough-notation"
+import { useColorModeValue } from "@chakra-ui/react"
+import { colors } from "../@chakra-ui/gatsby-plugin/theme"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link, Stack, Text } = Chakra
@@ -100,16 +102,22 @@ export const maxWidth = "49rem"
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
-  const brand = useBrandSecondaryColor()
+  const brand = useBrandColor()
+  const brandSecondary = useBrandSecondaryColor()
   const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
   const hasTags = post.frontmatter?.tags?.length > 0
   const { imageTop, imageBottom } = post.frontmatter
+  const borderSubtlePrimary = useColorModeValue(
+    colors.borderSubtlePrimary.light,
+    colors.borderSubtlePrimary.dark
+  )
   const isDraft = post.frontmatter.draft
   return (
     <>
-      <Layout imageTop={imageTop} imageBottom={imageBottom} article>
+      <Layout imageTop={imageTop} imageBottom={imageBottom}>
         <Box
-          layerStyle={["bgSecondary", "borderSubtlePrimary"]}
+          layerStyle="bgSecondary"
+          borderColor={borderSubtlePrimary}
           pt={[8, 12, 24]}
           borderBottomWidth="1px"
         >
@@ -129,7 +137,11 @@ export default function Post({ data, pageContext, location }) {
                   flexFlow="row"
                   maxWidth={maxWidth}
                 >
-                  <Text color={brand} fontSize={["sm", null, "lg"]}>
+                  <Text
+                    color={brand}
+                    fontSize={["sm", null, "lg"]}
+                    fontWeight="bold"
+                  >
                     🥺 You're viewing a draft. This post is not published.
                   </Text>
                 </Flex>
@@ -192,7 +204,7 @@ export default function Post({ data, pageContext, location }) {
                   Toastable,
                   Hr,
                   a: ({ children, ...props }) => (
-                    <Link color={brand} {...props}>
+                    <Link color={brandSecondary} {...props}>
                       {children}
                     </Link>
                   ),
@@ -223,7 +235,6 @@ export default function Post({ data, pageContext, location }) {
                     <Box
                       as="blockquote"
                       layerStyle="borderSubtle"
-                      // borderColor="text.secondary"
                       borderLeftWidth="2px"
                       borderLeft="solid"
                       paddingInlineStart={4}

@@ -1,0 +1,94 @@
+---
+title: 🤖 Bot Taxonomy
+date: "2021-07-06"
+description: How do different kinds of automation on the internet coexist?
+draft: true
+tags:
+  - Automation
+---
+
+import { RiExternalLinkLine } from "react-icons/ri"
+
+<Link
+  href="https://theweek.com/articles/454320/62-percent-all-web-traffic-comes-from-bots"
+  rel="noopener nofollower"
+  target="_blank"
+  color="textPrimary"
+>
+  <Heading mb={6}>
+    62% of all web traffic comes from bots
+    <RiExternalLinkLine
+      style={{ marginLeft: "5px", display: "inline", verticalAlign: "top" }}
+      size={32}
+    />
+  </Heading>
+</Link>
+
+export const Cell = ({ options, title }) => (
+  <Flex
+    as="section"
+    flexDirection="column"
+    layerStyle={["bgSecondary", "textPrimary"]}
+    height="100%"
+    sx={{ aspectRatio: "1/1" }}
+    fontSize="md"
+    position="relative"
+    lineHeight={6}
+    width="100%"
+  >
+    <Text
+      textAlign="center"
+      fontSize={["sm", "md"]}
+      layerStyle="textTertiary"
+      py={2}
+    >
+      {title}
+    </Text>
+    <Grid
+      px={4}
+      pb={4}
+      as="li"
+      sx={{ listStyle: "hangul" }}
+      Size={["sm", "md"]}
+      gap={2}
+      height="min-content"
+    >
+      {options?.map(option => (
+        <li key={option}>{option}</li>
+      ))}
+    </Grid>
+  </Flex>
+)
+
+That's a pretty scary headline. But what does bots really mean in this case?
+
+<Heading textAlign="center" fontSize="xl" mb={4}>
+  Alignment Chart
+</Heading>
+
+<Grid
+  gridTemplateColumns={["repeat(auto-fill, minmax(200px, 1fr))"]}
+  maxWidth={["250px", "100%"]}
+  margin="auto"
+  gridAtoRows="1fr"
+  gap="5px"
+>
+  <Cell
+    title="Lawful Good"
+    options={["Googlebot", "Other search engines pretending to be relevant"]}
+  />
+  <Cell title="Netural Good" />
+  <Cell
+    title="Chaotic Good"
+    options={[
+      <Link href="https://shodan.io">Shodan.io</Link>,
+      "Port Scanning as a Service",
+    ]}
+  />
+  <Cell title="Lawful Neutral" />
+  <Cell title="True Neutral" options={["Generic crawlers"]} />
+  <Cell title="Chaotic Neutral" options={["Scalpers & Sneakerbots"]} />
+  <Cell title="Lawful Evil" />
+  <Cell title="Netural Evil" options={["Votebotting", "Ticket botting"]} />
+  <Cell title="Chaotic Evil" options={["DDOS"]} />
+</Grid>
