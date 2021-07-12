@@ -5,7 +5,7 @@ import Theme from "prism-react-renderer/themes/vsDark"
 import ThemeLight from "prism-react-renderer/themes/github"
 import json5 from "json5"
 import rangeParser from "parse-numeric-range"
-import { maxWidth } from "../templates/post"
+import { maxWidth } from "../shared"
 import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout"
 import { layoutContentPadding } from "./Layout"
 import { Image } from "@chakra-ui/image"
@@ -21,6 +21,7 @@ import {
   Code as ChakraCode,
   useBreakpointValue,
 } from "@chakra-ui/react"
+import { transition } from "../@chakra-ui/gatsby-plugin/theme"
 export * from "./memes/Chatbox"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
 require("prismjs/components/prism-typescript")
@@ -74,6 +75,7 @@ export const WideBanner = forwardRef((props, ref) => {
       marginRight="-50vw"
       position="relative"
       overflow="hidden"
+      transition={transition}
       mb={6}
       // layerStyle="bgSecondary"
       ref={ref}
@@ -236,6 +238,8 @@ const DiscordMessageAvatar = ({ avatar, username }) => {
     <SkeletonCircle isLoaded={loaded} height={[10]} width={[10]}>
       <Image
         aria-label={`Avatar for ${username}`}
+        htmlHeight="40px"
+        htmlWidth="40px"
         objectFit="cover"
         src={avatar}
         onLoad={() => setLoaded(true)}
@@ -308,11 +312,14 @@ export const DiscordMessage = forwardRef(
           </Flex>
           {(messages ?? [message]).map((message, i, arr) =>
             typeof message === "string" ? (
-              <DiscordMessageText mb={i !== arr.length - 1 ? 1 : 0}>
+              <DiscordMessageText
+                mb={i !== arr.length - 1 ? 1 : 0}
+                key={message}
+              >
                 {message}
               </DiscordMessageText>
             ) : (
-              message
+              <React.Fragment key={i}>{message}</React.Fragment>
             )
           )}
           {reactions?.length > 0 && (
@@ -408,6 +415,7 @@ function Code({ children, className, metastring }) {
             as="pre"
             py={[2]}
             px={[4]}
+            transition={transition}
             borderWidth={["1px"]}
             wordBreak="break-all"
             layerStyle="borderSubtle"
@@ -471,12 +479,30 @@ export const InlineCode = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
+export const T = forwardRef((props, ref) => {
+  return (
+    <Flex
+      layerStyle="bgBrand"
+      fontWeight="bold"
+      fontSize="0.9em"
+      fontStyle="italic"
+      transition={transition}
+      borderRadius="5px"
+      padding="1px 5px"
+      ref={ref}
+    >
+      <Text layerStyle="textBrand">{props.children}</Text>
+    </Flex>
+  )
+})
+
 export const overrides = {
   pre(props) {
     return (
       <Flex
         as="pre"
         flexDirection="column"
+        transition={transition}
         flexGrow="1"
         // color="red"
         {...props}
@@ -484,7 +510,13 @@ export const overrides = {
     )
   },
   code: ({ children, ...props }) => (
-    <Code variant="outline" {...props} color="blue" fontSize="0.8em">
+    <Code
+      variant="outline"
+      transition={transition}
+      color="blue"
+      fontSize="0.8em"
+      {...props}
+    >
       {children}
     </Code>
   ),

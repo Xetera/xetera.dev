@@ -11,6 +11,7 @@ import SEO from "../components/Seo"
 import { FaTag, FaTags } from "react-icons/fa"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import PopupPortal, { Toastable } from "../components/Popup"
+import { RoughNotation } from "react-rough-notation"
 import { MDXProvider } from "@mdx-js/react"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
@@ -19,31 +20,32 @@ import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
 import { Text, useColorModeValue } from "@chakra-ui/react"
-import { colors } from "../@chakra-ui/gatsby-plugin/theme"
+import { colors, transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { maxWidth } from "../shared"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link } = Chakra
 
 const Navigator = ({ pos, link }) => {
   const isLeft = pos === "left"
-  const hasLink = Boolean(link)
 
   const data = (
     <Box
       p={4}
       m={0}
+      transition={transition}
       height="100%"
       overflow="hidden"
       borderRadius="sm"
       borderWidth="1px"
-      layerStyle={["borderSubtle", hasLink ? "bgSecondary" : null]}
+      layerStyle={"borderSubtle"}
     >
       <Heading
         fontSize="md"
         as="h3"
         fontWeight="bold"
         mb={1}
-        layerStyle={hasLink ? "textPrimary" : "textSecondary"}
+        layerStyle={link ? "textPrimary" : "textTertiary"}
       >
         {isLeft ? "Previous" : "Next"} Article
       </Heading>
@@ -90,33 +92,36 @@ const Navigator = ({ pos, link }) => {
 
 function makeHeader(type) {
   return ({ children, ...props }) => (
-    <Heading as={type} mb={4} fontSize={["xl", null, "2xl"]} {...props}>
+    <Heading
+      as={type}
+      mb={4}
+      transition={transition}
+      fontSize={["xl", null, "2xl"]}
+      {...props}
+    >
       {children}
     </Heading>
   )
 }
-
-export const maxWidth = "49rem"
 
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
   const brand = useBrandColor()
   const brandSecondary = useBrandSecondaryColor()
-  const TagIcon = post.frontmatter?.tags?.length > 1 ? FaTags : FaTag
-  const hasTags = post.frontmatter?.tags?.length > 0
   const { imageTop, imageBottom } = post.frontmatter
-  const borderSubtlePrimary = useColorModeValue(
-    colors.borderSubtlePrimary.light,
-    colors.borderSubtlePrimary.dark
+  const borderSubtle = useColorModeValue(
+    colors.borderSubtle.light,
+    colors.borderSubtle.dark
   )
   const isDraft = post.frontmatter.draft
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom}>
         <Box
+          transition={transition}
           layerStyle="bgSecondary"
-          borderColor={borderSubtlePrimary}
+          borderColor={borderSubtle}
           pt={[8, 12, 24]}
           borderBottomWidth="1px"
         >
@@ -177,15 +182,15 @@ export default function Post({ data, pageContext, location }) {
             description={post.frontmatter.description || post.excerpt}
             image={ogImage}
           />
-
-          {/* <style
-            dangerouslySetInnerHTML={{
-              __html: ` #gatsby-focus-wrapper { overflow: hidden; } `,
-            }}
-          /> */}
           <Grid as="article" gap={2}>
-            <Box as="section" fontSize="lg" lineHeight="1.7">
+            <Box
+              className="blog-post"
+              as="section"
+              fontSize="lg"
+              lineHeight="1.7"
+            >
               <MDXProvider
+                scope={{ transition }}
                 components={{
                   ...MarkdownComponents,
                   ...MarkdownOverrides,
@@ -201,6 +206,7 @@ export default function Post({ data, pageContext, location }) {
                       {children}
                     </Link>
                   ),
+                  RoughNotation,
                   h6: makeHeader("h6"),
                   h5: makeHeader("h5"),
                   h4: makeHeader("h4"),
@@ -238,8 +244,8 @@ export default function Post({ data, pageContext, location }) {
                   p: ({ children, ...props }) => (
                     <Text
                       as="p"
+                      transition={transition}
                       fontSize={["md", null, "lg"]}
-                      // lineHeight="1.8"
                       mb={6}
                       {...props}
                     >

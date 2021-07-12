@@ -5,12 +5,14 @@ import { Box, Flex, Grid } from "@chakra-ui/layout"
 import Navbar from "./Navbar"
 import { forwardRef } from "@chakra-ui/system"
 import { domAnimation, LazyMotion } from "framer-motion"
+import { transition } from "../@chakra-ui/gatsby-plugin/theme"
 
 export const Hr = forwardRef((props, ref) => {
   return (
     <Box
       as="hr"
       my={3}
+      transition={transition}
       layerStyle="bgSubtle"
       border="none"
       height="1px"

@@ -1,5 +1,5 @@
 ---
-title: 🤖 Bot Taxonomy
+title: 🤖 Automation Taxonomy
 date: "2021-07-06"
 description: How do different kinds of automation on the internet coexist?
 draft: true
@@ -15,17 +15,54 @@ import { RiExternalLinkLine } from "react-icons/ri"
   target="_blank"
   color="textPrimary"
 >
-  <Heading mb={6}>
+  <Heading mb={6} fontSize={["xl", "2xl", null, "3xl"]}>
     62% of all web traffic comes from bots
     <RiExternalLinkLine
       style={{ marginLeft: "5px", display: "inline", verticalAlign: "top" }}
-      size={32}
+      size={28}
     />
   </Heading>
 </Link>
 
-export const Cell = ({ options, title }) => (
-  <Box layerStyle="borderSubtle" borderWidth="1px">
+That's a pretty scary-sounding headline. But what does the term "bots" really mean in this case?
+
+`Bots` on the internet come in many different shapes and sizes. Some are good, some are purely nefarious and a lot of the other ones sit on a spectrum in between. It's hard to look at a headline like this alone and figure out whether or not that's a bad thing.
+
+import { Text, Heading, Flex } from "@chakra-ui/layout"
+
+export const Botanists = () => (
+  <Toastable text="botanists" color="green.300">
+    <Flex flexDirection="column">
+      <Flex alignItems="baseline">
+        <Heading mr={2} fontSize="md">
+          Botany
+        </Heading>
+        <Flex
+          layerStyle="borderSubtlePrimary"
+          borderWidth="1px"
+          borderRadius="md"
+          px={2}
+        >
+          <Text fontSize="xs" layerStyle="textTertiary">
+            Noun
+          </Text>
+        </Flex>
+      </Flex>
+      <Text>The scientific study of bots.</Text>
+    </Flex>
+  </Toastable>
+)
+
+I will be using an extremely scientifically rigorous model created by the brightest philosophers and <Botanists /> of our generation to explain where I place different aspects of the automation ecosystem in (my) moral system.
+
+export const Cell = ({ options, title, subtitle, children }) => (
+  <Box
+    layerStyle="borderSubtlePrimary"
+    borderWidth="1px"
+    _hover={{
+      layerStyle: "borderSubtle",
+    }}
+  >
     <Flex
       as="section"
       flexDirection="column"
@@ -37,163 +74,195 @@ export const Cell = ({ options, title }) => (
       lineHeight={6}
       width="100%"
     >
-      <Text
-        textAlign="center"
-        fontSize={["sm", "md"]}
-        layerStyle="textTertiary"
-        py={2}
-      >
-        {title}
-      </Text>
-      <OrderedList
-        px={4}
-        pb={4}
-        m={0}
-        as="li"
-        styleType="hangul"
-        stylePosition="inside"
-        fontSize={["sm", "md"]}
-        spacing={1}
-        height="min-content"
-      >
-        {options?.map(option => (
-          <ListItem key={option}>{option}</ListItem>
-        ))}
-      </OrderedList>
+      <Flex layerStyle="bgSecondary" justifyContent="center">
+        <Link
+          href={`#${title.toLowerCase().slice(2).split(" ").join("-")}`}
+          width="100%"
+          textDecoration="none"
+          transition="transform 0.1s ease-in-out"
+          _hover={{
+            transform: "scale(1.1)",
+          }}
+          textAlign="center"
+          color="inherit"
+          fontSize={["sm", "md"]}
+          layerStyle="textTertiary"
+          py={2}
+        >
+          {title}
+        </Link>
+      </Flex>
+      {children}
+      {subtitle && (
+        <Flex px={4} pt={2}>
+          <Text>{subtitle}</Text>
+        </Flex>
+      )}
+      {options && (
+        <OrderedList
+          px={4}
+          py={2}
+          m={0}
+          as="li"
+          layerStyle="textSecondary"
+          styleType="korean-hangul-formal"
+          stylePosition="inside"
+          fontSize="sm"
+          spacing={1}
+          height="min-content"
+        >
+          {options?.map(option => (
+            <ListItem key={option}>{option}</ListItem>
+          ))}
+        </OrderedList>
+      )}
     </Flex>
   </Box>
 )
 
-That's a pretty scary sounding headline. But what does bots really mean in this case?
-
-`Bots` on the internet come in many different shapes and sizes. Some are good, some are purely nefarious and a lot of the other ones sit on a spectrum in between. It's hard to look at a headline like this alone and figure out whether or not that's a bad thing.
-
-import { Text, Heading, Flex } from "@chakra-ui/layout"
-
-export const Botanists = () => (
-  <Toastable text="botanists" color="green.300">
-    <Flex flexDirection="column">
-      <Flex alignItems="baseline">
-        <Heading mr={1} fontSize="md">
-          Bontany
-        </Heading>
-        <Text fontSize="xs" layerStyle="textTertiary">
-          • Noun
-        </Text>
-      </Flex>
-      <Text>The scientific study of bots.</Text>
-    </Flex>
-  </Toastable>
-)
-
-To have a better idea of where certain bots fit in (my) moral axiom, I will be using an extremely scientifically rigorous model used by the brightest behaviorologists and <Botanists /> of our generation.
-
 <Grid
   gridTemplateColumns={["repeat(auto-fill, minmax(200px, 1fr))"]}
-  maxWidth={["250px", "100%"]}
+  maxWidth={["280px", "100%"]}
   margin="auto"
   gridAutoRows="1fr"
   gap="8px"
 >
   <Cell
-    title="Lawful Good"
-    options={["Googlebot", "Other search engines pretending to be relevant"]}
+    title="😇 Lawful Good"
+    options={["Googlebot", "DDG Crawler", "Bingbot"]}
+    subtitle="Google & other search engines pretending to be relevant"
   />
-  <Cell title="Netural Good" />
   <Cell
-    title="Chaotic Good"
+    title="😇 Neutral Good"
+    subtitle="Bot protection as a service"
+    options={["Cloudflare", "Datadome", "Imperva", "Akamai"]}
+  />
+  <Cell
+    title="😇 Chaotic Good"
+    subtitle="Port scanning as a service"
     options={[
       <Link href="https://shodan.io">Shodan.io</Link>,
-      "Port Scanning as a Service",
+      "The security researchers who keep pinging my server every goddamn day with masscan",
     ]}
   />
-  <Cell title="Lawful Neutral" />
-  <Cell title="True Neutral" options={["Generic crawlers"]} />
-  <Cell title="Chaotic Neutral" options={["Scalpers & Sneakerbots"]} />
-  <Cell title="Lawful Evil" />
-  <Cell title="Netural Evil" options={["Votebotting", "Ticket botting"]} />
-  <Cell title="Chaotic Evil" options={["DDOS"]} />
+  <Cell
+    title="🙄 Lawful Neutral"
+    subtitle="Home automation"
+    options={["IoT (Internet of Things)", "Home assistant"]}
+  />
+  <Cell
+    title="🙄 True Neutral"
+    subtitle="Independently run bots for small-scale automation"
+    options={[
+      "The 50 line python code your friend wrote to make an anime command for his Discord bot",
+    ]}
+  />
+  <Cell
+    title="🙄 Chaotic Neutral"
+    subtitle="Proxy and abuse tooling vendors"
+    options={["Oxylabs", "Luminati", "2Captcha"]}
+  />
+  <Cell title="😈 Lawful Evil">
+    <Flex width="100%" justifyContent="center" alignItems="center" flex={1}>
+      <Heading layerStyle="textSecondary">?</Heading>
+    </Flex>
+  </Cell>
+  <Cell
+    title="😈 Neutral Evil"
+    subtitle="Botting as a service"
+    options={[
+      "GPU Scalpers",
+      "Sneakerbots",
+      "Votebots",
+      "Automated account cracking",
+    ]}
+  />
+  <Cell
+    title="😈 Chaotic Evil"
+    subtitle="Purely malicious hacking and/or service denial"
+    options={["DDOS", "Destructionware"]}
+  />
 </Grid>
 
-<Hr />
+<Hr mb={6} />
 
-export const StickyTop = ({ children }) => (
-  <Flex
-    layerStyle="bgSecondary"
-    position="sticky"
-    top={0}
-    px={4}
-    py={1}
-    borderLeft="1px"
-  >
-    {children}
-  </Flex>
+### 😇 Lawful Good
+
+The good guys.
+
+Basically any automation that is beneficial to you and conforms to how you expect it to behave with pure intentions. These are generally your standard search engines. They're the reason why the internet works in the first place. Aside from a few ridiculous crawlers like `Baidubot`, they will go out of their way to ensure your site isn't affected by what they're doing.
+
+They're also the reason why it's challenging to protect yourself against unwanted automation. Sometimes a good solution for blocking bad bots you don't want might need to be reconsidered if it prevents the "good" automation in this category.
+
+### 😇 Neutral Good
+
+export const BlueTeam = () => (
+  <Toastable color="blue.400" text="blue team">
+    Blue team in computer security refers to the party that is on the defending
+    side of a system that is being attacked.
+  </Toastable>
 )
 
-# Good
+The <BlueTeam />.
 
-### Lawful Good
+These companies will ensure that `Neutral Evil` does not manage to automate your website and cause harm. They fight for good, but the methods that they use to provide their services result in privacy violations for real users through the use of things like browser fingerprinting and aggressive data collection.
 
-These are your standard search engines. They're the reason why the internet works in the first place, and they're also the reason why majority of the reason why sites can't have unbrella bans over any kind of automation.
+`Neutral Good` is always fighting with `Neutral Evil` as well as regular users who feel like they become collateral damage in the name of web security.
 
-SPACER SPACER
+### 😇 Chaotic Good
 
-SPACER SPACER
+Automation that is ultimately for benefit of everyone but has to be exercised with caution.
 
-SPACER SPACER
+One of the best examples of this is probably <Link href="https://shodan.io">Shodan.io</Link>. They let you stay secure if you use it properly but also allows bad actors to uncover information about your infrastructure that could've
+otherwise stayed hidden.
 
-SPACER SPACER
+### 🙄 Lawful Neutral
 
-SPACER SPACER
+Overall useful utilities with no specific benevolent or malevolent purpose.
 
-SPACER SPACER
+IoT devices in specific have no specific alignment other than doing what they need to be doing which is generally positive. They don't provide a service in general that can be considered inherently malicious or benevolent.
 
-SPACER SPACER
+### 🙄 True Neutral
 
-SPACER SPACER
+Mostly uninvolved 3rd parties.
 
-SPACER SPACER
-SPACER SPACER
+These people aren't really motivated in any particular way. They just want to go about their day without having to deal with a bunch of stuff. This is usually people who are just trying to create something new for the sake of learning or for fun, and often get caught in the crossfire.
 
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
+### 🙄 Chaotic Neutral
 
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
+The people who provide ammunition for everyone else.
 
-SPACER SPACER
-SPACER SPACER
+`Chaotic Neutral` does not bring harm to any site or individual, instead they customers customers who want to do the dirty work the tools to help them carry out abuse easier. They don't care about what kinds of people they are enabling.
 
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
+### 😈 Lawful Evil
 
-SPACER SPACER
-SPACER SPACER
+I don't actually know what fits into this category.
 
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
+Any technology or service that is malicious enough to cause problems is motivated by money or something equally as selfish. I can't think of any sort of destructive automation in the wild that claims to be self-righteous to justify its actions. The first thing that comes to mind is something like `Anonymous` but they don't fit into the category of automation.
 
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
+### 😈 Neutral Evil
 
-SPACER SPACER
-SPACER SPACER
+export const RedTeam = () => (
+  <Toastable color="red.400" text="red team">
+    The red team (in contrast to the blue team) is used to refer to the
+    attacking side in computer security.
+  </Toastable>
+)
 
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
+The <RedTeam />.
 
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
-SPACER SPACER
+People using automation in this category do not have malicious intentions or want to cause harm to the services they target. However, they believe that they have the right to obtain what they want without any regard for rules and do not care about whether or not their actions will harm the other party involved.
+
+`Neutral Evil` believes that they're not doing anything wrong; instead, they think they're simply hustling and that it's up to everyone else to step up their game instead of being forced to stop.
+
+Despite not being motivated by malice, they're ready to go to similar extents as `Chaotic Evil` to get what they want.
+
+Much like other predators in this category, they thrive when their targets are weak.
+
+### 😈 Chaotic Evil
+
+The bad guys.
+
+These are the people who just want to bring chaos and destruction. Whether it's caused by revenge or something else, the automation in this field primarily serves to inflict damage to the victim without benefiting its user. This mostly includes things like DDoS or destructionware.
+
+Surprisingly, there's not a whole lot that falls into this category. Unlike anime supervillains, most people in real life are not motivated by pure evil; there's almost always an underlying motivation that explains people's actions beyond just being evil.

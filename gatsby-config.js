@@ -17,8 +17,14 @@ module.exports = {
       github: `xetera`,
     },
   },
-  flags: { FAST_DEV: true },
+  flags: { FAST_DEV: true, DEV_SSR: false },
   plugins: [
+    {
+      resolve: "@chakra-ui/gatsby-plugin",
+      options: {
+        resetCSS: true,
+      },
+    },
     {
       resolve: "gatsby-plugin-root-import",
       options: {
@@ -27,12 +33,6 @@ module.exports = {
     },
     "gatsby-remark-images",
     `gatsby-plugin-image`,
-    {
-      resolve: "@chakra-ui/gatsby-plugin",
-      options: {
-        resetCSS: true,
-      },
-    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -77,6 +77,13 @@ module.exports = {
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
+        ],
+        rehypePlugins: [
+          // Generate heading ids for rehype-autolink-headings
+          require("rehype-slug"),
+          // To pass options, use a 2-element array with the
+          // configuration in an object in the second element
+          [require("rehype-autolink-headings"), { behavior: "wrap" }],
         ],
       },
     },

@@ -306,11 +306,13 @@ Why is it working now? Maybe it's just a VPN thing?
 <DiscordMessageContainer>
   <DiscordMessage
     messages={[
-      <DiscordMessageText>
+      <Box>
         <DiscordMention>@Sky</DiscordMention>
-        could you check on the first device that was blocked if you're still free?
-        I feel like it's just working now for no reason
-      </DiscordMessageText>,
+        <DiscordMessageText display="inline">
+          could you check on the first device that was blocked if you're still
+          free? I feel like it's just working now for no reason
+        </DiscordMessageText>
+      </Box>,
     ]}
     date="06/28/2021"
     {...xetProps}

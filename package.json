@@ -65,6 +65,8 @@
     "react-icons": "^4.2.0",
     "react-rough-notation": "^1.0.1",
     "react-typography": "^0.16.19",
+    "rehype-autolink-headings": "^5.1.0",
+    "rehype-slug": "^4.0.1",
     "typeface-inter": "^3.18.1",
     "typeface-jetbrains-mono": "^2.0.0",
     "typeface-merriweather": "1.1.13",

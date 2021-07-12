@@ -37,11 +37,9 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
         <Heading as="h3" fontSize="lg" mb={0}>
           {title}
         </Heading>
-        <Box px={2} layerStyle="bgSecondary" borderRadius="md">
-          <InlineCode mb={0} fontSize="sm" fontWeight="bold">
-            {size}
-          </InlineCode>
-        </Box>
+        <T mb={0} fontSize="sm" fontWeight="bold" px={2} borderRadius="md">
+          {size}
+        </T>
       </Flex>
       <Text mb={0} fontSize="sm">
         {text}

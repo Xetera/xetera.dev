@@ -1,21 +1,13 @@
 import "typeface-jetbrains-mono"
 import "./static/fonts/wotfard/stylesheet.css"
-// import "./src/font.css"
 import React from "react"
-import {
-  ChakraProvider,
-  ColorModeProvider,
-  GlobalStyle,
-} from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/react"
 import theme from "./src/@chakra-ui/gatsby-plugin/theme"
 
-export const wrapRootElement = ({ element, ...rest }) => {
+export const wrapPageElement = ({ element }) => {
   return (
-    <ChakraProvider theme={theme}>
-      <ColorModeProvider options={theme.config}>
-        <GlobalStyle />
-        {element}
-      </ColorModeProvider>
+    <ChakraProvider resetCSS theme={theme}>
+      {element}
     </ChakraProvider>
   )
 }

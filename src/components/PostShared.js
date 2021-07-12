@@ -4,6 +4,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
 import { RoughNotation } from "react-rough-notation"
 import { useBrandColor } from "../hooks/color"
+import { useColorModeValue } from "@chakra-ui/react"
 
 export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
   return (
@@ -30,6 +31,7 @@ export function PostList({ node }) {
   const title = node.frontmatter.title ?? node.fields.slug
   const { description, date } = node.frontmatter
   const color = useBrandColor()
+  const highlightColor = useColorModeValue("yellow", color)
   const [hover, setHover] = React.useState(false)
 
   return (
@@ -54,23 +56,15 @@ export function PostList({ node }) {
           fontSize="22px"
           layerStyle="textPrimary"
           fontWeight="bold"
-          // textDecoration={hover ? "underline" : "none"}
-          // textDecorationStyle="dashed"
-          // textDecorationColor={hover ? color : "transparent"}
-          // transition="all 0.4s ease-in-out"
           mb={1}
         >
-          <RoughNotation type="highlight" color={color} show={hover}>
+          <RoughNotation type="highlight" color={highlightColor} show={hover}>
             {title}
           </RoughNotation>
         </Heading>
         <Text as="p" fontSize="18px" layerStyle="textSecondary">
           {description}
         </Text>
-        {/* <Text>Read more</Text> */}
-        {/* <Text as="p">
-          {node.excerpt}
-        </Text> */}
       </Flex>
     </GatsbyLink>
   )

@@ -1,9 +1,3 @@
-// import "@fontsource/inter/300.css"
-// import "@fontsource/inter/400.css"
-// import "@fontsource/inter/500.css"
-// import "@fontsource/inter/600.css"
-// import "@fontsource/inter/700.css"
-// import "@fontsource/inter/900.css"
 import { extendTheme } from "@chakra-ui/react"
 import { mode } from "@chakra-ui/theme-tools"
 
@@ -25,23 +19,27 @@ export const colors = {
     dark: "gray.400",
   },
   bgPrimary: {
-    light: "white",
+    light: "#f3f3f3",
     dark: "gray.900",
   },
   bgSecondary: {
-    light: "#f5fbff",
+    light: "#e2e9ec",
     dark: "#181b2b",
   },
   bgTertiary: {
     light: "gray.200",
     dark: "#232735",
   },
+  bgBrand: {
+    light: "#f5e5ec",
+    dark: "hsl(333deg 52% 14%)",
+  },
   borderSubtle: {
     dark: "#1e2131",
-    light: "gray.100",
+    light: "#e8e8e8",
   },
   borderSubtlePrimary: {
-    light: "gray.100",
+    light: "#dadbde",
     dark: "#1f2231",
   },
   text: {
@@ -56,6 +54,7 @@ export const colors = {
     dark: "#62daff",
     light: "#256bc1",
   },
+  brandBackground: {},
   brandLight: {
     dark: "hsl(333deg, 100%, 55%)",
     dark: "hsl(333deg, 100%, 55%)",
@@ -74,6 +73,8 @@ function makeLayer(name, variants) {
   }
 }
 
+export const transition = "all 0.4s ease-in-out"
+
 export default extendTheme({
   config: {
     initialColorMode: "dark",
@@ -85,16 +86,23 @@ export default extendTheme({
   },
   layerStyles: {
     discordBackground: makeLayer("background", [
-      "#fbfbfb",
+      "#f9f9f9",
       colors.bgSecondary.dark,
     ]),
     discordTextColor: makeLayer("color", ["#2e3338", "#dcddde"]),
-    borderSubtle: makeLayer("borderColor", ["gray.100", "#282c3e"]),
+    borderSubtle: makeLayer("borderColor", [
+      colors.borderSubtle.light,
+      colors.borderSubtle.dark,
+    ]),
     borderSubtlePrimary: makeLayer("borderColor", [
       colors.borderSubtlePrimary.light,
       colors.borderSubtlePrimary.dark,
     ]),
     textBrand: makeLayer("color", [colors.brand.light, colors.brand.dark]),
+    bgBrand: makeLayer("background", [
+      colors.bgBrand.bgBrand,
+      colors.bgBrand.dark,
+    ]),
     textBrandLight: makeLayer("color", [
       colors.brandLight.light,
       colors.brandLight.dark,
@@ -140,15 +148,20 @@ export default extendTheme({
     global: props => ({
       code: {
         color: mode(colors.brand.light, colors.brand.dark)(props),
-        fontSize: "0.9em",
-        fontFamily: fontFamily,
-        fontStyle: "italic",
-        borderRadius: "5px",
         background: mode(
           colors.bgSecondary.light,
           colors.bgSecondary.dark
         )(props),
+        fontSize: "0.9em",
+        fontFamily: fontFamily,
+        fontStyle: "italic",
+        transition,
+        borderRadius: "5px",
         padding: "1px 5px",
+      },
+      ".blog-post :is(h1, h2, h3, h4, h5, h6) > a": {
+        // resetting the link colors of article headings
+        color: "inherit",
       },
       a: {
         wordBreak: "break-word",
@@ -165,9 +178,9 @@ export default extendTheme({
       },
       body: {
         lineBreak: "auto",
-        transition: "all 0.4s ease-in-out",
+        transition,
         color: mode("gray.700", "gray.300")(props),
-        background: mode("white", "#141621")(props),
+        background: mode(colors.bgPrimary.light, "#141621")(props),
       },
     }),
   },

@@ -14,9 +14,9 @@ import {
 import { forwardRef } from "@chakra-ui/system"
 import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Hr } from "./Layout"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 
-const MotionFlex = motion(Flex)
+const MotionFlex = m(Flex)
 
 const Bio = React.memo(
   forwardRef((props, ref) => {

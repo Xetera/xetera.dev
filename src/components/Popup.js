@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { m, AnimatePresence } from "framer-motion"
-import { maxWidth } from "../templates/post"
+import { maxWidth } from "../shared"
 import { Box, Flex } from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
 import { forwardRef } from "@chakra-ui/react"
