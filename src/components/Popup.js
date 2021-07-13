@@ -70,7 +70,7 @@ export default function Popup({ className }) {
         {hovered && (
           <MotionFlex
             maxWidth={maxWidth}
-            width="100%"
+            width={["auto", null, "100%"]}
             borderLeft={`2px solid ${brand}`}
             layerStyle="bgPrimary"
             transition={{ type: "tween", duration: 0.24 }}
@@ -92,12 +92,13 @@ export default function Popup({ className }) {
             borderBottomRightRadius="md"
             position="absolute"
             bottom={2}
-            mx={[4, null, "auto"]}
+            left={4}
+            right={4}
+            mx={"auto"}
             maxWidth="lg"
             py={3}
             px={4}
             boxShadow="xl"
-            className={`bottom-auto items-center flex popup bg-theme-dark rounded absolute py-3 px-4 text-blue-100 ${className} shadow-xl md:text-sm text-xs leading-normal md:max-w-lg max-w-full md:mx-auto mx-4 border-1 border-theme-alt border-solid`}
           >
             {jsx ?? "Oh no this toast isn't meant to be blank!"}
           </MotionFlex>

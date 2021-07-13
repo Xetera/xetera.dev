@@ -1,12 +1,30 @@
 import React from "react"
 import { Link } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 import { Box, Flex } from "@chakra-ui/layout"
-import { RiArrowLeftFill, RiSunFoggyLine, RiMoonLine } from "react-icons/ri"
+import { RiSunFoggyLine, RiMoonLine } from "react-icons/ri"
 import { useColorMode } from "@chakra-ui/color-mode"
 import { useLocation } from "@reach/router"
 import { useBreakpointValue } from "@chakra-ui/media-query"
+import { transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { motion } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
+import { Text } from "@chakra-ui/react"
+
+const MotionText = motion(Text)
 
 export default function Navbar() {
+  const [hover, setHover] = React.useState(false)
+  const [position, setPosition] = React.useState(0)
+  const scrollHandler = React.useCallback(() => {
+    setPosition(window.scrollY)
+  }, [])
+  React.useEffect(() => {
+    document.addEventListener("scroll", scrollHandler)
+    return () => document.removeEventListener("scroll", scrollHandler)
+  }, [])
+  const shouldOverrideBackground = useBreakpointValue([true, null, null, false])
+  const pinned = position === 0
   const iconSize = useBreakpointValue([24, 26, 28])
   const location = useLocation()
   const { colorMode, toggleColorMode } = useColorMode()
@@ -14,7 +32,9 @@ export default function Navbar() {
     <Flex
       justifyContent="space-between"
       width="100%"
-      p={4}
+      transition={transition}
+      // layerStyle={!pinned && shouldOverrideBackground ? "bgSecondary" : ""}
+      p={2}
       position="fixed"
       zIndex={100}
     >
@@ -22,10 +42,46 @@ export default function Navbar() {
         <div />
       ) : (
         <Link to="/">
-          <RiArrowLeftFill size={iconSize ?? 26} />
+          <Flex
+            filter={pinned ? "grayscale(1)" : "grayscale(0)"}
+            _hover={{ filter: "grayscale(0)" }}
+            p={2}
+            alignItems="center"
+            transition={transition}
+          >
+            <Box
+              w={["26px", null, null, "30px"]}
+              opacity={[0.7, null, null, 1]}
+            >
+              <StaticImage
+                src="../../content/assets/favicon.png"
+                aria-label="home button"
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+                width={30}
+                placeholder="tracedSVG"
+                quality={100}
+              />
+            </Box>
+            <AnimatePresence>
+              {hover && (
+                <MotionText
+                  ml={2}
+                  fontWeight="bold"
+                  animate={{ x: 0, opacity: 1 }}
+                  initial={{ x: -5, opacity: 0 }}
+                  exit={{ x: -5, opacity: 0 }}
+                >
+                  Home
+                </MotionText>
+              )}
+            </AnimatePresence>
+          </Flex>
+          {/* <RiArrowLeftFill size={iconSize ?? 26} /> */}
         </Link>
       )}
       <Box
+        p={2}
         onClick={toggleColorMode}
         cursor="pointer"
         as="button"
@@ -38,24 +94,5 @@ export default function Navbar() {
         )}
       </Box>
     </Flex>
-    // <nav
-    //   className="bg-theme-alt px-4 py-3 border-theme-light border-solid"
-    //   style={{
-    //     // I have no idea why I have to do this but I can't get it to only have
-    //     // one border for some reason
-    //     borderBottomWidth: "2px",
-    //     borderTopWidth: "0",
-    //     borderLeftWidth: "0",
-    //     borderRightWidth: "0",
-    //   }}
-    // >
-    //   <div className="flex justify-center max-w-screen-xl m-auto">
-    //     <Link to="/" className="hover:no-underline" prefetch>
-    //       <h1 className="margin-0 text-lg m-0 font-black text-blueGray-400 hover:text-blueGray-300 transition duration-300">
-    //         {SITE_TITLE}
-    //       </h1>
-    //     </Link>
-    //   </div>
-    // </nav>
   )
 }
