@@ -66,11 +66,12 @@ export default function Navbar() {
             <AnimatePresence>
               {hover && (
                 <MotionText
-                  ml={2}
-                  fontWeight="bold"
+                  ml={3}
+                  fontWeight="semibold"
+                  transition={{ type: "tween" }}
                   animate={{ x: 0, opacity: 1 }}
-                  initial={{ x: -5, opacity: 0 }}
-                  exit={{ x: -5, opacity: 0 }}
+                  initial={{ x: -15, opacity: 0 }}
+                  exit={{ x: -15, opacity: 0 }}
                 >
                   Home
                 </MotionText>
