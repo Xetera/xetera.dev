@@ -8,7 +8,7 @@ import {
 import { Link as GatsbyLink, graphql } from "gatsby"
 import Popup from "../components/Popup"
 import SEO from "../components/Seo"
-import { FaTag, FaTags } from "react-icons/fa"
+import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import PopupPortal, { Toastable } from "../components/Popup"
 import { RoughNotation } from "react-rough-notation"
@@ -196,6 +196,9 @@ export default function Post({ data, pageContext, location }) {
                   ...MarkdownOverrides,
                   ...Chakra,
                   ...ChakraReact,
+                  getImage,
+                  GatsbyImage,
+                  StaticImage,
                   maxWidth,
                   Text,
                   ChakraImage: Image,

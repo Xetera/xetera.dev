@@ -33,7 +33,6 @@ export default function Navbar() {
       justifyContent="space-between"
       width="100%"
       transition={transition}
-      // layerStyle={!pinned && shouldOverrideBackground ? "bgSecondary" : ""}
       p={2}
       position="fixed"
       zIndex={100}
@@ -43,8 +42,8 @@ export default function Navbar() {
       ) : (
         <Link to="/">
           <Flex
-            filter={pinned ? "grayscale(1)" : "grayscale(0)"}
-            _hover={{ filter: "grayscale(0)" }}
+            filter={pinned ? "saturate(0.3)" : "saturate(1)"}
+            _hover={{ filter: "saturate(1)" }}
             p={2}
             alignItems="center"
             transition={transition}

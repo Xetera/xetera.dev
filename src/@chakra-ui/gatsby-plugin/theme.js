@@ -100,7 +100,7 @@ export default extendTheme({
     ]),
     textBrand: makeLayer("color", [colors.brand.light, colors.brand.dark]),
     bgBrand: makeLayer("background", [
-      colors.bgBrand.bgBrand,
+      colors.bgBrand.light,
       colors.bgBrand.dark,
     ]),
     textBrandLight: makeLayer("color", [
@@ -137,7 +137,7 @@ export default extendTheme({
     xs: "13px",
     sm: "14px",
     md: "16px",
-    lg: "18px",
+    lg: "19px",
     xl: "24px",
     "2xl": "32px",
     "3xl": "38px",

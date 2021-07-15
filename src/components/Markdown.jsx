@@ -22,6 +22,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react"
 import { transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { Toastable } from "./Popup"
 export * from "./memes/Chatbox"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
 require("prismjs/components/prism-typescript")
@@ -482,6 +483,7 @@ export const InlineCode = forwardRef(({ children, ...props }, ref) => (
 export const T = forwardRef((props, ref) => {
   return (
     <Flex
+      display="inline-flex"
       layerStyle="bgBrand"
       fontWeight="bold"
       fontSize="0.9em"
@@ -495,6 +497,33 @@ export const T = forwardRef((props, ref) => {
     </Flex>
   )
 })
+
+export const Definition = forwardRef(
+  ({ title, type, children, text, ...rest }, ref) => {
+    return (
+      <Toastable text={text} {...rest} ref={ref}>
+        <Flex flexDirection="column">
+          <Flex alignItems="baseline">
+            <Heading mr={2} fontSize="md">
+              {title}
+            </Heading>
+            <Flex
+              layerStyle="borderSubtlePrimary"
+              borderWidth="1px"
+              borderRadius="md"
+              px={2}
+            >
+              <Text fontSize="xs" layerStyle="textTertiary">
+                {type}
+              </Text>
+            </Flex>
+          </Flex>
+          <Text>{children}</Text>
+        </Flex>
+      </Toastable>
+    )
+  }
+)
 
 export const overrides = {
   pre(props) {
