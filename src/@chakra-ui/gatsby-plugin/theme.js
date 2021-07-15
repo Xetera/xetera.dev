@@ -77,8 +77,8 @@ export const transition = "all 0.4s ease-in-out"
 
 export default extendTheme({
   config: {
-    // initialColorMode: "dark",
-    useSystemColorMode: true,
+    initialColorMode: "dark",
+    useSystemColorMode: false,
   },
   fonts: {
     heading: fontFamily,
