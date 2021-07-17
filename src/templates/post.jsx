@@ -13,6 +13,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import PopupPortal, { Toastable } from "../components/Popup"
 import { RoughNotation } from "react-rough-notation"
 import { MDXProvider } from "@mdx-js/react"
+import * as Chatbox from "../components/memes/Chatbox"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import * as ChakraReact from "@chakra-ui/react"
@@ -192,6 +193,7 @@ export default function Post({ data, pageContext, location }) {
               <MDXProvider
                 scope={{ transition }}
                 components={{
+                  ...Chatbox,
                   ...MarkdownComponents,
                   ...MarkdownOverrides,
                   ...Chakra,

@@ -1,8 +1,9 @@
 ---
-title: 🏫 Why does school suck?
+title: 🏫 Why does school suck so much?
 date: "2021-07-15"
-description: How do so many people who love learning hate formal education?
-draft: true
+description: It's ok bro just power through it and you'll be free after you graduate
+# description: Formal education is very good at putting the dying in studying
+draft: false
 tags:
   - Rant
   - Exploration
@@ -21,6 +22,7 @@ And while I agree with the premise, I think this is a pretty outdated saying, an
   playsinline
   controls
   muted=""
+  mb={6}
 />
 
 Don't teach a man to fish. He's a grown man; he can learn to fish on his own. Instead, show him why he would want to do that in the first place. Show him why you're passionate about fishing. Take him out for a boat ride, and get him excited about how good it feels when you catch something after patiently waiting for hours. Describe to him the details of fishing that make it feel so rewarding to sit with a pole in your hand for a whole day. But _please_, for the love of God, don't teach him how to fish. He doesn't need you for that.
@@ -74,16 +76,78 @@ As our global economies are transitioning out of the <SecondarySector /> and int
 
 ## What if I don't want to become a fisherman?
 
-> So Jake, what do you want to be when you grow up?
+> So Jakey, what do you want to be when you grow up?
 
-Every teenager's worst nightmare. Of the million things you could choose as a profession, chances are you have no idea what I could be interested in growing up. We force kids to learn a common core curriculum and expect them to magically have an idea of what they could be doing for a living after high school or college.
+Every kid's one dreaded question. Of the million things you could choose as a profession, chances are you have no idea what I could be interested in growing up. We force kids to learn a common core curriculum and expect them to magically have an idea of what they could be doing for a living after high school or college.
 
 When we were still hunter and gatherers, at least after you learned to hunt, you had all the skills necessary to become a hunter. How does this translate to school now? Do all kids want to become English teachers and biologists? Oh, I'm sorry, were you sleeping in your `investment banking` class? Maybe you should pay more attention in your `marketing` class next time because not only do you not have any of the skills necessary to work in marketing -- you don't even know what that means as a career.
 
-The bottom line is that school does absolutely nothing to teach you about different fields you could be interested in. You will learn the things a bunch of boomers decided you should know, and you will be released into the wild with no valuable knowledge to further your career. And I don't mean valuable knowledge same way an annoying middle-schooler would talk about it in science class going:
+The bottom line is that school does **absolutely nothing** to teach you about different fields you could be interested in. You will learn the things some boomers decided you should know many years ago with a few revisions here and there, and you will be released into the wild with no valuable knowledge to further your career or your desire to learn.
+
+I don't mean valuable knowledge in the way an annoying middle-schooler would talk about it in science class going:
 
 import Kekw from "@assets/emotes/kekw.png"
 
-> Ummm excuse me, Ms. Holloway? When are we ever going to need to know what a shield volcano is in real life <ChakraImage src={Kekw} display="inline" htmlWidth="30px" verticalAlign="top" />.
+import Omegalul from "@assets/emotes/omegalul.png"
 
-I mean that information <T>you</T> consider to be interesting is what is valuable to you. I need more than just to be able to feed myself. I need self-actual
+export const kekw = (
+  <ChakraImage
+    src={Kekw}
+    display="inline"
+    htmlWidth="20px"
+    verticalAlign="top"
+  />
+)
+
+<WhatsappContainer>
+  <WhatsappMessage
+    username="Class clown"
+    other={true}
+    number="+1 (234) 567-8910"
+    color="rgb(230, 159, 115)"
+    time="9:21 AM"
+    messages={[
+      <>
+        Ummm excuse me, Ms. Holloway? When are we ever going to need to know
+        what a shield volcano is outside of this class?{" "}
+        <ChakraImage
+          src={Omegalul}
+          display="inline"
+          htmlWidth="20px"
+          verticalAlign="top"
+        />
+      </>,
+    ]}
+  />
+  <WhatsappMessage
+    username="D student"
+    number="+123 (456) 689-1011"
+    color="rgb(120, 159, 115)"
+    time="9:21 AM"
+    other={true}
+    messages={[
+      <>
+        {kekw} {kekw} {kekw} {kekw}
+      </>,
+    ]}
+  />
+  <WhatsappMessage
+    username="Detention magnet"
+    number="+1 (234) 567-1234"
+    color="blue.400"
+    time="9:22 AM"
+    other={true}
+    messages={[
+      <>
+        {kekw} {kekw} {kekw}
+      </>,
+    ]}
+  />
+  <WhatsappMessage
+    color="rgb(120, 159, 115)"
+    time="9:22 AM"
+    messages={["I hate this job so much"]}
+  />
+</WhatsappContainer>
+
+I mean the kind of information **YOU** consider to be interesting is what is valuable to you. I need more than just to be able to feed myself. I need self-actual

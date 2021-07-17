@@ -155,58 +155,36 @@ It too, has all the features WhatsApp has and addresses every single one of the 
 
 So if all these apps have so many better features, why are people not using them? What's the _real_ reason people are hanging onto WhatsApp, not wanting to let go? Simply put, it's:
 
-import WhatsappBackground from "./whatsapp_background.png"
-
-<Box
-  width="100vw"
-  position="relative"
-  mb={6}
-  left="50%"
-  right="50%"
-  marginLeft="-50vw"
-  marginRight="-50vw"
-  backgroundRepeatY="repeat"
-  backgroundRepeatX="repeat"
-  background="#1d1c1c"
->
-  <Box
-    width="100%"
-    height="100%"
-    position="relative"
-    background={`linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url(${WhatsappBackground})`}
-  >
-    <VStack spacing={6} m="auto" px={6} py={6} maxWidth="49rem">
-      <WhatsappMessage
-        color="rgb(120, 159, 115)"
-        time="9:18 AM"
-        messages={["Hey Discord is really cool you guys", "You wanna switch?"]}
-      />
-      <WhatsappMessage
-        username="Billy"
-        other={true}
-        number="+1 (234) 567-8910"
-        color="rgb(230, 159, 115)"
-        time="9:21 AM"
-        messages={[
-          "Man it's just like",
-          "...",
-          "I'm already using whatsapp",
-          "and so are all my other friends",
-          ".......",
-          "fuck off",
-        ]}
-      />
-      <WhatsappMessage
-        username="John"
-        other={true}
-        number="+42 (069) 1337-420"
-        color="#bd88eb"
-        time="9:23 AM"
-        messages={["Lmaooo", "Yeah dude we're not switching to Discord"]}
-      />
-    </VStack>
-  </Box>
-</Box>
+<WhatsappContainer>
+  <WhatsappMessage
+    color="rgb(120, 159, 115)"
+    time="9:18 AM"
+    messages={["Hey Discord is really cool you guys", "You wanna switch?"]}
+  />
+  <WhatsappMessage
+    username="Billy"
+    other={true}
+    number="+1 (234) 567-8910"
+    color="rgb(230, 159, 115)"
+    time="9:21 AM"
+    messages={[
+      "Man it's just like",
+      "...",
+      "I'm already using whatsapp",
+      "and so are all my other friends",
+      ".......",
+      "fuck off",
+    ]}
+  />
+  <WhatsappMessage
+    username="John"
+    other={true}
+    number="+42 (069) 1337-420"
+    color="#bd88eb"
+    time="9:23 AM"
+    messages={["Lmaooo", "Yeah dude we're not switching to Discord"]}
+  />
+</WhatsappContainer>
 
 The truth is, if you've been using WhatsApp for a long time and all your friends are on it it's kind of difficult to coordinate everyone to jump ship at the same time. That's the vendor lock-in effect that WhatsApp has as its biggest feature...
 

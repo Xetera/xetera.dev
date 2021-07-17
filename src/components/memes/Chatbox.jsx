@@ -1,9 +1,39 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/layout"
+import { forwardRef, VStack } from "@chakra-ui/react"
 import React from "react"
+import WhatsappBackground from "@assets/whatsapp_background.png"
 
 const whatsappBackground = "#262d31"
 const whatsappBackgroundSelf = "rgb(5, 97, 98)"
 
+export const WhatsappContainer = forwardRef((props, ref) => {
+  return (
+    <Box
+      width="100vw"
+      position="relative"
+      mb={6}
+      left="50%"
+      right="50%"
+      marginLeft="-50vw"
+      marginRight="-50vw"
+      backgroundRepeatY="repeat"
+      backgroundRepeatX="repeat"
+      background="#1d1c1c"
+      ref={ref}
+    >
+      <Box
+        width="100%"
+        height="100%"
+        position="relative"
+        background={`linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url(${WhatsappBackground})`}
+      >
+        <VStack spacing={6} m="auto" px={6} py={6} maxWidth="49rem">
+          {props.children}
+        </VStack>
+      </Box>
+    </Box>
+  )
+})
 export function WhatsappMessage({
   other = false,
   number,
@@ -42,7 +72,7 @@ export function WhatsappMessage({
       <Flex
         background={bubbleColor}
         padding="6px 7px 8px 9px"
-        p={2}
+        p={["7px", null, null, 2]}
         flexFlow="column"
         position="relative"
         {...(other ? { borderRightRadius: "lg" } : { borderLeftRadius: "lg" })}
@@ -67,7 +97,7 @@ export function WhatsappMessage({
         </Box>
         {username && (
           <Flex mb={1} className="flex mb-1">
-            <Text color={color} fontWeight="semibold" mr={2} lineHeight="19px">
+            <Text color={color} fontWeight="medium" mr={2} lineHeight="19px">
               {number}
             </Text>
             <Text color="rgba(241,241,242, 0.4)" lineHeight="19px">
@@ -76,7 +106,12 @@ export function WhatsappMessage({
           </Flex>
         )}
         <Flex justifyContent="space-between">
-          <Text m={0} {...textStyle} lineHeight="19px">
+          <Text
+            m={0}
+            {...textStyle}
+            lineHeight="19px"
+            fontSize={["sm", null, null, "15px"]}
+          >
             {head}
           </Text>
           {timeComp}
@@ -91,7 +126,12 @@ export function WhatsappMessage({
           whiteSpace="nowrap"
           borderRadius="md"
         >
-          <Text m={0} lineHeight="19px" color={textStyle.color}>
+          <Text
+            m={0}
+            lineHeight="19px"
+            color={textStyle.color}
+            fontSize={["sm", null, null, "md"]}
+          >
             {message}
           </Text>
           {timeComp}
