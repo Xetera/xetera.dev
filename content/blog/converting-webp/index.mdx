@@ -37,9 +37,16 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
         <Heading as="h3" fontSize="lg" mb={0}>
           {title}
         </Heading>
-        <T mb={0} fontSize="sm" fontWeight="bold" px={2} borderRadius="md">
+        <Tag
+          mb={0}
+          fontSize="sm"
+          fontWeight="bold"
+          px={2}
+          borderRadius="md"
+          colorScheme="linkedin"
+        >
           {size}
-        </T>
+        </Tag>
       </Flex>
       <Text mb={0} fontSize="sm">
         {text}

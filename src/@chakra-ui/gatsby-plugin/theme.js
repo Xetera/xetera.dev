@@ -120,6 +120,14 @@ export default extendTheme({
       colors.bgTertiary.light,
       colors.bgTertiary.dark,
     ]),
+    bgPostHeader: makeLayer("background", [
+      colors.bgPrimary.light,
+      colors.bgSecondary.dark,
+    ]),
+    bgPopupShadow: makeLayer("background", [
+      `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px,rgba(0, 0, 0, 0.1) 30%, rgba(0, 0, 0, 0.2) 70% 20px, rgba(0, 0, 0, 0.3))`,
+      `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px,rgba(0, 0, 0, 0.1) 30%, rgba(0, 0, 0, 0.4) 70% 20px, rgba(0, 0, 0, 0.7))`,
+    ]),
     textPrimary: makeLayer("color", [
       colors.textPrimary.light,
       colors.textPrimary.dark,
@@ -147,17 +155,29 @@ export default extendTheme({
   styles: {
     global: props => ({
       code: {
-        color: mode(colors.brand.light, colors.brand.dark)(props),
+        display: "inline-flex",
+        layerStyle: "bgBrand",
+        fontWeight: "bold",
+        fontSize: "0.85em",
         background: mode(
           colors.bgSecondary.light,
           colors.bgSecondary.dark
         )(props),
-        fontSize: "0.9em",
-        fontFamily: fontFamily,
-        fontStyle: "italic",
+        // fontStyle: "italic",
         transition,
         borderRadius: "5px",
-        padding: "1px 5px",
+        padding: "0 6px",
+        color: mode(colors.brand.light, colors.brand.dark)(props),
+        borderRadius: "5px",
+        // background: mode(
+        //   colors.bgSecondary.light,
+        //   colors.bgSecondary.dark
+        // )(props),
+        // fontSize: "0.9em",
+        // fontFamily: "'Sriracha', 'Wotfard', serif",
+        // fontStyle: "italic",
+        // transition,
+        // padding: "1px 5px",
       },
       ".blog-post :is(h1, h2, h3, h4, h5, h6) > a": {
         // resetting the link colors of article headings

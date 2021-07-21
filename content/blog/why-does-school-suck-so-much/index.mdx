@@ -1,7 +1,7 @@
 ---
 title: 🏫 Why does school suck so much?
 date: "2021-07-15"
-description: It's ok bro just power through it and you'll be free after you graduate
+description: It's ok bro just power through it and you'll be free after you graduate.
 # description: Formal education is very good at putting the dying in studying
 draft: false
 tags:
@@ -16,7 +16,9 @@ There's a quote that every breathing human ever has either heard of before or re
 And while I agree with the premise, I think this is a pretty outdated saying, and I'd like to propose a third alternative that is inspired by the words of the famous philosopher Ron Swanson.
 
 <Box
+  borderRadius="md"
   as="video"
+  width="100%"
   src="https://media.vlipsy.com/vlips/GqLsYMoQ/480p.mp4"
   muted
   playsinline
@@ -25,19 +27,36 @@ And while I agree with the premise, I think this is a pretty outdated saying, an
   mb={6}
 />
 
-Don't teach a man to fish. He's a grown man; he can learn to fish on his own. Instead, show him why he would want to do that in the first place. Show him why you're passionate about fishing. Take him out for a boat ride, and get him excited about how good it feels when you catch something after patiently waiting for hours. Describe to him the details of fishing that make it feel so rewarding to sit with a pole in your hand for a whole day. But _please_, for the love of God, don't teach him how to fish. He doesn't need you for that.
+Don't teach a man to fish. He's a grown man; he can learn to fish on his own. Instead, show him why he might be interested in it over something else. Show him why you're passionate about fishing. Take him out for a boat ride, and get him excited about how good it feels when you catch something after patiently waiting for hours. Describe to him the details of fishing that make it feel so rewarding to sit with a pole in your hand for a whole day. But <T>please</T>, for the love of God, don't teach him how to fish. He doesn't need you for that.
 
-Admittedly, this version doesn't quite roll off the tongue, so I'm probably not going to be remembered for it when I die, but I still think it touches on a topic I believe is important.
+Admittedly, this version doesn't quite roll off the tongue, so I'm probably not going to be remembered for it when I die, but I think it touches on an important idea that I want to discuss.
 
-## Why we learn
+## Why we teach
 
-For a very long time, teaching was something we had to do out of necessity. If you wanted to survive, you had to learn how to hunt, how to avoid predators, how to gather supplies for your tribe. Later on, this transitioned into things like farming and trade. And as of fairly recently, during the time of the industrial revolution, we learned to channel this instinct into institutions capable of growing a large population of little people into skilled factory workers years down the line.
+For a very long time, most of teaching was something we had to do out of necessity. If you wanted to survive, you had to learn how to hunt, how to avoid predators, how to gather supplies for your tribe; someone was equally as obligated to teach those things to you. You learned what you had to learn, so you could do what you need to do. Sure, even in the early days, people were concerned with arts and other non-essential skills, but they were not much more than side projects. Something you did when you were free from the work someone or something forced you into doing. If little Ugubwe wanted to eat that night, he had to hunt with the men of the tribe, and then he could learn to paint on the cave walls from the tribe elders later if he wanted to.
 
-Sure, even in the early days, we were concerned with arts and other non-essential skills that were passed down from generation to generation, but they were not much more than side projects. Something you did when you were free from the work someone forced you into doing. If little Ugubwe wanted to eat that night, he had to hunt with the men of the tribe, and then he could paint on the cave walls later if he wanted to.
+As of fairly recently --specifically during the time of the industrial revolution-- we learned to channel this idea into institutions capable of growing a large population of little people into skilled factory workers years down the line. This wasn't so much based on necessity; we realized that like... I don't know man like this learning thing might be a good idea I don't know... So we went ahead and set up schools to actually be usable by the general public and came up with the <T>incredible idea</T> that being born into a family that has multiple servants should not be a pre-requisite to learning how to read. You still didn't get to paint on the cave walls on your own terms though. You learned the absolute basics of literacy and whatever skills you needed to become a good, obedient factory worker.
 
-This way of learning worked well for its intended purpose for many `thousands` of years, but because it was motivated by necessity, you were never asked about what it was that you wanted to learn. You were either given a task you had to do for a lifetime or had to find out what that was if you wanted to survive. Contrast that to how things are today; a lot has changed.
+<figure>
 
-import { Link } from "@chakra-ui/react"
+![victorian girls in captivity](./victorian.jpg)
+
+<Box
+  as="figcaption"
+  textAlign="center"
+  mb={6}
+  layerStyle="textTertiary"
+  fontSize={["sm", null, "md"]}
+>
+  A classroom of girls in the Victorian era wishing they could be doing
+  literally anything else right now.
+</Box>
+
+</figure>
+
+This way of learning worked well for its intended purpose for many <T>thousands</T> of years, but because it was motivated by necessity or covering the absolute basics, you were never asked about what it was that you wanted to learn. You weren't nudged into discovering a passion for yourself. You were either given a task you had to do for a lifetime or had to find out what that was if you wanted to survive.
+
+import { T } from "../../../src/components/Markdown"
 
 export const SecondarySector = () => (
   <Definition
@@ -45,13 +64,11 @@ export const SecondarySector = () => (
     type="Noun"
     title="Secondary Sector"
     color="orange.500"
+    whiteSpace="nowrap"
   >
-    In the{" "}
-    <Link href="https://en.wikipedia.org/wiki/Three-sector_model">
-      three-sector model
-    </Link>
-    , the secondary sector refers to an economy that is based around the conversion
-    of raw material to products through factories and processing.
+    In the <T>three-sector model</T>, the secondary sector refers to an economy
+    that is based around the conversion of raw material to products through
+    factories and processing.
   </Definition>
 )
 
@@ -61,30 +78,54 @@ export const TertiarySector = () => (
     type="Noun"
     title="Tertiary Sector"
     color="blue.400"
+    whiteSpace="nowrap"
   >
-    In the{" "}
-    <Link href="https://en.wikipedia.org/wiki/Three-sector_model">
-      three-sector model
-    </Link>
-    , the tertiary sector and above refer to an economy that is primarily focused
-    around the sales and marketing of goods produced in the secondary sector, as
-    well as the creation and sharing of information.
+    In the <T>three-sector model</T>, the tertiary sector and above refer to an
+    economy that is primarily focused around the sales and marketing of goods
+    produced in the secondary sector, as well as the creation and sharing of
+    information.
   </Definition>
 )
 
-As our global economies are transitioning out of the <SecondarySector /> and into the <TertiarySector />, we're finding that there is objectively more work to be done compared to what our parents and grandparents had to do. Statistically speaking, if you're in middle school today, by the time you're ready to join the workforce, you're most likely going to be working a job that doesn't even exist yet. When it comes to career choice, we can now choose from a plethora of options, and we live in an era where all the information we need to do and learn new things is at our fingertips. Yet, for some reason, the fisherman is `still` trying to teach us to fish.
+export const CurrentYear = () => (
+  <Box as="time">
+    {/* I'm incredible at predicting the future of global economies */}
+    {Math.max(Math.min(new Date().getFullYear(), 2030), 2021)}
+  </Box>
+)
+
+Now in <CurrentYear />, as our global economies are transitioning out of the <SecondarySector /> and into the <TertiarySector />, we're finding that there is objectively a more diverse pool of work to be done compared to what our parents and grandparents had to do. Statistically speaking, if you're in middle school today, by the time you're ready to join the workforce, you're most likely going to be working a job that doesn't even exist yet. When it comes to career choice, we can now choose from a plethora of options, and we live in an era where all the information we need to learn new things is at our fingertips. Yet, for some reason, the fisherman is **still trying to teach us to fish** even though we have the option to do anything else.
 
 ## What if I don't want to become a fisherman?
 
-> So Jakey, what do you want to be when you grow up?
+Remember when you were a kid and you heard _that_ question? You know the one I'm talking about...
 
-Every kid's one dreaded question. Of the million things you could choose as a profession, chances are you have no idea what I could be interested in growing up. We force kids to learn a common core curriculum and expect them to magically have an idea of what they could be doing for a living after high school or college.
+<Box
+  textAlign="center"
+  layerStyle="textBrand"
+  mb={6}
+  fontWeight="black"
+  fontSize={["lg", null, "xl", "2xl"]}
+>
+  So Jakey, what do you want to be when you grow up?
+</Box>
 
-When we were still hunter and gatherers, at least after you learned to hunt, you had all the skills necessary to become a hunter. How does this translate to school now? Do all kids want to become English teachers and biologists? Oh, I'm sorry, were you sleeping in your `investment banking` class? Maybe you should pay more attention in your `marketing` class next time because not only do you not have any of the skills necessary to work in marketing -- you don't even know what that means as a career.
+export const VideoGames = () => (
+  <Toastable text="Video games" color="purple.400">
+    I'm assuming that the people who'd be interested in reading my blog were
+    kids when video games were a thing.
+  </Toastable>
+)
 
-The bottom line is that school does **absolutely nothing** to teach you about different fields you could be interested in. You will learn the things some boomers decided you should know many years ago with a few revisions here and there, and you will be released into the wild with no valuable knowledge to further your career or your desire to learn.
+Every kid's nightmare. Of the million things you could choose as a profession, chances are you had no idea what you wanted to be when you grew up. What were you even interested in? <VideoGames />? Art? Chatting with your friends about random nonsense on Skype late on a school night until your dad finally walked into your room at 3 AM and confiscated your phone while muttering something under his breath about how irresponsible you are? Were you ever given an opportunity where you could discover new things you liked that fell outside your comfort zone of interests as a kid? Probably not. We have so little time to explore ourselves, the world, and our interests while going through school. Yet, for some reason, we assume that kids will have some idea about what they're going to be doing for a living after high school or college when we never bother to allow them to discover their passions. This phenomenon did not use to be relevant in the past, but I would like to argue it certainly is now.
 
-I don't mean valuable knowledge in the way an annoying middle-schooler would talk about it in science class going:
+> Hope you didn't forget about your homework of figuring out what you want to do in life. You had 12 years to hand it in!
+
+When we were still hunter and gatherers, at least after you learned to hunt, you had all the skills necessary to become a hunter. How does this translate to school now? Do all kids want to become English teachers and biologists? Oh, I'm sorry, were you sleeping in your <T>investment banking</T> class? Maybe you should pay more attention in your <T>marketing</T> class next time because not only do you not have any of the skills necessary to work in these fields, you probably don't even know what it means to do those things as a career.
+
+The bottom line is that school does **absolutely nothing** to expose you to the different fields you could be interested in. You will learn the basics of a few subjects some boomers decided you should know many years ago --with a few revisions here and there-- and you will be released into the wild with no valuable knowledge to further your career or your desire to learn.
+
+Also, I don't mean valuable knowledge in the same way an annoying middle-schooler would talk about it in science class going:
 
 import Kekw from "@assets/emotes/kekw.png"
 
@@ -146,8 +187,178 @@ export const kekw = (
   <WhatsappMessage
     color="rgb(120, 159, 115)"
     time="9:22 AM"
-    messages={["I hate this job so much"]}
+    messages={["I hate this job so much."]}
   />
 </WhatsappContainer>
 
-I mean the kind of information **YOU** consider to be interesting is what is valuable to you. I need more than just to be able to feed myself. I need self-actual
+I'm referring to the kind of information **YOU** consider to be valuable. Whether that's knowledge that will help you succeed in life, like writing a good resume, or knowledge you find fun and engaging just for the sake of it. If you want to find something you're interested in pursuing in the long term and you think school is going to help you with that, I have some bad news for you.
+
+## How we enjoy being taught
+
+The reason I feel so strongly about this topic is because I know if not all, most people are interested in learning and are curious by nature. School does a terrible job at bringing out this incredible quality in us, but it's there. One of the best places to witness this is in the comments section of educational [math and science videos](https://www.youtube.com/watch?v=OxGsU8oIWjY) on YouTube, which many people feel is <T>procrastination</T> and <T>not real learning</T> to this day.
+
+![](./youtube-comment.png)
+
+You can see the amazement in people as they realize that learning is an incredible feeling and that **school doesn't have to be synonymous with education**. Unfortunately, that is the way most of us feel, as we get put through this system starting as early as age 5, and it leads to a painful internal conflict for kids who realize the current education system isn't their cup of tea and don't perform well in school. They often think that they are just too dumb to understand concepts like math and science and arrive at the inevitable conclusion that they don't like <T>learning</T>.
+
+import { Link } from "@chakra-ui/react"
+import ThisArrow from "@assets/emotes/thisarrow.gif"
+
+export const friendProps = {
+  username: "Tzuyu",
+  roleColor: "green.500",
+  date: "2:25 PM",
+  avatar: <Tzuyu />,
+}
+
+<DiscordMessageContainer mb={6}>
+  <DiscordMessage
+    {...friendProps}
+    messages={[
+      "DUDE",
+      <DiscordMessageText>
+        have you seen this guy's videos?{" "}
+        <Link href="https://www.youtube.com/watch?v=X32dce7_D48">
+          https://www.youtube.com/watch?v=X32dce7_D48
+        </Link>
+      </DiscordMessageText>,
+      <DiscordMessageText my={3}>
+        <DiscordEmbed
+          color="red.500"
+          top="Youtube"
+          title="Eddie Woo"
+          content={
+            <Link
+              href="https://www.youtube.com/watch?v=X32dce7_D48"
+              color="blue.400"
+            >
+              Why is 0! = 1?
+            </Link>
+          }
+        >
+          <Box
+            as="iframe"
+            borderRadius="md"
+            width="100%"
+            height="315px"
+            src="https://www.youtube-nocookie.com/embed/X32dce7_D48"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </DiscordEmbed>
+      </DiscordMessageText>,
+      "Man if Ms. Connell taught us math like this I would've had a degree in math already",
+    ]}
+    reactions={[{ name: ":this:", reactCount: 2, image: ThisArrow }]}
+  />
+  <DiscordMessage
+    username="Xetera"
+    roleColor="purple.500"
+    date="2:25 PM"
+    avatar={Xetera}
+    messages={["But you don't even have a highschool diploma yet"]}
+  />
+  <DiscordMessage
+    {...friendProps}
+    messages={[
+      "Shut up",
+      "watch the video",
+      <DiscordMessageText>
+        Why does math feel like torture in school when it's so fun on youtube...{" "}
+        <Link href="https://www.youtube.com/watch?v=Kas0tIxDvrg">
+          https://www.youtube.com/watch?v=Kas0tIxDvrg
+        </Link>
+      </DiscordMessageText>,
+      <DiscordMessageText my={3}>
+        <DiscordEmbed
+          color="red.500"
+          top="Youtube"
+          title="3Blue1Brown"
+          content={
+            <Link
+              href="https://www.youtube.com/watch?v=Kas0tIxDvrg"
+              color="blue.400"
+            >
+              Exponential growth and epidemics{" "}
+            </Link>
+          }
+        >
+          <Box
+            as="iframe"
+            borderRadius="md"
+            width="100%"
+            height="315px"
+            src="https://www.youtube-nocookie.com/embed/Kas0tIxDvrg"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </DiscordEmbed>
+      </DiscordMessageText>,
+    ]}
+  />
+</DiscordMessageContainer>
+
+What is it about educational content on YouTube and friends that feel so different from school? Let's look at that question by exploring the business differences between these two. This might seem like a weird approach but bear with me for a moment.
+
+### Educational differences
+
+YouTube forces content creators to compete for your attention at any given moment. If the video you're looking at is not enticing enough, chances are you're just going to click on the next recommended video. Content creators win customers over by getting them to subscribe, but they still need to work hard to make sure that the videos that they're putting out continue to be engaging for their audience. As a viewer, you have the opportunity to explore a tremendous amount of alternative content with very little work on your end. You can also choose not to watch YouTube anymore, at which point the content creator still loses a customer. There's no single point where a creator gets to relax and stop caring about how engaging their audience thinks their work is because the customer lifecycle can break at any moment.
+
+Things go a little differently for formal education. I'll mostly be referring to private schools here, but I think most of these points also apply to public schools motivation-wise.
+
+First, society expects you to attend school. <T>Don't believe me?</T> What's the first question you have to answer after you tell a friend or family that you don't want to go to university?
+
+> Oh really? Why not?
+
+You need a reason to choose not to go to school, and a good one at that too. That's incredible leverage for educational institutions. For that reason, schools have to do very little to ensure that new students keep coming in year after year other than existing in a convenient physical location and not having a bad reputation.
+
+They also win over customers when students enroll, and that's generally where their customer lifecycle ends. Schools don't have to care about how engaging you feel the education is because they have no reason to. An enrolled student will continue attending unless the school does something catastrophic, and when that does happen, it's usually not an education-related issue either.
+
+Wait, what's that? You're saying that you always have the power to choose to attend a better school as a customer? <T>Uhuh</T>, which school are you going to move to, the one that's the **second** closest to your house? Gosh, I hope the education style there is better than the previous, even though that school has no reason to care either. Fine, you could choose to attend an online school, so you're not restricted by the physical location, but how are you supposed to tell apart an online school with a teaching style that resonates with you? There's no metric for this kind of thing. Schools are classified by prestige and cost, and we all know prestige is not an indicator of whether or not a school sucks to attend by any means.
+
+<!-- Your first interaction with educational content in school is probably getting assigned a schedule and being forced to go to a class you never even signed up for. In contrast, the content that you end up viewing on <T>YouTube</T> is is designed to be interesting to you at first glance and get you to click on it. This can be construed as a negative or manipulative thing, but in reality, it's one of the biggest puzzle pieces that our traditional education system is missing. Get people interested in the content you want to share with them. This is a technique that works regardless of whether you're a YouTuber or a teacher (or both). -->
+
+<!-- <iframe
+width="560"
+height="315"
+src="https://www.youtube-nocookie.com/embed/yZwfcMSDBHs"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen
+
+> </iframe>
+
+I don't really know anything about civil engineering or think I care, but I'm impelled to at least take a look when the information is presented in such an interesting way by someone who's truly passionate about the topic and isn't just being paid to be there.
+
+And that's the crucial difference between **the youtube science man I want to keep watching** vs. **Mr. Reynolds from 3rd period history class**. -->
+
+import { RiChat1Fill } from "react-icons/ri"
+
+<Box p={6} layerStyle="borderSubtle" borderWidth="1px" borderRadius="md">
+  <Flex mb={2}>
+    <RiChat1Fill />
+    <Heading fontSize="md" ml={3}>
+      Footnote
+    </Heading>
+  </Flex>
+  <VStack spacing={4}>
+    <Text layerStyle="textSecondary" fontSize="md">
+      Try to take what I've written here with a grain of salt. I never finished
+      my degree and I'm obviously projecting my own experiences in the education
+      system. I'm also heavily biased towards a way of learning that works for
+      me and isn't compatible with the traditional school education system.
+    </Text>
+    <Text layerStyle="textSecondary" fontSize="md">
+      I recognize that this isn't the case for everyone out there and that
+      everyone has their way of learning that works with or without a formal
+      education system. I'm only interested in helping people find out what that
+      style is for themselves and not necessarily pushing my preferred method
+      onto anyone else.
+    </Text>
+  </VStack>
+</Box>

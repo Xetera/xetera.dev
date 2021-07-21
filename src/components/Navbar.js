@@ -31,6 +31,7 @@ export default function Navbar() {
   return (
     <Flex
       justifyContent="space-between"
+      pointerEvents="none"
       width="100%"
       transition={transition}
       p={2}
@@ -42,6 +43,7 @@ export default function Navbar() {
       ) : (
         <Link to="/">
           <Flex
+            pointerEvents="all"
             filter={pinned ? "saturate(0.3)" : "saturate(1)"}
             _hover={{ filter: "saturate(1)" }}
             p={2}
@@ -85,6 +87,7 @@ export default function Navbar() {
         onClick={toggleColorMode}
         cursor="pointer"
         as="button"
+        pointerEvents="all"
         aria-label="theme switch"
       >
         {colorMode === "light" ? (

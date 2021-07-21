@@ -235,19 +235,56 @@ export const DiscordMessageText = forwardRef(({ children, ...props }, ref) => {
 
 const DiscordMessageAvatar = ({ avatar, username }) => {
   const [loaded, setLoaded] = React.useState(false)
-  return (
-    <SkeletonCircle isLoaded={loaded} height={[10]} width={[10]}>
-      <Image
-        aria-label={`Avatar for ${username}`}
-        htmlHeight="40px"
-        htmlWidth="40px"
-        objectFit="cover"
-        src={avatar}
-        onLoad={() => setLoaded(true)}
-      />
-    </SkeletonCircle>
-  )
+  if (typeof avatar === "string") {
+    return (
+      <SkeletonCircle isLoaded={loaded} height={[10]} width={[10]}>
+        <Image
+          aria-label={`Avatar for ${username}`}
+          htmlHeight="40px"
+          htmlWidth="40px"
+          objectFit="cover"
+          src={avatar}
+          onLoad={() => setLoaded(true)}
+        />
+      </SkeletonCircle>
+    )
+  }
+  return avatar
 }
+
+export const DiscordEmbed = forwardRef((props, ref) => {
+  const { color, children, top, title, content } = props
+  return (
+    <Flex
+      borderColor={color}
+      borderLeftWidth="5px"
+      borderRadius="4px"
+      {...props}
+      ref={ref}
+      layerStyle="bgPrimary"
+    >
+      <Flex flexDirection="column" p={4} width="100%">
+        <Text
+          fontSize="sm"
+          as="h3"
+          fontWeight="thin"
+          layerStyle="textTertiary"
+          mt={0}
+          mb={2}
+        >
+          {top}
+        </Text>
+        <Heading fontWeight="medium" as="h2" fontSize="md" mb={2}>
+          {title}
+        </Heading>
+        <Text fontWeight="medium" fontSize="md" mb={2}>
+          {content}
+        </Text>
+        <Box width="100%">{children}</Box>
+      </Flex>
+    </Flex>
+  )
+})
 
 export const DiscordMessage = forwardRef(
   (
@@ -289,11 +326,11 @@ export const DiscordMessage = forwardRef(
         >
           <DiscordMessageAvatar avatar={avatar} username={username} />
         </Box>
-        <div>
+        <Box width="100%">
           <Flex alignItems="baselin" mb={1} lineHeight="22.5px">
             <Heading
               fontSize="15.75px"
-              fontWeight="semibold"
+              fontWeight="medium"
               {...(!roleColor ? { layerStyle: "discordTextColor" } : {})}
               color={roleColor}
               mb={0}
@@ -330,7 +367,7 @@ export const DiscordMessage = forwardRef(
               ))}
             </Box>
           )}
-        </div>
+        </Box>
       </Flex>
     )
   }
@@ -484,16 +521,12 @@ export const T = forwardRef((props, ref) => {
   return (
     <Flex
       display="inline-flex"
-      layerStyle="bgBrand"
-      fontWeight="bold"
-      fontSize="0.9em"
-      fontStyle="italic"
+      layerStyle="textBrand"
+      fontFamily="'Sriracha', 'Wotfard', serif"
       transition={transition}
-      borderRadius="5px"
-      padding="1px 5px"
       ref={ref}
     >
-      <Text layerStyle="textBrand">{props.children}</Text>
+      {props.children}
     </Flex>
   )
 })

@@ -20,9 +20,15 @@ import * as ChakraReact from "@chakra-ui/react"
 import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
-import { Text, useColorModeValue } from "@chakra-ui/react"
+import {
+  Text,
+  useColorModePreference,
+  useColorModeValue,
+} from "@chakra-ui/react"
 import { colors, transition } from "../@chakra-ui/gatsby-plugin/theme"
 import { maxWidth } from "../shared"
+import { avatars } from "../components/Avatars"
+
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link } = Chakra
@@ -91,13 +97,13 @@ const Navigator = ({ pos, link }) => {
   )
 }
 
-function makeHeader(type) {
+function makeHeader(type, fonts = ["xl", null, "2xl"]) {
   return ({ children, ...props }) => (
     <Heading
       as={type}
       mb={4}
       transition={transition}
-      fontSize={["xl", null, "2xl"]}
+      fontSize={fonts}
       {...props}
     >
       {children}
@@ -109,6 +115,8 @@ export default function Post({ data, pageContext, location }) {
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
   const brand = useBrandColor()
+  const theme = useColorModePreference()
+  console.log({ theme })
   const brandSecondary = useBrandSecondaryColor()
   const { imageTop, imageBottom } = post.frontmatter
   const borderSubtle = useColorModeValue(
@@ -121,7 +129,7 @@ export default function Post({ data, pageContext, location }) {
       <Layout imageTop={imageTop} imageBottom={imageBottom}>
         <Box
           transition={transition}
-          layerStyle="bgSecondary"
+          layerStyle="bgPostHeader"
           borderColor={borderSubtle}
           pt={[8, 12, 24]}
           borderBottomWidth="1px"
@@ -193,6 +201,7 @@ export default function Post({ data, pageContext, location }) {
               <MDXProvider
                 scope={{ transition }}
                 components={{
+                  ...avatars,
                   ...Chatbox,
                   ...MarkdownComponents,
                   ...MarkdownOverrides,
@@ -214,7 +223,7 @@ export default function Post({ data, pageContext, location }) {
                   RoughNotation,
                   h6: makeHeader("h6"),
                   h5: makeHeader("h5"),
-                  h4: makeHeader("h4"),
+                  h4: makeHeader("h4", ["md", "lg", "xl"]),
                   h3: makeHeader("h3"),
                   h2: makeHeader("h2"),
                   h1: makeHeader("h1"),

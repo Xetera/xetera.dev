@@ -4,7 +4,8 @@ import { m, AnimatePresence } from "framer-motion"
 import { maxWidth } from "../shared"
 import { Box, Flex } from "@chakra-ui/layout"
 import { useBrandColor } from "../hooks/color"
-import { forwardRef } from "@chakra-ui/react"
+import { forwardRef, useColorModeValue } from "@chakra-ui/react"
+import { colors, transition } from "../@chakra-ui/gatsby-plugin/theme"
 
 export const ToastContext = React.createContext({
   jsx: null,
@@ -60,9 +61,18 @@ export default function Popup({ className }) {
     <Flex
       position="fixed"
       justifyContent="center"
-      // maxWidth="md"
+      display="flex"
+      zIndex={0}
+      alignItems="center"
+      maxHeight="40vh"
+      height="100%"
+      pointerEvents="none"
+      transition={transition}
+      backgroundPosition={hovered ? "100px" : "0"}
+      opacity={hovered ? 1 : 0}
+      layerStyle="bgPopupShadow"
       width="100%"
-      bottom={2}
+      bottom={0}
       left={0}
       right={0}
     >
@@ -76,7 +86,7 @@ export default function Popup({ className }) {
             transition={{ type: "tween", duration: 0.24 }}
             initial={{
               opacity: 0,
-              y: 10,
+              y: 25,
             }}
             animate={{
               opacity: 1,
@@ -84,14 +94,13 @@ export default function Popup({ className }) {
             }}
             exit={{
               opacity: 0,
-              y: 10,
+              y: 25,
             }}
-            bottom="auto"
             alignItems="center"
             borderTopRightRadius="md"
             borderBottomRightRadius="md"
             position="absolute"
-            bottom={2}
+            bottom={[4, null, null, 8]}
             left={4}
             right={4}
             mx={"auto"}

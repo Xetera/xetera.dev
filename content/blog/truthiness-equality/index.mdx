@@ -6,7 +6,7 @@ tags:
   - Guide
 ---
 
-There are a lot of beginners out there and even experienced developers who are confused about what it means for something to be truthy in Javascript. There's also an assumption that many people never go out of their way to validate, where they think loose equality (`==`) is the same thing as truthiness.
+There are a lot of beginners out there and even experienced developers who are confused about what it means for something to be truthy in Javascript. There's also an assumption that many people never go out of their way to validate, where they think loose equality (<T>==</T>) is the same thing as truthiness.
 
 Truthiness makes some level of intuitive sense to most people who deal with it. If you show someone the following code snippet, chances are they will have a vague understanding of what's going on. Even if they aren't Javascript developers.
 
@@ -25,7 +25,6 @@ But the explanation that is given is often muddled with misconceptions about how
 import Xetera from "@assets/avatars/xetera.png"
 import TzuyuImage from "@assets/avatars/tzuyu.png"
 import DubuImage from "@assets/avatars/dubu.png"
-
 import YooYikes from "@assets/emotes/yooyikes.png"
 import SanaKek from "@assets/emotes/sana_kek.png"
 
@@ -65,7 +64,7 @@ export const C = ({ children }) => <code className=".">{children}</code>
       "I think so",
       <DiscordMessageText>
         like if you were comparing{" "}
-        <InlineCode layerStyle="bgTertiary">"test" == true</InlineCode>{" "}
+        <T>"test" == true</T>{" "}
         it would be truthy
       </DiscordMessageText>
     ]}
@@ -94,7 +93,7 @@ export const C = ({ children }) => <code className=".">{children}</code>
 
 ## Truthiness
 
-It might be a good idea to take a step back and establish what it means for something to be truthy first. Many people get a feeling for how this works but don't actually dive into the details. In simple terms, truthiness is just what you get when you throw the variable in question into the `Boolean()` function.
+It might be a good idea to take a step back and establish what it means for something to be truthy first. Many people get a feeling for how this works but don't actually dive into the details. In simple terms, truthiness is just what you get when you throw the variable in question into the <T>Boolean()</T> function.
 
 ```js
 Boolean("") // false
@@ -135,7 +134,7 @@ if ([]) {
 }
 ```
 
-An array is an object which is always true regardless of its contents. If you're a python developer, this is likely confusing since python's lists implement `__bool__` differently and empty lists are considered falsy just like empty strings.
+An array is an object which is always true regardless of its contents. If you're a python developer, this is likely confusing since python's lists implement <T>**bool**</T> differently and empty lists are considered falsy just like empty strings.
 
 So if truthiness isn't based on `==`, what's going on with loose equality?
 
