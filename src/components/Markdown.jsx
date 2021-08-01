@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react"
 import { transition } from "../@chakra-ui/gatsby-plugin/theme"
 import { Toastable } from "./Popup"
+import { VStack } from "@chakra-ui/layout"
 export * from "./memes/Chatbox"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
 require("prismjs/components/prism-typescript")
@@ -582,4 +583,18 @@ export const overrides = {
       {children}
     </Code>
   ),
+}
+
+export function Callout({ children, title, icon }) {
+  return <Box p={6} layerStyle="borderSubtle" borderWidth="1px" borderRadius="md">
+  <Flex mb={2}>
+    {icon}
+    <Heading fontSize="md" ml={3}>
+    {title}
+    </Heading>
+  </Flex>
+  <VStack spacing={4}>
+    {children}
+  </VStack>
+</Box>
 }

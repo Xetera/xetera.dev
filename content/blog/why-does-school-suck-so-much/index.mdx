@@ -2,8 +2,7 @@
 title: 🏫 Why does school suck so much?
 date: "2021-07-15"
 description: It's ok bro just power through it and you'll be free after you graduate.
-# description: Formal education is very good at putting the dying in studying
-draft: false
+draft: true
 tags:
   - Rant
   - Exploration
@@ -13,7 +12,7 @@ There's a quote that every breathing human ever has either heard of before or re
 
 > Give a man a fish and you feed him for a day; teach a man to fish and you feed him for a lifetime.
 
-And while I agree with the premise, I think this is a pretty outdated saying, and I'd like to propose a third alternative that is inspired by the words of the famous philosopher Ron Swanson.
+And I agree with the premise, but I think this is a pretty outdated saying and I'd like to propose a third alternative that is inspired by the words of the famous philosopher Ron Swanson.
 
 <Box
   borderRadius="md"
@@ -339,14 +338,7 @@ And that's the crucial difference between **the youtube science man I want to ke
 
 import { RiChat1Fill } from "react-icons/ri"
 
-<Box p={6} layerStyle="borderSubtle" borderWidth="1px" borderRadius="md">
-  <Flex mb={2}>
-    <RiChat1Fill />
-    <Heading fontSize="md" ml={3}>
-      Footnote
-    </Heading>
-  </Flex>
-  <VStack spacing={4}>
+<Callout icon={<RiChat1Fill />} title="Footnote">
     <Text layerStyle="textSecondary" fontSize="md">
       Try to take what I've written here with a grain of salt. I never finished
       my degree and I'm obviously projecting my own experiences in the education
@@ -360,5 +352,4 @@ import { RiChat1Fill } from "react-icons/ri"
       style is for themselves and not necessarily pushing my preferred method
       onto anyone else.
     </Text>
-  </VStack>
-</Box>
+</Callout>
