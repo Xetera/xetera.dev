@@ -586,15 +586,15 @@ export const overrides = {
 }
 
 export function Callout({ children, title, icon }) {
-  return <Box p={6} layerStyle="borderSubtle" borderWidth="1px" borderRadius="md">
-  <Flex mb={2}>
-    {icon}
-    <Heading fontSize="md" ml={3}>
-    {title}
-    </Heading>
-  </Flex>
-  <VStack spacing={4}>
-    {children}
-  </VStack>
-</Box>
+  return (
+    <Box p={6} layerStyle="borderSubtle" borderWidth="1px" borderRadius="md">
+      <Flex mb={2}>
+        {icon}
+        <Heading fontSize="md" ml={3}>
+          {title}
+        </Heading>
+      </Flex>
+      <VStack spacing={4}>{children}</VStack>
+    </Box>
+  )
 }
