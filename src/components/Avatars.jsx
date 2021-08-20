@@ -20,21 +20,21 @@ export const avatars = {
       />
     )
   },
-  Tzuyu() {
+  TzuyuAvatar() {
     return (
       <StaticImage
         {...common}
         src="../../content/assets/avatars/tzuyu.png"
-        alt="Tzuyu"
+        alt="Tzuyu Avatar"
       />
     )
   },
-  Jiu() {
+  JiuAvatar() {
     return (
       <StaticImage
         {...common}
         src="../../content/assets/avatars/jiu.png"
-        alt="Kim Minji"
+        alt="Kim Minji Avatar"
       />
     )
   },
