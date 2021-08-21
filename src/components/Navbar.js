@@ -55,6 +55,7 @@ export default function Navbar() {
               opacity={[0.7, null, null, 1]}
             >
               <StaticImage
+                alt="home button"
                 src="../../content/assets/favicon.png"
                 aria-label="home button"
                 onMouseEnter={() => setHover(true)}

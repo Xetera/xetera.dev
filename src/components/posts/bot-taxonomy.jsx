@@ -1,5 +1,13 @@
 import React from "react"
-import { Box, Flex, Link, OrderedList, ListItem, Text } from "@chakra-ui/react"
+import {
+  Grid,
+  Box,
+  Flex,
+  Link,
+  OrderedList,
+  ListItem,
+  Text,
+} from "@chakra-ui/react"
 
 export const Cell = ({ options, title, subtitle, children }) => (
   <Box
@@ -57,11 +65,22 @@ export const Cell = ({ options, title, subtitle, children }) => (
           spacing={1}
           height="min-content"
         >
-          {options?.map(option => (
-            <ListItem key={option}>{option}</ListItem>
-          ))}
+          {options?.map((option, i) => {
+            return <ListItem key={i}>{option}</ListItem>
+          })}
         </OrderedList>
       )}
     </Flex>
   </Box>
+)
+
+export const Grid3x3 = ({ children }) => (
+  <Grid
+    gridTemplateColumns={["repeat(auto-fill, minmax(200px, 1fr))"]}
+    maxWidth={["280px", "100%"]}
+    margin="auto"
+    gridAutoRows="1fr"
+    gap="8px"
+    children={children}
+  />
 )

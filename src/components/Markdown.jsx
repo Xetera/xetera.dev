@@ -523,6 +523,7 @@ export const T = forwardRef((props, ref) => {
   return (
     <Flex
       display="inline-flex"
+      as="span"
       layerStyle="textBrand"
       fontFamily="'Sriracha', 'Wotfard', serif"
       transition={transition}

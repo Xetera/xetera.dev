@@ -116,7 +116,6 @@ export default function Post({ data, pageContext, location }) {
   const { previous, next, ogImage } = pageContext
   const brand = useBrandColor()
   const theme = useColorModePreference()
-  console.log({ theme })
   const brandSecondary = useBrandSecondaryColor()
   const { imageTop, imageBottom } = post.frontmatter
   const borderSubtle = useColorModeValue(
