@@ -16,8 +16,6 @@ export const WhatsappContainer = forwardRef((props, ref) => {
       right="50%"
       marginLeft="-50vw"
       marginRight="-50vw"
-      backgroundRepeatY="repeat"
-      backgroundRepeatX="repeat"
       background="#1d1c1c"
       ref={ref}
     >
@@ -41,6 +39,7 @@ export function WhatsappMessage({
   color,
   messages = [],
   time,
+  wrapFirst = false,
 }) {
   const [head, ...tail] = messages
   const textStyle = {
@@ -74,6 +73,7 @@ export function WhatsappMessage({
         padding="6px 7px 8px 9px"
         p={["7px", null, null, 2]}
         flexFlow="column"
+        width={wrapFirst ? ["100%", null, "max-content"] : "100%"}
         position="relative"
         {...(other ? { borderRightRadius: "lg" } : { borderLeftRadius: "lg" })}
         borderBottomRadius="lg"
@@ -122,8 +122,9 @@ export function WhatsappMessage({
           background={bubbleColor}
           p="6px 7px 8px 9px"
           position="relative"
-          width="min-content"
-          whiteSpace="nowrap"
+          justifySelf={other ? "flex-start" : "flex-end"}
+          width={["unset", null, "max-content"]}
+          whiteSpace={["unset", null, "nowrap"]}
           borderRadius="md"
         >
           <Text

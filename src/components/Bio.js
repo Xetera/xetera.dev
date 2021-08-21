@@ -1,13 +1,10 @@
 import React from "react"
-import ExternalLink from "./ExternalLink"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
+import ExternalLink from "./ExternalLink"
 import { Box, Flex, Grid, Heading, Link, Stack, Text } from "@chakra-ui/layout"
-// import { Image } from "@chakra-ui/image"
 import {
   RiGithubFill,
-  RiGithubLine,
-  RiSafariFill,
   RiSafariLine,
   RiTwitterFill,
 } from "react-icons/ri"
@@ -15,23 +12,21 @@ import { forwardRef } from "@chakra-ui/system"
 import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Hr } from "./Layout"
 import { m } from "framer-motion"
+import { useIsSafari } from "../hooks/is-safari"
 
 const MotionFlex = m(Flex)
 
 const Bio = React.memo(
   forwardRef((props, ref) => {
     const data = useStaticQuery(staticQuery)
-    const [isSafari, setSafari] = React.useState(false)
-    React.useEffect(() => {
-      var ua = navigator.userAgent.toLowerCase()
-      setSafari(ua.includes("safari") && !ua.includes("chrome"))
-    }, [])
+    const { isSafari } = useIsSafari()
 
     const osuRank = Intl.NumberFormat("default").format(
       data.osu.statistics.globalRank
     )
     const brand = useBrandColor()
     const brandSecondary = useBrandSecondaryColor()
+    const twitter = data.site.siteMetadata.social.twitter
     const image = React.useMemo(
       () => (
         <Flex
@@ -84,21 +79,19 @@ const Bio = React.memo(
                 {data.site.buildTime}
               </Text>{" "}
               I have watched{" "}
-              <Link
+              <ExternalLink
                 color={brandSecondary}
                 href="https://anilist.co/user/Xetera"
-                rel="noopener external noreferrer"
               >
                 {data.anilist.user.statistics.anime.count} animes
-              </Link>{" "}
+              </ExternalLink>{" "}
               and I’m rank{" "}
-              <Link
+              <ExternalLink
                 color={brandSecondary}
                 href={`https://osu.ppy.sh/users/${data.osu.user_id}`}
-                rel="noopener external noreferrer"
               >
                 #{osuRank} in osu.
-              </Link>
+              </ExternalLink>
             </Text>
           </Stack>
           <Stack spacing={4} direction="row">
@@ -111,7 +104,7 @@ const Bio = React.memo(
               <RiGithubFill size={28} />
             </Link>
             <Link
-              href="https://twitter.com/_Xetera"
+              href={`https://twitter.com/${twitter}`}
               color="unset"
               _hover={{ color: brand }}
               aria-label="twitter link"

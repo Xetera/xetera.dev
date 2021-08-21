@@ -162,6 +162,7 @@ So if all these apps have so many better features, why are people not using them
     messages={["Hey Discord is really cool you guys", "You wanna switch?"]}
   />
   <WhatsappMessage
+    wrapFirst
     username="Billy"
     other={true}
     number="+1 (234) 567-8910"
@@ -177,6 +178,7 @@ So if all these apps have so many better features, why are people not using them
     ]}
   />
   <WhatsappMessage
+    wrapFirst
     username="John"
     other={true}
     number="+42 (069) 1337-420"
@@ -190,8 +192,15 @@ The truth is, if you've been using WhatsApp for a long time and all your friends
 
 So while it's true that WhatsApp revolutionized the way we do instant messaging, it just hasn't been keeping up. Just because you're at the top doesn't meaan you can stop trying because someone else (**cough** discord, telegram **cough**) will be catching up with features you should've implemented 5 years ago.
 
-<Hr />
+<Hr mb={6} />
 
-### Funny footnote
+import { RiChat1Fill } from "react-icons/ri"
 
-While writing this post I sent something in WhatsApp that I had to delete later but accidentally ended up pressing `delete for me` instead of `delete for everyone` and completely lost the ability to delete it for everyone. Fuck this app AAAAAAAAAAAAAAAAAAAAAA.
+<Callout title="Funny footnote" icon={<RiChat1Fill />}>
+  <Text layerStyle="textSecondary">
+    While writing this post I sent something in WhatsApp that I had to delete
+    later but accidentally ended up pressing <T>delete for me</T> instead of
+    <T>delete for everyone</T> and completely lost the ability to delete it for everyone.
+    Fuck this app AAAAAAAAAAAAAAAAAAAAAA.
+  </Text>
+</Callout>

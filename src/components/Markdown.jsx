@@ -220,8 +220,9 @@ export const DiscordMessageContainer = ({ children }) => (
 )
 
 export const DiscordMessageText = forwardRef(({ children, ...props }, ref) => {
+  const Container = typeof children === "string" ? Text : Box
   return (
-    <Text
+    <Container
       fontSize="16px"
       fontWeight="normal"
       layerStyle="discordTextColor"
@@ -231,7 +232,7 @@ export const DiscordMessageText = forwardRef(({ children, ...props }, ref) => {
       {...props}
     >
       {children}
-    </Text>
+    </Container>
   )
 })
 
@@ -587,16 +588,25 @@ export const overrides = {
   ),
 }
 
-export function Callout({ children, title, icon }) {
+export const Callout = forwardRef(({ children, title, icon, ...rest }, ref) => {
   return (
-    <Box p={6} layerStyle="borderSubtle" borderWidth="1px" borderRadius="md">
-      <Flex mb={2}>
-        {icon}
-        <Heading fontSize="md" ml={3}>
-          {title}
-        </Heading>
-      </Flex>
+    <Box
+      p={6}
+      layerStyle="borderSubtle"
+      borderWidth="1px"
+      borderRadius="md"
+      {...rest}
+      ref={ref}
+    >
+      {(icon || title) && (
+        <Flex mb={2}>
+          {icon}
+          <Heading fontSize="md" ml={3}>
+            {title}
+          </Heading>
+        </Flex>
+      )}
       <VStack spacing={4}>{children}</VStack>
     </Box>
   )
-}
+})

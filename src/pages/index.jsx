@@ -3,9 +3,11 @@ import { Link as GatsbyLink, graphql, PageProps } from "gatsby"
 import Bio from "../components/Bio"
 import PostData, { PostList, Tags } from "../components/PostShared"
 import { Layout, LayoutContent } from "../components/Layout"
-import { Flex, Grid, Heading, Stack } from "@chakra-ui/layout"
+import { Flex, Grid, Heading, Stack, Box, Link } from "@chakra-ui/layout"
 import { Helmet } from "react-helmet"
 import SEO from "../components/Seo"
+import { RiGithubFill } from "react-icons/ri"
+import ExternalLink from "../components/ExternalLink"
 
 const BlogIndex = ({ data, pageContext }) => {
   const posts = data.allMdx.edges
@@ -37,6 +39,17 @@ const BlogIndex = ({ data, pageContext }) => {
             >
               {posts.length} Posts
             </Heading>
+            <Flex alignItems="center">
+              <ExternalLink
+                layerStyle="textSecondary"
+                fontSize="xs"
+                mr={2}
+                href="https://github.com/xetera/xetera.dev"
+              >
+                View the site's code
+              </ExternalLink>
+              <RiGithubFill size={18} />
+            </Flex>
             {/* <PostSwitch /> */}
           </Flex>
           <Grid gap={10}>
