@@ -94,18 +94,18 @@ const SEO = ({ description, lang = "en", title, image, canonical }) => {
   }
   return (
     <Helmet
-    // htmlAttributes={{
-    //   lang,
-    // }}
-    // title={title}
+      htmlAttributes={{
+        lang,
+      }}
+      title={title}
     >
-      {/* {data.map(({ name, content }) => (
+      {data.map(({ name, content }) => (
         <meta name={name} content={content} key={name} />
       ))}
       {canonical && (
         <link rel="canonical" href={new URL(canonical, siteUrl).href} />
       )}
-      <meta name="theme-color" content={site.siteMetadata.themeColor} /> */}
+      <meta name="theme-color" content={site.siteMetadata.themeColor} />
     </Helmet>
   )
 }
