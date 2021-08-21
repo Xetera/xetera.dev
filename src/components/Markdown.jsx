@@ -25,6 +25,7 @@ import { transition } from "../@chakra-ui/gatsby-plugin/theme"
 import { Toastable } from "./Popup"
 import { VStack } from "@chakra-ui/layout"
 export * from "./memes/Chatbox"
+export * from "./posts"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
 require("prismjs/components/prism-typescript")
 require("prismjs/components/prism-haskell")

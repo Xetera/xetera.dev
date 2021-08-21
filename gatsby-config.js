@@ -19,6 +19,7 @@ module.exports = {
   },
   flags: { FAST_DEV: true, DEV_SSR: false },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
       resolve: "@chakra-ui/gatsby-plugin",
       options: {
@@ -110,7 +111,6 @@ module.exports = {
         icon: `content/assets/favicon.png`,
       },
     },
-    `gatsby-plugin-react-helmet`,
     "gatsby-plugin-open-graph-images",
     "gatsby-plugin-webpack-bundle-analyser-v2",
   ],
