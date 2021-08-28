@@ -161,7 +161,8 @@ export default extendTheme({
         fontSize: "0.85em",
         background: mode(
           colors.bgSecondary.light,
-          colors.bgSecondary.dark
+          "#2b141d"
+          // colors.bgSecondary.dark
         )(props),
         // fontStyle: "italic",
         transition,
