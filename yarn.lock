@@ -2559,7 +2559,7 @@
 
 "@netlify/functions@^0.7.2":
   version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-0.7.2.tgz#9d39553b94e7aaa86dddf515bdbaed3e89998122"
+  resolved "https://registry.npmjs.org/@netlify/functions/-/functions-0.7.2.tgz#9d39553b94e7aaa86dddf515bdbaed3e89998122"
   integrity sha512-xf45ZqQukMxmlkqNMC5BXdFMaVZ8VqF42MV5zA5nKVOh2V0mhYlcbTYlVbS/K2/rtvQ3W8lxxixYl4NT7kq6Bg==
   dependencies:
     is-promise "^4.0.0"
@@ -3019,6 +3019,11 @@
   version "0.16.1"
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
+
+"@types/spotify-web-playback-sdk@^0.1.9":
+  version "0.1.11"
+  resolved "https://registry.npmjs.org/@types/spotify-web-playback-sdk/-/spotify-web-playback-sdk-0.1.11.tgz#8844508170d1e22cb056af3af99e8120f0c49946"
+  integrity sha512-jso3WBjbx9gTUc62ze5MFX2npL2/IZfxnv0iiF5dd+6QXz47r/8scJUUyCi4tgk6MPrdGkj8NiGuBQ1YaxG5jg==
 
 "@types/tinycolor2@1.4.2":
   version "1.4.2"
@@ -12676,6 +12681,13 @@ react-side-effect@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
   integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
+
+react-spotify-web-playback-sdk@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/react-spotify-web-playback-sdk/-/react-spotify-web-playback-sdk-2.0.0.tgz#4805d000c6122bfd9cee3c96ec06c8835372f4a4"
+  integrity sha512-uF8g2ByOyPIegMVcyQUQqs4ZIGcjQUalJCfeExG2HmbXhy9fDQAQpxlXeo5nlw6K4H4xk+j6u/Sa+WZ9RXw34A==
+  dependencies:
+    "@types/spotify-web-playback-sdk" "^0.1.9"
 
 react-style-singleton@^2.1.0:
   version "2.1.1"
