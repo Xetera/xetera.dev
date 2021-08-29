@@ -3,7 +3,7 @@ import path from "path"
 import { createFilePath } from "gatsby-source-filesystem"
 import { createOpenGraphImage } from "gatsby-plugin-open-graph-images"
 import { postPreviewDimensions } from "./src/shared"
-import { getAnilist, getOsu, getSpotify } from "./fetcher"
+import { getAnilist, getOsu, getSpotifyTracks } from "./fetcher"
 
 const blogPostPreview = path.resolve(
   path.join(__dirname, `./src/templates/preview.jsx`)
@@ -21,7 +21,7 @@ export const sourceNodes = async ({
   const [anilist, osu, spotify] = await Promise.all([
     getAnilist(),
     getOsu(),
-    getSpotify(),
+    getSpotifyTracks(),
   ])
   console.log({ spotify })
   actions.createNode({
