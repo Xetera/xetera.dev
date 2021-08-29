@@ -2,11 +2,9 @@ import React, { useCallback, useRef, useState } from "react"
 import { useEffect } from "react"
 import Cookie from "js-cookie"
 import {
-  useErrorState,
   usePlaybackState,
   usePlayerDevice,
   useSpotifyPlayer,
-  useWebPlaybackSDKReady,
   WebPlaybackSDK,
 } from "react-spotify-web-playback-sdk"
 import { useMount, useWindowSize } from "react-use"
