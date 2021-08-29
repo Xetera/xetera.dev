@@ -74,7 +74,7 @@ export function PlayerWrapper({ element }) {
   const [mounted, setMounted] = useState(false)
   useMount(() => setMounted(true))
   if (!mounted) {
-    return null
+    return element
   }
   return (
     <Box>
