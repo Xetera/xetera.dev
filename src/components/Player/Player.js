@@ -99,7 +99,7 @@ export function Player() {
       })
   }, [])
 
-  if (win.width < 990) {
+  if (typeof window !== "undefined" && win.width < 990) {
     return null
   }
 
@@ -212,7 +212,6 @@ const PlayerControls = ({
   setVolume,
   refreshToken,
 }) => {
-  const webPlaybackSDKReady = useWebPlaybackSDKReady()
   const inside = useRef()
   const mainPlayer = useRef()
   const [closed, setClosed] = useLocalStorage("playerClosed", true)
@@ -324,6 +323,7 @@ const PlayerControls = ({
             <Box layerStyle="bgSecondary" borderRadius="lg" p={2} h={10} w={10}>
               <StaticImage
                 quality="100"
+                alt="Spotify logo"
                 src="./spotify.png"
                 placeholder="none"
                 style={{
