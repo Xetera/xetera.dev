@@ -9,7 +9,7 @@ import {
   useWebPlaybackSDKReady,
   WebPlaybackSDK,
 } from "react-spotify-web-playback-sdk"
-import { useWindowSize } from "react-use"
+import { useMount, useWindowSize } from "react-use"
 import {
   Box,
   Flex,
@@ -71,6 +71,20 @@ const redirectUri =
 const clientId = "b376c65fb6ab4cf4af6648fffb308ddc"
 
 const SPOTIFY_STATUS = "spotifyLoggedIn"
+
+export function PlayerWrapper({ element }) {
+  const [mounted, setMounted] = useState(false)
+  useMount(() => setMounted(true))
+  if (!mounted) {
+    return null
+  }
+  return (
+    <Box>
+      <Player />
+      {element}
+    </Box>
+  )
+}
 
 export function Player() {
   const token = useRef()
