@@ -20,7 +20,7 @@ export const colors = {
   },
   bgPrimary: {
     light: "#f3f3f3",
-    dark: "gray.900",
+    dark: "#141621",
   },
   bgSecondary: {
     light: "#e2e9ec",
@@ -54,7 +54,9 @@ export const colors = {
     dark: "#62daff",
     light: "#256bc1",
   },
-  brandBackground: {},
+  brandBackground: {
+    200: "#256bc1",
+  },
   brandLight: {
     dark: "hsl(333deg, 100%, 55%)",
     dark: "hsl(333deg, 100%, 55%)",

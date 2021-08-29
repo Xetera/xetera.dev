@@ -1,8 +1,9 @@
+import "dotenv/config"
 import path from "path"
 import { createFilePath } from "gatsby-source-filesystem"
 import { createOpenGraphImage } from "gatsby-plugin-open-graph-images"
 import { postPreviewDimensions } from "./src/shared"
-import { getAnilist, getOsu } from "./fetcher"
+import { getAnilist, getOsu, getSpotify } from "./fetcher"
 
 const blogPostPreview = path.resolve(
   path.join(__dirname, `./src/templates/preview.jsx`)
@@ -17,7 +18,12 @@ export const sourceNodes = async ({
   createNodeId,
   createContentDigest,
 }) => {
-  const [anilist, osu] = await Promise.all([getAnilist(), getOsu()])
+  const [anilist, osu, spotify] = await Promise.all([
+    getAnilist(),
+    getOsu(),
+    getSpotify(),
+  ])
+  console.log({ spotify })
   actions.createNode({
     ...anilist,
     id: createNodeId(`user-information-anilist`),
@@ -35,6 +41,19 @@ export const sourceNodes = async ({
       contentDigest: createContentDigest(osu),
     },
   })
+  if (spotify) {
+    const spotifyTopTracksId = createNodeId(
+      `user-information-spotify-top-tracks`
+    )
+    actions.createNode({
+      tracks: spotify,
+      id: spotifyTopTracksId,
+      internal: {
+        type: "SpotifyTopTracks",
+        contentDigest: createContentDigest(spotify),
+      },
+    })
+  }
 }
 
 const staticPreviewMapping = {
