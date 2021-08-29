@@ -85,16 +85,15 @@
     "typeface-sriracha": "^1.1.13",
     "typography": "^0.16.19",
     "typography-theme-sutro": "^0.16.19",
-    "typography-theme-wordpress-2016": "^0.16.19"
-  },
-  "devDependencies": {
+    "typography-theme-wordpress-2016": "^0.16.19",
     "@netlify/plugin-gatsby": "^1.0.3",
     "@types/ms": "^0.7.31",
-    "gatsby-plugin-root-import": "^2.0.6",
+    "gatsby-plugin-root-import": "^2.0.7",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.24",
     "netlify-cli": "^6.7.7",
     "prettier": "2.3.1"
   },
+  "devDependencies": {},
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "keywords": [
     "gatsby"
