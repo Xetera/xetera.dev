@@ -2,7 +2,7 @@ import React from "react"
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react"
 import { postPreviewDimensions } from "../shared"
 import avatar from "@assets/avatars/xetera.png"
-import { useBrandColor } from "../hooks/color"
+import "./disable-spotify.css"
 
 export default function StaticPreview({ pageContext, image = avatar }) {
   const { title, description } = pageContext

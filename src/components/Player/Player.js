@@ -332,7 +332,14 @@ const PlayerControls = ({
             exit={{ opacity: 0 }}
             zIndex={2}
           >
-            <Box layerStyle="bgSecondary" borderRadius="lg" p={2} h={10} w={10}>
+            <Box
+              layerStyle="bgSecondary"
+              borderRadius="lg"
+              p={2}
+              h={10}
+              w={10}
+              className="spotify-button"
+            >
               <StaticImage
                 quality="100"
                 alt="Spotify logo"
