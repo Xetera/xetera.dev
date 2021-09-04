@@ -1,0 +1,87 @@
+---
+title: ⌨️ Understanding type systems
+description: What is static typing in programming and why is it going to change your life?
+date: 2021-09-04
+tags:
+  - Programming
+  - Guide
+---
+
+What is a bug in a computer program? Let's start with a very basic Javascript example that has been overused by every article ever written about types.
+
+```js
+function addNumbers(first, second) {
+  return first + second
+}
+
+addNumbers(5, 2)
+// 7
+```
+
+Very straightforward in terms of basic examples go. What happens if we decide to call this with things other than a number though?
+
+```js
+addNumbers([], 2)
+// "2"
+
+addNumbers({}, 10)
+// 10
+
+addNumbers(Symbol.for("LOONA"), 365)
+// Uncaught TypeError: Cannot convert a Symbol value to a number
+```
+
+We get a single unexpected successful result, a somewhat correct but questionable result, and a straight up error depending on what we pass into the function. Now, aside from Javascript's funky and inconsistent behavior --which I like to make fun of often, but is not the point I'm trying to make here-- there's a bug in this program. What is this bug though?
+
+## Bug hunting
+
+When writing `addNumbers`, we made a small but significant assumption about the data that we're working with, which is that we will be adding two **numbers** together, and nothing else. Unknowingly violating that assumption later down the line caused us to run into problems where the code we wrote stated behaving in strange ways that we never originally intended it to behave in.
+
+The bugs you introduce in your programs can have serious consequences, so how do we prevent these problems from appearing in our code and causing problems in the real world outside of just your editor?
+
+The first approach is a philosophy I've coined as JDMMM which stands for <T>Just Don't Make Mistakes Man</T>. Those of you who have ever written a single line of code before might have realized that the above mistake can be fixed by simply not calling the function in the incorrect way, and you would be 100% correct if you did, that will indeed fix the problem. Simply not doing the wrong thing is a philosophy we've adhered to as developers for many decades ever since the first line of code was ever written. As a dev, you get better as you get more experience writing code, and and you will inevitably end up introducing fewer bugs over time as a result of it. Dev teams also frequently engage in code review (which I always encourage) where they look over each others code to make sure that they're not introducing any bugs in their programs. When it works perfectly, this option of writing a correct program is by far the cheapest and the least time consuming. You simply write a correct program and tada, that's all.
+
+Sadly, the technique of "don't make mistakes dawg just git gud lol" hasn't exactly worked out well for us over the past few decades. Engineers have introduced bugs and terrifying security vulnerabilities like <Link href="https://youtu.be/MyldPMn95kk" target="_blank">Shellshock</Link>, Heartbleed, Android's Stagefright, and plenty more into critical software with a neat little language built entirely on this philosophy called `C`.
+
+![Stagefright logo](./stagefright.jpg)
+
+<Text textAlign="center" layerStyle="textTertiary" mb={3}>
+  Serious vulnerabilities like Stagefright always have really cool artwork made
+  after them for some reason
+</Text>
+
+Just to be clear, these developers are not your average Joes who will accidentally pass a `Symbol` into `addNumbers`, they're some of the most brilliant engineers out there, working on fields they're experts on. They have an extensive understanding of the problems they're solving, the tools they're using, and the environment they're working in. They have a team of equally talented developers reviewing their work and professional security teams auditing the code they write; yet these bugs still manage to pass through the cracks.
+
+The company that originally revealed the Stagefright vulnerability said that (paraphrased) in order to prevent these kinds of errors with caution alone, devs would have to be "very, very, very, very careful when coding. More careful than the entirety of the Android security team, for sure". So how do we prevent these mistakes from slipping through if not with more caution?
+
+This is where the second approach comes in. Historically, there has been an alternative we've recently started turning to after realizing that there are tasks we cannot complete efficiently enough --even when working together in a team-- called automation. If you're a developer making mistakes in your code you're not a bad developer, you're a bad computer. In very abstract terms, the problem that needs to be solved here is making sure that assumptions made about how a program functions should not be violated. As convenient as it would be, cannot exactly get a program to read our minds and check the correctness of a program by itself. So if we want to automate this process, we need to be able to tell a program about our assumptions so it can be checked for consistency. To do that, we need to be able to speak a language of <T>restrictions</T> that the computer can understand.
+
+## Thinking in types
+
+In our earlier Javascript example, we had a language a computer could read to execute the code, but not one that could be used to check the consistency of the program. We're free to violate any rules we may have set up in our head, and the program will make its best guess to try to figure out what's going on when it has to deal with errors, often not matching what we had in mind when writing the code. To solve this, lets make up our own rule system so a separate program can make sure that our original program is
+
+import { RiAtFill } from "react-icons/ri"
+
+<Callout title="Disclaimer" icon={<RiAtFill />}>
+  <Text w="full" fontSize="md" layerStyle="textSecondary">
+    Part of this post was my take on trying to convey the idea behind{" "}
+    <Link
+      rel="noopener external"
+      target="_blank"
+      href="https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/"
+    >
+      Parse, don't validate
+    </Link>{" "}
+    by Alexis King in a format that's approachable for a general audience. You
+    absolutely <b>must</b> read it along with everything else she's ever written
+    because she's an incredible programmer and an equally good writer. Go follow
+    her on{" "}
+    <Link target="_blank" href="https://twitter.com/lexi_lambda">
+      Twitter
+    </Link>{" "}
+    too.
+    <Box mt={2}>
+      Most of her examples are in Haskell so go learn that first if you need to.
+    </Box>
+  </Text>
+</Callout>
