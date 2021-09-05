@@ -182,6 +182,12 @@ export default extendTheme({
         // transition,
         // padding: "1px 5px",
       },
+      ".highlight-line": {
+        background: mode(
+          colors.bgSecondary.light,
+          colors.bgSecondary.dark
+        )(props),
+      },
       ".blog-post :is(h1, h2, h3, h4, h5, h6) > a": {
         // resetting the link colors of article headings
         color: "inherit",
@@ -193,6 +199,8 @@ export default extendTheme({
         marginBottom: 0,
       },
       ".token-line": {
+        paddingInlineStart: 3,
+        paddingInlineEnd: 3,
         whiteSpace: "pre-wrap",
         wordBreak: "break-word",
       },

@@ -454,8 +454,7 @@ function Code({ children, className, metastring }) {
         {({ tokens, getLineProps, getTokenProps }) => (
           <Text
             as="pre"
-            py={[2]}
-            px={[4]}
+            py={2}
             transition={transition}
             borderWidth={["1px"]}
             wordBreak="break-all"
@@ -588,25 +587,33 @@ export const overrides = {
   ),
 }
 
-export const Callout = forwardRef(({ children, title, icon, ...rest }, ref) => {
-  return (
-    <Box
-      p={6}
-      layerStyle="borderSubtle"
-      borderWidth="1px"
-      borderRadius="md"
-      {...rest}
-      ref={ref}
-    >
-      {(icon || title) && (
-        <Flex mb={2}>
-          {icon}
-          <Heading fontSize="md" ml={3}>
-            {title}
-          </Heading>
-        </Flex>
-      )}
-      <VStack spacing={4}>{children}</VStack>
-    </Box>
-  )
-})
+export const Callout = forwardRef(
+  ({ children, title, icon, smallText, ...rest }, ref) => {
+    return (
+      <Box
+        p={6}
+        layerStyle="borderSubtle"
+        borderWidth="1px"
+        borderRadius="md"
+        {...rest}
+        ref={ref}
+      >
+        {(icon || title) && (
+          <Flex mb={2}>
+            {icon && <Box mr={3}>{icon}</Box>}
+            <Heading fontSize="md">{title}</Heading>
+          </Flex>
+        )}
+        <VStack spacing={4}>
+          {smallText ? (
+            <Text layerStyle="textTertiary" fontSize="md" w="full">
+              {children}
+            </Text>
+          ) : (
+            children
+          )}
+        </VStack>
+      </Box>
+    )
+  }
+)
