@@ -331,7 +331,7 @@ export const DiscordMessage = forwardRef(
           <DiscordMessageAvatar avatar={avatar} username={username} />
         </Box>
         <Box width="100%">
-          <Flex alignItems="baselin" mb={1} lineHeight="22.5px">
+          <Flex alignItems="baseline" mb={1} lineHeight="22.5px">
             <Heading
               fontSize="15.75px"
               fontWeight="medium"
@@ -345,7 +345,6 @@ export const DiscordMessage = forwardRef(
                 ml={2}
                 fontWeight="normal"
                 fontSize="xs"
-                color="#72767d"
                 color="text.500"
               >
                 {date}
