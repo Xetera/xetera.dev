@@ -25,7 +25,7 @@ import {
   useColorModePreference,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { colors, transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { colors, transition } from "../data/theme"
 import { maxWidth } from "../shared"
 import { avatars } from "../components/Avatars"
 
@@ -45,23 +45,23 @@ const Navigator = ({ pos, link }) => {
       overflow="hidden"
       borderRadius="sm"
       borderWidth="1px"
-      layerStyle={"borderSubtle"}
+      borderColor="borderSubtle"
     >
       <Heading
         fontSize="md"
         as="h3"
         fontWeight="bold"
         mb={1}
-        layerStyle={link ? "textPrimary" : "textTertiary"}
+        color={link ? "text.100" : "text.500"}
       >
         {isLeft ? "Previous" : "Next"} Article
       </Heading>
       {link ? (
-        <Text as="p" mb={0} fontSize="md" layerStyle="textSecondary">
+        <Text as="p" mb={0} fontSize="md" color="text.300">
           {link.frontmatter.title}
         </Text>
       ) : (
-        <Text mb={0} as="i" layerStyle="textTertiary" fontSize="md">
+        <Text mb={0} as="i" color="text.500" fontSize="md">
           {isLeft ? (
             "Wow you just read the first post. Why are you even here?"
           ) : (
@@ -115,21 +115,16 @@ export default function Post({ data, pageContext, location }) {
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
   const brand = useBrandColor()
-  const theme = useColorModePreference()
   const brandSecondary = useBrandSecondaryColor()
   const { imageTop, imageBottom } = post.frontmatter
-  const borderSubtle = useColorModeValue(
-    colors.borderSubtle.light,
-    colors.borderSubtle.dark
-  )
   const isDraft = post.frontmatter.draft
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom}>
         <Box
           transition={transition}
-          layerStyle="bgPostHeader"
-          borderColor={borderSubtle}
+          background="bgPostHeader"
+          borderColor="borderSubtle"
           pt={[8, 12, 24]}
           borderBottomWidth="1px"
         >
@@ -159,7 +154,7 @@ export default function Post({ data, pageContext, location }) {
                 </Flex>
               </Box>
             )}
-            <Flex alignItems="center" layerStyle="textTertiary">
+            <Flex alignItems="center" color="text.500">
               <Text as="time" dateTime={post.frontmatter.date} color="gray.500">
                 {post.frontmatter.date}
               </Text>
@@ -168,6 +163,7 @@ export default function Post({ data, pageContext, location }) {
             </Flex>
             <Heading
               as="h1"
+              color="text.100"
               fontSize={["xl", "2xl", "3xl"]}
               lineHeight="1.4"
               fontWeight="black"
@@ -177,7 +173,7 @@ export default function Post({ data, pageContext, location }) {
             <Text
               fontSize={["lg", "xl"]}
               fontWeight="medium"
-              layerStyle="textTertiary"
+              color="text.500"
             >
               {post.frontmatter.description}
             </Text>
@@ -245,7 +241,7 @@ export default function Post({ data, pageContext, location }) {
                   blockquote: ({ children, ...props }) => (
                     <Box
                       as="blockquote"
-                      layerStyle="borderSubtle"
+                      borderColor="borderSubtle"
                       borderLeftWidth="2px"
                       borderLeft="solid"
                       paddingInlineStart={4}

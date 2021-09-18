@@ -1,5 +1,5 @@
 import { useColorModeValue } from "@chakra-ui/color-mode"
-import { colors } from "../@chakra-ui/gatsby-plugin/theme"
+import { colors } from "../data/theme"
 
 export function useBrandSecondaryColor() {
   return useColorModeValue(

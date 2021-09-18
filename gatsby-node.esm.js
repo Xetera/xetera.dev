@@ -23,7 +23,6 @@ export const sourceNodes = async ({
     getOsu(),
     getSpotifyTracks(),
   ])
-  console.log({ spotify })
   actions.createNode({
     ...anilist,
     id: createNodeId(`user-information-anilist`),

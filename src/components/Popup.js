@@ -1,11 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { m, AnimatePresence } from "framer-motion"
+import { AnimatePresence, m } from "framer-motion"
 import { maxWidth } from "../shared"
 import { Box, Flex } from "@chakra-ui/layout"
-import { useBrandColor } from "../hooks/color"
-import { forwardRef, useColorModeValue } from "@chakra-ui/react"
-import { colors, transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { forwardRef } from "@chakra-ui/react"
+import { transition } from "../data/theme"
 
 export const ToastContext = React.createContext({
   jsx: null,
@@ -15,12 +14,15 @@ export const ToastContext = React.createContext({
 export const Toastable = forwardRef(({ text, children, ...rest }, ref) => {
   const [hovering, setHovering] = React.useState(null)
   const { setJsx } = React.useContext(ToastContext)
+
   function onEnter() {
     setJsx(children)
   }
+
   function onLeave() {
     setJsx(false)
   }
+
   return (
     <Box
       as="span"
@@ -46,14 +48,12 @@ export function PopupPortal({ children }) {
   React.useEffect(() => {
     setLocation(document.querySelector("#___gatsby"))
   }, [])
-  console.log(location)
   if (!location) return null
   return ReactDOM.createPortal(children, location)
 }
 
 export default function Popup({ className }) {
   const { jsx } = React.useContext(ToastContext)
-  const brand = useBrandColor()
   const hovered = Boolean(jsx)
   const targetY =
     typeof window !== "undefined" && window.innerWidth > 600 ? "-10vh" : "-10vh"
@@ -70,7 +70,7 @@ export default function Popup({ className }) {
       transition={transition}
       backgroundPosition={hovered ? "100px" : "0"}
       opacity={hovered ? 1 : 0}
-      layerStyle="bgPopupShadow"
+      background="bgPopupShadow"
       width="100%"
       bottom={0}
       left={0}
@@ -81,8 +81,9 @@ export default function Popup({ className }) {
           <MotionFlex
             maxWidth={maxWidth}
             width={["auto", null, "100%"]}
-            borderLeft={`2px solid ${brand}`}
-            layerStyle="bgPrimary"
+            borderLeft={`2px solid`}
+            borderColor="brand"
+            background="bgPrimary"
             transition={{ type: "tween", duration: 0.24 }}
             initial={{
               opacity: 0,

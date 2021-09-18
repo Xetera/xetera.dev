@@ -130,8 +130,6 @@ const handler: Handler = async (event, context) => {
       body: searchParams.toString(),
     }).then(r => r.json())
 
-    console.log({ response })
-
     const url = new URL(event.queryStringParameters.state)
 
     const cookies = makeCookies(response.refresh_token)

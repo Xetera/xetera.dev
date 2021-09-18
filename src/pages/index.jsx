@@ -41,7 +41,7 @@ const BlogIndex = ({ data, pageContext }) => {
             </Heading>
             <Flex alignItems="center">
               <ExternalLink
-                layerStyle="textSecondary"
+                color="text.300"
                 fontSize="xs"
                 mr={2}
                 href="https://github.com/xetera/xetera.dev"

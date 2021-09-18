@@ -19,7 +19,7 @@ import { RiExternalLinkLine } from "react-icons/ri"
   href="https://theweek.com/articles/454320/62-percent-all-web-traffic-comes-from-bots"
   rel="noopener nofollower"
   target="_blank"
-  color="textPrimary"
+  color="text.100"
 >
   <Heading mb={6} fontSize={["xl", "2xl", null, "3xl"]}>
     62% of all web traffic comes from bots
@@ -40,12 +40,12 @@ export const Botanists = () => (
           Botany
         </Heading>
         <Flex
-          layerStyle="borderSubtlePrimary"
+          borderColor="borderSubtlePrimary"
           borderWidth="1px"
           borderRadius="md"
           px={2}
         >
-          <Text fontSize="xs" layerStyle="textTertiary">
+          <Text fontSize="xs" color="text.500">
             Noun
           </Text>
         </Flex>
@@ -110,7 +110,7 @@ I will be using an extremely scientifically rigorous model created by the bright
   />
   <Cell title="😈 Lawful Evil">
     <Flex width="100%" justifyContent="center" alignItems="center" flex={1}>
-      <Heading layerStyle="textSecondary">?</Heading>
+      <Heading color="text.300">?</Heading>
     </Flex>
   </Cell>
   <Cell
@@ -257,7 +257,7 @@ I'm a huge fan of this little world we've built around automation and the endles
 import { GiButterflyWarning } from "react-icons/gi"
 
 <Callout title="For The Record" icon={<GiButterflyWarning />}>
-  <Text layerStyle="textSecondary" textAlign="left" alignSelf="flex-start">
+  <Text color="text.300" textAlign="left" alignSelf="flex-start">
     I've never actually played dungeons & dragons so if the reasoning behind
     where I put things in my alignment chart seems off then uh... I don't really
     care, sorry nerds.

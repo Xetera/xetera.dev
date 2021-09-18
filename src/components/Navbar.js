@@ -1,20 +1,21 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { Box, Flex } from "@chakra-ui/layout"
 import { RiSunFoggyLine, RiMoonLine } from "react-icons/ri"
-import { useColorMode } from "@chakra-ui/color-mode"
 import { useLocation } from "@reach/router"
 import { useBreakpointValue } from "@chakra-ui/media-query"
-import { transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { transition } from "../data/theme"
 import { motion } from "framer-motion"
 import { AnimatePresence } from "framer-motion"
 import { Text } from "@chakra-ui/react"
+import { ThemeProvider } from "../data/themeProvider"
 
 const MotionText = motion(Text)
 
 export default function Navbar() {
   const [hover, setHover] = React.useState(false)
+  const { theme, setTheme, toggle } = useContext(ThemeProvider)
   const [position, setPosition] = React.useState(0)
   const scrollHandler = React.useCallback(() => {
     setPosition(window.scrollY)
@@ -27,7 +28,6 @@ export default function Navbar() {
   const pinned = position === 0
   const iconSize = useBreakpointValue([24, 26, 28])
   const location = useLocation()
-  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Flex
       justifyContent="space-between"
@@ -80,18 +80,19 @@ export default function Navbar() {
               )}
             </AnimatePresence>
           </Flex>
-          {/* <RiArrowLeftFill size={iconSize ?? 26} /> */}
+          {/* <RiArrowLeftFill size={iconSize ?? 27} /> */}
         </Link>
       )}
       <Box
         p={2}
-        onClick={toggleColorMode}
+        color="text.100"
+        onClick={() => setTheme(toggle)}
         cursor="pointer"
         as="button"
         pointerEvents="all"
         aria-label="theme switch"
       >
-        {colorMode === "light" ? (
+        {theme === "light" ? (
           <RiMoonLine size={iconSize} />
         ) : (
           <RiSunFoggyLine size={iconSize} />

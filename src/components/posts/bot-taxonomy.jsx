@@ -11,16 +11,16 @@ import {
 
 export const Cell = ({ options, title, subtitle, children }) => (
   <Box
-    layerStyle="borderSubtlePrimary"
+    borderColor="borderSubtlePrimary"
     borderWidth="1px"
     _hover={{
-      layerStyle: "borderSubtle",
+      background: "borderSubtle",
     }}
   >
     <Flex
       as="section"
       flexDirection="column"
-      layerStyle={["textPrimary"]}
+      color="text.100"
       height="100%"
       sx={{ aspectRatio: "1/1" }}
       fontSize="md"
@@ -28,7 +28,7 @@ export const Cell = ({ options, title, subtitle, children }) => (
       lineHeight={6}
       width="100%"
     >
-      <Flex layerStyle="bgSecondary" justifyContent="center">
+      <Flex background="bgSecondary" justifyContent="center">
         <Link
           href={`#${title.toLowerCase().slice(2).split(" ").join("-")}`}
           width="100%"
@@ -40,7 +40,7 @@ export const Cell = ({ options, title, subtitle, children }) => (
           textAlign="center"
           color="inherit"
           fontSize={["sm", "md"]}
-          layerStyle="textTertiary"
+          color="text.500"
           py={2}
         >
           {title}
@@ -58,7 +58,7 @@ export const Cell = ({ options, title, subtitle, children }) => (
           py={2}
           m={0}
           as="li"
-          layerStyle="textSecondary"
+          color="text.300"
           styleType="korean-hangul-formal"
           stylePosition="inside"
           fontSize="sm"

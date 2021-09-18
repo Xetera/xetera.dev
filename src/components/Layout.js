@@ -5,7 +5,7 @@ import { Box, Flex, Grid } from "@chakra-ui/layout"
 import Navbar from "./Navbar"
 import { forwardRef } from "@chakra-ui/system"
 import { domAnimation, LazyMotion } from "framer-motion"
-import { transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { transition } from "../data/theme"
 
 export const Hr = forwardRef((props, ref) => {
   return (
@@ -13,7 +13,7 @@ export const Hr = forwardRef((props, ref) => {
       as="hr"
       my={3}
       transition={transition}
-      layerStyle="bgSubtle"
+      background="borderSubtle"
       border="none"
       height="1px"
       {...props}
@@ -29,7 +29,7 @@ export const LayoutContent = forwardRef((props, ref) => {
     <Box width="100%" overflow="hidden">
       <Grid
         as="main"
-        layerStyle="textPrimary"
+        color="text.100"
         fontWeight="regular"
         gap={12}
         p={layoutContentPadding}

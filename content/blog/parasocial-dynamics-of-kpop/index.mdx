@@ -18,7 +18,7 @@ imageBottom:
 
 import { FaExclamationCircle } from "react-icons/fa"
 
-<WideBanner centered bordered layerStyle="bgSecondary">
+<WideBanner centered bordered background="bgSecondary">
   <Heading
     fontSize="lg"
     fontWeight="bold"
@@ -60,7 +60,7 @@ export const Fancam = ({ children }) => (
   </Toastable>
 )
 
-<Box as="section" layerStyle="bgSecondary" >
+<Box as="section" background="bgSecondary" >
 <Flex flexFlow="row" p={4} justifyContent="space-between" fontSize={["xs", null, "sm"]}>
   <Flex alignItems="center">
     <Flex as="span" mr={4} alignItems="center">
@@ -71,7 +71,7 @@ export const Fancam = ({ children }) => (
       <b>@gowonlover2006</b>
     </Flex>
   </Flex>
-  <Box mb={0} ml={3} layerStyle="textTertiary" alignItems="flex-start" display={["none", null, "block"]}>
+  <Box mb={0} ml={3} color="text.500" alignItems="flex-start" display={["none", null, "block"]}>
     Replied to unrelated conversation 365 minutes ago
   </Box>
 </Flex>
@@ -92,7 +92,7 @@ export const Fancam = ({ children }) => (
         as="span"
         display="inline-flex"
         alignItems="center"
-        layerStyle="bgSecondary"
+        background="bgSecondary"
         p={4}
         width="min-content"
         whiteSpace="nowrap"
@@ -111,7 +111,7 @@ export const Fancam = ({ children }) => (
   </Toastable>
 </Box>
 
-<Box p={4} layerStyle="bgSecondary">
+<Box p={4} background="bgSecondary">
 
 <Flex flexFlow="row">
   <Box mr={4}>
@@ -298,10 +298,10 @@ Despite having a global reach, kpop as a genre also seems to be effective at spe
 centered
 mt={16}
 as="section"
-layerStyle="bgSecondary"
+background="bgSecondary"
 >
   <Box
-    layerStyle="textTertiary"
+    color="text.500"
   >
     <Flex
       position="absolute"
@@ -311,7 +311,7 @@ layerStyle="bgSecondary"
       py={[1]}
       px={3}
       fontSize="md"
-      layerStyle="bgSecondary"
+      background="bgSecondary"
       className="absolute bottom-100 py-2 lg:py-1 px-3 flex rounded-t-md bg-theme-alt"
     >
     <Box

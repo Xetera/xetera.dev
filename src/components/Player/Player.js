@@ -41,7 +41,6 @@ import { StaticImage } from "gatsby-plugin-image"
 import { useLocalStorage } from "react-use"
 import { AnimatePresence, motion } from "framer-motion"
 import { graphql, useStaticQuery } from "gatsby"
-import { colors } from "../../@chakra-ui/gatsby-plugin/theme"
 import format from "date-fns/format"
 import throttle from "lodash/throttle"
 
@@ -236,10 +235,7 @@ const PlayerControls = ({
   const playbackState = usePlaybackState(true, 100)
   const player = useSpotifyPlayer()
   const playerDevice = usePlayerDevice()
-  const scrollerColor = useColorModeValue(
-    colors.bgSecondary.light,
-    colors.bgSecondary.dark
-  )
+  const scrollerColor = "bgSecondary"
 
   useOutsideClick({
     ref: inside,
@@ -333,7 +329,7 @@ const PlayerControls = ({
             zIndex={2}
           >
             <Box
-              layerStyle="bgSecondary"
+              background="bgSecondary"
               borderRadius="lg"
               p={2}
               h={10}
@@ -373,7 +369,7 @@ const PlayerControls = ({
           ref={mainPlayer}
           onClick={handleClick}
         >
-          <Flex position="relative" width="300px" layerStyle="bgSecondary">
+          <Flex position="relative" width="300px" background="bgSecondary">
             <Flex
               position="absolute"
               bottom="-40px"
@@ -395,14 +391,14 @@ const PlayerControls = ({
                     width: "8px",
                   },
                   "&::-webkit-scrollbar-thumb": {
-                    background: scrollerColor,
+                    background: "bg.300",
                   },
                 }}
                 display="flex"
                 justifyContent="center"
                 flexDirection="column"
                 width="30px"
-                layerStyle="bgSecondary"
+                background="bgSecondary"
                 transition={{ type: "tween", duration: 0.3 }}
                 variants={{
                   open: { x: 0, opacity: 1 },
@@ -413,7 +409,7 @@ const PlayerControls = ({
               >
                 <Text
                   fontSize="xs"
-                  layerStyle="textTertiary"
+                  color="text.500"
                   textAlign="center"
                   pt={2}
                 >
@@ -426,7 +422,7 @@ const PlayerControls = ({
                     value={volume * 100}
                     onChange={e => setVolume(e / 100)}
                   >
-                    <SliderTrack layerStyle="bgPrimary">
+                    <SliderTrack background="bgPrimary">
                       <SliderFilledTrack bg="brandBackground.200" />
                     </SliderTrack>
                     <SliderThumb />
@@ -443,7 +439,7 @@ const PlayerControls = ({
               pointerEvents={trackListOpen ? "auto" : "none"}
             >
               <MotionBox
-                layerStyle="bgPrimary"
+                background="bgPrimary"
                 transition={{ type: "tween" }}
                 variants={{
                   open: { y: 0 },
@@ -466,7 +462,7 @@ const PlayerControls = ({
                       background: scrollerColor,
                     },
                   }}
-                  layerStyle="borderSubtle"
+                  borderColor="borderSubtle"
                   borderWidth="1px"
                   spacing={4}
                   alignItems="flex-start"
@@ -490,7 +486,7 @@ const PlayerControls = ({
                         playSong(i)
                       }}
                       alignItems="center"
-                      layerStyle={
+                      background={
                         playbackState?.track_window.current_track.uri === r.uri
                           ? "bgSecondary"
                           : ""
@@ -505,7 +501,7 @@ const PlayerControls = ({
                         width={7}
                         whiteSpace="nowrap"
                         textAlign="right"
-                        layerStyle="textTertiary"
+                        color="text.500"
                         fontSize="xs"
                         pr={3}
                       >
@@ -538,7 +534,7 @@ const PlayerControls = ({
                   lineHeight="1.2"
                   fontSize="xs"
                   fontWeight="medium"
-                  layerStyle="textPrimary"
+                  color="text.100"
                   letterSpacing="1.1px"
                   textTransform="uppercase"
                 >
@@ -556,7 +552,7 @@ const PlayerControls = ({
               {authorized ? (
                 <Tooltip label="Logout">
                   <Flex
-                    layerStyle="bgSecondary"
+                    background="bgSecondary"
                     p={1}
                     mb={1}
                     borderRadius="sm"
@@ -573,7 +569,7 @@ const PlayerControls = ({
                   label={trackListOpen ? "Hide tracklist" : "Show tracklist"}
                 >
                   <Flex
-                    layerStyle="bgSecondary"
+                    background="bgSecondary"
                     p={1}
                     borderRadius="sm"
                     onClick={e => {
@@ -587,7 +583,7 @@ const PlayerControls = ({
                 {authorized && (
                   <Tooltip label="Volume">
                     <Flex
-                      layerStyle="bgSecondary"
+                      background="bgSecondary"
                       p={1}
                       borderRadius="sm"
                       onClick={e => {
@@ -601,7 +597,7 @@ const PlayerControls = ({
                 )}
                 <Tooltip label="Minimize">
                   <Flex
-                    layerStyle="bgSecondary"
+                    background="bgSecondary"
                     p={1}
                     borderRadius="sm"
                     onClick={e => {
@@ -637,13 +633,13 @@ const PlayerControls = ({
               />
             </Flex>
             <HStack marginInlineStart={1} p={2}>
-              <VStack spacing={2} alignItems="flex-start">
+              <VStack spacing={2} alignItems="flex-start" color="text.300">
                 {trackName ? (
                   <Text
                     fontSize="sm"
                     fontWeight="bold"
                     lineHeight="1.2"
-                    layerStyle="textPrimary"
+                    color="text.100"
                   >
                     {trackName}
                   </Text>
@@ -679,7 +675,7 @@ const PlayerControls = ({
               <Tooltip label="Track's Spotify page">
                 <Link
                   p={1}
-                  layerStyle="borderSubtle"
+                  borderColor="borderSubtle"
                   right={2}
                   bottom={2}
                   w={7}
@@ -703,7 +699,7 @@ const PlayerControls = ({
             )}
           </Flex>
           <Flex
-            layerStyle="bgSecondary"
+            background="bgSecondary"
             mt={1}
             w="full"
             h="35px"
@@ -713,18 +709,18 @@ const PlayerControls = ({
             justifyContent="center"
           >
             {!authorized ? (
-              <Text fontSize="xs" layerStyle="textTertiary">
+              <Text fontSize="xs" color="text.500">
                 This widget connects to your Spotify account
               </Text>
             ) : timedOut ? (
-              <Text fontSize="xs" layerStyle="textSecondary">
+              <Text fontSize="xs" color="text.300">
                 Maybe change devices in your Spotify app?
               </Text>
             ) : playbackState ? (
               <HStack py={1}>
                 <Box
                   p={1}
-                  layerStyle="borderSubtle"
+                  borderColor="borderSubtle"
                   borderWidth="1px"
                   borderRadius="lg"
                   overflow="hidden"
@@ -736,7 +732,7 @@ const PlayerControls = ({
                 </Box>
                 <Box
                   p={1}
-                  layerStyle="borderSubtle"
+                  borderColor="borderSubtle"
                   borderWidth="1px"
                   borderRadius="lg"
                   overflow="hidden"
@@ -758,7 +754,7 @@ const PlayerControls = ({
                 </Box>
                 <Box
                   p={1}
-                  layerStyle="borderSubtle"
+                  borderColor="borderSubtle"
                   borderWidth="1px"
                   borderRadius="lg"
                   overflow="hidden"
@@ -811,7 +807,7 @@ const Seeker = ({ seek, position, duration }) => {
         display="block"
         h="3px"
       >
-        <SliderTrack layerStyle="bgSecondary">
+        <SliderTrack background="bgSecondary">
           <SliderFilledTrack bg="brandBackground.200" />
         </SliderTrack>
         <SliderThumb display={trackHover || trackDrag ? "block" : "none"} />

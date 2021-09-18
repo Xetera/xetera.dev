@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useContext, useRef } from "react"
 import Prism from "prism-react-renderer/prism"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import Theme from "prism-react-renderer/themes/vsDark"
@@ -21,9 +21,10 @@ import {
   Code as ChakraCode,
   useBreakpointValue,
 } from "@chakra-ui/react"
-import { transition } from "../@chakra-ui/gatsby-plugin/theme"
+import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
 import { VStack } from "@chakra-ui/layout"
+import { ThemeProvider } from "../data/themeProvider"
 export * from "./memes/Chatbox"
 export * from "./posts"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
@@ -80,7 +81,7 @@ export const WideBanner = forwardRef((props, ref) => {
       overflow="hidden"
       transition={transition}
       mb={6}
-      // layerStyle="bgSecondary"
+      // background="bgSecondary"
       ref={ref}
       {...rest}
     >
@@ -158,7 +159,7 @@ export function DiscordReaction({
       overflow="hidden"
     >
       <Image src={image} width="40px" height="40px" mr={2} />
-      <Text layerStyle="discordTextColor" mb={0} lineHeight="19px">
+      <Text color="discordTextColor" mb={0} lineHeight="19px">
         {reacted
           ? reacts === 1
             ? `You reacted with ${name}`
@@ -172,7 +173,7 @@ export function DiscordReaction({
   return (
     <Tooltip
       arrowShadowColor="gray.900"
-      layerStyle="discordBackground"
+      background="discordBackground"
       openDelay={500}
       label={tooltip}
       placement="top"
@@ -182,7 +183,7 @@ export function DiscordReaction({
       <Box
         display={reacts === 9 ? "none" : "inline-flex"}
         borderWidth="1px"
-        layerStyle="borderSubtle"
+        borderColor="borderSubtle"
         alignItems="center"
         borderRadius="md"
         cursor="pointer"
@@ -212,7 +213,7 @@ export const DiscordMessageContainer = ({ children }) => (
     centered
     py={2}
     my={6}
-    layerStyle="discordBackground"
+    background="discordBackground"
     inner={innerGap}
   >
     {children}
@@ -225,7 +226,7 @@ export const DiscordMessageText = forwardRef(({ children, ...props }, ref) => {
     <Container
       fontSize="16px"
       fontWeight="normal"
-      layerStyle="discordTextColor"
+      color="discordTextColor"
       lineHeight="22.5px"
       mb={1}
       ref={ref}
@@ -264,14 +265,14 @@ export const DiscordEmbed = forwardRef((props, ref) => {
       borderRadius="4px"
       {...props}
       ref={ref}
-      layerStyle="bgPrimary"
+      background="bgPrimary"
     >
       <Flex flexDirection="column" p={4} width="100%">
         <Text
           fontSize="sm"
           as="h3"
           fontWeight="thin"
-          layerStyle="textTertiary"
+          color="text.500"
           mt={0}
           mb={2}
         >
@@ -334,7 +335,7 @@ export const DiscordMessage = forwardRef(
             <Heading
               fontSize="15.75px"
               fontWeight="medium"
-              {...(!roleColor ? { layerStyle: "discordTextColor" } : {})}
+              {...(!roleColor ? { color: "discordTextColor" } : {})}
               color={roleColor}
               mb={0}
             >
@@ -345,7 +346,7 @@ export const DiscordMessage = forwardRef(
                 fontWeight="normal"
                 fontSize="xs"
                 color="#72767d"
-                layerStyle="textTertiary"
+                color="text.500"
               >
                 {date}
               </Box>
@@ -390,7 +391,7 @@ const calculateLinesToHighlight = meta => {
 function Code({ children, className, metastring }) {
   const shouldDisplayLineNumbers = useBreakpointValue([false, false, true])
   const extraProps = json5.parse(metastring ?? "{}") ?? {}
-  const { colorMode } = useColorMode()
+  const { theme } = useContext(ThemeProvider)
   if (typeof extraProps.lang === "undefined") {
     extraProps.lang = true
   }
@@ -411,11 +412,11 @@ function Code({ children, className, metastring }) {
               as={TitleType}
               width="full"
               mb={0}
-              // layerStyle="bgSecondary"
+              // background="bgSecondary"
               fontSize={["xs", null, "sm"]}
               borderTopRadius="sm"
               borderTopRadius="2px"
-              layerStyle="textSecondary"
+              color="text.300"
             >
               {extraProps.title}
             </Box>
@@ -427,7 +428,7 @@ function Code({ children, className, metastring }) {
               alignItems="center"
               justifySelf="flex-end"
             >
-              <Text fontSize="xs" layerStyle="textTertiary">
+              <Text fontSize="xs" color="text.500">
                 {highlighterClass.name}
               </Text>
               {highlighterClass.image && (
@@ -449,7 +450,7 @@ function Code({ children, className, metastring }) {
         {...defaultProps}
         code={children}
         language={language}
-        theme={colorMode === "dark" ? Theme : ThemeLight}
+        theme={theme === "dark" ? Theme : ThemeLight}
       >
         {({ tokens, getLineProps, getTokenProps }) => (
           <Text
@@ -458,7 +459,7 @@ function Code({ children, className, metastring }) {
             transition={transition}
             borderWidth={["1px"]}
             wordBreak="break-all"
-            layerStyle="borderSubtle"
+            borderColor="borderSubtle"
             position="relative"
             overflowX="auto"
             fontSize={["sm", null, "md"]}
@@ -479,7 +480,7 @@ function Code({ children, className, metastring }) {
                     fontSize="sm"
                     mr={4}
                     userSelect="none"
-                    layerStyle="textTertiary"
+                    color="text.500"
                     // className="mr-4 text-blueGray-600 select-none"
                   >
                     {i + 1}
@@ -524,7 +525,7 @@ export const T = forwardRef((props, ref) => {
     <Flex
       display="inline-flex"
       as="span"
-      layerStyle="textBrand"
+      color="brand.100"
       fontFamily="'Sriracha', 'Wotfard', serif"
       transition={transition}
       ref={ref}
@@ -544,12 +545,12 @@ export const Definition = forwardRef(
               {title}
             </Heading>
             <Flex
-              layerStyle="borderSubtlePrimary"
+              borderColor="borderSubtlePrimary"
               borderWidth="1px"
               borderRadius="md"
               px={2}
             >
-              <Text fontSize="xs" layerStyle="textTertiary">
+              <Text fontSize="xs" color="text.500">
                 {type}
               </Text>
             </Flex>
@@ -592,7 +593,7 @@ export const Callout = forwardRef(
     return (
       <Box
         p={6}
-        layerStyle="borderSubtle"
+        borderColor="borderSubtle"
         borderWidth="1px"
         borderRadius="md"
         {...rest}
@@ -606,7 +607,7 @@ export const Callout = forwardRef(
         )}
         <VStack spacing={4}>
           {smallText ? (
-            <Text layerStyle="textTertiary" fontSize="md" w="full">
+            <Text color="text.500" fontSize="md" w="full">
               {children}
             </Text>
           ) : (

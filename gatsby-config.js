@@ -21,12 +21,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: "@chakra-ui/gatsby-plugin",
-      options: {
-        resetCSS: true,
-      },
-    },
-    {
       resolve: "gatsby-plugin-root-import",
       options: {
         "@assets": path.join(__dirname, "content", "assets"),
