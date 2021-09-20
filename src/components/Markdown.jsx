@@ -3,7 +3,6 @@ import Prism from "prism-react-renderer/prism"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import Theme from "prism-react-renderer/themes/vsDark"
 import ThemeLight from "prism-react-renderer/themes/github"
-import json5 from "json5"
 import rangeParser from "parse-numeric-range"
 import { maxWidth } from "../shared"
 import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout"
@@ -15,12 +14,7 @@ import typescript from "@assets/tech/typescript.png"
 import javascript from "@assets/tech/javascript.png"
 import haskell from "@assets/tech/haskell.png"
 import python from "@assets/tech/python.png"
-import {
-  SkeletonCircle,
-  useBreakpoint,
-  Code as ChakraCode,
-  useBreakpointValue,
-} from "@chakra-ui/react"
+import { SkeletonCircle, useBreakpointValue } from "@chakra-ui/react"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
 import { VStack } from "@chakra-ui/layout"
@@ -389,7 +383,10 @@ const calculateLinesToHighlight = meta => {
 
 function Code({ children, className, metastring }) {
   const shouldDisplayLineNumbers = useBreakpointValue([false, false, true])
-  const extraProps = json5.parse(metastring ?? "{}") ?? {}
+  // basically I want to be able to declare objects here without adding quotes to keys
+  // which json5 allows me to do but json5 has a really big bundle size so I don't want to use it
+  // please forgive me for my sins javascript gods
+  const extraProps = eval(`(${metastring ?? "{}"})`)
   const { theme } = useContext(ThemeProvider)
   if (typeof extraProps.lang === "undefined") {
     extraProps.lang = true
