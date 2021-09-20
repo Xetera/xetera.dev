@@ -157,6 +157,9 @@ export function createTheme(theme) {
     },
     styles: {
       global: props => ({
+        ul: {
+          ml: "1em",
+        },
         code: {
           display: "inline-flex",
           fontWeight: "bold",
