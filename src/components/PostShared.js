@@ -3,8 +3,6 @@ import { Link as GatsbyLink } from "gatsby"
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
 import { RoughNotation } from "react-rough-notation"
-import { useBrandColor } from "../hooks/color"
-import { useColorModeValue } from "@chakra-ui/react"
 import { ThemeContext } from "@emotion/react"
 import { ThemeProvider } from "../data/themeProvider"
 import { colors } from "../data/theme"
@@ -33,7 +31,6 @@ export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
 export function PostList({ node }) {
   const title = node.frontmatter.title ?? node.fields.slug
   const { description, date } = node.frontmatter
-  const color = useBrandColor()
   const { theme } = useContext(ThemeProvider)
   const [hover, setHover] = React.useState(false)
 

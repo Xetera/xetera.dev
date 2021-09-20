@@ -17,14 +17,9 @@ import * as Chatbox from "../components/memes/Chatbox"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import * as ChakraReact from "@chakra-ui/react"
-import { useBrandColor, useBrandSecondaryColor } from "../hooks/color"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
-import {
-  Text,
-  useColorModePreference,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 import { colors, transition } from "../data/theme"
 import { maxWidth } from "../shared"
 import { avatars } from "../components/Avatars"
@@ -114,8 +109,6 @@ function makeHeader(type, fonts = ["xl", null, "2xl"]) {
 export default function Post({ data, pageContext, location }) {
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
-  const brand = useBrandColor()
-  const brandSecondary = useBrandSecondaryColor()
   const { imageTop, imageBottom } = post.frontmatter
   const isDraft = post.frontmatter.draft
   return (
@@ -136,13 +129,10 @@ export default function Post({ data, pageContext, location }) {
                   width="100%"
                   mx="auto"
                   flexFlow="row"
+                  justify="center"
                   maxWidth={maxWidth}
                 >
-                  <Text
-                    color={brand}
-                    fontSize={["sm", null, "lg"]}
-                    fontWeight="bold"
-                  >
+                  <Text fontSize={["sm", null, "lg"]} fontWeight="bold">
                     🥺 You're viewing a draft. This post is not published.
                   </Text>
                 </Flex>
@@ -177,7 +167,7 @@ export default function Post({ data, pageContext, location }) {
             <HStack
               justify="center"
               textTransform="uppercase"
-              fontSize="sm"
+              fontSize="xs"
               spacing={4}
               fontWeight="medium"
             >
@@ -221,7 +211,7 @@ export default function Post({ data, pageContext, location }) {
                   Toastable,
                   Hr,
                   a: ({ children, ...props }) => (
-                    <Link color={brandSecondary} {...props}>
+                    <Link color="brandSecondary" {...props}>
                       {children}
                     </Link>
                   ),

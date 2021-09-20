@@ -5,7 +5,6 @@ import ExternalLink from "./ExternalLink"
 import { Flex, Heading, Link, Stack, Text } from "@chakra-ui/layout"
 import { RiGithubFill, RiSafariLine, RiTwitterFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
-import { useBrandColor } from "../hooks/color"
 import { Hr } from "./Layout"
 import { m } from "framer-motion"
 import { useIsSafari } from "../hooks/is-safari"
@@ -20,7 +19,6 @@ const Bio = React.memo(
     const osuRank = Intl.NumberFormat("default").format(
       data.osu.statistics.globalRank
     )
-    const brand = useBrandColor()
     const twitter = data.site.siteMetadata.social.twitter
     const image = (
       <Flex
@@ -86,7 +84,7 @@ const Bio = React.memo(
             <Link
               href="https://github.com/xetera"
               color="unset"
-              _hover={{ color: brand }}
+              _hover={{ color: "brand.100" }}
               aria-label="github link"
             >
               <RiGithubFill size={28} />
@@ -94,7 +92,7 @@ const Bio = React.memo(
             <Link
               href={`https://twitter.com/${twitter}`}
               color="unset"
-              _hover={{ color: brand }}
+              _hover={{ color: "brand.100" }}
               aria-label="twitter link"
             >
               <RiTwitterFill size={28} />

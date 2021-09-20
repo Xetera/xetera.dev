@@ -3,7 +3,7 @@ import { Link as GatsbyLink, graphql, PageProps } from "gatsby"
 import Bio from "../components/Bio"
 import PostData, { PostList, Tags } from "../components/PostShared"
 import { Layout, LayoutContent } from "../components/Layout"
-import { Flex, Grid, Heading, Stack, Box, Link } from "@chakra-ui/layout"
+import { Flex, Grid, Heading, Stack, Box, Link, Text } from "@chakra-ui/layout"
 import { Helmet } from "react-helmet"
 import SEO from "../components/Seo"
 import { RiGithubFill } from "react-icons/ri"
@@ -31,14 +31,15 @@ const BlogIndex = ({ data, pageContext }) => {
             alignItems="center"
             width="100%"
           >
-            <Heading
-              fontSize="lg"
+            <Text
+              fontSize="md"
+              color="text.300"
               textTransform="uppercase"
               letterSpacing="1.5px"
-              fontWeight="bold"
+              fontWeight="medium"
             >
               {posts.length} Posts
-            </Heading>
+            </Text>
             <Flex alignItems="center">
               <ExternalLink
                 color="text.300"
