@@ -31,7 +31,7 @@ import { avatars } from "../components/Avatars"
 
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
-const { Box, Flex, Grid, Heading, Link } = Chakra
+const { Box, Flex, Grid, Heading, Link, HStack } = Chakra
 
 const Navigator = ({ pos, link }) => {
   const isLeft = pos === "left"
@@ -121,13 +121,7 @@ export default function Post({ data, pageContext, location }) {
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom}>
-        <Box
-          transition={transition}
-          background="bgPostHeader"
-          borderColor="borderSubtle"
-          pt={[8, 12, 24]}
-          borderBottomWidth="1px"
-        >
+        <Box transition={transition} pt={[8, 12, 24]}>
           <Grid
             gap={2}
             as="header"
@@ -154,29 +148,45 @@ export default function Post({ data, pageContext, location }) {
                 </Flex>
               </Box>
             )}
-            <Flex alignItems="center" color="text.500">
-              <Text as="time" dateTime={post.frontmatter.date} color="gray.500">
-                {post.frontmatter.date}
-              </Text>
-              <Box mx="10px">·</Box>
-              <Text color="gray.500">{post.fields.readingTime.text}</Text>
-            </Flex>
             <Heading
               as="h1"
+              mb={2}
+              textAlign="center"
               color="text.100"
               fontSize={["xl", "2xl", "3xl"]}
               lineHeight="1.4"
-              fontWeight="black"
+              fontWeight="bold"
             >
               {post.frontmatter.title}
             </Heading>
             <Text
               fontSize={["lg", "xl"]}
               fontWeight="medium"
-              color="text.500"
+              color="text.300"
+              textAlign="center"
             >
               {post.frontmatter.description}
             </Text>
+            <Flex alignItems="center" color="text.500" justify="center">
+              <Text as="time" dateTime={post.frontmatter.date}>
+                {post.frontmatter.date}
+              </Text>
+              <Box mx={2}>{"–"}</Box>
+              <Text>{post.fields.readingTime.text}</Text>
+            </Flex>
+            <HStack
+              justify="center"
+              textTransform="uppercase"
+              fontSize="sm"
+              spacing={4}
+              fontWeight="medium"
+            >
+              {post.frontmatter.tags.map((tag, i) => (
+                <Text color="brand.100" key={tag} color="brand.100">
+                  {tag}
+                </Text>
+              ))}
+            </HStack>
           </Grid>
         </Box>
         <LayoutContent mx="auto" maxWidth={maxWidth}>

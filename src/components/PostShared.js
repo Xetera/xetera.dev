@@ -34,7 +34,7 @@ export function PostList({ node }) {
   const title = node.frontmatter.title ?? node.fields.slug
   const { description, date } = node.frontmatter
   const color = useBrandColor()
-  const { theme }  = useContext(ThemeProvider)
+  const { theme } = useContext(ThemeProvider)
   const [hover, setHover] = React.useState(false)
 
   return (
@@ -56,16 +56,22 @@ export function PostList({ node }) {
         <Heading
           as="h2"
           display="inline"
-          fontSize="22px"
+          fontSize="lg"
           color="text.100"
           fontweight="bold"
           mb={1}
         >
-          <RoughNotation type="highlight" color={theme === "light" ? colors.highlight.light : colors.highlight.dark} show={hover}>
+          <RoughNotation
+            type="highlight"
+            color={
+              theme === "light" ? colors.highlight.light : colors.highlight.dark
+            }
+            show={hover}
+          >
             {title}
           </RoughNotation>
         </Heading>
-        <Text as="p" fontSize="18px" color="text.300">
+        <Text as="p" fontSize="md" color="text.300">
           {description}
         </Text>
       </Flex>

@@ -28,14 +28,14 @@ const baseColors = {
   text: {
     100: {
       dark: "#eee",
-      light: "black",
+      light: "#29292c",
     },
     300: {
-      light: "#2D3748",
       dark: "#CBD5E0",
+      light: "#454547",
     },
     500: {
-      dark: "#A0AEC0",
+      dark: "#718096",
       light: "#38404e",
     },
   },
@@ -148,7 +148,7 @@ export function createTheme(theme) {
       xs: "13px",
       sm: "14px",
       md: "16px",
-      lg: "19px",
+      lg: "20px",
       xl: "24px",
       "2xl": "32px",
       "3xl": "38px",
@@ -156,7 +156,7 @@ export function createTheme(theme) {
       "5xl": "56px",
     },
     styles: {
-      global: props => ({
+      global: {
         code: {
           display: "inline-flex",
           fontWeight: "bold",
@@ -202,18 +202,21 @@ export function createTheme(theme) {
           lineBreak: "auto",
           transition,
           color: pick(colors.text[300]),
-          background: pick({ light: colors.bgPrimary.light, dark: "#141621" }),
+          background: pick({
+            light: colors.bg[100].light,
+            dark: colors.bg[100].dark,
+          }),
         },
-      }),
+      },
     },
     components: {
       Link: {
-        baseStyle: props => ({
+        baseStyle: {
           color: pick({
             light: colors.brandSecondary.light,
-            dark: colors.brandSecondary.dark
+            dark: colors.brandSecondary.dark,
           }),
-        }),
+        },
       },
       // Heading: {
       //   baseStyle: props => ({
@@ -221,9 +224,9 @@ export function createTheme(theme) {
       //   }),
       // },
       Text: {
-        baseStyle: props => ({
+        baseStyle: {
           lineHeight: "1.7",
-        }),
+        },
       },
     },
     // colors
