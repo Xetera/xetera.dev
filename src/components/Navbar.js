@@ -16,16 +16,6 @@ const MotionText = motion(Text)
 export default function Navbar() {
   const [hover, setHover] = React.useState(false)
   const { theme, setTheme, toggle } = useContext(ThemeProvider)
-  const [position, setPosition] = React.useState(0)
-  const scrollHandler = React.useCallback(() => {
-    setPosition(window.scrollY)
-  }, [])
-  React.useEffect(() => {
-    document.addEventListener("scroll", scrollHandler)
-    return () => document.removeEventListener("scroll", scrollHandler)
-  }, [])
-  const shouldOverrideBackground = useBreakpointValue([true, null, null, false])
-  const pinned = position === 0
   const iconSize = useBreakpointValue([24, 26, 28])
   const location = useLocation()
   return (
@@ -44,7 +34,7 @@ export default function Navbar() {
         <Link to="/">
           <Flex
             pointerEvents="all"
-            filter={pinned ? "saturate(0.3)" : "saturate(1)"}
+            filter="saturate(1)"
             _hover={{ filter: "saturate(1)" }}
             p={2}
             alignItems="center"
@@ -80,7 +70,6 @@ export default function Navbar() {
               )}
             </AnimatePresence>
           </Flex>
-          {/* <RiArrowLeftFill size={iconSize ?? 27} /> */}
         </Link>
       )}
       <Box

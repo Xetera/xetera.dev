@@ -2,12 +2,15 @@ const path = require("path")
 require("dotenv/config")
 
 const siteTitle = `Xetera`
+const discordId = "140862798832861184"
 const themeColor = `#112130`
+
 module.exports = {
   siteMetadata: {
     title: siteTitle,
     author: {
       name: process.env.GATSBY_OWNER_FULL_NAME,
+      discordId,
     },
     description: "A place for my ramblings.",
     siteUrl: process.env.GATSBY_SITE_URL || "http://localhost:8000",
