@@ -1,6 +1,27 @@
 const path = require("path")
 require("dotenv/config")
 
+const cheerio = require("cheerio")
+
+const fixRelativeLinks = (html, siteUrl) => {
+  const $ = cheerio.load(html, {
+    decodeEntities: false,
+  })
+
+  $("a[href], img[src]").each(function () {
+    const href = $(this).attr("href")
+    if (typeof href == "string" && !href.startsWith("http")) {
+      $(this).attr("href", siteUrl + (href.startsWith("/") ? "" : "/") + href)
+    }
+    const src = $(this).attr("src")
+    if (typeof src == "string" && !src.startsWith("http")) {
+      $(this).attr("src", siteUrl + (src.startsWith("/") ? "" : "/") + src)
+    }
+  })
+
+  return $.html()
+}
+
 const siteTitle = `Xetera`
 const themeColor = `#112130`
 module.exports = {
@@ -108,5 +129,74 @@ module.exports = {
     },
     "gatsby-plugin-open-graph-images",
     "gatsby-plugin-webpack-bundle-analyser-v2",
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.description, // or excerpt
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  enclosure: {
+                    url:
+                      site.siteMetadata.siteUrl +
+                      edge.node.fields.slug +
+                      "thumbnail.png",
+                  },
+                  custom_elements: [
+                    {
+                      "content:encoded": fixRelativeLinks(
+                        edge.node.html,
+                        site.siteMetadata.siteUrl
+                      ),
+                    },
+                  ],
+                })
+              })
+            },
+            query: `{
+              allMdx(
+                sort: { fields: [frontmatter___date], order: DESC }
+                filter: { frontmatter: { draft: { ne: true } } }
+              ) {
+                edges {
+                  node {
+                    html
+                    fields { slug }
+                    frontmatter {
+                      title
+                      date
+                      description
+                    }
+                  }
+                }
+              }
+            }`,
+            output: "/rss.xml",
+            title: "Xetera",
+            // im not sure how to resolve site url automatically here
+            image_url: "https://xetera.dev/favicon-32x32.png",
+            feed_url: "https://xetera.dev/rss.xml",
+            site_url: "https://xetera.dev",
+          },
+        ],
+      },
+    },
   ],
 }
