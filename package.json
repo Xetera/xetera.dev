@@ -54,7 +54,7 @@
     "node-html-parser": "^3.3.5",
     "parse-numeric-range": "^1.2.0",
     "prism-react-renderer": "^1.1.1",
-    "prismjs": "^1.24.0",
+    "prismjs": "^1.25.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.0.0",
