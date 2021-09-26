@@ -10,3 +10,11 @@ export const DisableSpotify = () => (
     }}
   />
 )
+
+export const DisableNavbar = () => (
+  <div
+    dangerouslySetInnerHTML={{
+      __html: "<style>nav { display: none }</style>",
+    }}
+  />
+)

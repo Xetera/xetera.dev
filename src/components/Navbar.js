@@ -56,6 +56,7 @@ export default function Navbar() {
   const lanyard = useContext(LanyardProvider)
   const nav = (
     <Flex
+      as="nav"
       justifyContent="space-between"
       width="100%"
       transition={transition}

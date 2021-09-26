@@ -2,7 +2,7 @@ import React from "react"
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react"
 import { postPreviewDimensions } from "../shared"
 import avatar from "@assets/avatars/xetera.png"
-import { DisableSpotify } from "./disable-spotify"
+import { DisableNavbar, DisableSpotify } from "./disable-spotify"
 
 export default function StaticPreview({ pageContext, image = avatar }) {
   const { title, description } = pageContext
@@ -20,6 +20,7 @@ export default function StaticPreview({ pageContext, image = avatar }) {
       position="relative"
     >
       <DisableSpotify />
+      <DisableNavbar />
       <Flex
         backgroundImage="radial-gradient(circle at 6px 24px, #404458 1%, transparent 1%),radial-gradient(circle at 47px 53px, #3f4356 1%, transparent 1%)"
         backgroundSize="79px 60px"

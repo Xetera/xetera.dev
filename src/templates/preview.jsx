@@ -12,7 +12,7 @@ import {
 import { Tag } from "@chakra-ui/tag"
 import { postPreviewDimensions } from "../shared"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { DisableSpotify } from "./disable-spotify"
+import { DisableNavbar, DisableSpotify } from "./disable-spotify"
 // import "./disable-spotify.css"
 
 export default function PostPreview(props) {
@@ -28,6 +28,7 @@ export default function PostPreview(props) {
       height={`${postPreviewDimensions.height}px`}
     >
       <DisableSpotify />
+      <DisableNavbar />
       {data.frontmatter.imageTop && (
         <GatsbyImage
           width="100%"
