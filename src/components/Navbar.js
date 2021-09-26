@@ -54,7 +54,6 @@ const LazyImage = ({ src, ...rest }) => {
 export default function Navbar() {
   const { theme, setTheme, toggle } = useContext(ThemeProvider)
   const lanyard = useContext(LanyardProvider)
-  console.log({ lanyard })
   const nav = (
     <Flex
       justifyContent="space-between"
