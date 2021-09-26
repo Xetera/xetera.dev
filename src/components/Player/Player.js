@@ -43,6 +43,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { graphql, useStaticQuery } from "gatsby"
 import format from "date-fns/format"
 import throttle from "lodash/throttle"
+import { useLanyard } from "../../hooks/lanyard"
 
 /**
  * If you're looking at this file to figure out
@@ -71,6 +72,7 @@ const SPOTIFY_STATUS = "spotifyLoggedIn"
 
 export function PlayerWrapper({ element }) {
   const [mounted, setMounted] = useState(false)
+  const lanyard = useLanyard("140862798832861184")
   useMount(() => setMounted(true))
   if (!mounted) {
     return element
@@ -407,12 +409,7 @@ const PlayerControls = ({
                 initial="closed"
                 animate={volumeOpen ? "open" : "closed"}
               >
-                <Text
-                  fontSize="xs"
-                  color="text.500"
-                  textAlign="center"
-                  pt={2}
-                >
+                <Text fontSize="xs" color="text.500" textAlign="center" pt={2}>
                   {Math.floor(volume * 100)}
                 </Text>
                 <Box p={2} h="full">

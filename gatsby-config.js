@@ -31,7 +31,6 @@ module.exports = {
     title: siteTitle,
     author: {
       name: process.env.GATSBY_OWNER_FULL_NAME,
-      discordId,
     },
     description: "A place for my ramblings.",
     siteUrl: process.env.GATSBY_SITE_URL || "http://localhost:8000",
@@ -39,6 +38,7 @@ module.exports = {
     social: {
       twitter: `_Xetera`,
       github: `xetera`,
+      discordId,
     },
   },
   flags: { FAST_DEV: true, DEV_SSR: false },

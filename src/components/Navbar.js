@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import { Box, Flex } from "@chakra-ui/layout"
 import { RiSunFoggyLine, RiMoonLine } from "react-icons/ri"
@@ -10,6 +10,7 @@ import { motion } from "framer-motion"
 import { AnimatePresence } from "framer-motion"
 import { Text } from "@chakra-ui/react"
 import { ThemeProvider } from "../data/themeProvider"
+import { useLanyard } from "../hooks/lanyard"
 
 const MotionText = motion(Text)
 

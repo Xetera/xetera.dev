@@ -55,7 +55,7 @@ export function PostList({ node }) {
           display="inline"
           fontSize="lg"
           color="text.100"
-          fontweight="bold"
+          fontWeight="bold"
           mb={1}
         >
           <RoughNotation
