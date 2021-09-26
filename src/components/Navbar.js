@@ -135,7 +135,7 @@ export default function Navbar() {
                       <Text
                         fontSize="xs"
                         mx={2}
-                        maxWidth={["22ch", "40ch", "100%"]}
+                        maxWidth={["20ch", "40ch", "100%"]}
                         whiteSpace="nowrap"
                         textOverflow="ellipsis"
                         overflow="hidden"
