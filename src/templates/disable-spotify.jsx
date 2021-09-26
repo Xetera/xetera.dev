@@ -6,7 +6,7 @@ import React from "react"
 export const DisableSpotify = () => (
   <div
     dangerouslySetInnerHTML={{
-      __html: "<style>.spotify-button{ display: none }</style>",
+      __html: "<style>.spotify-button{ display: none !important }</style>",
     }}
   />
 )
@@ -14,7 +14,8 @@ export const DisableSpotify = () => (
 export const DisableNavbar = () => (
   <div
     dangerouslySetInnerHTML={{
-      __html: "<style>nav { display: none }</style>",
+      __html:
+        "<style>nav, .headroom-wrapper { display: none !important }</style>",
     }}
   />
 )
