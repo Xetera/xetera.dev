@@ -31,7 +31,7 @@ const baseColors = {
       light: "#29292c",
     },
     300: {
-      dark: "#CBD5E0",
+      dark: "#9eaab7",
       light: "#454547",
     },
     500: {

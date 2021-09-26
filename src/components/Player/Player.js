@@ -7,7 +7,7 @@ import {
   useSpotifyPlayer,
   WebPlaybackSDK,
 } from "react-spotify-web-playback-sdk"
-import { useMount, useWindowSize } from "react-use"
+import { useWindowSize } from "react-use"
 import {
   Box,
   Flex,
@@ -34,7 +34,6 @@ import {
   RiPlayLine,
   RiSkipBackLine,
   RiSkipForwardLine,
-  RiSkull2Line,
   RiVolumeUpLine,
 } from "react-icons/ri"
 import { StaticImage } from "gatsby-plugin-image"
@@ -43,7 +42,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { graphql, useStaticQuery } from "gatsby"
 import format from "date-fns/format"
 import throttle from "lodash/throttle"
-import { useLanyard } from "../../hooks/lanyard"
+import Lanyard from "../Lanyard"
 
 /**
  * If you're looking at this file to figure out
@@ -69,21 +68,6 @@ const redirectUri =
 const clientId = "b376c65fb6ab4cf4af6648fffb308ddc"
 
 const SPOTIFY_STATUS = "spotifyLoggedIn"
-
-export function PlayerWrapper({ element }) {
-  const [mounted, setMounted] = useState(false)
-  const lanyard = useLanyard("140862798832861184")
-  useMount(() => setMounted(true))
-  if (!mounted) {
-    return element
-  }
-  return (
-    <Box>
-      <Player />
-      {element}
-    </Box>
-  )
-}
 
 export function Player() {
   const token = useRef()

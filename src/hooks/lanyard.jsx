@@ -1,23 +1,20 @@
+import { useStaticQuery, graphql } from "gatsby"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
-export function useLanyard(id) {
+export function useLanyard() {
+  const { site } = useStaticQuery(staticQuery)
+  const { discordId } = site.siteMetadata.social
   const heartBeatInterval = useRef()
   const [socket] = useState(
-    () => new WebSocket("wss://api.lanyard.rest/socket"),
-    []
+    () => new WebSocket("wss://api.lanyard.rest/socket")
   )
-  const [data, setData] = useState()
+  const [data, setData] = useState({})
   const messageListener = useCallback(message => {
     const incoming = JSON.parse(message.data)
-    console.log(incoming)
     if (incoming.op === 1) {
       const msg = {
         op: 2,
-        d: {
-          // subscribe_to_ids should be an array of user IDs you want to subscribe to presences from
-          // if Lanyard doesn't monitor an ID specified, it won't be included in INIT_STATE
-          subscribe_to_id: id,
-        },
+        d: { subscribe_to_id: discordId },
       }
       socket.send(JSON.stringify(msg))
       heartBeatInterval.current = setInterval(() => {
@@ -36,5 +33,21 @@ export function useLanyard(id) {
       socket.removeEventListener("message", messageListener)
     }
   }, [])
-  return { data }
+  return {
+    ...data,
+    discordId,
+  }
 }
+
+const staticQuery = graphql`
+  query UserQuery {
+    site {
+      siteMetadata {
+        social {
+          discordId
+          twitter
+        }
+      }
+    }
+  }
+`

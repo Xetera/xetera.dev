@@ -2,7 +2,6 @@ import React from "react"
 import { ToastContext } from "./Popup"
 import { BackgroundImage } from "./Image"
 import { Box, Flex, Grid } from "@chakra-ui/layout"
-import Navbar from "./Navbar"
 import { forwardRef } from "@chakra-ui/system"
 import { domAnimation, LazyMotion } from "framer-motion"
 import { transition } from "../data/theme"
@@ -54,7 +53,6 @@ export function Layout({
 
   return (
     <Flex flexFlow="column nowrap">
-      <Navbar />
       <LazyMotion features={domAnimation}>
         <ToastContext.Provider value={{ jsx: toastJsx, setJsx: setToastJsx }}>
           <Box {...rest}>{children}</Box>

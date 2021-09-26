@@ -18,7 +18,7 @@ import { SkeletonCircle, useBreakpointValue } from "@chakra-ui/react"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
 import { VStack } from "@chakra-ui/layout"
-import { ThemeProvider } from "../data/themeProvider"
+import { ThemeProvider } from "../data/providers"
 export * from "./memes/Chatbox"
 export * from "./posts"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism

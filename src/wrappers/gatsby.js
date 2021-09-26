@@ -1,11 +1,11 @@
 import React from "react"
-import { PlayerWrapper } from "../components/Player/Player"
+import PersistentLayout from "../components/PersistentLayout"
 import { StyleManager } from "./chakra"
 
 export const wrapRootElement = ({ element }) => {
   return (
     <StyleManager>
-      <PlayerWrapper element={element} />
+      <PersistentLayout element={element}>{element}</PersistentLayout>
     </StyleManager>
   )
 }

@@ -4,7 +4,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
 import { RoughNotation } from "react-rough-notation"
 import { ThemeContext } from "@emotion/react"
-import { ThemeProvider } from "../data/themeProvider"
+import { ThemeProvider } from "../data/providers"
 import { colors } from "../data/theme"
 
 export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {

@@ -3,7 +3,7 @@ import "typeface-sriracha"
 import "typeface-jetbrains-mono"
 import "./static/fonts/wotfard/stylesheet.css"
 import { wrapRootElement as wrap } from "./src/wrappers/gatsby"
-import { defaultTheme } from "./src/data/themeProvider"
+import { defaultTheme } from "./src/data/providers"
 import { ColorModeScript } from "@chakra-ui/react"
 
 export const onRenderBody = ({ setPreBodyComponents }) => {
