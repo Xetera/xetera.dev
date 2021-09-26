@@ -2,8 +2,9 @@ import React from "react"
 import { LanyardProvider } from "../data/providers"
 import { useLanyard } from "../hooks/lanyard"
 
-const Lanyard = ({ children }) => {
-  const lanyard = useLanyard()
+const Lanyard = ({ children, discordId }) => {
+  // stupid gatsby
+  const lanyard = useLanyard(discordId)
   return (
     <LanyardProvider.Provider value={lanyard}>
       {children}

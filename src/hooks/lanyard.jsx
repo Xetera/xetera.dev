@@ -1,13 +1,9 @@
-import { useStaticQuery, graphql } from "gatsby"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
-export function useLanyard() {
-  const { site } = useStaticQuery(staticQuery)
-  const { discordId } = site.siteMetadata.social
+export function useLanyard(id) {
+  const discordId = id
   const heartBeatInterval = useRef()
-  const [socket] = useState(
-    () => new WebSocket("wss://api.lanyard.rest/socket")
-  )
+  const socket = useRef()
   const [data, setData] = useState({})
   const messageListener = useCallback(message => {
     const incoming = JSON.parse(message.data)
@@ -16,21 +12,22 @@ export function useLanyard() {
         op: 2,
         d: { subscribe_to_id: discordId },
       }
-      socket.send(JSON.stringify(msg))
+      socket.current.send(JSON.stringify(msg))
       heartBeatInterval.current = setInterval(() => {
-        socket.send(JSON.stringify({ op: 3 }))
+        socket.current.send(JSON.stringify({ op: 3 }))
       }, 30000)
       return
     }
     setData(incoming.d)
   }, [])
   useEffect(() => {
-    socket.addEventListener("message", messageListener)
+    socket.current = new WebSocket("wss://api.lanyard.rest/socket")
+    socket.current.addEventListener("message", messageListener)
     return () => {
       if (heartBeatInterval.current) {
         clearInterval(heartBeatInterval.current)
       }
-      socket.removeEventListener("message", messageListener)
+      socket.current.removeEventListener("message", messageListener)
     }
   }, [])
   return {
@@ -38,16 +35,3 @@ export function useLanyard() {
     discordId,
   }
 }
-
-const staticQuery = graphql`
-  query UserQuery {
-    site {
-      siteMetadata {
-        social {
-          discordId
-          twitter
-        }
-      }
-    }
-  }
-`

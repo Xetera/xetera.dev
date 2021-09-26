@@ -5,15 +5,15 @@ import Lanyard from "./Lanyard"
 import Navbar from "./Navbar"
 import { Player } from "./Player/Player"
 
-const PersistentLayout = ({ element }) => {
+const PersistentLayout = ({ children, data }) => {
   const [mounted, setMounted] = useState(false)
   useMount(() => setMounted(true))
   const PlayerElem = mounted ? Player : "div"
   return (
-    <Lanyard>
+    <Lanyard discordId={data.siteMetadata.social.discordId}>
       <Navbar />
       <PlayerElem />
-      {element}
+      {children}
     </Lanyard>
   )
 }
