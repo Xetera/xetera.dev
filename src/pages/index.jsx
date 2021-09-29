@@ -7,6 +7,7 @@ import { Flex, Grid, Heading, Stack, Box, Link, Text } from "@chakra-ui/layout"
 import { Helmet } from "react-helmet"
 import SEO from "../components/Seo"
 import { RiGithubFill } from "react-icons/ri"
+import { FaRss } from "react-icons/fa"
 import ExternalLink from "../components/ExternalLink"
 
 const BlogIndex = ({ data, pageContext }) => {
@@ -31,15 +32,20 @@ const BlogIndex = ({ data, pageContext }) => {
             alignItems="center"
             width="100%"
           >
-            <Text
-              fontSize="md"
-              color="text.300"
-              textTransform="uppercase"
-              letterSpacing="1.5px"
-              fontWeight="medium"
-            >
-              {posts.length} Posts
-            </Text>
+            <Flex alignItems="center">
+              <Text
+                fontSize="md"
+                color="text.300"
+                textTransform="uppercase"
+                letterSpacing="1.5px"
+                fontWeight="medium"
+              >
+                {posts.length} Posts
+              </Text>
+              <ExternalLink color="text.300" ml={2} href="/rss.xml">
+                <FaRss size={15} /> {/* 16 just doesnt look right */}
+              </ExternalLink>
+            </Flex>
             <Flex alignItems="center">
               <ExternalLink
                 color="text.300"
