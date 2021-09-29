@@ -2,7 +2,7 @@ import React from "react"
 import "typeface-sriracha"
 import "typeface-jetbrains-mono"
 import "./static/fonts/wotfard/stylesheet.css"
-import { wrapRootElement as wrap } from "./src/wrappers/gatsby"
+import { wrapRootElement } from "./src/wrappers/gatsby"
 import { defaultTheme } from "./src/data/providers"
 import { ColorModeScript } from "@chakra-ui/react"
 
@@ -15,4 +15,4 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
   ])
 }
 
-export const wrapRootElement = wrap
+export { wrapRootElement }

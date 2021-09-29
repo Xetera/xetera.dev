@@ -1,10 +1,25 @@
+import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
 import { LanyardProvider } from "../data/providers"
 import { useLanyard } from "../hooks/lanyard"
 
-const Lanyard = ({ children, discordId }) => {
+const Lanyard = ({ children }) => {
   // stupid gatsby
-  const lanyard = useLanyard(discordId)
+
+  const { site } = useStaticQuery(graphql`
+    query PersistentLayoutQuery {
+      site {
+        siteMetadata {
+          social {
+            discordId
+          }
+        }
+      }
+    }
+  `)
+
+  const lanyard = useLanyard(site.siteMetadata.social.discordId)
+
   return (
     <LanyardProvider.Provider value={lanyard}>
       {children}
