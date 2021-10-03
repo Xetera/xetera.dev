@@ -36,10 +36,10 @@ export default function StaticPreview({ pageContext, image = avatar }) {
           position="static"
           zIndex={1}
         >
-          <Heading fontSize="6xl" fontWeight="black" mb={3}>
+          <Heading color="text.100" fontSize="6xl" fontWeight="black" mb={3}>
             {title}
           </Heading>
-          <Text fontSize="2xl" fontWeight="medium" color="#e0e0e0">
+          <Text fontSize="2xl" fontWeight="medium" color="text.300">
             {description}
           </Text>
         </Flex>
