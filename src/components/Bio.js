@@ -2,7 +2,7 @@ import React from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 import ExternalLink from "./ExternalLink"
-import { Flex, Heading, Link, Stack, Text } from "@chakra-ui/layout"
+import { Flex, Heading, Link, Box, Stack, Text } from "@chakra-ui/layout"
 import { RiGithubFill, RiSafariLine, RiTwitterFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
 import { Hr } from "./Layout"
@@ -106,17 +106,22 @@ const Bio = React.memo(
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <Flex flexFlow="column" position="sticky" top={6}>
-                  <Heading as="h4" fontSize="lg" mb={2} color="text.300">
-                    <RiSafariLine
-                      size={20}
-                      style={{
-                        display: "inline",
-                        verticalAlign: "bottom",
-                        marginRight: "8px",
-                      }}
-                    />
-                    Oh no
+                <Flex
+                  flexFlow="column"
+                  position="sticky"
+                  top={6}
+                  justify="center"
+                >
+                  <Heading
+                    as="h4"
+                    fontSize="lg"
+                    color="text.300"
+                    mb={2}
+                    alignItems="center"
+                    display="flex"
+                  >
+                    <RiSafariLine size={18} />
+                    <Box marginInlineStart={2}>Oh no</Box>
                   </Heading>
                   <Text color="text.500" fontSize="sm">
                     It looks like you're using an outdated browser that can't
