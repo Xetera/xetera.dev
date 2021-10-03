@@ -598,12 +598,16 @@ export const Callout = forwardRef(
         {(icon || title) && (
           <Flex mb={2}>
             {icon && <Box mr={3}>{icon}</Box>}
-            <Heading fontSize="md">{title}</Heading>
+            <Heading fontSize={["sm", "md"]}>{title}</Heading>
           </Flex>
         )}
-        <VStack spacing={4}>
+        <VStack
+          spacing={4}
+          fontSize={["sm", null, "md"]}
+          wordBreak="break-word"
+        >
           {smallText ? (
-            <Text color="text.500" fontSize="md" w="full">
+            <Text color="text.500" w="full">
               {children}
             </Text>
           ) : (
