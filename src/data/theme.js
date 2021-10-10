@@ -157,6 +157,9 @@ export function createTheme(theme) {
     },
     styles: {
       global: {
+        ul: {
+          "list-style-position": "inside",
+        },
         code: {
           display: "inline-flex",
           fontWeight: "bold",

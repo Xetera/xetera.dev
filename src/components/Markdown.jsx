@@ -14,6 +14,8 @@ import typescript from "@assets/tech/typescript.png"
 import javascript from "@assets/tech/javascript.png"
 import haskell from "@assets/tech/haskell.png"
 import python from "@assets/tech/python.png"
+import go from "@assets/tech/go.png"
+import rust from "@assets/tech/rust.png"
 import { SkeletonCircle, useBreakpointValue } from "@chakra-ui/react"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
@@ -22,8 +24,6 @@ import { ThemeProvider } from "../data/providers"
 export * from "./memes/Chatbox"
 export * from "./posts"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
-require("prismjs/components/prism-typescript")
-require("prismjs/components/prism-haskell")
 
 const languageMappings = {
   js: {
@@ -49,6 +49,14 @@ const languageMappings = {
     className: "bg-purple-800 text-purple-300",
     name: "Haskell",
     image: haskell,
+  },
+  go: {
+    name: "Go",
+    image: go,
+  },
+  rust: {
+    name: "Rust",
+    image: rust,
   },
 }
 
