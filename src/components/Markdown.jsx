@@ -626,3 +626,20 @@ export const Callout = forwardRef(
     )
   }
 )
+
+export const Caption = forwardRef((props, ref) => {
+  const { children, ...rest } = props
+  return (
+    <Box
+      as="figcaption"
+      textAlign="center"
+      mb={6}
+      color="text.300"
+      fontSize={["sm", null, "md"]}
+      ref={ref}
+      {...rest}
+    >
+      {props.children}
+    </Box>
+  )
+})
