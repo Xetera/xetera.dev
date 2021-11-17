@@ -149,14 +149,6 @@ export const query = graphql`
         tags
         date(formatString: "MMMM DD, YYYY")
         description
-        thumbnail {
-          objectPosition
-          src {
-            image: childImageSharp {
-              gatsbyImageData(quality: 100, height: 600, layout: CONSTRAINED)
-            }
-          }
-        }
         imageTop {
           src {
             ...CoverStatic

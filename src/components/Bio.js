@@ -3,7 +3,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 import ExternalLink from "./ExternalLink"
 import { Flex, Heading, Link, Box, Stack, Text } from "@chakra-ui/layout"
-import { RiGithubFill, RiSafariLine, RiTwitterFill } from "react-icons/ri"
+import { RiGithubFill, RiSafariLine, RiMailFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
 import { Hr } from "./Layout"
 import { m } from "framer-motion"
@@ -45,44 +45,38 @@ const Bio = React.memo(
             <Text>
               I'm currently a full-stack developer at{" "}
               <Link
-                href="https://top.gg"
+                href="https://oksidia.fi"
                 rel="external nofollower noopener"
                 color="brandSecondary"
               >
-                Top.gg
+                Oksidia Oy
               </Link>
-              . I like to wear many hats when necessary and make cool ideas come
-              to life.
+              . I'm 24 years old and I'm trying to get better at software
+              development.
             </Text>
             <Text>
-              I’m a simp for functional programming and anti-abuse trust &
-              safety. I also enjoy design and writing on the side when I can
-              find the time.
+              This blog is my outlet where I can talk about various development
+              related topics aswell as some hobby related stuff. I also enjoy
+              photography and mechanical keyboards. I can guarantee you will be
+              finding more about those in my blog.{" "}
             </Text>
             <Text>
               As of{" "}
               <Text as="time" dateTime={data.site.buildtime} color="text.500">
                 {data.site.buildTime}
               </Text>{" "}
-              I have watched{" "}
-              <ExternalLink
-                color="brandSecondary"
-                href="https://anilist.co/user/narigon"
-              >
-                {data.anilist.user.statistics.anime.count} animes
-              </ExternalLink>{" "}
-              and I’m rank{" "}
+              I am rank{" "}
               <ExternalLink
                 color="brandSecondary"
                 href={`https://osu.ppy.sh/users/${data.osu.user_id}`}
               >
-                #{osuRank} in osu.
+                #{osuRank} in osu!.
               </ExternalLink>
             </Text>
           </Stack>
           <Stack spacing={4} direction="row">
             <Link
-              href="https://github.com/narigon"
+              href="https://github.com/tatupesonen"
               color="unset"
               _hover={{ color: "brand.100" }}
               aria-label="github link"
@@ -90,12 +84,12 @@ const Bio = React.memo(
               <RiGithubFill size={28} />
             </Link>
             <Link
-              href={`https://twitter.com/${twitter}`}
+              href={`mailto:tatu@narigon.dev`}
               color="unset"
               _hover={{ color: "brand.100" }}
-              aria-label="twitter link"
+              aria-label="email"
             >
-              <RiTwitterFill size={28} />
+              <RiMailFill size={28} />
             </Link>
           </Stack>
           {isSafari && (
