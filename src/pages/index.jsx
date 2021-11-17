@@ -50,7 +50,7 @@ const BlogIndex = ({ data, pageContext }) => {
                 color="text.300"
                 fontSize="xs"
                 mr={2}
-                href="https://github.com/xetera/xetera.dev"
+                href="https://github.com/narigon/narigon.dev"
               >
                 View the site's code
               </ExternalLink>

@@ -3,7 +3,7 @@ import path from "path"
 import { createFilePath } from "gatsby-source-filesystem"
 import { createOpenGraphImage } from "gatsby-plugin-open-graph-images"
 import { postPreviewDimensions } from "./src/shared"
-import { getAnilist, getOsu, getSpotifyTracks } from "./fetcher"
+import { getAnilist, getOsu } from "./fetcher"
 
 const blogPostPreview = path.resolve(
   path.join(__dirname, `./src/templates/preview.jsx`)
@@ -18,10 +18,9 @@ export const sourceNodes = async ({
   createNodeId,
   createContentDigest,
 }) => {
-  const [anilist, osu, spotify] = await Promise.all([
+  const [anilist, osu] = await Promise.all([
     getAnilist(),
     getOsu(),
-    getSpotifyTracks(),
   ])
   actions.createNode({
     ...anilist,
@@ -40,24 +39,11 @@ export const sourceNodes = async ({
       contentDigest: createContentDigest(osu),
     },
   })
-  if (spotify) {
-    const spotifyTopTracksId = createNodeId(
-      `user-information-spotify-top-tracks`
-    )
-    actions.createNode({
-      tracks: spotify,
-      id: spotifyTopTracksId,
-      internal: {
-        type: "SpotifyTopTracks",
-        contentDigest: createContentDigest(spotify),
-      },
-    })
-  }
 }
 
 const staticPreviewMapping = {
   "/": () => ({
-    title: "It's me Xetera.",
+    title: "It's me narigon.",
     description: "I'm a developer I guess",
   }),
 }

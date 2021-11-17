@@ -1,11 +1,11 @@
 {
-  "name": "xetera.dev",
+  "name": "narigon.dev",
   "private": true,
   "description": "A place for my ramblings",
   "version": "0.1.0",
-  "author": "Xetera <contact@xetera.dev>",
+  "author": "narigon <me@narigon.dev>",
   "bugs": {
-    "url": "https://github.com/xetera/xetera.dev/issues"
+    "url": "https://github.com/narigon/narigon.dev/issues"
   },
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^2.0.1",
@@ -87,7 +87,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "yarn develop",
     "dev": "netlify dev --port 8008",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve --port 8000",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }

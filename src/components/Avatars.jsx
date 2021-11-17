@@ -11,12 +11,12 @@ const common = {
 }
 
 export const avatars = {
-  Xetera() {
+  narigon() {
     return (
       <StaticImage
         {...common}
-        src="../../content/assets/avatars/xetera.png"
-        alt="Xetera"
+        src="../../content/assets/avatars/narigon.png"
+        alt="narigon"
       />
     )
   },

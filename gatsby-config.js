@@ -22,8 +22,8 @@ const fixRelativeLinks = (html, siteUrl) => {
   return $.html()
 }
 
-const siteTitle = `Xetera`
-const discordId = "140862798832861184"
+const siteTitle = `narigon`
+const discordId = "121777389012385796"
 const themeColor = `#112130`
 
 module.exports = {
@@ -36,8 +36,8 @@ module.exports = {
     siteUrl: process.env.GATSBY_SITE_URL || "http://localhost:8000",
     themeColor,
     social: {
-      twitter: `_Xetera`,
-      github: `xetera`,
+      twitter: `_narigon`,
+      github: `tatupesonen`,
       discordId,
     },
   },
@@ -192,11 +192,11 @@ module.exports = {
               }
             }`,
             output: "/rss.xml",
-            title: "Xetera",
+            title: "narigon",
             // im not sure how to resolve site url automatically here
-            image_url: "https://xetera.dev/favicon-32x32.png",
-            feed_url: "https://xetera.dev/rss.xml",
-            site_url: "https://xetera.dev",
+            image_url: "https://narigon.dev/favicon-32x32.png",
+            feed_url: "https://narigon.dev/rss.xml",
+            site_url: "https://narigon.dev",
           },
         ],
       },

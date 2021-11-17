@@ -42,7 +42,7 @@ const SEO = ({ description, lang = "en", title, image, canonical }) => {
     },
     {
       name: "og:site_name",
-      content: "Xetera",
+      content: "narigon",
     },
     {
       name: `twitter:card`,

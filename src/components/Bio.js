@@ -39,7 +39,7 @@ const Bio = React.memo(
         <Stack lineHeight="1.7" spacing={4} ref={ref} {...props}>
           {image}
           <Heading fontWeight="black" fontSize="3xl" color="text.100">
-            Hi, I’m Xetera.
+            Hi, I’m narigon.
           </Heading>
           <Stack spacing={4} fontSize="16px">
             <Text>
@@ -67,7 +67,7 @@ const Bio = React.memo(
               I have watched{" "}
               <ExternalLink
                 color="brandSecondary"
-                href="https://anilist.co/user/Xetera"
+                href="https://anilist.co/user/narigon"
               >
                 {data.anilist.user.statistics.anime.count} animes
               </ExternalLink>{" "}
@@ -82,7 +82,7 @@ const Bio = React.memo(
           </Stack>
           <Stack spacing={4} direction="row">
             <Link
-              href="https://github.com/xetera"
+              href="https://github.com/narigon"
               color="unset"
               _hover={{ color: "brand.100" }}
               aria-label="github link"
@@ -148,7 +148,7 @@ const staticQuery = graphql`
   }
 
   query BioQuery {
-    avatar: file(absolutePath: { regex: "/avatars/xetera.png/" }) {
+    avatar: file(absolutePath: { regex: "/avatars/narigon.png/" }) {
       data: childImageSharp {
         gatsbyImageData(
           width: 200
