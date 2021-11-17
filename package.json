@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "narigon <me@narigon.dev>",
   "bugs": {
-    "url": "https://github.com/narigon/narigon.dev/issues"
+    "url": "https://github.com/tatupesonen/narigon.dev/issues"
   },
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^2.0.1",

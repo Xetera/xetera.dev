@@ -161,7 +161,6 @@ export const query = graphql`
           src {
             ...CoverStatic
           }
-          opacity
         }
       }
     }

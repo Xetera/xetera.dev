@@ -334,7 +334,6 @@ export const pageQuery = graphql`
           src {
             ...Cover
           }
-          opacity
         }
       }
     }
