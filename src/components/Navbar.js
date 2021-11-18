@@ -231,12 +231,6 @@ export default function Navbar() {
                   {lanyard?.vscodeStatus ? (
                     <>
                       <RiGitRepositoryFill />
-                      <ChakraLink
-                        color="inherit"
-                        rel="external noopener"
-                        target="_blank"
-                        href={`https://open.spotify.com/track/0`}
-                      >
                         <Text
                           fontSize="xs"
                           mx={2}
@@ -247,7 +241,6 @@ export default function Navbar() {
                         >
                           {lanyard.vscodeStatus.state}
                         </Text>
-                      </ChakraLink>
                     </>
                   ) : (
                     <>
