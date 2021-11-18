@@ -18,7 +18,12 @@ export function useLanyard(id) {
       }, 30000)
       return
     }
-    setData(incoming.d)
+    const vscodeStatus = incoming.d.activities.find(
+      activities => activities.name === "Visual Studio Code"
+    )
+    const data = { ...incoming.d, vscodeStatus };
+    console.log(data);
+    setData(data)
   }, [])
   useEffect(() => {
     socket.current = new WebSocket("wss://api.lanyard.rest/socket")
