@@ -16,9 +16,6 @@ const Bio = React.memo(
     const data = useStaticQuery(staticQuery)
     const { isSafari } = useIsSafari()
 
-    const osuRank = Intl.NumberFormat("default").format(
-      data.osu.statistics.globalRank
-    )
     const twitter = data.site.siteMetadata.social.twitter
     const image = (
       <Flex
@@ -70,13 +67,6 @@ const Bio = React.memo(
                 href="https://anilist.co/user/Xetera"
               >
                 {data.anilist.user.statistics.anime.count} animes
-              </ExternalLink>{" "}
-              and I’m rank{" "}
-              <ExternalLink
-                color="brandSecondary"
-                href={`https://osu.ppy.sh/users/${data.osu.user_id}`}
-              >
-                #{osuRank} in osu.
               </ExternalLink>
             </Text>
           </Stack>
@@ -174,12 +164,6 @@ const staticQuery = graphql`
             count
           }
         }
-      }
-    }
-    osu {
-      user_id
-      statistics {
-        globalRank: global_rank
       }
     }
   }
