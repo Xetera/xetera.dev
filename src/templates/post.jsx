@@ -17,6 +17,7 @@ import * as Chatbox from "../components/memes/Chatbox"
 import * as AllMarkdownComponents from "../components/Markdown"
 import * as Chakra from "@chakra-ui/layout"
 import * as ChakraReact from "@chakra-ui/react"
+import { ThemeProvider } from "../data/providers"
 import { Image } from "@chakra-ui/image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
 import { Text } from "@chakra-ui/react"
@@ -27,6 +28,31 @@ import { avatars } from "../components/Avatars"
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
 const { Box, Flex, Grid, Heading, Link, HStack } = Chakra
+
+const Comments = props => {
+  const commentsRef = React.useRef(null)
+  const { theme } = React.useContext(ThemeProvider)
+  const utterancesTheme = theme === "light" ? "github-light" : "github-dark"
+  React.useEffect(() => {
+    const theme = "github-dark"
+    const scriptElement = document.createElement("script")
+    scriptElement.setAttribute("src", "https://utteranc.es/client.js")
+    scriptElement.setAttribute("crossorigin", "anonymous")
+    scriptElement.setAttribute("async", true)
+    scriptElement.setAttribute("repo", "tatupesonen/narigon.dev")
+    scriptElement.setAttribute("issue-term", "pathname")
+    scriptElement.setAttribute("theme", utterancesTheme)
+    while (commentsRef.current.firstChild) {
+      commentsRef.current.firstChild.remove()
+    }
+    commentsRef.current.appendChild(scriptElement)
+  }, [theme])
+  return (
+    <Box>
+      <div ref={commentsRef} className="comment-box"></div>
+    </Box>
+  )
+}
 
 const Navigator = ({ pos, link }) => {
   const isLeft = pos === "left"
@@ -107,11 +133,12 @@ function makeHeader(type, fonts = ["xl", null, "2xl"]) {
 }
 
 export default function Post({ data, pageContext, location }) {
-	console.log(pageContext);
+  console.log(pageContext)
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
   const { imageTop, imageBottom } = post.frontmatter
   const isDraft = post.frontmatter.draft
+  console.log(data.mdx)
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom}>
@@ -286,6 +313,8 @@ export default function Post({ data, pageContext, location }) {
                     <Navigator pos="left" link={previous} />
                     <Navigator pos="right" link={next} />
                   </Grid>
+                  <Hr />
+                  <Comments />
                 </Box>
               </>
             )}

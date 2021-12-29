@@ -124,6 +124,10 @@ export const colors = {
 		light: "#e4e6eb",
 		dark: "#3e4042"
 	},
+	utterances: {
+		light: "github-light",
+		dark: "github-dark",
+	},
   discordTextColor: { light: "#2e3338", dark: "#dcddde" },
   highlight: {
     light: "yellow",
@@ -233,6 +237,14 @@ export function createTheme(theme) {
           }),
         },
       },
+			Comments: {
+				baseStyle: {
+					color: pick({
+						light: colors.utterances.light,
+						dark: colors.utterances.dark,
+					})
+				}
+			},
       // Heading: {
       //   baseStyle: props => ({
       //     color: "text.100",
