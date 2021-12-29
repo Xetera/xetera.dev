@@ -107,6 +107,7 @@ function makeHeader(type, fonts = ["xl", null, "2xl"]) {
 }
 
 export default function Post({ data, pageContext, location }) {
+	console.log(pageContext);
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
   const { imageTop, imageBottom } = post.frontmatter
