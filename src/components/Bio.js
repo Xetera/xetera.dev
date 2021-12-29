@@ -3,7 +3,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 import ExternalLink from "./ExternalLink"
 import { Flex, Heading, Link, Box, Stack, Text } from "@chakra-ui/layout"
-import { RiGithubFill, RiSafariLine, RiMailFill } from "react-icons/ri"
+import { RiGithubFill, RiSafariLine, RiMailFill, RiKeyFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
 import { Hr } from "./Layout"
 import { m } from "framer-motion"
@@ -90,6 +90,14 @@ const Bio = React.memo(
               aria-label="email"
             >
               <RiMailFill size={28} />
+            </Link>
+            <Link
+              href="/publickey.tatu@narigon.dev-8d409ff7767d83f81fc2d5f5a4c5e8fdd1746806.asc"
+              color="unset"
+              _hover={{ color: "brand.100" }}
+              aria-label="email"
+            >
+              <RiKeyFill size={28} />
             </Link>
           </Stack>
           {isSafari && (
