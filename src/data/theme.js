@@ -79,8 +79,8 @@ const baseColors = {
   },
   brand: {
     100: {
-      light: "hsl(333deg, 100%, 45%)",
-      dark: "hsl(333deg, 100%, 45%)",
+      dark: "#f9bc60",
+      light: "#e16162",
     },
   },
   brandSecondary: {
@@ -112,6 +112,18 @@ export const colors = {
     dark: baseColors.bgSecondary.dark,
     light: "#f9f9f9",
   },
+  facebookBackground: {
+    dark: baseColors.bgSecondary.dark,
+    light: "#ffffff",
+  },
+	facebookTextColor: {
+		dark: "#e4e6eb",
+		light: "#050505"
+	},
+	facebookBubbleColor: {
+		light: "#e4e6eb",
+		dark: "#3e4042"
+	},
   discordTextColor: { light: "#2e3338", dark: "#dcddde" },
   highlight: {
     light: "yellow",
