@@ -16,6 +16,7 @@ import haskell from "@assets/tech/haskell.png"
 import python from "@assets/tech/python.png"
 import go from "@assets/tech/go.png"
 import rust from "@assets/tech/rust.png"
+import shell from "@assets/tech/shell.png"
 import { SkeletonCircle, useBreakpointValue } from "@chakra-ui/react"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
@@ -44,7 +45,13 @@ const languageMappings = {
   sh: {
     className: "bg-blue-600 text-blue-200",
     name: "Shell",
+		image: shell,
   },
+	bash: {
+    className: "bg-blue-600 text-blue-200",
+    name: "Shell",
+		image: shell,
+	},
   hs: {
     className: "bg-purple-800 text-purple-300",
     name: "Haskell",

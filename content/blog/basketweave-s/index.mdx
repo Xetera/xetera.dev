@@ -15,6 +15,13 @@ draft: true
 ---
 
 import { T } from "../../../src/components/Markdown"
+import { RiExternalLinkLine } from "react-icons/ri"
+
+export const Toast = ({ text, children }) => (
+  <Toastable text={children} color="blue.300">
+    {text}
+  </Toastable>
+)
 
 export const Requirement = ({ type, children, optional }) => {
   let borderColor
@@ -36,7 +43,9 @@ export const Requirement = ({ type, children, optional }) => {
           pl={2}
           pr={2}
           borderRadius={5}
-					boxShadow={optional && "0px 0px 0px 2px var(--chakra-colors-kbTool) inset"}
+          boxShadow={
+            optional && "0px 0px 0px 2px var(--chakra-colors-kbTool) inset"
+          }
           display="inline-block"
         >
           {children}
@@ -65,7 +74,9 @@ export const ColorDescription = ({ type, children, optional }) => {
       mr={1}
       pr={1}
       borderRadius={3}
-			boxShadow={optional && "0px 0px 0px 2px var(--chakra-colors-kbTool) inset"}
+      boxShadow={
+        optional && "0px 0px 0px 2px var(--chakra-colors-kbTool) inset"
+      }
       display="inline-block"
     >
       {children}
@@ -83,8 +94,11 @@ export const PartsList = () => (
       <li>All electronic components </li>
       <li>Controller flashed with USBaspLoader bootloader</li>
       <li>
-        1x <Link href="https://42keebs.eu/shop/parts/ec11-rotary-encoder/">EC11 rotary encoder</Link>,{" "}
-        <T>but you can install an additional one if you want to.</T>{" "}
+        1x{" "}
+        <Link href="https://42keebs.eu/shop/parts/ec11-rotary-encoder/">
+          EC11 rotary encoder
+        </Link>
+        , <T>but you can install an additional one if you want to.</T>{" "}
       </li>
       <li>Brass standoffs and screws</li>
       <li>Acrylic cover</li>
@@ -98,13 +112,19 @@ export const PartsList = () => (
       <Requirement>Keycaps (check for compatibility)</Requirement>
       <Requirement>69-71 Cherry compatible switches (5pin)</Requirement>
       <Requirement type="optional">
-        <Link>A second EC11 rotary encoder if you want to have two encoders</Link>
+        <Link>
+          A second EC11 rotary encoder if you want to have two encoders
+        </Link>
       </Requirement>
       <Requirement type="optional">
-        <Link href="https://42keebs.eu/shop/parts/aluminium-cone-feet/">Anodised aluminium cone feet (comes with two in the package)</Link>
+        <Link href="https://42keebs.eu/shop/parts/aluminium-cone-feet/">
+          Anodised aluminium cone feet (comes with two in the package)
+        </Link>
       </Requirement>
       <Requirement type="optional">
-        <Link href="https://42keebs.eu/shop/parts/anodised-aluminium-encoder-knobs/">Anodised aluminium encoder knob (I'd get two of these)</Link>
+        <Link href="https://42keebs.eu/shop/parts/anodised-aluminium-encoder-knobs/">
+          Anodised aluminium encoder knob (I'd get two of these)
+        </Link>
       </Requirement>
       <Requirement type="tool">Soldering iron and solder</Requirement>
       <Requirement type="tool">Phillips head screwdriver</Requirement>
@@ -120,18 +140,19 @@ export const PartsList = () => (
       <ColorDescription type="tool">
         Tool you will need to build the keyboard
       </ColorDescription>
-      <ColorDescription type="tool" optional>May need this, I guess?</ColorDescription>
+      <ColorDescription type="tool" optional>
+        May need this, I guess?
+      </ColorDescription>
     </Text>
   </Box>
 )
 
 ![Basketweave-S](./header.jpg)
 
-# Basketweave-S
-
 Hello! In this blog post, we'll be going through the build process of the <T>Basketweave-S</T> mechanical keyboard.
 
-[You can buy the DIY kit here on 42keebs.eu](https://42keebs.eu/shop/kits/basketweave-s-ergo-65-kit-black)  
+#### Links
+[DIY kit on 42keebs.eu](https://42keebs.eu/shop/kits/basketweave-s-ergo-65-kit-black)  
 [Build guide](https://github.com/piit79/basketweave-s/blob/master/doc/build.md)  
 [QMK fork](https://github.com/piit79/qmk_firmware)
 
@@ -139,12 +160,101 @@ Hello! In this blog post, we'll be going through the build process of the <T>Bas
 
 The Basketweave-S is a 65% mechanical keyboard with Alice-like layout.
 
+Below I've listed everything you will need to turn it from a board into a working mechanical keyboard
+
+As for this build, the parts we will be using are the following:  
+**Switches: Durock Lavender, 65g**  
+**Lube: Krytox 205g0**  
+**Films: Deskeys films**  
+**Keycaps: [ePBT Shadow Version A](https://kbdfans.com/products/ic-epbt-shadow)**  
 <PartsList />
+
+As for my tools, I'm using a TS100 soldering iron.
+
+![TS100 soldering iron](./iron.jpg)
 
 ## Introduction
 
 I've always wanted to try out an Alice-style board. I think they look cool.
-I don't believe they are any better than a standard keyboard layout from an ergonomical viewpoint, but they have this very nice aesthetic to them.
-Especially since you can see the components through the acrylic panel, gives it a very nice retro vibe.
+I don't believe they are any better than a standard keyboard layout from an ergonomical viewpoint, but they have this very nice <T>aesthetic</T> to them.
+Especially since you can see the components through the acrylic panel, gives it a very nice retro vibe. Also worth noting that the **revision of my board is 1.9**.
+
+
+As you might have noticed, in some pictures the board is white whereas in others it's black.
+This is because I didn't take enough pictures of the assembly process when I was building it, so I'm using images I took when my friend was assembling his own Basketweave-S at my place.
+
+
+
+
+## Soldering the area around the MCU
+This part is straightforward, just follow the build guide and make sure to pay attention to the orientation of the components as stated in the build guide.
+
+For inserting the ATmega32a, the pins might be a bit too "wide" around the socket. This is easily remedied by pushing the flat side of the pins against the table so they turn _slightly_ inwards.
+
+
+## QMK Setup
+
+For my QMK setup, I'm using [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) with Ubuntu. I mainly develop using Linux/MacOS, WSL2 allows me to run Linux tooling on my main gaming PC.
+
+#### Prerequisites
+
+This part will cover installing QMK on WSL2 with Ubuntu.
+Shamelessly copied from [QMK's newbs guide](https://docs.qmk.fm/#/newbs_getting_started) so this may be subject to change.
+
+```bash
+sudo apt install -y git python3-pip
+python3 -m pip install --user qmk
+qmk setup
+```
+
+QMK should now be set up.
+
+#### Grabbing the repo and building for QMK
+
+In this part we will clone piit's build of QMK with the firmware for the Basketweave-S and build it.
+
+```
+qmk clone piit79/qmk_firmware
+qmk compile -kb 42keebs/basketweave_s -km default
+```
+
+This will output a `.hex` file which is the built firmware into `~/qmk_firmware/42keebs_basketweave_s_default.hex` if you installed QMK into the default location.
+
+#### For <Toast text="Vial is an open-source cross-platform (Windows, Linux and Mac) GUI and a QMK fork for configuring your keyboard in real time. ">Vial</Toast>
+
+There is a pull request on piit's fork of QMK for adding <Toast text="Vial is an open-source cross-platform (Windows, Linux and Mac) GUI and a QMK fork for configuring your keyboard in real time.">Vial</Toast>
+support.  
+[QMK fork of piit's fork, for Vial support](https://github.com/IvoPo/qmk_firmware/tree/basketweave-s-vial)
+
+These instructions will help you install Vial support, in case it's not merged by the time this post is published.
+
+```
+qmk clone IvoPo/qmk_firmware
+cd ~/qmk_firmware
+git checkout basketweave-s-vial
+qmk compile -kb 42keebs/basketweave_s -km vial
+```
+
+If it's already merged, you can simply run `qmk compile -kb 42keebs/basketweave_s -km vial` to build it with the Vial keymap.
+
+# Flashing QMK onto the ATmega32a
+
+<QMKToolBoxHeader />
+
+If you're using [QMK Toolbox](https://github.com/qmk/qmk_toolbox), you can simply point the `Local file` to the compiled `.hex` file. **Remember to select ATmega32a for the MCU.**  
+
+If your Basketweave-S is not showing up as a connected device, try holding the **boot** button on the top of the PCB to put it into bootloader mode when plugging in the USB-C cable.
+
+![QMK Toolbox flashing](./qmktoolbox.jpg)
+
+#### Flashing on Linux using QMK
+I haven't tried this myself, but you should be able to flash it onto the MCU from the command line by running:
+```bash
+cd ~/qmk_firmware
+# For QMK
+make -kb 42keebs/basketweave_s:default:flash
+# For Vial
+make -kb 42keebs/basketweave_s:vial:flash
+```
 
 ## Diodes
