@@ -124,6 +124,18 @@ export const colors = {
 		light: "#e4e6eb",
 		dark: "#3e4042"
 	},
+	kbRequired: {
+		light: "#9AE6B4",
+		dark: "#22543D",
+	},
+	kbOptional: {
+		light: "#81E6D9", // teal.200
+		dark: "#1D4044", // teal.900
+	},
+	kbTool: {
+		light: "#FEB2B2", // teal.200
+		dark: "#63171B", // teal.900
+	},
 	utterances: {
 		light: "github-light",
 		dark: "github-dark",

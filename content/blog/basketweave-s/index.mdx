@@ -1,0 +1,150 @@
+---
+title: "Assembling the Basketweave-S mechanical keyboard"
+date: "2021-12-28"
+description: A cheap DIY Alice-like layout mechanical keyboard
+tags:
+  - Keyboards
+  - Mechanical
+  - DIY
+  - Soldering
+  - QMK
+imageTop:
+  objectPosition: 30%
+  src: ./header.jpg
+draft: true
+---
+
+import { T } from "../../../src/components/Markdown"
+
+export const Requirement = ({ type, children, optional }) => {
+  let borderColor
+  switch (type) {
+    case "optional":
+      borderColor = "kbOptional"
+      break
+    case "tool":
+      borderColor = "kbTool"
+      break
+    default:
+      borderColor = "kbRequired"
+  }
+  return (
+    <Box display="block" mb={1}>
+      <li>
+        <Box
+          bg={optional ? null : borderColor}
+          pl={2}
+          pr={2}
+          borderRadius={5}
+					boxShadow={optional && "0px 0px 0px 2px var(--chakra-colors-kbTool) inset"}
+          display="inline-block"
+        >
+          {children}
+        </Box>
+      </li>
+    </Box>
+  )
+}
+
+export const ColorDescription = ({ type, children, optional }) => {
+  let borderColor
+  switch (type) {
+    case "optional":
+      borderColor = "kbOptional"
+      break
+    case "tool":
+      borderColor = "kbTool"
+      break
+    default:
+      borderColor = "kbRequired"
+  }
+  return (
+    <Box
+      bg={optional ? null : borderColor}
+      pl={1}
+      mr={1}
+      pr={1}
+      borderRadius={3}
+			boxShadow={optional && "0px 0px 0px 2px var(--chakra-colors-kbTool) inset"}
+      display="inline-block"
+    >
+      {children}
+    </Box>
+  )
+}
+
+export const PartsList = () => (
+  <Box bg="bgSecondary" p={4} mb={5} fontSize="md">
+    <b>The kit comes with:</b>
+    <ul>
+      <li>Main PCB </li>
+      <li>Bottom plate made from PCB material (FR4)</li>
+      <li>Switch plate made from PCB material (FR4)</li>
+      <li>All electronic components </li>
+      <li>Controller flashed with USBaspLoader bootloader</li>
+      <li>
+        1x <Link href="https://42keebs.eu/shop/parts/ec11-rotary-encoder/">EC11 rotary encoder</Link>,{" "}
+        <T>but you can install an additional one if you want to.</T>{" "}
+      </li>
+      <li>Brass standoffs and screws</li>
+      <li>Acrylic cover</li>
+    </ul>
+    <br />
+    <i>
+      <b>In addition to that, you will need</b>
+    </i>
+    <ul>
+      <Requirement>5x 2u PCB mount stabilizers</Requirement>
+      <Requirement>Keycaps (check for compatibility)</Requirement>
+      <Requirement>69-71 Cherry compatible switches (5pin)</Requirement>
+      <Requirement type="optional">
+        <Link>A second EC11 rotary encoder if you want to have two encoders</Link>
+      </Requirement>
+      <Requirement type="optional">
+        <Link href="https://42keebs.eu/shop/parts/aluminium-cone-feet/">Anodised aluminium cone feet (comes with two in the package)</Link>
+      </Requirement>
+      <Requirement type="optional">
+        <Link href="https://42keebs.eu/shop/parts/anodised-aluminium-encoder-knobs/">Anodised aluminium encoder knob (I'd get two of these)</Link>
+      </Requirement>
+      <Requirement type="tool">Soldering iron and solder</Requirement>
+      <Requirement type="tool">Phillips head screwdriver</Requirement>
+      <Requirement type="tool">Flush side cutters</Requirement>
+      <Requirement type="tool" optional>
+        No-clean flux (if you are soldering the USB-C port yourself)
+      </Requirement>
+      <Requirement type="tool">USB Type C cable</Requirement>
+    </ul>
+    <Text fontSize="xs">
+      Color descriptions: <ColorDescription>Required</ColorDescription>
+      <ColorDescription type="optional">Optional</ColorDescription>
+      <ColorDescription type="tool">
+        Tool you will need to build the keyboard
+      </ColorDescription>
+      <ColorDescription type="tool" optional>May need this, I guess?</ColorDescription>
+    </Text>
+  </Box>
+)
+
+![Basketweave-S](./header.jpg)
+
+# Basketweave-S
+
+Hello! In this blog post, we'll be going through the build process of the <T>Basketweave-S</T> mechanical keyboard.
+
+[You can buy the DIY kit here on 42keebs.eu](https://42keebs.eu/shop/kits/basketweave-s-ergo-65-kit-black)  
+[Build guide](https://github.com/piit79/basketweave-s/blob/master/doc/build.md)  
+[QMK fork](https://github.com/piit79/qmk_firmware)
+
+## About the board
+
+The Basketweave-S is a 65% mechanical keyboard with Alice-like layout.
+
+<PartsList />
+
+## Introduction
+
+I've always wanted to try out an Alice-style board. I think they look cool.
+I don't believe they are any better than a standard keyboard layout from an ergonomical viewpoint, but they have this very nice aesthetic to them.
+Especially since you can see the components through the acrylic panel, gives it a very nice retro vibe.
+
+## Diodes
