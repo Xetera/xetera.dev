@@ -72,6 +72,10 @@ const SEO = ({ description, lang = "en", title, image, canonical }) => {
       name: "og:description",
       content: metaDescription,
     },
+		{
+			name: "viewport",
+			content: "width=device-width, initial-scale=1"
+		}
   ]
   if (image) {
     data.push(
