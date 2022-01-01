@@ -11,7 +11,7 @@ tags:
 imageTop:
   objectPosition: 30%
   src: ./header.jpg
-draft: true
+draft: false
 ---
 
 import { T } from "../../../src/components/Markdown"
@@ -89,16 +89,15 @@ export const PartsList = () => (
     <b>The kit comes with:</b>
     <ul>
       <li>Main PCB </li>
-      <li>Bottom plate made from PCB material (FR4)</li>
-      <li>Switch plate made from PCB material (FR4)</li>
+      <li>Bottom plate (FR4 material)</li>
+      <li>Switch plate (FR4)</li>
       <li>All electronic components </li>
-      <li>Controller flashed with USBaspLoader bootloader</li>
+      <li>Controller flashed with USBaspLoader</li>
       <li>
         1x{" "}
         <Link href="https://42keebs.eu/shop/parts/ec11-rotary-encoder/">
           EC11 rotary encoder
         </Link>
-        , <T>but you can install an additional one if you want to.</T>{" "}
       </li>
       <li>Brass standoffs and screws</li>
       <li>Acrylic cover</li>
@@ -113,24 +112,24 @@ export const PartsList = () => (
       <Requirement>69-71 Cherry compatible switches (5pin)</Requirement>
       <Requirement type="optional">
         <Link>
-          A second EC11 rotary encoder if you want to have two encoders
+          Second EC11 rotary encoder
         </Link>
       </Requirement>
       <Requirement type="optional">
         <Link href="https://42keebs.eu/shop/parts/aluminium-cone-feet/">
-          Anodised aluminium cone feet (comes with two in the package)
+          Aluminium cone feet
         </Link>
       </Requirement>
       <Requirement type="optional">
         <Link href="https://42keebs.eu/shop/parts/anodised-aluminium-encoder-knobs/">
-          Anodised aluminium encoder knob (I'd get two of these)
+          Encoder knobs
         </Link>
       </Requirement>
       <Requirement type="tool">Soldering iron and solder</Requirement>
       <Requirement type="tool">Phillips head screwdriver</Requirement>
       <Requirement type="tool">Flush side cutters</Requirement>
       <Requirement type="tool" optional>
-        No-clean flux (if you are soldering the USB-C port yourself)
+        No-clean flux for soldering USB-C port
       </Requirement>
       <Requirement type="tool">USB Type C cable</Requirement>
     </ul>
@@ -138,10 +137,10 @@ export const PartsList = () => (
       Color descriptions: <ColorDescription>Required</ColorDescription>
       <ColorDescription type="optional">Optional</ColorDescription>
       <ColorDescription type="tool">
-        Tool you will need to build the keyboard
+        Tool
       </ColorDescription>
       <ColorDescription type="tool" optional>
-        May need this, I guess?
+        Depends
       </ColorDescription>
     </Text>
   </Box>
