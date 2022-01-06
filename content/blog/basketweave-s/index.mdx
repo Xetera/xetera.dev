@@ -109,7 +109,7 @@ export const PartsList = () => (
     <ul>
       <Requirement>5x 2u PCB mount stabilizers</Requirement>
       <Requirement>Keycaps (check for compatibility)</Requirement>
-      <Requirement>69-71 Cherry compatible switches (5pin)</Requirement>
+      <Requirement>69-71 Compatible switches (5pin)</Requirement>
       <Requirement type="optional">
         <Link>
           Second EC11 rotary encoder
@@ -217,7 +217,7 @@ qmk clone piit79/qmk_firmware
 qmk compile -kb 42keebs/basketweave_s -km default
 ```
 
-This will output a `.hex` file which is the built firmware into `~/qmk_firmware/42keebs_basketweave_s_default.hex` if you installed QMK into the default location.
+This will output a `42keebs_basketweave_s_default.hex.hex` file which is the built firmware into `~/qmk_firmware` if you installed QMK into the default location.
 
 #### For <Toast text="Vial is an open-source cross-platform (Windows, Linux and Mac) GUI and a QMK fork for configuring your keyboard in real time. ">Vial</Toast>
 
@@ -227,7 +227,7 @@ support.
 
 These instructions will help you install Vial support, in case it's not merged by the time this post is published.
 
-```
+```bash
 qmk clone IvoPo/qmk_firmware
 cd ~/qmk_firmware
 git checkout basketweave-s-vial
