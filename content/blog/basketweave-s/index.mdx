@@ -1,17 +1,14 @@
 ---
-title: "Assembling Basketweave-S"
-date: "2021-12-28"
-description: Cheap DIY Alice-like keyboard
+title: "⌨️ Basketweave-S"
+date: "2022-01-07"
+description: Assembling a cheap DIY Alice-like keyboard
 tags:
   - Keyboards
-  - Mechanical
   - DIY
-  - Soldering
   - QMK
 imageTop:
-  objectPosition: 30%
-  src: ./header.jpg
-draft: true
+  src: ./keys.jpg
+draft: false
 ---
 
 import { T } from "../../../src/components/Markdown"
@@ -146,7 +143,7 @@ export const PartsList = () => (
   </Box>
 )
 
-![Basketweave-S](./scammed.jpg)
+![Basketweave-S](./side.jpg)
 
 Hello! In this blog post, we'll be going through the build process of the <T>Basketweave-S</T> mechanical keyboard.
 
@@ -157,13 +154,13 @@ Hello! In this blog post, we'll be going through the build process of the <T>Bas
 
 ## About the board
 
-The Basketweave-S is a 65% mechanical keyboard with Alice-like layout.
+The Basketweave-S is a 75% mechanical keyboard with Alice-like layout.
 
 Below I've listed everything you will need to turn it from a board into a working mechanical keyboard
 
 As for this build, the parts we will be using are the following:  
 **Switches: Durock Lavender, 65g**  
-**Lube: Krytox 205g0**  
+**Lube: Krytox 205g0 and 105 for springs**  
 **Films: Deskeys films**  
 **Keycaps: [ePBT Shadow Version A](https://kbdfans.com/products/ic-epbt-shadow)**  
 <PartsList />
@@ -176,24 +173,29 @@ As for my tools, I'm using a TS100 soldering iron.
 
 I've always wanted to try out an Alice-style board. I think they look cool.
 I don't believe they are any better than a standard keyboard layout from an ergonomical viewpoint, but they have this very nice <T>aesthetic</T> to them.
-Especially since you can see the components through the acrylic panel, gives it a very nice retro vibe. Also worth noting that the **revision of my board is 1.9**.
-
+Especially since you can see the components through the acrylic panel, gives it a very nice retro vibe. Also worth noting that the **revision of my board is 1.9**, and I used the **USB-C soldering service** that piit79 offered.
 
 As you might have noticed, in some pictures the board is white whereas in others it's black.
 This is because I didn't take enough pictures of the assembly process when I was building it, so I'm using images I took when my friend was assembling his own Basketweave-S at my place.
 
+<br />
 
-
-
-## Soldering the area around the MCU
+#### Soldering the area around the MCU
 This part is straightforward, just follow the build guide and make sure to pay attention to the orientation of the components as stated in the build guide.
 
 For inserting the ATmega32a, the pins might be a bit too "wide" around the socket. This is easily remedied by pushing the flat side of the pins against the table so they turn _slightly_ inwards.
 
+![MCU](./mcu.jpg)
 
-## QMK Setup
+Once you're done soldering this, we're ready to move on to installing [QMK](#qmk)
+
+<br />
+
+## QMK
 
 For my QMK setup, I'm using [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) with Ubuntu. I mainly develop using Linux/MacOS, WSL2 allows me to run Linux tooling on my main gaming PC.
+
+You might also be wondering, <Toast text="QMK is an open source keyboard firmware software project.">what the hell is QMK?</Toast>  
 
 #### Prerequisites
 
@@ -208,7 +210,7 @@ qmk setup
 
 QMK should now be set up.
 
-#### Grabbing the repo and building for QMK
+#### Building for QMK
 
 In this part we will clone piit's build of QMK with the firmware for the Basketweave-S and build it.
 
@@ -217,7 +219,7 @@ qmk clone piit79/qmk_firmware
 qmk compile -kb 42keebs/basketweave_s -km default
 ```
 
-This will output a `42keebs_basketweave_s_default.hex.hex` file which is the built firmware into `~/qmk_firmware` if you installed QMK into the default location.
+This will output a `42keebs_basketweave_s_default.hex` file into `~/qmk_firmware` if you installed QMK into the default location.
 
 #### For <Toast text="Vial is an open-source cross-platform (Windows, Linux and Mac) GUI and a QMK fork for configuring your keyboard in real time. ">Vial</Toast>
 
@@ -231,20 +233,19 @@ These instructions will help you install Vial support, in case it's not merged b
 qmk clone IvoPo/qmk_firmware
 cd ~/qmk_firmware
 git checkout basketweave-s-vial
+# -km can either be default or vial
 qmk compile -kb 42keebs/basketweave_s -km vial
 ```
 
-If it's already merged, you can simply run `qmk compile -kb 42keebs/basketweave_s -km vial` to build it with the Vial keymap.
+# Flashing firmware
 
-# Flashing QMK onto the ATmega32a
-
-<QMKToolBoxHeader />
-
-If you're using [QMK Toolbox](https://github.com/qmk/qmk_toolbox), you can simply point the `Local file` to the compiled `.hex` file. **Remember to select ATmega32a for the MCU.**  
+If you're using [QMK Toolbox](https://github.com/qmk/qmk_toolbox), you can simply point the `Local file` to the compiled `.hex` file. **Remember to select ATmega32a for the MCU.** 
 
 If your Basketweave-S is not showing up as a connected device, try holding the **boot** button on the top of the PCB to put it into bootloader mode when plugging in the USB-C cable.
 
 ![QMK Toolbox flashing](./qmktoolbox.jpg)
+
+<Caption>A successful flash.</Caption>
 
 #### Flashing on Linux using QMK
 I haven't tried this myself, but you should be able to flash it onto the MCU from the command line by running:
@@ -256,4 +257,98 @@ make -kb 42keebs/basketweave_s:default:flash
 make -kb 42keebs/basketweave_s:vial:flash
 ```
 
-## Diodes
+<br />
+
+#### Diodes
+![My friend's Basketweave-S' diodes](./diodes.jpg)
+
+So the MCU works. That means it's time to put on some diodes!
+
+This part might take a while. There's a diode for every switch, so there's 71 diodes (+ a few additional for the encoders). I just put in around 20 at a time and then soldered.
+Depending on your speed this might take an hour / a few hours. I was very lazy so it took me around 2.5 hours to do.
+
+#### Stabilizers
+![Stabs](./stabs.jpg)
+
+For the acoustics of the board (<T>yes, keyboard nerds care about that</T>) I wanted to get some premium stabilizers. I opted to use some Durock V2 screw in stabilizers.
+
+To prepare the stabs, there's a few steps. Let's start with the <Toast text="A really cringe name for just putting bandaid inside your stabilizers.">"holee mod"</Toast>.
+<Box
+  as="iframe"
+  mb={6}
+  borderRadius="md"
+  width="100%"
+  height="405px"
+  src="https://www.youtube-nocookie.com/embed/-vhpHjlkRgQ"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+/>
+
+<Caption>To summarize - you just put some bandaid in there.</Caption>
+
+Now to anyone who is not into mechanical keyboards, this might sound pretty stupid. Now that I've tested it, **I can assure you that it works!** The stabilized keys sound so much nicer after. I guess it's because the balancing wire inside the stabilizer is now neatly cushioned between lubricated plastic and the bandaid.
+
+I also wanted to pamper myself so I got myself some stab foam. You put this between the PCB and the stabilizer to dampen the sound of the stabilizer hitting the PCB when you press the key.
+
+Now after all of that is done, time to screw on the stabs.
+
+![Mounting the screw in stabs](./stabmount.jpg)
+
+#### Switches
+This is the part that most mechanical keyboard enthusiasts hate. It's called lubing the switches.
+
+Believe me, the first time I heard people do this I thought they were some kind of nutjobs. But I did it for my second mechanical keyboard I modified and noticed a significant difference in smoothness! If you have the time to do it, it's definitely worth it. I wanted to splurge on this board so I spent a lot of time doing this.
+
+![Lubing the stem](./lubing.jpg)
+<Caption>Lubing the stem</Caption>
+
+To lubricate a mechanical keyboard switch, you first take it apart using something called a <T>switch opener</T>. You'll be able to pop out the individual parts. Here's what a single switch consists of:
+
+* Top housing
+* Stem
+* Spring
+* Bottom housing  
+
+<br />
+
+To save some time lubing the switches, I used a method called bag lubing. That means you open up all the switches and put them in a plastic bag or some kind of a closed container, put in some lube and _**vigorously**_ shake for around 10 minutes. 
+
+Then you do a pass around on the bottom housing, put in the spring, take the stem and put a tiny even coat around it. There's a saying in the keyboard community that goes _"less is more"_, simply because it's annoying to fix an overlubed switch.
+
+![Ready for filming](./switch.jpg)
+<Caption>A switch ready to be filmed.</Caption>
+
+Filming is done to make the top housing sit snug on the bottom housing. I don't know if this actually makes any difference for acoustics but I decided to do it anyways.
+
+## Putting it all together
+You may have noticed that the white PCB looks a bit different than mine. That's because I'm using <Toast text="Hotswap sockets allow me to remove and add switches without having to do any soldering.">hotswap sockets</Toast>. For my friend's build, at this point we put on the encoders and soldered in the switches.
+
+In my case, since I already soldered in the sockets, I only have to solder in the encoders.
+
+![EC11 rotary encoder](./encoder.jpg)
+
+After that, it's time to pop in the switches. I was really lazy with the lubing process. I was basically doing 10 switches at once and then putting them in the keyboard just to see the progress. 
+
+![Messy desk](./table.jpg)
+<Caption>The table got pretty messy during the build process.</Caption>
+
+#### End result
+Here's some pretty images of the finished build:
+
+![Keycaps and encoder](./encoder_and_keys.jpg)
+
+![Keycaps](./encoder3.jpg)
+
+![Finished board](./finished_build.jpg)
+
+
+#### Experiences with Alice layout
+import { RiChat1Fill } from "react-icons/ri"
+
+<Callout icon={<RiChat1Fill />} title="Footnote">
+  <Text color="text.300" fontSize="md">
+		I released this post on the same day I finished the build. I'll update this section (or maybe make a new blog post) once I have used the layout for a bit and have a feel for how I like it.
+  </Text>
+</Callout>

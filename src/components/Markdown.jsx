@@ -49,8 +49,6 @@ const languageMappings = {
   },
 	bash: {
     className: "bg-blue-600 text-blue-200",
-    name: "Shell",
-		image: shell,
 	},
   hs: {
     className: "bg-purple-800 text-purple-300",
