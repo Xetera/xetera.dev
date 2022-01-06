@@ -21,9 +21,6 @@ const Bio = React.memo(
     const data = useStaticQuery(staticQuery)
     const { isSafari } = useIsSafari()
 
-    const osuRank = Intl.NumberFormat("default").format(
-      data.osu.statistics.globalRank
-    )
     const twitter = data.site.siteMetadata.social.twitter
     const image = (
       <Flex
@@ -74,19 +71,6 @@ const Bio = React.memo(
               >
                 PGP key for email
               </Link>
-            </Text>
-            <Text>
-              As of{" "}
-              <Text as="time" dateTime={data.site.buildtime} color="text.500">
-                {data.site.buildTime}
-              </Text>{" "}
-              I am rank{" "}
-              <ExternalLink
-                color="brandSecondary"
-                href={`https://osu.ppy.sh/users/${data.osu.user_id}`}
-              >
-                #{osuRank} in osu!.
-              </ExternalLink>
             </Text>
           </Stack>
           <Stack spacing={4} direction="row">
@@ -182,21 +166,6 @@ const staticQuery = graphql`
         social {
           twitter
         }
-      }
-    }
-    anilist {
-      user {
-        statistics {
-          anime {
-            count
-          }
-        }
-      }
-    }
-    osu {
-      user_id
-      statistics {
-        globalRank: global_rank
       }
     }
   }

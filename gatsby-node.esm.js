@@ -3,7 +3,6 @@ import path from "path"
 import { createFilePath } from "gatsby-source-filesystem"
 import { createOpenGraphImage } from "gatsby-plugin-open-graph-images"
 import { postPreviewDimensions } from "./src/shared"
-import { getAnilist, getOsu } from "./fetcher"
 
 const blogPostPreview = path.resolve(
   path.join(__dirname, `./src/templates/preview.jsx`)
@@ -12,34 +11,6 @@ const blogPostPreview = path.resolve(
 const staticPagePreview = path.resolve(
   path.join(__dirname, `./src/templates/static-preview.jsx`)
 )
-
-export const sourceNodes = async ({
-  actions,
-  createNodeId,
-  createContentDigest,
-}) => {
-  const [anilist, osu] = await Promise.all([
-    getAnilist(),
-    getOsu(),
-  ])
-  actions.createNode({
-    ...anilist,
-    id: createNodeId(`user-information-anilist`),
-    internal: {
-      type: `Anilist`,
-      contentDigest: createContentDigest(anilist),
-    },
-  })
-  actions.createNode({
-    ...osu,
-    user_id: osu.id,
-    id: createNodeId(`user-information-osu`),
-    internal: {
-      type: `Osu`,
-      contentDigest: createContentDigest(osu),
-    },
-  })
-}
 
 const staticPreviewMapping = {
   "/": () => ({
