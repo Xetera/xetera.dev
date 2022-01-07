@@ -18,9 +18,8 @@ export const sourceNodes = async ({
   createNodeId,
   createContentDigest,
 }) => {
-  const [anilist, osu, spotify] = await Promise.all([
+  const [anilist, spotify] = await Promise.all([
     getAnilist(),
-    getOsu(),
     getSpotifyTracks(),
   ])
   actions.createNode({

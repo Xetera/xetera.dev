@@ -15,7 +15,7 @@ export function useLanyard(id) {
       socket.current.send(JSON.stringify(msg))
       heartBeatInterval.current = setInterval(() => {
         socket.current.send(JSON.stringify({ op: 3 }))
-      }, 30000)
+      }, incoming.d.heartbeat_interval)
       return
     }
     setData(incoming.d)
