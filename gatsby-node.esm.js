@@ -30,15 +30,6 @@ export const sourceNodes = async ({
       contentDigest: createContentDigest(anilist),
     },
   })
-  actions.createNode({
-    ...osu,
-    user_id: osu.id,
-    id: createNodeId(`user-information-osu`),
-    internal: {
-      type: `Osu`,
-      contentDigest: createContentDigest(osu),
-    },
-  })
   if (spotify) {
     const spotifyTopTracksId = createNodeId(
       `user-information-spotify-top-tracks`
