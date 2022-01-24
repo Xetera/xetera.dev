@@ -53,7 +53,7 @@ const Bio = React.memo(
               >
                 Oksidia Oy
               </Link>
-              . I'm 24 years old and I'm trying to get better at software
+              . I'm 25 years old and I'm trying to get better at software
               development.
             </Text>
             <Text>
