@@ -789,9 +789,12 @@ const Seeker = ({ seek, position, duration }) => {
         h="3px"
       >
         <SliderTrack background="bgSecondary">
-          <SliderFilledTrack bg="brandBackground.200" />
+          <SliderFilledTrack bg="brand.100" />
         </SliderTrack>
-        <SliderThumb display={trackHover || trackDrag ? "block" : "none"} />
+        <SliderThumb
+          opacity={trackHover || trackDrag ? "1" : "0"}
+          transition="opacity 0.4s ease-in-out"
+        />
       </Slider>
     </Box>
   )
