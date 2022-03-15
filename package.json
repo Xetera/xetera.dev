@@ -33,7 +33,6 @@
     "gatsby-plugin-image": "^1.8.0",
     "gatsby-plugin-manifest": "^3.8.0",
     "gatsby-plugin-mdx": "^2.8.0",
-    "gatsby-plugin-netlify-cache": "^2.0.0",
     "gatsby-plugin-open-graph-images": "^0.1.7",
     "gatsby-plugin-postcss": "^4.8.0",
     "gatsby-plugin-purgecss": "^6.0.2",
