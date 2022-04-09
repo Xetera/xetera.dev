@@ -18,6 +18,7 @@ import go from "@assets/tech/go.png"
 import rust from "@assets/tech/rust.png"
 import shell from "@assets/tech/shell.png"
 import elixir from "@assets/tech/elixir.png"
+import erlang from "@assets/tech/erlang.svg"
 import { SkeletonCircle, useBreakpointValue } from "@chakra-ui/react"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
@@ -65,9 +66,13 @@ const languageMappings = {
     image: rust,
   },
   elixir: {
-    className: "bg-yellow-700 text-yellow-100",
+    className: "bg-purple-800 text-purple-300",
     name: "Elixir",
     image: elixir,
+  },
+  erlang: {
+    name: "Erlang",
+    image: erlang,
   },
 }
 
