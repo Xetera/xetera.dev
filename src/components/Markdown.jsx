@@ -17,6 +17,7 @@ import python from "@assets/tech/python.png"
 import go from "@assets/tech/go.png"
 import rust from "@assets/tech/rust.png"
 import shell from "@assets/tech/shell.png"
+import elixir from "@assets/tech/elixir.png"
 import { SkeletonCircle, useBreakpointValue } from "@chakra-ui/react"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
@@ -62,6 +63,11 @@ const languageMappings = {
   rust: {
     name: "Rust",
     image: rust,
+  },
+  elixir: {
+    className: "bg-yellow-700 text-yellow-100",
+    name: "Elixir",
+    image: elixir,
   },
 }
 
@@ -285,9 +291,9 @@ export const DiscordEmbed = forwardRef((props, ref) => {
         >
           {top}
         </Text>
-        <Heading fontWeight="medium" as="h2" fontSize="md" mb={2}>
+        {title && <Heading fontWeight="medium" as="h2" fontSize="md" mb={2}>
           {title}
-        </Heading>
+        </Heading>}
         <Text fontWeight="medium" fontSize="md" mb={2}>
           {content}
         </Text>
@@ -315,11 +321,10 @@ export const DiscordMessage = forwardRef(
   ) => {
     return (
       <Flex
-        mb={2}
+        mb={1}
         color="#dcddde"
         lineHeight="1.4"
         // background="#36393f"
-        mb={0}
         ref={ref}
         {...props}
       >

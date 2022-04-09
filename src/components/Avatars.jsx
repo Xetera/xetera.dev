@@ -29,6 +29,15 @@ export const avatars = {
       />
     )
   },
+  KibbAvatar() {
+    return (
+      <StaticImage
+        {...common}
+        src="../../content/assets/avatars/kibb.png"
+        alt="Kibb Avatar"
+      />
+    )
+  },
   JiuAvatar() {
     return (
       <StaticImage

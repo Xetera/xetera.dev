@@ -1,0 +1,104 @@
+---
+title: "🧪 My journey to Elixir"
+date: "2022-09-04"
+description: Learning a new programming language for fun and profit
+tags:
+  - Elixir
+  - Phoenix
+imageTop:
+  objectPosition: 30%
+  src: ./milkyway.jpg
+draft: true
+---
+
+import { T } from "../../../src/components/Markdown"
+
+![](https://opengraph.githubassets.com/0/elixir-lang/elixir)
+
+# What is Elixir?
+
+import { Link } from "@chakra-ui/react"
+import ThisArrow from "@assets/emotes/thisarrow.gif"
+
+export const friendProps = {
+  username: "Kibb",
+  roleColor: "#9b59b6",
+  avatar: <KibbAvatar />,
+}
+
+export const narigonProps = {
+  username: "narigon",
+  roleColor: "#ec5653",
+  avatar: narigon,
+}
+
+Idk, we're about to find out.
+
+<DiscordMessageContainer>
+  <DiscordMessage
+    {...narigonProps}
+    messages={[
+      "Where could I read more about why exactly Elixir is good for concurrency and how exactly does it scale?",
+    ]}
+  />
+  <DiscordMessage
+    {...friendProps}
+    messages={[
+      <DiscordMessageText>
+        <Link href="https://medium.com/flatiron-labs/elixir-and-the-beam-how-concurrency-really-works-3cc151cddd61">
+          https://medium.com/flatiron-labs/elixir-and-the-beam-how-concurrency-really-works-3cc151cddd61
+        </Link>
+      </DiscordMessageText>,
+      <DiscordMessageText my={3}>
+        <DiscordEmbed
+          color="gray.700"
+          top="Medium"
+          content={
+            <>
+              <Link
+                href="https://medium.com/flatiron-labs/elixir-and-the-beam-how-concurrency-really-works-3cc151cddd61"
+                color="blue.400"
+              >
+                Elixir and The Beam: How Concurrency Really Works
+              </Link>
+              <Text color="gray.100">
+                What actually makes Elixir concurrent? To find out, we need to
+                understand OTP and the Erlang VM.
+              </Text>
+            </>
+          }
+        >
+          <Link
+            rel="external noopener noreferrer"
+            target="_blank"
+            href="https://medium.com/flatiron-labs/elixir-and-the-beam-how-concurrency-really-works-3cc151cddd61"
+          >
+            <Box
+              as="img"
+              borderRadius="md"
+              width="100%"
+              height="315px"
+              src="https://miro.medium.com/focal/1200/632/36/35/1*X14b2Clrv0kgSNqcvwFUdg.png"
+              frameborder="0"
+            />
+          </Link>
+        </DiscordEmbed>
+      </DiscordMessageText>,
+      "This is quite good",
+    ]}
+  />
+  <DiscordMessage
+    {...narigonProps}
+    messages={["cheers"]}
+  />
+</DiscordMessageContainer>
+
+```elixir {h: "1,3", lines:true}
+defmodule MathTest do
+  use ExUnit.Case, async: true
+
+  test "can add two numbers" do
+    assert 1 + 1 == 2
+  end
+end
+```
