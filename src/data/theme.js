@@ -221,11 +221,6 @@ export function createTheme(theme) {
           }),
         },
       },
-      // Heading: {
-      //   baseStyle: props => ({
-      //     color: "text.100",
-      //   }),
-      // },
       Text: {
         baseStyle: {
           lineHeight: "1.7",
