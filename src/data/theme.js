@@ -82,6 +82,10 @@ const baseColors = {
       light: "hsl(333deg, 100%, 45%)",
       dark: "hsl(333deg, 100%, 45%)",
     },
+    80: {
+      light: "hsl(333deg, 100%, 45%)",
+      dark: "hsl(333deg, 100%, 45%)",
+    },
   },
   brandSecondary: {
     dark: "#62daff",
@@ -147,8 +151,8 @@ export function createTheme(theme) {
     fontSizes: {
       xs: "13px",
       sm: "14px",
-      md: "16px",
-      lg: "20px",
+      md: "18px",
+      lg: "22px",
       xl: "24px",
       "2xl": "32px",
       "3xl": "38px",
@@ -170,6 +174,7 @@ export function createTheme(theme) {
           }),
           transition,
           padding: "0 6px",
+          lineHeight: "1.7",
           color: pick({
             light: colors.brand[100].light,
             dark: colors.brand[100].dark,
@@ -226,11 +231,6 @@ export function createTheme(theme) {
       //     color: "text.100",
       //   }),
       // },
-      Text: {
-        baseStyle: {
-          lineHeight: "1.7",
-        },
-      },
     },
     // colors
     colors: injectTheme(colors, theme),

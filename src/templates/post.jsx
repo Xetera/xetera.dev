@@ -1,35 +1,35 @@
-import React from "react"
+import React from "react";
 import {
   Hr,
   Layout,
   LayoutContent,
-  layoutContentPadding,
-} from "../components/Layout"
-import { Link as GatsbyLink, graphql } from "gatsby"
-import Popup from "../components/Popup"
-import SEO from "../components/Seo"
-import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image"
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import PopupPortal, { Toastable } from "../components/Popup"
-import { RoughNotation } from "react-rough-notation"
-import { MDXProvider } from "@mdx-js/react"
-import * as Chatbox from "../components/memes/Chatbox"
-import * as AllMarkdownComponents from "../components/Markdown"
-import * as Chakra from "@chakra-ui/layout"
-import * as ChakraReact from "@chakra-ui/react"
-import { Image } from "@chakra-ui/image"
-import { Table, Td, Th, Tr } from "@chakra-ui/table"
-import { Text } from "@chakra-ui/react"
-import { colors, transition } from "../data/theme"
-import { maxWidth } from "../shared"
-import { avatars } from "../components/Avatars"
+  layoutContentPadding
+} from "../components/Layout";
+import { Link as GatsbyLink, graphql } from "gatsby";
+import Popup from "../components/Popup";
+import SEO from "../components/Seo";
+import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image";
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import PopupPortal, { Toastable } from "../components/Popup";
+import { RoughNotation } from "react-rough-notation";
+import { MDXProvider } from "@mdx-js/react";
+import * as Chatbox from "../components/memes/Chatbox";
+import * as AllMarkdownComponents from "../components/Markdown";
+import * as Chakra from "@chakra-ui/layout";
+import * as ChakraReact from "@chakra-ui/react";
+import { Image } from "@chakra-ui/image";
+import { Table, Td, Th, Tr } from "@chakra-ui/table";
+import { Text } from "@chakra-ui/react";
+import { colors, transition } from "../data/theme";
+import { maxWidth } from "../shared";
+import { avatars } from "../components/Avatars";
 
-const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
-const MarkdownComponents = rest
-const { Box, Flex, Grid, Heading, Link, HStack } = Chakra
+const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents;
+const MarkdownComponents = rest;
+const { Box, Flex, Grid, Heading, Link, HStack } = Chakra;
 
 const Navigator = ({ pos, link }) => {
-  const isLeft = pos === "left"
+  const isLeft = pos === "left";
 
   const data = (
     <Box
@@ -74,10 +74,10 @@ const Navigator = ({ pos, link }) => {
         </Text>
       )}
     </Box>
-  )
+  );
 
   if (!link) {
-    return data
+    return data;
   }
 
   return (
@@ -89,8 +89,8 @@ const Navigator = ({ pos, link }) => {
     >
       {data}
     </Link>
-  )
-}
+  );
+};
 
 function makeHeader(type, fonts = ["xl", null, "2xl"]) {
   return ({ children, ...props }) => (
@@ -103,14 +103,14 @@ function makeHeader(type, fonts = ["xl", null, "2xl"]) {
     >
       {children}
     </Heading>
-  )
+  );
 }
 
 export default function Post({ data, pageContext, location }) {
-  const post = data.mdx
-  const { previous, next, ogImage } = pageContext
-  const { imageTop, imageBottom } = post.frontmatter
-  const isDraft = post.frontmatter.draft
+  const post = data.mdx;
+  const { previous, next, ogImage } = pageContext;
+  const { imageTop, imageBottom } = post.frontmatter;
+  const isDraft = post.frontmatter.draft;
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom}>
@@ -138,45 +138,55 @@ export default function Post({ data, pageContext, location }) {
                 </Flex>
               </Box>
             )}
+            <Text color="text.60">
+              <Box as="span" fontWeight="semibold" color="brand.100" textTransform="uppercase">Article</Box>{" "}
+              • {post.fields.readingTime.text}</Text>
             <Heading
               as="h1"
               mb={2}
-              textAlign="center"
               color="text.100"
-              fontSize={["xl", "2xl", "3xl"]}
-              lineHeight="1.4"
-              fontWeight="bold"
+              fontSize={["3xl", "4xl", "6xl"]}
+              lineHeight="1.2"
+              fontWeight="black"
             >
               {post.frontmatter.title}
             </Heading>
             <Text
               fontSize={["lg", "xl"]}
-              fontWeight="medium"
+              fontWeight="regular"
               color="text.300"
-              textAlign="center"
             >
               {post.frontmatter.description}
             </Text>
-            <Flex alignItems="center" color="text.500" justify="center">
-              <Text as="time" dateTime={post.frontmatter.date}>
-                {post.frontmatter.date}
-              </Text>
-              <Box mx={2}>{"–"}</Box>
-              <Text>{post.fields.readingTime.text}</Text>
-            </Flex>
-            <HStack
-              justify="center"
-              textTransform="uppercase"
-              fontSize="xs"
-              spacing={4}
-              fontWeight="medium"
+            <Hr />
+            <Flex
+              alignItems={{ base: "flex-start", md: "center" }} color="text.500"
+                  justify="space-between"
+              flexDirection={{ base: "column", md: "row" }}
             >
-              {post.frontmatter.tags.map((tag, i) => (
-                <Text color="brand.100" key={tag} color="brand.100">
-                  {tag}
+              <HStack
+                mb={{ base: 2, md: 0 }}
+                justify="center"
+                textTransform="capitalize"
+                // fontSize="sm"
+                spacing={4}
+                fontWeight="medium"
+              >
+                {post.frontmatter.tags.map((tag, i) => (
+                  <Text
+                    color="brand.100"
+                    key={tag}
+                  >
+                    {tag}
+                  </Text>
+                ))}
+              </HStack>
+              <Flex alignItems="center">
+                <Text as="time" dateTime={post.frontmatter.date} color="text.100">
+                  {post.frontmatter.date}
                 </Text>
-              ))}
-            </HStack>
+              </Flex>
+            </Flex>
           </Grid>
         </Box>
         <LayoutContent mx="auto" maxWidth={maxWidth}>
@@ -191,7 +201,7 @@ export default function Post({ data, pageContext, location }) {
               className="blog-post"
               as="section"
               fontSize="lg"
-              lineHeight="1.7"
+              lineHeight="200%"
             >
               <MDXProvider
                 scope={{ transition }}
@@ -260,7 +270,7 @@ export default function Post({ data, pageContext, location }) {
                     >
                       {children}
                     </Text>
-                  ),
+                  )
                 }}
               >
                 <MDXRenderer>{post.body}</MDXRenderer>
@@ -295,7 +305,7 @@ export default function Post({ data, pageContext, location }) {
         </LayoutContent>
       </Layout>
     </>
-  )
+  );
 }
 export const pageQuery = graphql`
   fragment Cover on File {
@@ -339,4 +349,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

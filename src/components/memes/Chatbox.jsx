@@ -117,7 +117,7 @@ export function WhatsappMessage({
           {timeComp}
         </Flex>
       </Flex>
-      {tail.map(message => (
+      {tail.map((message, i) => (
         <Flex
           background={bubbleColor}
           p="6px 7px 8px 9px"
@@ -126,6 +126,7 @@ export function WhatsappMessage({
           width={["unset", null, "max-content"]}
           whiteSpace={["unset", null, "nowrap"]}
           borderRadius="md"
+          key={i}
         >
           <Text
             m={0}

@@ -38,7 +38,7 @@ const Bio = React.memo(
           <Heading fontWeight="black" fontSize="3xl" color="text.100">
             Hi, I’m Xetera.
           </Heading>
-          <Stack spacing={4} fontSize="16px">
+          <Stack spacing={4} fontSize="md">
             <Text>
               I'm currently a full-stack developer at{" "}
               <Link
