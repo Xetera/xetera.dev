@@ -13,7 +13,6 @@ export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
       alignItems="center"
       mb={2}
       color="gray.500"
-      fontSize="14px"
       ref={ref}
       {...props}
     >
@@ -49,14 +48,14 @@ export function PostList({ node }) {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <PostHead date={date} readingTime={node.fields.readingTime.text} />
+        <PostHead mb={3} date={date} readingTime={node.fields.readingTime.text} />
         <Heading
           as="h2"
           display="inline"
           fontSize="lg"
           color="text.100"
           fontWeight="bold"
-          mb={1}
+          mb={3}
         >
           <RoughNotation
             type="highlight"

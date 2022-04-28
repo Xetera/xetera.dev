@@ -408,7 +408,7 @@ function Code({ children, className, metastring }) {
   const displayTop = extraProps.title || (highlighterClass && extraProps.lang)
 
   return (
-    <Flex flexFlow="column" mb={6}>
+    <Flex flexFlow="column" mb={6} lineHeight="1.8">
       {displayTop && (
         <Flex justifyContent="flex-end" alignItems="center" mb={2}>
           {extraProps.title && (
