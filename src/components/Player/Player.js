@@ -222,6 +222,7 @@ const PlayerControls = ({
   const player = useSpotifyPlayer()
   const playerDevice = usePlayerDevice()
   const scrollerColor = "bgSecondary"
+  console.log(trackList)
 
   useOutsideClick({
     ref: inside,
@@ -376,9 +377,9 @@ const PlayerControls = ({
                   "&::-webkit-scrollbar-track": {
                     width: "8px",
                   },
-                  "&::-webkit-scrollbar-thumb": {
-                    background: "bg.300",
-                  },
+                  // "&::-webkit-scrollbar-thumb": {
+                  //   background: "bg.300",
+                  // },
                 }}
                 display="flex"
                 justifyContent="center"
@@ -403,7 +404,7 @@ const PlayerControls = ({
                     value={volume * 100}
                     onChange={e => setVolume(e / 100)}
                   >
-                    <SliderTrack background="bgPrimary">
+                    <SliderTrack background="bg.100">
                       <SliderFilledTrack bg="brandBackground.200" />
                     </SliderTrack>
                     <SliderThumb />
@@ -420,7 +421,7 @@ const PlayerControls = ({
               pointerEvents={trackListOpen ? "auto" : "none"}
             >
               <MotionBox
-                background="bgPrimary"
+                background="bg.100"
                 transition={{ type: "tween" }}
                 variants={{
                   open: { y: 0 },
@@ -430,19 +431,9 @@ const PlayerControls = ({
                 animate={trackListOpen ? "open" : "closed"}
               >
                 <Flex
+                  className="themed-scrollable"
                   maxHeight="600px"
                   overflowY="auto"
-                  css={{
-                    "&::-webkit-scrollbar": {
-                      width: "8px",
-                    },
-                    "&::-webkit-scrollbar-track": {
-                      width: "8px",
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                      background: scrollerColor,
-                    },
-                  }}
                   borderColor="borderSubtle"
                   borderWidth="1px"
                   spacing={4}
@@ -450,60 +441,68 @@ const PlayerControls = ({
                   overflowX="hidden"
                   flexFlow="column"
                 >
-                  {trackList.tracks.items.map((r, i) => (
-                    <Flex
-                      py={2}
-                      px={3}
-                      w="full"
-                      key={r.uri}
-                      _hover={{ background: scrollerColor }}
-                      onClick={() => {
-                        if (!authorized) {
-                          return login()
+                  {trackList.tracks.items.map((r, i) => {
+                    const albumArt = r.album.images.at(-1)
+                    return (
+                      <Flex
+                        py={2}
+                        px={3}
+                        w="full"
+                        key={r.uri}
+                        _hover={{ background: scrollerColor }}
+                        onClick={() => {
+                          if (!authorized) {
+                            return login()
+                          }
+                          if (timedOut || !playerDevice) {
+                            return
+                          }
+                          playSong(i)
+                        }}
+                        alignItems="center"
+                        background={
+                          playbackState?.track_window.current_track.uri ===
+                          r.uri
+                            ? "bgSecondary"
+                            : ""
                         }
-                        if (timedOut || !playerDevice) {
-                          return
+                        filter={
+                          timedOut || !authorized
+                            ? "grayscale(1)"
+                            : "grayscale(0)"
                         }
-                        playSong(i)
-                      }}
-                      alignItems="center"
-                      background={
-                        playbackState?.track_window.current_track.uri === r.uri
-                          ? "bgSecondary"
-                          : ""
-                      }
-                      filter={
-                        timedOut || !authorized
-                          ? "grayscale(1)"
-                          : "grayscale(0)"
-                      }
-                    >
-                      <Box
-                        width={7}
-                        whiteSpace="nowrap"
-                        textAlign="right"
-                        color="text.500"
-                        fontSize="xs"
-                        pr={3}
                       >
-                        {i + 1}
-                      </Box>
-                      <Image
-                        src={r.album.images[0].url}
-                        h={8}
-                        w={8}
-                        marginInlineEnd={2}
-                      />
-                      <VStack alignItems="flex-start" spacing={0}>
-                        <Text fontWeight="bold" fontSize="sm" lineHeight="1.2">
-                          {r.name}
-                        </Text>
-                        <Text fontSize="xs" lineHeight="1.2">
-                          {r.artists[0]?.name ?? "Unknown artist"}
-                        </Text>
-                      </VStack>
-                    </Flex>
-                  ))}
+                        <Box
+                          width={7}
+                          whiteSpace="nowrap"
+                          textAlign="right"
+                          color="text.500"
+                          fontSize="xs"
+                          pr={3}
+                        >
+                          {i + 1}
+                        </Box>
+                        <Image
+                          src={albumArt?.url}
+                          h={8}
+                          w={8}
+                          marginInlineEnd={2}
+                        />
+                        <VStack alignItems="flex-start" spacing={0}>
+                          <Text
+                            fontWeight="bold"
+                            fontSize="sm"
+                            lineHeight="1.2"
+                          >
+                            {r.name}
+                          </Text>
+                          <Text fontSize="xs" lineHeight="1.2">
+                            {r.artists[0]?.name ?? "Unknown artist"}
+                          </Text>
+                        </VStack>
+                      </Flex>
+                    )
+                  })}
                 </Flex>
                 <Text
                   as="h2"
