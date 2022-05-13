@@ -1,5 +1,6 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/layout"
-import { forwardRef, VStack } from "@chakra-ui/react"
+import { VStack } from "@chakra-ui/layout"
+import { forwardRef } from "@chakra-ui/system"
 import React from "react"
 import WhatsappBackground from "@assets/whatsapp_background.png"
 
@@ -110,7 +111,7 @@ export function WhatsappMessage({
             m={0}
             {...textStyle}
             lineHeight="19px"
-            fontSize={["sm", null, null, "15px"]}
+            fontSize={{ base: "sm", lg: "15px" }}
           >
             {head}
           </Text>
@@ -132,7 +133,7 @@ export function WhatsappMessage({
             m={0}
             lineHeight="19px"
             color={textStyle.color}
-            fontSize={["sm", null, null, "md"]}
+            fontSize={{ base: "sm", lg: "15px" }}
           >
             {message}
           </Text>

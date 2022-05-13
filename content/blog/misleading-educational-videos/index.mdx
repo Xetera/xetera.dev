@@ -14,18 +14,19 @@ Teaching is not simple; communicating ideas takes a lot of very intentional effo
 
 I want to specifically talk about one video today, which I think is a pretty egregious example of what I mean.
 
-<Box
-  as="iframe"
-  mb={6}
-  borderRadius="md"
-  width="100%"
-  height="315px"
+<WideMedia>
+
+<iframe
+  width="560"
+  height="315"
   src="https://www.youtube-nocookie.com/embed/MEyyegfvhwM"
   title="YouTube video player"
   frameborder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
 />
+
+</WideMedia>
 
 import SanaShrug from "@assets/emotes/sana_shrug.gif"
 
@@ -57,7 +58,7 @@ The step of inspecting the JWT gave Loi an idea of what the database schema of t
 He later goes to the user registration page, pulls up burp suite, and talks about how the JWT thing is making it possible for him to create a new user with premium, which makes no sense. The roles in the JWT are not insecure or sensitive. It's not uncommon to store user roles in a JWT as it's signed, and a user can't change it. If there was proper validation being done, the JWT would've made zero difference, and the exploit wouldn't be possible. These two things are not in the least bit related to each other. This exploit is still possible with or without a JWT storing information that is not even sensitive to begin with.
 
 <Callout mb={6}>
-  <Text color="text.500" fontSize="md">
+  <Text color="text.400" fontSize="md">
     The only problems that arise from storing user roles in tokens are
     logistical, and not security-related. For example, if you store roles in a
     token, you have to reissue the user a new token when you want to change

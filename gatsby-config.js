@@ -48,9 +48,9 @@ module.exports = {
       resolve: "gatsby-plugin-root-import",
       options: {
         "@assets": path.join(__dirname, "content", "assets"),
+        "@src": path.join(__dirname, "src"),
       },
     },
-    "gatsby-remark-images",
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-image`,
     {
@@ -75,8 +75,12 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 800,
+              maxWidth: 1000,
               backgroundColor: "transparent",
+              wrapperStyle: img => {
+                return `max-width: ${Math.min(img.presentationWidth, 1000)}px`
+              },
+              tracedSvg: true,
               withWebp: {
                 quality: 95,
               },
@@ -110,7 +114,12 @@ module.exports = {
     "gatsby-plugin-twitter",
     "gatsby-remark-reading-time",
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        stripMetadata: true,
+      },
+    },
     "gatsby-plugin-postcss",
     {
       resolve: `gatsby-plugin-google-analytics`,
@@ -131,7 +140,10 @@ module.exports = {
       },
     },
     "gatsby-plugin-open-graph-images",
-    "gatsby-plugin-webpack-bundle-analyser-v2",
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      options: { devMode: process.env.ANALYZE === "true" },
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -201,6 +213,7 @@ module.exports = {
         ],
       },
     },
-    "gatsby-plugin-netlify"
+    "gatsby-plugin-schema-snapshot",
+    "gatsby-plugin-netlify",
   ],
 }

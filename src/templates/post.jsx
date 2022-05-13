@@ -1,41 +1,39 @@
-import React from "react";
-import {
-  Hr,
-  Layout,
-  LayoutContent,
-  layoutContentPadding
-} from "../components/Layout";
-import { Link as GatsbyLink, graphql } from "gatsby";
-import Popup from "../components/Popup";
-import SEO from "../components/Seo";
-import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import PopupPortal, { Toastable } from "../components/Popup";
-import { RoughNotation } from "react-rough-notation";
-import { MDXProvider } from "@mdx-js/react";
-import * as Chatbox from "../components/memes/Chatbox";
-import * as AllMarkdownComponents from "../components/Markdown";
-import * as Chakra from "@chakra-ui/layout";
-import * as ChakraReact from "@chakra-ui/react";
-import { Image } from "@chakra-ui/image";
-import { Table, Td, Th, Tr } from "@chakra-ui/table";
-import { Text } from "@chakra-ui/react";
-import { colors, transition } from "../data/theme";
-import { maxWidth } from "../shared";
-import { avatars } from "../components/Avatars";
+import React from "react"
+import { Hr, Layout, LayoutContent } from "../components/Layout"
+import { Link as GatsbyLink, graphql } from "gatsby"
+import Popup from "../components/Popup"
+import SEO from "../components/Seo"
+import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import PopupPortal, { Toastable } from "../components/Popup"
+import { RoughNotation } from "react-rough-notation"
+import { MDXProvider } from "@mdx-js/react"
+import * as Chatbox from "../components/memes/Chatbox"
+import * as AllMarkdownComponents from "../components/Markdown"
+import { Link, Box, Flex, Grid, Heading, HStack, Text } from "@chakra-ui/layout"
+import { Button } from "@chakra-ui/button"
+import { Image } from "@chakra-ui/image"
+import { ImageWrapper, Constrain, WideMedia } from "../components/Image"
+import { Table, Td, Th, Tr } from "@chakra-ui/table"
+import { Tag } from "@chakra-ui/tag"
+import { maxWidth } from "../shared"
+import { avatars } from "../components/Avatars"
+import { CenteredGrid } from "../components/CenteredGrid"
+import sample from "lodash/sample"
+import { ExContextWrapper } from "../components/memes/Ex"
+import formatDistance from "date-fns/formatDistance"
+import { DraftDisclaimer } from "../components/post/draft"
 
-const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents;
-const MarkdownComponents = rest;
-const { Box, Flex, Grid, Heading, Link, HStack } = Chakra;
+const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
+const MarkdownComponents = rest
 
 const Navigator = ({ pos, link }) => {
-  const isLeft = pos === "left";
+  const isLeft = pos === "left"
 
   const data = (
     <Box
-      p={4}
+      p={6}
       m={0}
-      transition={transition}
       height="100%"
       overflow="hidden"
       borderRadius="sm"
@@ -45,9 +43,9 @@ const Navigator = ({ pos, link }) => {
       <Heading
         fontSize="md"
         as="h3"
-        fontWeight="bold"
-        mb={1}
-        color={link ? "text.100" : "text.500"}
+        fontWeight="semibold"
+        mb={3}
+        color={link ? "text.100" : "text.400"}
       >
         {isLeft ? "Previous" : "Next"} Article
       </Heading>
@@ -56,7 +54,7 @@ const Navigator = ({ pos, link }) => {
           {link.frontmatter.title}
         </Text>
       ) : (
-        <Text mb={0} as="i" color="text.500" fontSize="md">
+        <Text mb={0} as="i" color="text.400" fontSize="md">
           {isLeft ? (
             "Wow you just read the first post. Why are you even here?"
           ) : (
@@ -74,10 +72,10 @@ const Navigator = ({ pos, link }) => {
         </Text>
       )}
     </Box>
-  );
+  )
 
   if (!link) {
-    return data;
+    return data
   }
 
   return (
@@ -89,196 +87,235 @@ const Navigator = ({ pos, link }) => {
     >
       {data}
     </Link>
-  );
-};
+  )
+}
 
-function makeHeader(type, fonts = ["xl", null, "2xl"]) {
+function makeHeader(type, { fonts = ["xl", null, "2xl"], ...rest } = {}) {
   return ({ children, ...props }) => (
     <Heading
       as={type}
       mb={4}
-      transition={transition}
       fontSize={fonts}
+      color="text.200"
+      fontWeight="medium"
       {...props}
+      {...rest}
     >
       {children}
     </Heading>
-  );
+  )
 }
 
-export default function Post({ data, pageContext, location }) {
-  const post = data.mdx;
-  const { previous, next, ogImage } = pageContext;
-  const { imageTop, imageBottom } = post.frontmatter;
-  const isDraft = post.frontmatter.draft;
+export default function Post(props) {
+  const { data, pageContext, location } = props
+  const post = data.mdx
+  const { previous, next, ogImage } = pageContext
+  const { imageTop, imageBottom } = post.frontmatter
+  const isDraft = post.frontmatter.draft
+  const distance = formatDistance(new Date(post.frontmatter.date), new Date(), {
+    addSuffix: true,
+  })
+
   return (
     <>
       <Layout imageTop={imageTop} imageBottom={imageBottom}>
-        <Box transition={transition} pt={[8, 12, 24]}>
-          <Grid
-            gap={2}
-            as="header"
-            p={layoutContentPadding}
-            mx="auto"
-            maxWidth={maxWidth}
-          >
-            {post.frontmatter.draft && (
-              <Box mb={2}>
-                <Flex
-                  zIndex={10}
-                  width="100%"
-                  mx="auto"
-                  flexFlow="row"
-                  justify="center"
-                  maxWidth={maxWidth}
-                >
-                  <Text fontSize={["sm", null, "lg"]} fontWeight="bold">
-                    🥺 You're viewing a draft. This post is not published.
-                  </Text>
-                </Flex>
-              </Box>
-            )}
-            <Text color="text.60">
-              <Box as="span" fontWeight="semibold" color="brand.100" textTransform="uppercase">Article</Box>{" "}
-              • {post.fields.readingTime.text}</Text>
-            <Heading
-              as="h1"
-              mb={2}
-              color="text.100"
-              fontSize={["3xl", "4xl", "6xl"]}
-              lineHeight="1.2"
-              fontWeight="black"
-            >
-              {post.frontmatter.title}
-            </Heading>
-            <Text
-              fontSize={["lg", "xl"]}
-              fontWeight="regular"
-              color="text.300"
-            >
-              {post.frontmatter.description}
-            </Text>
-            <Hr />
-            <Flex
-              alignItems={{ base: "flex-start", md: "center" }} color="text.500"
-                  justify="space-between"
-              flexDirection={{ base: "column", md: "row" }}
-            >
-              <HStack
-                mb={{ base: 2, md: 0 }}
-                justify="center"
-                textTransform="capitalize"
-                // fontSize="sm"
-                spacing={4}
-                fontWeight="medium"
-              >
-                {post.frontmatter.tags.map((tag, i) => (
-                  <Text
-                    color="brand.100"
-                    key={tag}
-                  >
-                    {tag}
-                  </Text>
-                ))}
-              </HStack>
-              <Flex alignItems="center">
-                <Text as="time" dateTime={post.frontmatter.date} color="text.100">
-                  {post.frontmatter.date}
-                </Text>
-              </Flex>
-            </Flex>
-          </Grid>
-        </Box>
-        <LayoutContent mx="auto" maxWidth={maxWidth}>
+        <LayoutContent mx="auto" width="100%">
           <SEO
             canonical={post.slug}
             title={post.frontmatter.title}
             description={post.frontmatter.description || post.excerpt}
             image={ogImage}
           />
-          <Grid as="article" gap={2}>
-            <Box
-              className="blog-post"
-              as="section"
-              fontSize="lg"
-              lineHeight="200%"
+          <Grid gap={24}>
+            <CenteredGrid
+              gridRowGap={3}
+              as="header"
+              mx="auto"
+              width="100%"
+              mt={[8, 12, 18]}
             >
-              <MDXProvider
-                scope={{ transition }}
-                components={{
-                  ...avatars,
-                  ...Chatbox,
-                  ...MarkdownComponents,
-                  ...MarkdownOverrides,
-                  ...Chakra,
-                  ...ChakraReact,
-                  getImage,
-                  GatsbyImage,
-                  StaticImage,
-                  maxWidth,
-                  Text,
-                  ChakraImage: Image,
-                  Toastable,
-                  Hr,
-                  a: ({ children, ...props }) => (
-                    <Link color="brandSecondary" {...props}>
-                      {children}
-                    </Link>
-                  ),
-                  RoughNotation,
-                  h6: makeHeader("h6"),
-                  h5: makeHeader("h5"),
-                  h4: makeHeader("h4", ["md", "lg", "xl"]),
-                  h3: makeHeader("h3"),
-                  h2: makeHeader("h2"),
-                  h1: makeHeader("h1"),
-                  table: ({ children, ...props }) => (
-                    <Table mb={6} {...props}>
-                      {children}
-                    </Table>
-                  ),
-                  th: Th,
-                  tr: Tr,
-                  td: ({ children, ...props }) => (
-                    <Td
-                      fontSize={["sm", "md", "lg"]}
-                      verticalAlign="initial"
-                      {...props}
-                    >
-                      {children}
-                    </Td>
-                  ),
-                  blockquote: ({ children, ...props }) => (
-                    <Box
-                      as="blockquote"
-                      borderColor="borderSubtle"
-                      borderLeftWidth="2px"
-                      borderLeft="solid"
-                      paddingInlineStart={4}
-                      {...props}
-                    >
-                      {children}
-                    </Box>
-                  ),
-                  p: ({ children, ...props }) => (
-                    <Text
-                      as="p"
-                      transition={transition}
-                      fontSize={["md", null, "lg"]}
-                      mb={6}
-                      {...props}
-                    >
-                      {children}
-                    </Text>
-                  )
-                }}
+              <Text color="text.300">
+                <Box
+                  as="span"
+                  fontWeight="semibold"
+                  color="brand.100"
+                  textTransform="uppercase"
+                >
+                  {isDraft && "Draft"} Article
+                </Box>
+                <Box mx={3} as="span">
+                  —
+                </Box>
+                {post.fields.readingTime.text}
+              </Text>
+              <Heading
+                as="h1"
+                mb={2}
+                color="text.200"
+                fontSize={["3xl", "4xl", "7xl"]}
+                lineHeight="110%"
+                fontWeight="black"
               >
-                <MDXRenderer>{post.body}</MDXRenderer>
-              </MDXProvider>
-            </Box>
+                {post.frontmatter.title}
+              </Heading>
+              <Text
+                as="h2"
+                fontSize={["lg", "xl"]}
+                fontWeight="normal"
+                color="text.300"
+                mb={4}
+              >
+                {post.frontmatter.description}
+              </Text>
+              {isDraft && <DraftDisclaimer />}
+              <Hr />
+              <Flex
+                alignItems="flex-start"
+                color="text.400"
+                justify="space-between"
+                flexDirection={{ base: "column", md: "row" }}
+              >
+                <HStack
+                  mb={{ base: 2, md: 0 }}
+                  justify="center"
+                  textTransform="capitalize"
+                  // fontSize="sm"
+                  spacing={{ base: 4, md: 6 }}
+                  fontWeight="medium"
+                >
+                  {post.frontmatter.tags.map((tag, i) => (
+                    <Text color="brand.100" key={tag}>
+                      {tag}
+                    </Text>
+                  ))}
+                </HStack>
+                <Flex
+                  alignItems={{ base: "flex-start", md: "flex-end" }}
+                  flexDirection="column"
+                >
+                  <Text
+                    as="time"
+                    dateTime={post.frontmatter.date}
+                    color="text.100"
+                  >
+                    {post.frontmatter.date}
+                  </Text>
+                  <Text fontSize="sm">{distance}</Text>
+                </Flex>
+              </Flex>
+            </CenteredGrid>
+            <CenteredGrid
+              className="blog-post centered-grid"
+              fontSize="lg"
+              lineHeight={{ base: "180%", md: "200%" }}
+            >
+              <ExContextWrapper>
+                <MDXProvider
+                  components={{
+                    ...avatars,
+                    ...Chatbox,
+                    ...MarkdownComponents,
+                    ...MarkdownOverrides,
+                    Link,
+                    Box,
+                    Flex,
+                    Grid,
+                    Button,
+                    getImage,
+                    Constrain,
+                    ImageWrapper,
+                    WideMedia,
+                    GatsbyImage,
+                    StaticImage,
+                    maxWidth,
+                    Text,
+                    Tag,
+                    ChakraImage: Image,
+                    Image,
+                    Toastable,
+                    Hr,
+                    a: ({ children, ...props }) => (
+                      <Link color="brandSecondary" {...props}>
+                        {children}
+                      </Link>
+                    ),
+                    RoughNotation,
+                    h6: makeHeader("h6"),
+                    h5: makeHeader("h5"),
+                    h4: makeHeader("h4", { fonts: ["md", "lg", "xl"] }),
+                    h3: makeHeader("h3", { fonts: ["md", "lg", "2xl"] }),
+                    h2: makeHeader("h2", { fonts: ["md", "lg", "2xl"], mt: 6 }),
+                    h1: makeHeader("h1", {
+                      fonts: ["lg", "xl", "4xl"],
+                      mt: 8,
+                      mb: 8,
+                    }),
+                    table: ({ children, ...props }) => (
+                      <Box overflowX="auto" mb={8}>
+                        <Table {...props}>{children}</Table>
+                      </Box>
+                    ),
+                    th: Th,
+                    tr: Tr,
+                    td: ({ children, ...props }) => (
+                      <Td
+                        fontSize={["sm", "md", "lg"]}
+                        verticalAlign="initial"
+                        {...props}
+                      >
+                        {children}
+                      </Td>
+                    ),
+                    ul: ({ children, ...props }) => (
+                      <Box
+                        as="ul"
+                        listStyleType={sample([
+                          "katakana",
+                          "hiragana",
+                          "simp-chinese-formal",
+                          "korean-hanja-formal",
+                          "korean-hangul-formal",
+                        ])}
+                        fontSize={["md", null, "lg"]}
+                        mb={8}
+                        {...props}
+                      >
+                        {children}
+                      </Box>
+                    ),
+                    blockquote: ({ children, ...props }) => (
+                      <Box
+                        as="blockquote"
+                        textAlign="center"
+                        borderColor="borderSubtle"
+                        fontSize={{ base: "lg", lg: "2xl" }}
+                        color="text.200"
+                        mt={4}
+                        mb={8}
+                        px={{ base: 8, lg: 24 }}
+                        {...props}
+                      >
+                        {children}
+                      </Box>
+                    ),
+                    p: ({ children, ...props }) => (
+                      <Text
+                        as="p"
+                        fontSize={["md", null, "lg"]}
+                        mb={8}
+                        {...props}
+                      >
+                        {children}
+                      </Text>
+                    ),
+                  }}
+                >
+                  <MDXRenderer>{post.body}</MDXRenderer>
+                </MDXProvider>
+              </ExContextWrapper>
+            </CenteredGrid>
             {!isDraft && (
-              <>
-                <Hr />
+              <CenteredGrid>
                 <Box as="footer">
                   <Grid
                     as="section"
@@ -296,7 +333,7 @@ export default function Post({ data, pageContext, location }) {
                     <Navigator pos="right" link={next} />
                   </Grid>
                 </Box>
-              </>
+              </CenteredGrid>
             )}
           </Grid>
           <PopupPortal>
@@ -305,7 +342,7 @@ export default function Post({ data, pageContext, location }) {
         </LayoutContent>
       </Layout>
     </>
-  );
+  )
 }
 export const pageQuery = graphql`
   fragment Cover on File {
@@ -349,4 +386,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

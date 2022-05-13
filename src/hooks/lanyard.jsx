@@ -54,7 +54,13 @@ export function useLanyard(id) {
       }
       socket.current.send(JSON.stringify(msg))
       heartBeatInterval.current = setInterval(() => {
-        socket.current.send(JSON.stringify({ op: 3 }))
+        try {
+          socket.current.send(JSON.stringify({ op: 3 }))
+        } catch (err) {
+          console.error("Couldn't send heartbeat, exiting")
+          console.error(err)
+          cleanup(socket.current)
+        }
       }, incoming.d.heartbeat_interval)
       return
     }

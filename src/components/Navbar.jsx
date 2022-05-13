@@ -1,21 +1,12 @@
 import React, { useContext, useRef } from "react"
 import { Link } from "gatsby"
 import { Box, Flex } from "@chakra-ui/layout"
-import {
-  RiMoonLine,
-  RiSunFoggyLine,
-  RiDiscordFill,
-  RiSpotifyFill,
-} from "react-icons/ri"
+import { RiMoonLine, RiSunFoggyLine, RiSpotifyFill } from "react-icons/ri"
 import { HiMusicNote } from "react-icons/hi"
 import { transition } from "../data/theme"
-import {
-  Image,
-  Text,
-  Link as ChakraLink,
-  Skeleton,
-  SkeletonCircle,
-} from "@chakra-ui/react"
+import { Text, Link as ChakraLink } from "@chakra-ui/layout"
+import { Image } from "@chakra-ui/image"
+import { Skeleton, SkeletonCircle } from "@chakra-ui/skeleton"
 import { LanyardProvider, ThemeProvider } from "../data/providers"
 import Headroom from "react-headroom"
 
@@ -54,6 +45,7 @@ const LazyImage = ({ src, ...rest }) => {
 export default function Navbar() {
   const { theme, setTheme, toggle } = useContext(ThemeProvider)
   const lanyard = useContext(LanyardProvider)
+
   const nav = (
     <Flex
       as="nav"
@@ -61,15 +53,15 @@ export default function Navbar() {
       width="100%"
       transition={transition}
       p={3}
+      backdropFilter={{ base: "blur(8px); opacity(0.1)", xl: "none" }}
       zIndex={100}
-      bg="bg.100"
     >
       <Flex justify="flex-start" align="center">
-        <Link to="/" h="max-content">
+        <Link to="/">
           <Flex pointerEvents="all" alignItems="center" transition={transition}>
             <Flex
-              w={["30px", "32px", "45px"]}
-              h={["30px", "32px", "45px"]}
+              w={["30px", "32px", "50px"]}
+              h={["30px", "32px", "50px"]}
               justifyContent="center"
             >
               {lanyard.spotify ? (
@@ -81,7 +73,7 @@ export default function Navbar() {
                 <Box position="relative" w="full">
                   <LazyImage
                     borderRadius="full"
-                    src={`https://cdn.discordapp.com/avatars/${lanyard.discordId}/${lanyard.discord_user.avatar}.webp?size=80`}
+                    src={`https://cdn.discordapp.com/avatars/${lanyard.discordId}/${lanyard.discord_user.avatar}.webp?size=256`}
                   />
                   <Box
                     position="absolute"
@@ -116,7 +108,7 @@ export default function Navbar() {
                 </Text>
               </Flex>
             )}
-            <Flex align="center" lineHeight={1}>
+            <Flex align="center">
               <Flex
                 display="flex"
                 fontSize="sm"

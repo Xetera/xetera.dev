@@ -9,17 +9,14 @@ tags:
 ---
 
 export const OGImage = () => {
-  const cacheBust = Math.random()
   return (
-    <AspectRatio ratio={2}>
-      <Image
-        src={`https://opengraph.githubassets.com/${cacheBust}/Xetera/jiu`}
-        borderRadius="md"
-        overflow="hidden"
-        height="auto"
-        width="100%"
-      />
-    </AspectRatio>
+    <Image
+      sx={{ aspectRatio: "2" }}
+      src={`https://opengraph.githubassets.com/1/Xetera/jiu`}
+      borderRadius="md"
+      width="full"
+      mx="auto"
+    />
   )
 }
 
@@ -43,11 +40,11 @@ This project was originally meant to be a part of Kiyomi, but I figured the prob
 
 This isn't crucial to understanding the problem, but I want to share the infrastructure Jiu sits on top of because it could provide important context. Also, I spent a lot of time working on this and drawing the diagram for it, so I'm going to need someone to look at it.
 
-![Kiyomi architecture map](./kiyomi_arch.png)
+<WideMedia caption="Kiyomi architecture map">
 
-<Caption>
-  Might need to click on this one if you want to be able to read the labels
-</Caption>
+<img src="./kiyomi_arch.png" />
+
+</WideMedia>
 
 New images Jiu finds on supported sites are stored in a database isolated from every other service and get published to RabbitMQ for consumers to do whatever with. Jiu also runs its own webserver to allow dynamically adding and removing new providers, querying the stats of scrapes, and displaying its schedule/history.
 
@@ -102,11 +99,19 @@ At the start of the day, a database that looks like the following will get these
 | B             | 1.0      | 2.2    |
 | C             | 0.5      | 2.5    |
 
-![example of a list of scheduled scrapes](./bad_distribution.png)
+<WideMedia caption="Example list of scheduled scrapes">
+
+<img src="./bad_distribution.png" />
+
+</WideMedia>
 
 After every successful scrape, the next priority of the provider is calculated by getting the latest scrape result + the past 30 scrapes, and summing up the amount of images it found per check, weighed by how long ago the scrape was from the current day.
 
-![](./priority_graph.png)
+<WideMedia caption="Example list of scheduled scrapes">
+
+<img src="./priority_graph.png" />
+
+</WideMedia>
 
 This makes sure that an inactive account that starts to post images gets a higher bump in priority, and an active account that stops posting images gets knocked down an equivalent amount.
 
@@ -329,7 +334,7 @@ As a refresher, `reduce` (also referred to as `fold` in some languages) works by
 ![a diagram explaining how fold/reduce works](./reduce.png)
 
 export const Light = ({ children }) => (
-  <Box as="span" color="text.500">
+  <Box as="span" color="text.400">
     {children}
   </Box>
 )

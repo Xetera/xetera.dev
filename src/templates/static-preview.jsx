@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react"
+import { Flex, Heading, Text } from "@chakra-ui/layout"
 import { postPreviewDimensions } from "../shared"
 import avatar from "@assets/avatars/xetera.png"
 import { DisableNavbar, DisableSpotify } from "./disable-spotify"

@@ -1,9 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { AnimatePresence, m } from "framer-motion"
-import { maxWidth } from "../shared"
 import { Box, Flex } from "@chakra-ui/layout"
-import { forwardRef } from "@chakra-ui/react"
+import { forwardRef } from "@chakra-ui/system"
 import { transition } from "../data/theme"
 
 export const ToastContext = React.createContext({
@@ -67,8 +66,8 @@ export default function Popup({ className }) {
       maxHeight="40vh"
       height="100%"
       pointerEvents="none"
-      transition={transition}
       backgroundPosition={hovered ? "100px" : "0"}
+      transition={transition}
       opacity={hovered ? 1 : 0}
       background="bgPopupShadow"
       width="100%"
@@ -79,11 +78,10 @@ export default function Popup({ className }) {
       <AnimatePresence>
         {hovered && (
           <MotionFlex
-            maxWidth={maxWidth}
             width={["auto", null, "100%"]}
             borderLeft={`2px solid`}
-            borderColor="brand"
-            background="bgPrimary"
+            borderColor="brand.100"
+            background="bg.100"
             transition={{ type: "tween", duration: 0.24 }}
             initial={{
               opacity: 0,

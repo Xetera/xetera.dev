@@ -1,5 +1,4 @@
 import { extendTheme } from "@chakra-ui/react"
-import { mode } from "@chakra-ui/theme-tools"
 import mapValues from "lodash/mapValues"
 
 /**
@@ -30,19 +29,27 @@ const baseColors = {
       dark: "#eee",
       light: "#29292c",
     },
+    200: {
+      light: "#353534",
+      dark: "#f5f5f5",
+    },
     300: {
       dark: "#9eaab7",
       light: "#454547",
     },
-    500: {
+    400: {
       dark: "#718096",
       light: "#38404e",
+    },
+    500: {
+      dark: "#718096",
+      light: "#606876",
     },
   },
   bg: {
     100: {
       light: "#f3f3f3",
-      dark: "#141621",
+      dark: "#0f1117",
     },
     300: {
       light: "#e2e9ec",
@@ -70,16 +77,20 @@ const baseColors = {
     dark: "hsl(333deg 52% 14%)",
   },
   borderSubtle: {
-    dark: "#1e2131",
+    dark: "#181c24",
     light: "#e8e8e8",
   },
   borderSubtlePrimary: {
     light: "#dadbde",
     dark: "#1f2231",
   },
+  barelyVisible: {
+    light: "#9c9c9c21",
+    dark: "#1f222a3d",
+  },
   brand: {
     100: {
-      light: "hsl(333deg, 100%, 45%)",
+      light: "#a92491",
       dark: "hsl(333deg, 100%, 45%)",
     },
     80: {
@@ -88,7 +99,7 @@ const baseColors = {
     },
   },
   brandSecondary: {
-    dark: "#62daff",
+    dark: "#61b3cc",
     light: "#256bc1",
   },
 }
@@ -126,16 +137,19 @@ export const colors = {
 const fontFamily =
   "'Wotfard',-apple-system,'Segoe UI','Roboto','Ubuntu','Cantarell','Noto Sans',sans-serif,'BlinkMacSystemFont','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji'"
 
-function makeLayer(name, variants) {
-  return {
-    [name]: variants[1],
-    _light: {
-      [name]: variants[0],
-    },
-  }
-}
-
 export const transition = "all 0.4s ease-in-out"
+
+const fontSizes = {
+  xs: "13px",
+  sm: "14px",
+  md: "18px",
+  lg: "22px",
+  xl: "24px",
+  "2xl": "32px",
+  "3xl": "38px",
+  "4xl": "48px",
+  "5xl": "56px",
+}
 
 export function createTheme(theme) {
   const pick = themePicker(theme)
@@ -148,21 +162,14 @@ export function createTheme(theme) {
       heading: fontFamily,
       body: fontFamily,
     },
-    fontSizes: {
-      xs: "13px",
-      sm: "14px",
-      md: "18px",
-      lg: "22px",
-      xl: "24px",
-      "2xl": "32px",
-      "3xl": "38px",
-      "4xl": "48px",
-      "5xl": "56px",
-    },
+    fontSizes,
     styles: {
       global: {
+        ":root": {
+          colorScheme: pick({ light: "light", dark: "dark" }),
+        },
         ul: {
-          "list-style-position": "inside",
+          listStylePosition: "inside",
         },
         code: {
           display: "inline-flex",
@@ -172,7 +179,6 @@ export function createTheme(theme) {
             light: colors.bg[300].light,
             dark: "#2b141d",
           }),
-          transition,
           padding: "0 6px",
           lineHeight: "1.7",
           color: pick({
@@ -187,9 +193,24 @@ export function createTheme(theme) {
             dark: colors.bgSecondary.dark,
           }),
         },
+        ".themed-scrollable::-webkit-scrollbar": {
+          width: "8px",
+        },
+        ".themed-scrollable::-webkit-scrollbar-track": {
+          width: "8px",
+        },
+        "*::-webkit-scrollbar-thumb": {
+          background: pick(colors.bg[500]),
+        },
+        ".centered-grid > *": {
+          gridColumn: "2 / auto",
+        },
         ".blog-post :is(h1, h2, h3, h4, h5, h6) > a": {
           // resetting the link colors of article headings
           color: "inherit",
+        },
+        ".blog-post > *": {
+          fontSize: fontSizes.md,
         },
         a: {
           wordBreak: "break-word",
@@ -206,6 +227,20 @@ export function createTheme(theme) {
         "pre, kbd, samp": {
           fontFamily: `'Jetbrains Mono', ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace`,
         },
+        // We don't want the last element of blockquotes to push the quote border down with a margin
+        ".blog-post blockquote::before, .blog-post blockquote::after": {
+          width: "3rem",
+          display: "block",
+          borderTop: `1px solid ${pick(colors.text[500])}`,
+          opacity: 0.4,
+          content: '""',
+          margin: "0 auto",
+        },
+        ".blog-post blockquote > p": {
+          margin: "3rem 0",
+          fontWeight: "medium",
+          fontSize: "inherit",
+        },
         body: {
           lineBreak: "auto",
           transition,
@@ -213,6 +248,12 @@ export function createTheme(theme) {
           background: pick({
             light: colors.bg[100].light,
             dark: colors.bg[100].dark,
+          }),
+        },
+        "::selection": {
+          backgroundColor: pick({
+            light: "#ddbed8",
+            dark: "#1f242e",
           }),
         },
       },

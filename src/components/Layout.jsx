@@ -1,6 +1,5 @@
 import React from "react"
 import { ToastContext } from "./Popup"
-import { BackgroundImage } from "./Image"
 import { Box, Flex, Grid } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
 import { domAnimation, LazyMotion } from "framer-motion"
@@ -29,7 +28,7 @@ export const LayoutContent = forwardRef((props, ref) => {
       <Grid
         as="main"
         color="text.100"
-        fontWeight="regular"
+        fontWeight="normal"
         gap={12}
         p={layoutContentPadding}
         ref={ref}

@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react"
-import { ChakraProvider, localStorageManager } from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/provider"
+import { localStorageManager } from "@chakra-ui/system"
 import { defaultTheme, ThemeProvider } from "../data/providers"
 import { createTheme } from "../data/theme"
 

@@ -3,7 +3,8 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     "paths": {
-      "@assets/*": ["./content/assets/*"]
+      "@assets/*": ["./content/assets/*"],
+      "@src/*": ["./src/*"]
     },
     /* Basic Options */
     // "incremental": true,                         /* Enable incremental compilation */

@@ -43,13 +43,15 @@ function makeCookies(token: string, expired = false) {
   const cookieSettings = `Max-Age=${ms("31d") / 1000}; Path=/`
   if (expired) {
     return [
-      `spotifyToken=${token}; ${cookieSettings}; Expires=${new Date(0).toUTCString()} HttpOnly`,
-      `spotifyLoggedIn=false; ${cookieSettings};`
+      `spotifyToken=${token}; ${cookieSettings}; Expires=${new Date(
+        0
+      ).toUTCString()} HttpOnly`,
+      `spotifyLoggedIn=false; ${cookieSettings};`,
     ]
   }
   return [
     `spotifyToken=${token}; ${cookieSettings}; HttpOnly`,
-    `spotifyLoggedIn=true; ${cookieSettings};`
+    `spotifyLoggedIn=true; ${cookieSettings};`,
   ]
 }
 
@@ -60,8 +62,8 @@ function failAndClearCookies(reason: string) {
     statusCode: 401,
     body: JSON.stringify({ status: "error", reason }),
     multiValueHeaders: {
-      "Set-Cookie": cookies
-    }
+      "Set-Cookie": cookies,
+    },
   }
 }
 
@@ -80,8 +82,6 @@ const handler: Handler = async (event, context) => {
       return failAndClearCookies("invalidCookie")
     }
 
-
-    console.log(token)
     const response: any = await refreshToken(token)
     const resultStr = await response.text()
     if (!response.ok) {

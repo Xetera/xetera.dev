@@ -7,7 +7,7 @@ import {
   OrderedList,
   ListItem,
   Text,
-} from "@chakra-ui/react"
+} from "@chakra-ui/layout"
 
 export const Cell = ({ options, title, subtitle, children }) => (
   <Box
@@ -38,9 +38,8 @@ export const Cell = ({ options, title, subtitle, children }) => (
             transform: "scale(1.1)",
           }}
           textAlign="center"
-          color="inherit"
           fontSize={["sm", "md"]}
-          color="text.500"
+          color="text.400"
           py={2}
         >
           {title}

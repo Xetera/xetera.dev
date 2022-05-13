@@ -58,7 +58,7 @@ const Bio = React.memo(
             </Text>
             <Text>
               As of{" "}
-              <Text as="time" dateTime={data.site.buildtime} color="text.500">
+              <Text as="time" dateTime={data.site.buildtime} color="text.400">
                 {data.site.buildTime}
               </Text>{" "}
               I have watched{" "}
@@ -113,7 +113,7 @@ const Bio = React.memo(
                     <RiSafariLine size={18} />
                     <Box marginInlineStart={2}>Oh no</Box>
                   </Heading>
-                  <Text color="text.500" fontSize="sm">
+                  <Text color="text.400" fontSize="sm">
                     It looks like you're using an outdated browser that can't
                     keep up with web standards. Some functionality on the site
                     might feel a little broken, sorry. 😭

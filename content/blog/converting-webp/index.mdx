@@ -48,7 +48,7 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
           {size}
         </Tag>
       </Flex>
-      <Text mb={0} fontSize="sm">
+      <Text mb={0} fontSize={{ base: "sm", md: "md" }} lineHeight="180%">
         {text}
       </Text>
     </Box>

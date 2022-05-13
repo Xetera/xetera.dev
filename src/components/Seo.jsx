@@ -78,9 +78,10 @@ const SEO = ({ description, lang = "en", title, image, canonical }) => {
       {
         name: "og:image",
         // og image does some weird shit lol
-        content: `${site.siteMetadata.siteUrl}${image.path.replace(/\/{1,}/g, "/")
+        content: `${site.siteMetadata.siteUrl}${
+          image.path.replace(/\/{1,}/g, "/")
           //cache busting
-          }?t=${site.buildTime}`,
+        }?t=${site.buildTime}`,
       },
       {
         name: "og:image:height",
@@ -106,6 +107,10 @@ const SEO = ({ description, lang = "en", title, image, canonical }) => {
         <link rel="canonical" href={new URL(canonical, siteUrl).href} />
       )}
       <meta name="theme-color" content={site.siteMetadata.themeColor} />
+      <meta
+        http-equiv="Content-Security-Policy"
+        content="connect-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval';"
+      ></meta>
     </Helmet>
   )
 }

@@ -1,8 +1,11 @@
-import React, { useState } from "react"
+import React, { Suspense, useState } from "react"
 import { useMount } from "react-use"
 import Lanyard from "./Lanyard"
 import Navbar from "./Navbar"
-import { Player } from "./Player/Player"
+
+const Player = React.lazy(() =>
+  import("./Player/Player").then(r => ({ default: r.Player }))
+)
 
 const PersistentLayout = ({ children }) => {
   const [mounted, setMounted] = useState(false)
@@ -14,7 +17,9 @@ const PersistentLayout = ({ children }) => {
   return (
     <LanyardWrapper>
       <Navbar />
-      <PlayerElem />
+      <Suspense fallback={<div />}>
+        <Player />
+      </Suspense>
       {children}
     </LanyardWrapper>
   )

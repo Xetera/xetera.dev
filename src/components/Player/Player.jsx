@@ -8,24 +8,17 @@ import {
   WebPlaybackSDK,
 } from "react-spotify-web-playback-sdk"
 import { useWindowSize } from "react-use"
+import { Box, Flex, HStack, Link, Text, VStack } from "@chakra-ui/layout"
+import { Image } from "@chakra-ui/image"
+import { Tooltip } from "@chakra-ui/tooltip"
 import {
-  Box,
-  Flex,
-  HStack,
-  Image,
-  Link,
-  Skeleton,
   Slider,
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
-  Text,
-  Tooltip,
-  useBoolean,
-  useColorModeValue,
-  useOutsideClick,
-  VStack,
-} from "@chakra-ui/react"
+} from "@chakra-ui/slider"
+import { Skeleton } from "@chakra-ui/skeleton"
+import { useBoolean, useOutsideClick } from "@chakra-ui/hooks"
 import {
   RiCloseLine,
   RiFolderMusicLine,
@@ -42,7 +35,6 @@ import { AnimatePresence, motion } from "framer-motion"
 import { graphql, useStaticQuery } from "gatsby"
 import format from "date-fns/format"
 import throttle from "lodash/throttle"
-import Lanyard from "../Lanyard"
 
 /**
  * If you're looking at this file to figure out
@@ -222,7 +214,6 @@ const PlayerControls = ({
   const player = useSpotifyPlayer()
   const playerDevice = usePlayerDevice()
   const scrollerColor = "bgSecondary"
-  console.log(trackList)
 
   useOutsideClick({
     ref: inside,
@@ -347,7 +338,6 @@ const PlayerControls = ({
         alignItems="center"
         zIndex={8}
         transform={closed ? "translateY(200px)" : "translateY(0)"}
-        transition="all 0.2s ease-in-out"
         cursor="pointer"
       >
         <Flex
@@ -394,7 +384,7 @@ const PlayerControls = ({
                 initial="closed"
                 animate={volumeOpen ? "open" : "closed"}
               >
-                <Text fontSize="xs" color="text.500" textAlign="center" pt={2}>
+                <Text fontSize="xs" color="text.400" textAlign="center" pt={2}>
                   {Math.floor(volume * 100)}
                 </Text>
                 <Box p={2} h="full">
@@ -442,7 +432,9 @@ const PlayerControls = ({
                   flexFlow="column"
                 >
                   {trackList.tracks.items.map((r, i) => {
-                    const albumArt = r.album.images.at(-1)
+                    // album images are sorted from biggest to smallest
+                    const { images } = r.album
+                    const albumArt = images[images.length - 1]
                     return (
                       <Flex
                         py={2}
@@ -476,7 +468,7 @@ const PlayerControls = ({
                           width={7}
                           whiteSpace="nowrap"
                           textAlign="right"
-                          color="text.500"
+                          color="text.400"
                           fontSize="xs"
                           pr={3}
                         >
@@ -689,7 +681,7 @@ const PlayerControls = ({
             justifyContent="center"
           >
             {!authorized ? (
-              <Text fontSize="xs" color="text.500">
+              <Text fontSize="xs" color="text.400">
                 This widget connects to your Spotify account
               </Text>
             ) : timedOut ? (

@@ -1,9 +1,9 @@
 import React from "react"
-import { Link as GatsbyLink, graphql, PageProps } from "gatsby"
+import { graphql } from "gatsby"
 import Bio from "../components/Bio"
-import PostData, { PostList, Tags } from "../components/PostShared"
+import { PostList } from "../components/PostShared"
 import { Layout, LayoutContent } from "../components/Layout"
-import { Flex, Grid, Heading, Stack, Box, Link, Text } from "@chakra-ui/layout"
+import { Flex, Grid, Stack, Text } from "@chakra-ui/layout"
 import { Helmet } from "react-helmet"
 import SEO from "../components/Seo"
 import { RiGithubFill, RiRssFill } from "react-icons/ri"
@@ -33,7 +33,7 @@ const BlogIndex = ({ data, pageContext }) => {
           >
             <Flex alignItems="center">
               <Text
-                fontSize="md"
+                fontSize="sm"
                 color="text.300"
                 textTransform="uppercase"
                 letterSpacing="1.5px"
@@ -92,7 +92,8 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMMM D, YYYY")
+            rawDate: date
             title
             description
             tags

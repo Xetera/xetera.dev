@@ -15,6 +15,8 @@ There's a quote that every breathing human ever has either heard of before or re
 
 And I agree with the premise, but I think this is a pretty outdated saying and I'd like to propose a third alternative that is inspired by the words of the famous philosopher Ron Swanson.
 
+<WideMedia mb={8}>
+
 <Box
   borderRadius="md"
   as="video"
@@ -24,8 +26,9 @@ And I agree with the premise, but I think this is a pretty outdated saying and I
   playsinline
   controls
   muted=""
-  mb={6}
 />
+
+</WideMedia>
 
 Don't teach a man to fish. He's a grown man; he can learn to fish on his own. Instead, show him why he might be interested in it over something else. Show him why you're passionate about fishing. Take him out for a boat ride, and get him excited about how good it feels when you catch something after patiently waiting for hours. Describe to him the details of fishing that make it feel so rewarding to sit with a pole in your hand for a whole day. But <T>please</T>, for the love of God, don't teach him how to fish. He doesn't need you for that.
 
@@ -37,22 +40,13 @@ For a very long time, most of teaching was something we had to do out of necessi
 
 As of fairly recently --specifically during the time of the industrial revolution-- we learned to channel this idea into institutions capable of growing a large population of little people into skilled factory workers years down the line. This wasn't so much based on necessity; we realized that like... I don't know man like this learning thing might be a good idea I don't know... So we went ahead and set up schools to actually be usable by the general public and came up with the <T>incredible idea</T> that being born into a family that has multiple servants should not be a pre-requisite to learning how to read. You still didn't get to paint on the cave walls on your own terms though. You learned the absolute basics of literacy and whatever skills you needed to become a good, obedient factory worker.
 
-<figure>
+import { StaticImage } from "gatsby-plugin-image"
 
-![victorian girls in captivity](./victorian.jpg)
+<WideMedia caption="A classroom of girls in the Victorian era wishing they could be doing literally anything else right now." >
 
-<Box
-  as="figcaption"
-  textAlign="center"
-  mb={6}
-  color="text.500"
-  fontSize={["sm", null, "md"]}
->
-  A classroom of girls in the Victorian era wishing they could be doing
-  literally anything else right now.
-</Box>
+<img src="./victorian.jpg" alt="victorian girls in captivity" />
 
-</figure>
+</WideMedia>
 
 This way of learning worked well for its intended purpose for many <T>thousands</T> of years, but because it was motivated by necessity or covering the absolute basics, you were never asked about what it was that you wanted to learn. You weren't nudged into discovering a passion for yourself. You were either given a task you had to do for a lifetime or had to find out what that was if you wanted to survive.
 
@@ -203,7 +197,8 @@ The reason I feel so strongly about this topic is that I know most people --if n
 
 You can see the amazement in people as they realize that learning is an incredible feeling and that **school doesn't have to be synonymous with education**. Unfortunately, that is the way most of us feel, as we get put through this system starting as early as age 5, and it leads to a painful internal conflict for kids who realize the current education system isn't their cup of tea and they don't perform well in school because of it. They often think that they are just too dumb to understand concepts like math and science and arrive at the inevitable conclusion that they don't like <T>learning</T>.
 
-import { Link } from "@chakra-ui/react"
+import { Link } from "@chakra-ui/layout"
+
 import ThisArrow from "@assets/emotes/thisarrow.gif"
 
 export const friendProps = {

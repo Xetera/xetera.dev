@@ -8,7 +8,7 @@ import { maxWidth } from "../shared"
 import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout"
 import { layoutContentPadding } from "./Layout"
 import { Image } from "@chakra-ui/image"
-import { forwardRef, useColorMode } from "@chakra-ui/system"
+import { forwardRef } from "@chakra-ui/system"
 import { Tooltip, useTooltip } from "@chakra-ui/tooltip"
 import typescript from "@assets/tech/typescript.png"
 import javascript from "@assets/tech/javascript.png"
@@ -16,11 +16,12 @@ import haskell from "@assets/tech/haskell.png"
 import python from "@assets/tech/python.png"
 import go from "@assets/tech/go.png"
 import rust from "@assets/tech/rust.png"
-import { SkeletonCircle, useBreakpointValue } from "@chakra-ui/react"
+import { SkeletonCircle } from "@chakra-ui/skeleton"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
 import { VStack } from "@chakra-ui/layout"
 import { ThemeProvider } from "../data/providers"
+import { CenteredGrid } from "./CenteredGrid"
 export * from "./memes/Chatbox"
 export * from "./posts"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
@@ -81,14 +82,13 @@ export const WideBanner = forwardRef((props, ref) => {
       marginRight="-50vw"
       position="relative"
       overflow="hidden"
-      transition={transition}
       mb={6}
       // background="bgSecondary"
       ref={ref}
       {...rest}
     >
-      <Grid
-        className="widebanner"
+      <CenteredGrid
+        className="widebanner centered-grid"
         maxWidth={maxWidth}
         px={layoutContentPadding}
         {...inner}
@@ -108,7 +108,7 @@ export const WideBanner = forwardRef((props, ref) => {
           </h2>
         )}
         {children}
-      </Grid>
+      </CenteredGrid>
     </Box>
   )
 })
@@ -208,7 +208,7 @@ export function DiscordReaction({
   )
 }
 
-const innerGap = { gap: 22 }
+const innerGap = { gridRowGap: 22 }
 
 export const DiscordMessageContainer = ({ children }) => (
   <WideBanner
@@ -259,22 +259,22 @@ const DiscordMessageAvatar = ({ avatar, username }) => {
 }
 
 export const DiscordEmbed = forwardRef((props, ref) => {
-  const { color, children, top, title, content } = props
+  const { color, children, top, title, content, ...rest } = props
   return (
     <Flex
       borderColor={color}
       borderLeftWidth="5px"
       borderRadius="4px"
-      {...props}
+      {...rest}
       ref={ref}
-      background="bgPrimary"
+      background="bg.100"
     >
       <Flex flexDirection="column" p={4} width="100%">
         <Text
           fontSize="sm"
           as="h3"
           fontWeight="thin"
-          color="text.500"
+          color="text.400"
           mt={0}
           mb={2}
         >
@@ -309,15 +309,7 @@ export const DiscordMessage = forwardRef(
     ref
   ) => {
     return (
-      <Flex
-        mb={2}
-        color="#dcddde"
-        lineHeight="1.4"
-        // background="#36393f"
-        mb={0}
-        ref={ref}
-        {...props}
-      >
+      <Flex color="#dcddde" lineHeight="1.4" mb={0} ref={ref} {...props}>
         <Box
           as="figure"
           mb={0}
@@ -347,22 +339,19 @@ export const DiscordMessage = forwardRef(
                 ml={2}
                 fontWeight="normal"
                 fontSize="xs"
-                color="text.500"
+                color="text.400"
               >
                 {date}
               </Box>
             </Heading>
           </Flex>
-          {(messages ?? [message]).map((message, i, arr) =>
-            typeof message === "string" ? (
-              <DiscordMessageText
-                mb={i !== arr.length - 1 ? 1 : 0}
-                key={message}
-              >
-                {message}
+          {(messages ?? [message]).map((msg, i, arr) =>
+            typeof msg === "string" ? (
+              <DiscordMessageText mb={i !== arr.length - 1 ? 1 : 0} key={msg}>
+                {msg}
               </DiscordMessageText>
             ) : (
-              <React.Fragment key={i}>{message}</React.Fragment>
+              <React.Fragment key={i}>{msg}</React.Fragment>
             )
           )}
           {reactions?.length > 0 && (
@@ -390,7 +379,6 @@ const calculateLinesToHighlight = meta => {
 }
 
 function Code({ children, className, metastring }) {
-  const shouldDisplayLineNumbers = useBreakpointValue([false, false, true])
   // basically I want to be able to declare objects here without adding quotes to keys
   // which json5 allows me to do but json5 has a really big bundle size so I don't want to use it
   // please forgive me for my sins javascript gods
@@ -418,7 +406,6 @@ function Code({ children, className, metastring }) {
               mb={0}
               // background="bgSecondary"
               fontSize={["xs", null, "sm"]}
-              borderTopRadius="sm"
               borderTopRadius="2px"
               color="text.300"
             >
@@ -432,7 +419,7 @@ function Code({ children, className, metastring }) {
               alignItems="center"
               justifySelf="flex-end"
             >
-              <Text fontSize="xs" color="text.500">
+              <Text fontSize="xs" color="text.400">
                 {highlighterClass.name}
               </Text>
               {highlighterClass.image && (
@@ -480,11 +467,12 @@ function Code({ children, className, metastring }) {
               } else if (extraProps.lines) {
                 lineNumberElem = (
                   <Box
+                    display={{ base: "none", md: "inline" }}
                     as="span"
                     fontSize="sm"
                     mr={4}
                     userSelect="none"
-                    color="text.500"
+                    color="text.400"
                     // className="mr-4 text-blueGray-600 select-none"
                   >
                     {i + 1}
@@ -504,7 +492,7 @@ function Code({ children, className, metastring }) {
 
               return (
                 <div key={i} {...lineProps}>
-                  {shouldDisplayLineNumbers && lineNumberElem}
+                  {lineNumberElem}
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
@@ -524,7 +512,7 @@ export const InlineCode = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-export const T = forwardRef((props, ref) => {
+export const T = forwardRef(({ children, ...rest }, ref) => {
   return (
     <Flex
       display="inline-flex"
@@ -533,8 +521,9 @@ export const T = forwardRef((props, ref) => {
       fontFamily="'Sriracha', 'Wotfard', serif"
       transition={transition}
       ref={ref}
+      {...rest}
     >
-      {props.children}
+      {children}
     </Flex>
   )
 })
@@ -545,7 +534,7 @@ export const Definition = forwardRef(
       <Toastable text={text} {...rest} ref={ref}>
         <Flex flexDirection="column">
           <Flex alignItems="baseline">
-            <Heading mr={2} fontSize="md">
+            <Heading mr={2} fontSize="sm" fontWeight="semibold">
               {title}
             </Heading>
             <Flex
@@ -554,7 +543,7 @@ export const Definition = forwardRef(
               borderRadius="md"
               px={2}
             >
-              <Text fontSize="xs" color="text.500">
+              <Text fontSize="xs" color="text.400">
                 {type}
               </Text>
             </Flex>
@@ -600,6 +589,7 @@ export const Callout = forwardRef(
         borderColor="borderSubtle"
         borderWidth="1px"
         borderRadius="md"
+        mb={8}
         {...rest}
         ref={ref}
       >
@@ -613,9 +603,10 @@ export const Callout = forwardRef(
           spacing={4}
           fontSize={["sm", null, "md"]}
           wordBreak="break-word"
+          lineHeight="2"
         >
           {smallText ? (
-            <Text color="text.500" w="full">
+            <Text color="text.400" w="full">
               {children}
             </Text>
           ) : (
@@ -635,11 +626,11 @@ export const Caption = forwardRef((props, ref) => {
       textAlign="center"
       mb={6}
       color="text.300"
-      fontSize={["sm", null, "md"]}
+      fontSize={{ base: "sm", md: "md" }}
       ref={ref}
       {...rest}
     >
-      {props.children}
+      {children}
     </Box>
   )
 })

@@ -132,6 +132,7 @@ export const createPages = async ({ graphql, actions }) => {
       previous,
       next,
     }
+
     const previewPath = `/${slug.replace(/\//g, "")}/thumbnail.png`
 
     createPage({

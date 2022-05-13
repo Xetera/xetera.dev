@@ -4,9 +4,9 @@ import "typeface-jetbrains-mono"
 import "./static/fonts/wotfard/stylesheet.css"
 import { wrapRootElement } from "./src/wrappers/gatsby"
 import { defaultTheme } from "./src/data/providers"
-import { ColorModeScript } from "@chakra-ui/react"
+import { ColorModeScript } from "@chakra-ui/color-mode"
 
-export const onRenderBody = ({ setPreBodyComponents }) => {
+export const onRenderBody = ({ setPreBodyComponents, setHtmlAttributes }) => {
   setPreBodyComponents([
     <ColorModeScript
       initialColorMode={defaultTheme}
