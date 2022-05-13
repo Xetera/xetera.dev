@@ -17,7 +17,6 @@ export default function StaticPreview({ pageContext, image = avatar }) {
       mx="auto"
       width={width}
       height={height}
-      position="relative"
     >
       <DisableSpotify />
       <DisableNavbar />
