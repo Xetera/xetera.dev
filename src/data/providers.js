@@ -7,4 +7,9 @@ export const ThemeProvider = React.createContext({
   setTheme: () => {},
 })
 
+export const ToastContext = React.createContext({
+  jsx: null,
+  setJsx: null,
+})
+
 export const LanyardProvider = React.createContext({})

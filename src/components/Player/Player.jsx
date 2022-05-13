@@ -33,7 +33,6 @@ import { StaticImage } from "gatsby-plugin-image"
 import { useLocalStorage } from "react-use"
 import { AnimatePresence, motion } from "framer-motion"
 import { graphql, useStaticQuery } from "gatsby"
-import format from "date-fns/format"
 import throttle from "lodash/throttle"
 
 /**
@@ -190,6 +189,21 @@ const AlbumCover = ({ state }) => {
   }
 }
 
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+]
+
 const PlayerControls = ({
   token,
   play,
@@ -289,7 +303,7 @@ const PlayerControls = ({
   const trackName = playbackState?.track_window.current_track.name
   const albumName = playbackState?.track_window.current_track.artists[0].name
   const albumArt = playbackState?.track_window.current_track.album.images[0].url
-  const thisMonth = format(new Date(), "LLLL")
+  const thisMonth = months[new Date().getMonth()]
 
   return (
     <>

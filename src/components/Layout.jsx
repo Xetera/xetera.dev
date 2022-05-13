@@ -1,9 +1,9 @@
 import React from "react"
-import { ToastContext } from "./Popup"
 import { Box, Flex, Grid } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
 import { domAnimation, LazyMotion } from "framer-motion"
 import { transition } from "../data/theme"
+import { ToastContext } from "../data/providers"
 
 export const Hr = forwardRef((props, ref) => {
   return (

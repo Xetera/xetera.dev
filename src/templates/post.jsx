@@ -8,6 +8,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import PopupPortal, { Toastable } from "../components/Popup"
 import { RoughNotation } from "react-rough-notation"
 import { MDXProvider } from "@mdx-js/react"
+import { Skeleton } from "@chakra-ui/skeleton"
 import * as Chatbox from "../components/memes/Chatbox"
 import * as AllMarkdownComponents from "../components/Markdown"
 import { Link, Box, Flex, Grid, Heading, HStack, Text } from "@chakra-ui/layout"
@@ -229,6 +230,8 @@ export default function Post(props) {
                     StaticImage,
                     maxWidth,
                     Text,
+                    Heading,
+                    Skeleton,
                     Tag,
                     ChakraImage: Image,
                     Image,

@@ -1,12 +1,13 @@
 import React from "react"
 import "typeface-sriracha"
-import "typeface-jetbrains-mono"
 import "./static/fonts/wotfard/stylesheet.css"
 import { wrapRootElement } from "./src/wrappers/gatsby"
 import { defaultTheme } from "./src/data/providers"
 import { ColorModeScript } from "@chakra-ui/color-mode"
+import { FontPreload } from "./src/components/Fonts"
 
-export const onRenderBody = ({ setPreBodyComponents, setHtmlAttributes }) => {
+export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
+  setHeadComponents([<FontPreload />])
   setPreBodyComponents([
     <ColorModeScript
       initialColorMode={defaultTheme}

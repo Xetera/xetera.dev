@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^2.0.1",
-    "@chakra-ui/react": "^1.6.6",
-    "@chakra-ui/theme-tools": "^1.1.7",
+    "@chakra-ui/react": "^2.0.0",
+    "@chakra-ui/theme-tools": "^2.0.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mdx-js/mdx": "^1.6.22",
@@ -36,6 +36,7 @@
     "gatsby-plugin-netlify": "^3.3.0",
     "gatsby-plugin-open-graph-images": "^0.1.7",
     "gatsby-plugin-postcss": "^4.8.0",
+    "gatsby-plugin-preload-fonts": "^3.14.0",
     "gatsby-plugin-purgecss": "^6.0.2",
     "gatsby-plugin-react-helmet": "^4.8.0",
     "gatsby-plugin-root-import": "^2.0.7",
@@ -58,8 +59,8 @@
     "parse-numeric-range": "^1.2.0",
     "prism-react-renderer": "^1.1.1",
     "prismjs": "^1.27.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-headroom": "^3.1.1",
     "react-helmet": "^6.0.0",
     "react-icons": "^4.2.0",
@@ -90,6 +91,7 @@
     "dev": "netlify dev --port 8008",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "preload-fonts": "gatsby-preload-fonts",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }

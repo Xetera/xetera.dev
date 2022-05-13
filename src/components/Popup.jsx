@@ -4,11 +4,7 @@ import { AnimatePresence, m } from "framer-motion"
 import { Box, Flex } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
 import { transition } from "../data/theme"
-
-export const ToastContext = React.createContext({
-  jsx: null,
-  setJsx: null,
-})
+import { ToastContext } from "../data/providers"
 
 export const Toastable = forwardRef(({ text, children, ...rest }, ref) => {
   const [hovering, setHovering] = React.useState(null)
