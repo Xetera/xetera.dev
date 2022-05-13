@@ -107,10 +107,6 @@ const SEO = ({ description, lang = "en", title, image, canonical }) => {
         <link rel="canonical" href={new URL(canonical, siteUrl).href} />
       )}
       <meta name="theme-color" content={site.siteMetadata.themeColor} />
-      <meta
-        http-equiv="Content-Security-Policy"
-        content="connect-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval';"
-      ></meta>
     </Helmet>
   )
 }
