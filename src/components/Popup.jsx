@@ -49,8 +49,6 @@ export function PopupPortal({ children }) {
 export default function Popup({ className }) {
   const { jsx } = React.useContext(ToastContext)
   const hovered = Boolean(jsx)
-  const targetY =
-    typeof window !== "undefined" && window.innerWidth > 600 ? "-10vh" : "-10vh"
   return (
     <Flex
       position="fixed"

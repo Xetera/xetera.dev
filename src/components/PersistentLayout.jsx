@@ -11,13 +11,12 @@ const Player = React.lazy(() =>
 const PersistentLayout = ({ children }) => {
   const [mounted, setMounted] = useState(false)
   useMount(() => setMounted(true))
-  const isSsr = typeof window === "undefined"
 
   const LanyardWrapper = mounted ? Lanyard : "div"
   const content = (
     <>
       <Navbar />
-      {!isSsr && (
+      {mounted && (
         <Suspense fallback={<div />}>
           <Player />
         </Suspense>
@@ -26,7 +25,7 @@ const PersistentLayout = ({ children }) => {
     </>
   )
 
-  return isSsr ? (
+  return !mounted ? (
     content
   ) : (
     <Suspense fallback={content}>
