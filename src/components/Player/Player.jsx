@@ -489,6 +489,7 @@ const PlayerControls = ({
                           {i + 1}
                         </Box>
                         <Image
+                          loading="lazy"
                           src={albumArt?.url}
                           h={8}
                           w={8}
