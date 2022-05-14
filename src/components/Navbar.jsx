@@ -57,7 +57,7 @@ export default function Navbar() {
       zIndex={100}
     >
       <Flex justify="flex-start" align="center">
-        <Link to="/">
+        <Link to="/" aria-label="Go back home">
           <Flex pointerEvents="all" alignItems="center" transition={transition}>
             <Flex
               w={["30px", "32px", "50px"]}
@@ -66,6 +66,7 @@ export default function Navbar() {
             >
               {lanyard.spotify ? (
                 <LazyImage
+                  alt={`${lanyard.spotify.artist} - ${lanyard.spotify.song}`}
                   key={lanyard.spotify.album_art_url}
                   src={lanyard.spotify.album_art_url}
                 />
@@ -73,6 +74,9 @@ export default function Navbar() {
                 <Box position="relative" w="full">
                   <LazyImage
                     borderRadius="full"
+                    alt={`Avatar of ${
+                      lanyard.discord_user?.username ?? "Unknown user"
+                    }`}
                     src={`https://cdn.discordapp.com/avatars/${lanyard.discordId}/${lanyard.discord_user.avatar}.webp?size=256`}
                   />
                   <Box

@@ -41,7 +41,12 @@ const BlogIndex = ({ data, pageContext }) => {
               >
                 {posts.length} Posts
               </Text>
-              <ExternalLink color="text.300" ml={2} href="/rss.xml">
+              <ExternalLink
+                color="text.300"
+                ml={2}
+                href="/rss.xml"
+                aria-label="Go to RSS feed"
+              >
                 <RiRssFill size={15} /> {/* 16 just doesnt look right */}
               </ExternalLink>
             </Flex>

@@ -41,7 +41,7 @@ module.exports = {
       discordId,
     },
   },
-  flags: { FAST_DEV: true, DEV_SSR: false },
+  // flags: { FAST_DEV: true },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {

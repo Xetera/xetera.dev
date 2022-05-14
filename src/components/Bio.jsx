@@ -1,5 +1,4 @@
 import React from "react"
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 import ExternalLink from "./ExternalLink"
 import { Flex, Heading, Link, Box, Stack, Text } from "@chakra-ui/layout"
