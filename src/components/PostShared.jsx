@@ -4,7 +4,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
 import { RoughNotation } from "react-rough-notation"
 import { ThemeProvider } from "../data/providers"
-import { colors } from "../data/theme"
+import { colors } from "../data/color"
 import formatDistance from "date-fns/formatDistance"
 
 export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
@@ -23,7 +23,7 @@ export const PostHead = forwardRef(({ date, readingTime, ...props }, ref) => {
 
 export function PostList({ node }) {
   const title = node.frontmatter.title ?? node.fields.slug
-  const { description, date, rawDate } = node.frontmatter
+  const { description, rawDate } = node.frontmatter
   const { theme } = useContext(ThemeProvider)
   const [hover, setHover] = React.useState(false)
   const distance = formatDistance(new Date(rawDate), new Date(), {

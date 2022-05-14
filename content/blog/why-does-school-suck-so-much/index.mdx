@@ -121,17 +121,12 @@ The bottom line is that school does **absolutely nothing** to expose you to diff
 
 Also, I don't mean valuable knowledge in the same way an annoying middle-schooler would talk about it in science class going:
 
-import Kekw from "@assets/emotes/kekw.png"
-
-import Omegalul from "@assets/emotes/omegalul.png"
+import { Kekw, Omegalul } from "@src/components/Emotes"
 
 export const kekw = (
-  <ChakraImage
-    src={Kekw}
-    display="inline"
-    htmlWidth="20px"
-    verticalAlign="top"
-  />
+  <Box display="inline" htmlWidth="20px" verticalAlign="top">
+    <Kekw />
+  </Box>
 )
 
 <WhatsappContainer>
@@ -145,12 +140,9 @@ export const kekw = (
       <>
         Ummm excuse me, Ms. Holloway? When are we ever going to need to know
         what a shield volcano is outside of this class?{" "}
-        <ChakraImage
-          src={Omegalul}
-          display="inline"
-          htmlWidth="20px"
-          verticalAlign="top"
-        />
+        <Box display="inline" htmlWidth="20px" verticalAlign="top">
+          <Omegalul />
+        </Box>
       </>,
     ]}
   />
@@ -199,7 +191,7 @@ You can see the amazement in people as they realize that learning is an incredib
 
 import { Link } from "@chakra-ui/layout"
 
-import ThisArrow from "@assets/emotes/thisarrow.gif"
+import { ThisArrow } from "@src/components/Emotes"
 
 export const friendProps = {
   username: "Tzuyu",
@@ -248,7 +240,7 @@ export const friendProps = {
       </DiscordMessageText>,
       "Man if Ms. Connell taught us math like this I would've had a degree in math already",
     ]}
-    reactions={[{ name: ":this:", reactCount: 2, image: ThisArrow }]}
+    reactions={[{ name: ":this:", reactCount: 2, image: <ThisArrow /> }]}
   />
   <DiscordMessage
     username="Xetera"

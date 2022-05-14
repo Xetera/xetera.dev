@@ -1,6 +1,4 @@
 import { Flex, Text } from "@chakra-ui/layout"
-import { Alert } from "@chakra-ui/alert"
-import { Tag } from "@chakra-ui/tag"
 import React from "react"
 
 export const DraftDisclaimer = () => {
@@ -15,7 +13,12 @@ export const DraftDisclaimer = () => {
       justifyContent="center"
       borderRadius="lg"
     >
-      <Text fontSize={["sm", null, "lg"]} fontWeight="medium" color="text.500">
+      <Text
+        fontSize={["sm", null, "lg"]}
+        fontWeight="medium"
+        color="text.500"
+        textAlign="center"
+      >
         You're previewing a draft. This post is not published.
       </Text>
     </Flex>

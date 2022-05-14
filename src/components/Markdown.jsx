@@ -5,42 +5,64 @@ import Theme from "prism-react-renderer/themes/vsDark"
 import ThemeLight from "prism-react-renderer/themes/github"
 import rangeParser from "parse-numeric-range"
 import { maxWidth } from "../shared"
-import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/layout"
+import { Box, Flex, Heading, Text } from "@chakra-ui/layout"
 import { layoutContentPadding } from "./Layout"
 import { Image } from "@chakra-ui/image"
 import { forwardRef } from "@chakra-ui/system"
-import { Tooltip, useTooltip } from "@chakra-ui/tooltip"
-import typescript from "@assets/tech/typescript.png"
-import javascript from "@assets/tech/javascript.png"
-import haskell from "@assets/tech/haskell.png"
-import python from "@assets/tech/python.png"
-import go from "@assets/tech/go.png"
-import rust from "@assets/tech/rust.png"
+import { Tooltip } from "@chakra-ui/tooltip"
 import { SkeletonCircle } from "@chakra-ui/skeleton"
 import { transition } from "../data/theme"
 import { Toastable } from "./Popup"
 import { VStack } from "@chakra-ui/layout"
 import { ThemeProvider } from "../data/providers"
 import { CenteredGrid } from "./CenteredGrid"
-export * from "./memes/Chatbox"
-export * from "./posts"
+import { StaticImage } from "gatsby-plugin-image"
 ;(typeof global !== "undefined" ? global : window).Prism = Prism
+
+const sharedImageProps = {
+  objectFit: "cover",
+  layout: "fixed",
+}
 
 const languageMappings = {
   js: {
     className: "bg-yellow-700 text-yellow-100",
     name: "Javascript",
-    image: javascript,
+    image: (
+      <StaticImage
+        {...sharedImageProps}
+        width={20}
+        height={20}
+        src="../../content/assets/tech/javascript.png"
+        alt="javascript"
+      />
+    ),
   },
   py: {
     className: "bg-yellow-900 text-yellow-400",
     name: "Python",
-    image: python,
+    image: (
+      <StaticImage
+        {...sharedImageProps}
+        width={20}
+        height={20}
+        src="../../content/assets/tech/python.png"
+        alt="python"
+      />
+    ),
   },
   ts: {
     className: "bg-blue-600 text-blue-200",
     name: "Typescript",
-    image: typescript,
+    image: (
+      <StaticImage
+        {...sharedImageProps}
+        width={20}
+        height={20}
+        src="../../content/assets/tech/typescript.png"
+        alt="typescript"
+      />
+    ),
   },
   sh: {
     className: "bg-blue-600 text-blue-200",
@@ -49,15 +71,39 @@ const languageMappings = {
   hs: {
     className: "bg-purple-800 text-purple-300",
     name: "Haskell",
-    image: haskell,
+    image: (
+      <StaticImage
+        {...sharedImageProps}
+        width={30}
+        height={20}
+        src="../../content/assets/tech/haskell.png"
+        alt="haskell"
+      />
+    ),
   },
   go: {
     name: "Go",
-    image: go,
+    image: (
+      <StaticImage
+        {...sharedImageProps}
+        width={50}
+        height={20}
+        src="../../content/assets/tech/go.png"
+        alt="go"
+      />
+    ),
   },
   rust: {
     name: "Rust",
-    image: rust,
+    image: (
+      <StaticImage
+        {...sharedImageProps}
+        width={20}
+        height={20}
+        src="../../content/assets/tech/rust.png"
+        alt="rust"
+      />
+    ),
   },
 }
 
@@ -67,7 +113,6 @@ export const WideBanner = forwardRef((props, ref) => {
     children,
     centered,
     bordered,
-    className = "",
     inner = {},
     noBg,
     noPadding,
@@ -137,7 +182,6 @@ export function DiscordReaction({
   const [reacts, setReacts] = React.useState(reactCount)
   const [reacted, setReacted] = React.useState(_reacted)
   let mounted = useRef()
-  const t = useTooltip()
   React.useEffect(() => {
     mounted.current = true
   }, [])
@@ -160,7 +204,11 @@ export function DiscordReaction({
       borderRadius="md"
       overflow="hidden"
     >
-      <Image src={image} width="40px" height="40px" mr={2} />
+      {typeof image === "string" ? (
+        <Image src={image} width="40px" height="40px" mr={2} />
+      ) : (
+        image
+      )}
       <Text color="discordTextColor" mb={0} lineHeight="19px">
         {reacted
           ? reacts === 1
@@ -194,7 +242,13 @@ export function DiscordReaction({
         onClick={react}
         background={reacted ? "rgba(114,137,218,.3)" : "hsl(0, 0%, 100%, 0.06)"}
       >
-        <Image src={image} mb={0} width="16px" height="16px" />
+        {typeof image === "string" ? (
+          <Image src={image} mb={0} width="16px" height="16px" />
+        ) : (
+          <Box width="16px" height="16px">
+            {image}
+          </Box>
+        )}
         <Box
           fontSize="xs"
           mb={0}
@@ -423,15 +477,16 @@ function Code({ children, className, metastring }) {
                 {highlighterClass.name}
               </Text>
               {highlighterClass.image && (
-                <Image
-                  src={highlighterClass.image}
+                <Box
                   borderRadius="sm"
                   overflow="hidden"
                   width="auto"
                   height="20px"
                   display="block"
                   ml={2}
-                />
+                >
+                  {highlighterClass.image}
+                </Box>
               )}
             </Flex>
           )}

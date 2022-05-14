@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-import { FontPreload } from "./Fonts"
 
 const SEO = ({ description, lang = "en", title, image, canonical }) => {
   const { site } = useStaticQuery(
@@ -101,7 +100,6 @@ const SEO = ({ description, lang = "en", title, image, canonical }) => {
       }}
       title={title}
     >
-      <FontPreload />
       {data.map(({ name, content }) => (
         <meta name={name} content={content} key={name} />
       ))}

@@ -167,9 +167,8 @@ This idea of simplicity-gone-too-far appears in many places. Go makes extensive 
 
 Simplicity on its own is not necessarily a bad thing to strive for, even when done well. But the way Go approaches it is a little... well, I'll just let you decide how you feel about [this quote from Rob Pike](https://channel9.msdn.com/Events/Lang-NEXT/Lang-NEXT-2014/From-Parallel-to-Concurrent), one of the creators of the language.
 
-import robPike from "./rob_pike.png"
-import clap from "@assets/emotes/clap.png"
-import thumbsDown from "@assets/emotes/thumbs_down.png"
+import { Clap, ThumbsDown } from "@src/components/Emotes"
+import { RobPike } from "@src/components/Avatars"
 
 <DiscordMessageContainer mb={6}>
   <DiscordMessage
@@ -191,15 +190,15 @@ import thumbsDown from "@assets/emotes/thumbs_down.png"
     date="May 19, 2014"
     username="Rob Pike"
     roleColor="orange.500"
-    avatar={robPike}
+    avatar={<RobPike />}
     reactions={[
       {
-        image: clap,
+        image: <Clap />,
         reactCount: 1025,
         name: ":clap:",
       },
       {
-        image: thumbsDown,
+        image: <ThumbsDown />,
         reactCount: 0,
         reacted: true,
         name: ":thumbs_down:",

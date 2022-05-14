@@ -22,17 +22,14 @@ if ("") {
 
 But the explanation that is given is often muddled with misconceptions about how comparisons and equality works in Javascript.
 
-import Xetera from "@assets/avatars/xetera.png"
-import TzuyuImage from "@assets/avatars/tzuyu.png"
-import DubuImage from "@assets/avatars/dubu.png"
-import YooYikes from "@assets/emotes/yooyikes.png"
-import SanaKek from "@assets/emotes/sana_kek.png"
+import { TzuyuAvatar, Xetera, Dubu } from "@src/components/Avatars"
+import { YooYikes, SanaKek } from "@src/components/Emotes"
 
 export const Me = props => (
   <DiscordMessage
     username="Xetera"
     roleColor="pink.300"
-    avatar={Xetera}
+    avatar={<Xetera />}
     {...props}
   />
 )
@@ -41,7 +38,7 @@ export const Tzuyu = props => (
   <DiscordMessage
     username="Tzuyu"
     roleColor="blue.400"
-    avatar={TzuyuImage}
+    avatar={<TzuyuAvatar />}
     {...props}
   />
 )
@@ -70,7 +67,7 @@ export const C = ({ children }) => <code className=".">{children}</code>
     ]}
     date="Today at 9:44 PM"
     reactions={[
-      { image: YooYikes, reactCount: 2, reacted: true, name: ":yooyikes:" },
+      { image: <YooYikes />, reactCount: 2, reacted: true, name: ":yooyikes:" },
     ]}
 />
 
@@ -80,11 +77,11 @@ export const C = ({ children }) => <code className=".">{children}</code>
     messages={["wait wtf"]}
     date="Today at 9:47 PM"
     reactions={[
-      { image: SanaKek, reactCount: 2, reacted: false, name: ":sana_kek:" },
+      { image: <SanaKek />, reactCount: 2, reacted: false, name: ":sana_kek:" },
     ]}
   />
   <DiscordMessage
-    avatar={DubuImage}
+    avatar={<Dubu />}
     username="Dubu"
     message="lmao"
     date="Today at 9:48 PM"

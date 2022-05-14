@@ -1,5 +1,5 @@
 import React from "react"
-import { GatsbyImage } from "gatsby-plugin-image"
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 import ExternalLink from "./ExternalLink"
 import { Flex, Heading, Link, Box, Stack, Text } from "@chakra-ui/layout"
@@ -8,6 +8,7 @@ import { forwardRef } from "@chakra-ui/system"
 import { Hr } from "./Layout"
 import { m } from "framer-motion"
 import { useIsSafari } from "../hooks/is-safari"
+import { XeteraMedium } from "./Avatars"
 
 const MotionFlex = m(Flex)
 
@@ -25,10 +26,7 @@ const Bio = React.memo(
         width="min-content"
         mb={2}
       >
-        <GatsbyImage
-          image={data.avatar.data.gatsbyImageData}
-          alt="Avatar image"
-        />
+        <XeteraMedium />
       </Flex>
     )
     return (
@@ -138,17 +136,6 @@ const staticQuery = graphql`
   }
 
   query BioQuery {
-    avatar: file(absolutePath: { regex: "/avatars/xetera_girlboss.jpeg/" }) {
-      data: childImageSharp {
-        gatsbyImageData(
-          width: 280
-          height: 280
-          layout: FIXED
-          quality: 100
-          placeholder: TRACED_SVG
-        )
-      }
-    }
     site {
       buildTime(formatString: "MMMM Do, YYYY")
       siteMetadata {

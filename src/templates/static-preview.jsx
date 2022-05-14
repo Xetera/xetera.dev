@@ -1,10 +1,9 @@
 import React from "react"
 import { Flex, Heading, Text } from "@chakra-ui/layout"
 import { postPreviewDimensions } from "../shared"
-import avatar from "@assets/avatars/xetera.png"
 import { DisableNavbar, DisableSpotify } from "./disable-spotify"
 
-export default function StaticPreview({ pageContext, image = avatar }) {
+export default function StaticPreview({ pageContext }) {
   const { title, description } = pageContext
 
   const width = `${postPreviewDimensions.width}px`

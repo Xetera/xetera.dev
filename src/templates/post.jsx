@@ -18,12 +18,12 @@ import { ImageWrapper, Constrain, WideMedia } from "../components/Image"
 import { Table, Td, Th, Tr } from "@chakra-ui/table"
 import { Tag } from "@chakra-ui/tag"
 import { maxWidth } from "../shared"
-import { avatars } from "../components/Avatars"
 import { CenteredGrid } from "../components/CenteredGrid"
 import sample from "lodash/sample"
 import { ExContextWrapper } from "../components/memes/Ex"
 import formatDistance from "date-fns/formatDistance"
 import { DraftDisclaimer } from "../components/post/draft"
+import * as postData from "../components/posts"
 
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
 const MarkdownComponents = rest
@@ -108,7 +108,7 @@ function makeHeader(type, { fonts = ["xl", null, "2xl"], ...rest } = {}) {
 }
 
 export default function Post(props) {
-  const { data, pageContext, location } = props
+  const { data, pageContext } = props
   const post = data.mdx
   const { previous, next, ogImage } = pageContext
   const { imageTop, imageBottom } = post.frontmatter
@@ -213,10 +213,10 @@ export default function Post(props) {
               <ExContextWrapper>
                 <MDXProvider
                   components={{
-                    ...avatars,
                     ...Chatbox,
                     ...MarkdownComponents,
                     ...MarkdownOverrides,
+                    ...postData,
                     Link,
                     Box,
                     Flex,

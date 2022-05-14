@@ -13,7 +13,7 @@ import { Tag } from "@chakra-ui/tag"
 import { postPreviewDimensions } from "../shared"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { DisableNavbar, DisableSpotify } from "./disable-spotify"
-// import "./disable-spotify.css"
+import { XeteraLarge } from "../components/Avatars"
 
 export default function PostPreview(props) {
   const data = props.data.mdx
@@ -105,16 +105,17 @@ export default function PostPreview(props) {
           height="100%"
           width="100%"
         >
-          <GatsbyImage
-            imgStyle={{
-              objectFit: "cover",
-              objectPosition: thumbnail?.objectPosition ?? "40%",
-            }}
-            image={
-              thumbnail?.src?.image?.gatsbyImageData ??
-              props.data.avatar.image.gatsbyImageData
-            }
-          />
+          {thumbnail?.src?.image?.gatsbyImageData ? (
+            <GatsbyImage
+              imgStyle={{
+                objectFit: "cover",
+                objectPosition: thumbnail.objectPosition ?? "40%",
+              }}
+              image={thumbnail.src.image.gatsbyImageData}
+            />
+          ) : (
+            <XeteraLarge />
+          )}
         </Flex>
       </Grid>
     </Flex>
@@ -129,11 +130,6 @@ export const query = graphql`
   }
 
   query PreviewPage($slug: String!) {
-    avatar: file(absolutePath: { regex: "/avatars/xetera.png/" }) {
-      image: childImageSharp {
-        gatsbyImageData(width: 600, height: 600, layout: FIXED, quality: 100)
-      }
-    }
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)

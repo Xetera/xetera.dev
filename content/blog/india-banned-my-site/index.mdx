@@ -11,25 +11,24 @@ tags:
 
 A few days ago I got a ping from one of the moderators in the Top.gg Discord server about something I've never seen happen before.
 
-import Marco from "./marco.png"
-import Drac from "./drac.png"
+import { Drac, Marco } from "@src/components/Avatars"
 
 export const marcoProps = {
   username: "marco_rennmaus | Rennmoose2",
   roleColor: "red.300",
-  avatar: Marco,
+  avatar: <Marco />,
 }
 
 export const xetProps = {
   username: "Xetera",
   roleColor: "blue.300",
-  avatar: Xetera,
+  avatar: <Xetera />,
 }
 
 export const dracProps = {
   username: "Drac",
   roleColor: "orange.500",
-  avatar: Drac,
+  avatar: <Drac />,
 }
 
 <DiscordMessageContainer mb={6}>

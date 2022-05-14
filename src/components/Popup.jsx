@@ -7,7 +7,6 @@ import { transition } from "../data/theme"
 import { ToastContext } from "../data/providers"
 
 export const Toastable = forwardRef(({ text, children, ...rest }, ref) => {
-  const [hovering, setHovering] = React.useState(null)
   const { setJsx } = React.useContext(ToastContext)
 
   function onEnter() {

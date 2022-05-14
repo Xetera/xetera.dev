@@ -26,13 +26,16 @@ The last time I was using this app regularly was around 4 years ago. That was ba
 
 The reason why this bothers me is because WhatsApp enjoys the leisure of a term I'm about to coin right now on the spot, called privacy-oriented laziness. Which is where your design decisions as a tech company based on privacy are a form of marketing for your users and a way of doing less work for your engineers. Building a system that tracks all of its users, while potentially very useful for growing a business, is a huge hassle engineering wise. Duckduckgo for example, doesn't have to deal with the work that goes into building a personalized search engine because that's just not what they do. WhatsApp doesn't store any messages from users for the sake of being privacy focused but that also means they have a lot less to worry about. Of course, when you're at the scale of WhatsApp, every technical problem is a massive challenge that requires completely rethinking the problem itself and not having to store messages doesn't end up being as big of a win. But the domain of problems that you're solving ends up being significantly smaller than if you had to worry about storing trillions of data points a month just for user messages alone.
 
-import Wa from "./whatsapp.png"
-import Boomer from "./peepoboomer.png"
-import Xetera from "@assets/avatars/xetera.png"
-import NodReaction from "./prollynod.gif"
-import Downvote from "./downvote.png"
-import Angery from "./angery.png"
-import Uhuh from "./uhuh.png"
+import Wa from "./whatsapp.jpg"
+import { Xetera } from "@src/components/Avatars"
+import {
+  Angery,
+  Whatsapp,
+  Downvote,
+  ProllyNod,
+  Uhuh,
+  PeepoBoomer,
+} from "@src/components/Emotes"
 
 <DiscordMessageContainer>
   <DiscordMessage
@@ -40,10 +43,10 @@ import Uhuh from "./uhuh.png"
     username="Definitely Not a Facebook Employee"
     roleColor="pink.700"
     date="Today at 5:05 AM"
-    avatar={Wa}
+    avatar={<Whatsapp />}
     reactions={[
       {
-        image: NodReaction,
+        image: <ProllyNod />,
         reactCount: 12,
         reacted: false,
         name: ":anodprobably:",
@@ -55,7 +58,7 @@ import Uhuh from "./uhuh.png"
     username="Boomer"
     roleColor="orange.700"
     date="Today at 5:10 AM"
-    avatar={Boomer}
+    avatar={<PeepoBoomer />}
   />
   <DiscordMessage
     message="But there are so many problems with it, shouldn't you expect an app to be good and improving?"
@@ -63,18 +66,20 @@ import Uhuh from "./uhuh.png"
     roleColor="pink.600"
     date="Today at 5:12 AM"
     reactions={[
-      { image: Downvote, reactCount: 35, name: ":no:" },
-      { image: Angery, reactCount: 27, name: ":angery:" },
+      { image: <Downvote />, reactCount: 35, name: ":no:" },
+      { image: <Angery />, reactCount: 27, name: ":angery:" },
     ]}
-    avatar={Xetera}
+    avatar={<Xetera />}
   />
   <DiscordMessage
     message="That's the most ridiculous thing I've ever heard."
     username="Definitely Not a Facebook Employee"
     roleColor="pink.700"
     date="Today at 5:13 AM"
-    avatar={Wa}
-    reactions={[{ image: Uhuh, reactCount: 0, reacted: true, name: ":uhuh:" }]}
+    avatar={<Whatsapp />}
+    reactions={[
+      { image: <Uhuh />, reactCount: 0, reacted: true, name: ":uhuh:" },
+    ]}
   />
 </DiscordMessageContainer>
 
@@ -122,7 +127,7 @@ I understand where these arguments are coming from, you don't have to use group 
 
 So what do you think we should use instead? Allow me to introduce you to Discord!
 
-![discord](./discord.png)
+<!-- ![discord](./discord.png) -->
 
 Actually don't, just go look it up yourself instead, but chances are you already know about it and it's undisputably amazing.
 

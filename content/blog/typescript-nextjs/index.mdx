@@ -75,9 +75,8 @@ This way we can declare the types of the responses we get from an endpoint _insi
 
 All of this sounds pretty good so far, but when it comes to importing things, some of you might be wondering:
 
-import Dahyun from "./dahyun_confused.jpg"
-import ThisArrow from "@assets/emotes/thisarrow.gif"
-import ThisTbh from "./thistbh.png"
+import { DubuConfused } from "@src/components/Avatars"
+import { ThisTbh, ThisArrow } from "@src/components/Emotes"
 
 <DiscordMessageContainer mb={6}>
   <DiscordMessage
@@ -86,10 +85,10 @@ import ThisTbh from "./thistbh.png"
     username="You, reading this"
     roleColor="blue.300"
     date="Today at 4:20 PM"
-    avatar={Dahyun}
+    avatar={<DubuConfused />}
     reactions={[
-      { image: ThisArrow, reactCount: 7, name: ":this:" },
-      { image: ThisTbh, reactCount: 12, name: ":thistbh:" },
+      { image: <ThisArrow />, reactCount: 7, name: ":this:" },
+      { image: <ThisTbh />, reactCount: 12, name: ":thistbh:" },
     ]}
   />
 </DiscordMessageContainer>
