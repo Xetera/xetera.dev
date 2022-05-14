@@ -9738,6 +9738,13 @@ gatsby-plugin-preload-fonts@^3.14.0:
     progress "^2.0.3"
     puppeteer "^3.3.0"
 
+gatsby-plugin-purge-cloudflare-cache@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-purge-cloudflare-cache/-/gatsby-plugin-purge-cloudflare-cache-0.0.3.tgz#2823ff6ad16ac364adbc6314c12187c7ce542da5"
+  integrity sha512-/St+Izftm9PMT6N+iUrGJvWsCLV76ybf5+rAB9/mR1lcib/C/AV+fRpCUDaLyW6H7KLfxjba0l4XxRII5A1qZg==
+  dependencies:
+    node-fetch "^2.6.0"
+
 gatsby-plugin-purgecss@^6.0.2:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-purgecss/-/gatsby-plugin-purgecss-6.1.2.tgz#64467685b6e4e393bcf62b675b7ec52413cedfac"

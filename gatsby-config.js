@@ -215,5 +215,13 @@ module.exports = {
     },
     "gatsby-plugin-schema-snapshot",
     "gatsby-plugin-netlify",
+    {
+      resolve: "gatsby-plugin-purge-cloudflare-cache",
+      options: {
+        token: process.env.CLOUDFLARE_TOKEN,
+        zoneId: "a1d7f18737bc37144427635bf256aabe",
+        condition: () => Boolean(process.env.CLOUDFLARE_TOKEN),
+      },
+    },
   ],
 }
