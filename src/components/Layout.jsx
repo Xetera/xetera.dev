@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Flex, Grid } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
-import { domAnimation, LazyMotion } from "framer-motion"
+import { domAnimation } from "framer-motion"
 import { transition } from "../data/theme"
 import { ToastContext } from "../data/providers"
 
@@ -52,11 +52,9 @@ export function Layout({
 
   return (
     <Flex flexFlow="column nowrap">
-      <LazyMotion features={domAnimation}>
-        <ToastContext.Provider value={{ jsx: toastJsx, setJsx: setToastJsx }}>
-          <Box {...rest}>{children}</Box>
-        </ToastContext.Provider>
-      </LazyMotion>
+      <ToastContext.Provider value={{ jsx: toastJsx, setJsx: setToastJsx }}>
+        <Box {...rest}>{children}</Box>
+      </ToastContext.Provider>
     </Flex>
   )
 }
