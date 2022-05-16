@@ -19,7 +19,7 @@ export async function getSpotifyTracks() {
     // this is hardcoded because I did the flow manually and spotify sucks and needs oauth
     // for something that should be doable through client credentials...
     redirect_uri: "https://localhost:40751/.netlify/functions/spotify",
-    scope: "user-read-email user-read-private user-top-read",
+    scope: "user-read-email user-read-private user-top-read user-library-read",
     refresh_token: SPOTIFY_REFRESH_TOKEN,
   })
 
@@ -46,12 +46,15 @@ export async function getSpotifyTracks() {
   const tracks = await fetch(
     "https://api.spotify.com/v1/me/top/tracks?time_range=short_term",
     {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
+      headers: { authorization: `Bearer ${token}` },
     }
   ).then(res => res.json())
-  return tracks
+
+  const likedTracks = await fetch("https://api.spotify.com/v1/me/tracks", {
+    headers: { authorization: `Bearer ${token}` },
+  }).then(res => res.json())
+
+  return { tracks, likedTracks }
 }
 
 export async function getOsu() {

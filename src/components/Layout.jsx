@@ -1,7 +1,6 @@
 import React from "react"
-import { Box, Flex, Grid } from "@chakra-ui/layout"
+import { Box, Stack, Flex, Grid } from "@chakra-ui/layout"
 import { forwardRef } from "@chakra-ui/system"
-import { domAnimation } from "framer-motion"
 import { transition } from "../data/theme"
 import { ToastContext } from "../data/providers"
 
@@ -24,13 +23,12 @@ export const layoutContentPadding = [6, 8]
 
 export const LayoutContent = forwardRef((props, ref) => {
   return (
-    <Box width="100%" overflow="hidden">
+    <Box width="100%">
       <Grid
         as="main"
         color="text.100"
         fontWeight="normal"
         gap={12}
-        p={layoutContentPadding}
         ref={ref}
         {...props}
       >
@@ -51,10 +49,26 @@ export function Layout({
   const [toastJsx, setToastJsx] = React.useState(null)
 
   return (
-    <Flex flexFlow="column nowrap">
+    <Flex flexFlow="column nowrap" p={6}>
       <ToastContext.Provider value={{ jsx: toastJsx, setJsx: setToastJsx }}>
         <Box {...rest}>{children}</Box>
       </ToastContext.Provider>
     </Flex>
   )
 }
+
+export const StackedSection = forwardRef(({ children, ...rest }, ref) => {
+  return (
+    <Stack
+      as="section"
+      flexFlow="column"
+      spacing={6}
+      width="100%"
+      maxWidth="72rem"
+      ref={ref}
+      {...rest}
+    >
+      {children}
+    </Stack>
+  )
+})

@@ -1,0 +1,139 @@
+---
+title: 📲 Winning the adblock arms race for good
+description: Adblock-proof your Amplitude site metrics (but not 3rd party ads)
+date: "2022-05-15"
+tags:
+  - Engineering
+  - Guide
+  - Privacy
+---
+
+I have a huge dilemma with privacy. As a user, I hate seeing ads, so I turn on adblock on every website I visit. But as a developer, I hate how adblock prevents me from having accurate insight on what's going on with my site.
+
+Even if you're not "selling user data", your metrics reporting endpoints almost certainly fall under a blanket ban on analytics from plugins like uBlock Origin and friends that make it harder for you to make data-driven decisions for your product.
+
+I don't mind sitting on both sides of this table, so let's figure out how to get around adblock to make sure users are reporting metrics correctly.
+
+# Easy workaround: Proxies
+
+Adblock plugins have a list of analytics endpoints that they block regardless of what's being sent. If you're using a 3rd party analytics provider like Google Analytics or Amplitude, the URLs they use for reporting like `api.amplitude.com` get blocked by these plugins.
+
+To get around this issue, some of these services will allow you to create a new subdomain like `a.site.com` and set a <T>CNAME record</T> pointing to the analytics reporting endpoint that won't be picked up by a hardcoded URL ban. Though you have to make sure to not use words like "analytics", otherwise the request might still get blocked by other heuristics.
+
+```js
+import amplitude from "amplitude-js"
+
+amplitude.init("YOUR-KEY", "USER-ID", {
+  apiEndpoint: "a.site.com",
+})
+```
+
+For an _overwhelming_ majority of sites, this will almost certainly be the last step needed to get your metrics back. But it's possible that maintainers will start blocking this new URL too if they catch onto it, and you absolutely do not want to play a game of cat and mouse here. Maintainers of these plugins are incredibly passionate devs and non-devs alike who will tirelessly keep up with changes to your site if they don't like what you're doing.
+
+Because of that, constantly changing the subdomain is going to be a waste of your and everyone else's time. It's time to come up with a permanent solution
+
+# Big brain workaround: Dynamic Proxies
+
+Adblockers (at least for chrome) do not have any kind of API access to view contents of HTTP requests they intercept. They're only able to decide what they should and shouldn't block based on the URL and method. Changing this URL manually is a lot of work, so what if we changed it dynamically on every deploy instead?
+
+What we need here is a way to create a completely random endpoint like `/abcd/1234/xyz` using a seeded random number generator to make sure we can reliably construct multiple endpoints to not break anything during something like a rolling deploy where the reporting url moves from `/A` to `/B` without missing metrics.
+
+```ts
+import Random from "seedrandom"
+
+const alphabet = "abcdefghijklmnoprstuvwyz123456789////"
+
+function generateEndpoints(salts: string[]) {
+  return salts.map(salt => {
+    const rnd = Random(salt)
+
+    const length = randomInRange(rnd, 30, 20)
+    const extension = [...Array(length)]
+      .map(() => {
+        const num = randomInRange(rnd, alphabet.length)
+        return alphabet[num]
+      })
+      .join("")
+
+    // making sure we can't have double
+    // leading slashes in the generated url
+    return `/${extension.replace(/^\/*/g, "")}`
+  })
+}
+```
+
+This allows us to create multiple endpoints that will listen for metrics
+
+```ts
+import Random from "seedrandom"
+import express from "express"
+import httpProxy from "http-proxy"
+import { AMPLITUDE_IMPORT } from "./amplitude.js"
+
+const http = httpProxy.createProxyServer({
+  changeOrigin: true,
+  // all requests should go to root amplitude
+  // regardless of the generated path
+  ignorePath: true,
+})
+
+const alphabet = "abcdefghijklmnoprstuvwyz123456789////"
+
+const random = (rnd: () => number, len: number, min = 0) =>
+  Math.floor(rnd() * (len - min)) + min
+
+function generateEndpoints(salts: string[]) {
+  return salts.map(salt => {
+    const rnd = Random(salt)
+
+    const length = random(rnd, 30, 20)
+    const extension = [...Array(length)]
+      .map(() => {
+        const num = random(rnd, alphabet.length)
+        return alphabet[num]
+      })
+      .join("")
+
+    // making sure we can't have double
+    // leading slashes in the generated url
+    return `/${extension.replace(/^\/*/g, "")}`
+  })
+}
+
+const app = express()
+
+const seeds = process.env.METRIC_SEEDS!.split(",")
+const metricEndpoints = generateEndpoints(seeds)
+
+const latestMetricEndpoint = metricEndpoints[1]
+
+for (const endpoint of metricEndpoints) {
+  console.log(`Listening for metrics on ${endpoint}`)
+  app.post(endpoint, (req, res) => {
+    http.web(req, res, { target: "https://api.amplitude.com/" })
+  })
+}
+
+app.get("/", (_, res) => {
+  res.write(
+    `
+      <!Doctype html>
+      <html>
+        <body>
+          <h1>Let's make data-driven business decisions</h1>
+          <script type="text/javascript">
+            ${AMPLITUDE_IMPORT}
+            amplitude.init("SITE_KEY", undefined, {
+              apiEndpoint: "localhost:1234${latestMetricEndpoint}",
+              forceHttps: false
+            });
+            amplitude.getInstance().logEvent("testing")
+          </script>
+        </body>
+      </html>
+    `
+  )
+})
+
+app.listen(1234)
+```

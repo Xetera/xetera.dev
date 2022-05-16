@@ -17,8 +17,8 @@ export const Xetera = () => {
 export const XeteraMedium = () => {
   return (
     <StaticImage
-      width={280}
-      height={280}
+      width={300}
+      height={300}
       quality={100}
       layout="fixed"
       placeholder="tracedSVG"

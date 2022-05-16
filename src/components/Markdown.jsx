@@ -567,22 +567,6 @@ export const InlineCode = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-export const T = forwardRef(({ children, ...rest }, ref) => {
-  return (
-    <Flex
-      display="inline-flex"
-      as="span"
-      color="brand.100"
-      fontFamily="'Sriracha', 'Wotfard', serif"
-      transition={transition}
-      ref={ref}
-      {...rest}
-    >
-      {children}
-    </Flex>
-  )
-})
-
 export const Definition = forwardRef(
   ({ title, type, children, text, ...rest }, ref) => {
     return (

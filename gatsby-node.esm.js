@@ -18,7 +18,7 @@ export const sourceNodes = async ({
   createNodeId,
   createContentDigest,
 }) => {
-  const [anilist, spotify] = await Promise.all([
+  const [anilist, { tracks, likedTracks }] = await Promise.all([
     getAnilist(),
     getSpotifyTracks(),
   ])
@@ -30,16 +30,28 @@ export const sourceNodes = async ({
       contentDigest: createContentDigest(anilist),
     },
   })
-  if (spotify) {
+  if (tracks && likedTracks) {
     const spotifyTopTracksId = createNodeId(
       `user-information-spotify-top-tracks`
     )
     actions.createNode({
-      tracks: spotify,
+      tracks: tracks,
       id: spotifyTopTracksId,
       internal: {
         type: "SpotifyTopTracks",
-        contentDigest: createContentDigest(spotify),
+        contentDigest: createContentDigest(tracks),
+      },
+    })
+
+    const spotifyLikedTracksId = createNodeId(
+      `user-information-spotify-liked-tracks`
+    )
+    actions.createNode({
+      tracks: likedTracks,
+      id: spotifyLikedTracksId,
+      internal: {
+        type: "SpotifyLikedTracks",
+        contentDigest: createContentDigest(likedTracks),
       },
     })
   }

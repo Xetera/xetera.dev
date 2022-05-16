@@ -1,15 +1,25 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import ExternalLink from "./ExternalLink"
-import { Flex, Heading, Link, Box, Stack, Text } from "@chakra-ui/layout"
+import { Flex, Heading, Link, Box, Stack, Text, Grid } from "@chakra-ui/layout"
 import { RiGithubFill, RiSafariLine, RiTwitterFill } from "react-icons/ri"
 import { forwardRef } from "@chakra-ui/system"
 import { Hr } from "./Layout"
 import { m } from "framer-motion"
 import { useIsSafari } from "../hooks/is-safari"
+import { T } from "@src/components/Typography"
 import { XeteraMedium } from "./Avatars"
 
 const MotionFlex = m(Flex)
+
+const Employment = React.memo(({ job, position, link }) => (
+  <Text>
+    I'm currently <T>{position}</T> at{" "}
+    <Link href={link} rel="external nofollower noopener" color="brandSecondary">
+      {job}
+    </Link>
+  </Text>
+))
 
 const Bio = React.memo(
   forwardRef((props, ref) => {
@@ -18,41 +28,54 @@ const Bio = React.memo(
 
     const twitter = data.site.siteMetadata.social.twitter
     const image = (
-      <Flex
-        borderRadius="md"
+      <Box
+        borderRadius="lg"
         overflow="hidden"
-        borderColor="brandSecondary"
-        width="min-content"
-        mb={2}
+        height="min-content"
+        maxWidth="340px"
       >
         <XeteraMedium />
-      </Flex>
+      </Box>
     )
     return (
-      <>
-        <Stack lineHeight="1.7" spacing={4} ref={ref} {...props}>
-          {image}
-          <Heading fontWeight="black" fontSize="3xl" color="text.100">
+      <Grid
+        gap={8}
+        gridTemplateAreas={{
+          base: `
+        "avatar"
+        "bio"
+      `,
+          lg: "'bio avatar'",
+        }}
+      >
+        <Stack
+          lineHeight="200%"
+          spacing={4}
+          gridArea="bio"
+          ref={ref}
+          {...props}
+          flex={1}
+          maxWidth="42rem"
+        >
+          <Heading
+            fontWeight="black"
+            fontSize={{ base: "3xl", lg: "7xl" }}
+            color="text.100"
+          >
             Hi, I’m Xetera.
           </Heading>
-          <Stack spacing={4} fontSize="md">
+          <Stack spacing={4} fontSize={{ base: "md", lg: "2md" }}>
             <Text>
-              I'm currently a full-stack developer at{" "}
-              <Link
-                href="https://top.gg"
-                rel="external nofollower noopener"
-                color="brandSecondary"
-              >
-                Top.gg
-              </Link>
-              . I like to wear many hats when necessary and make cool ideas come
-              to life.
+              I like to wear many hats when necessary and make cool ideas come
+              to life. I’m a simp for functional programming and anti-abuse
+              trust & safety. I also enjoy design and writing on the side when I
+              can find the time.
             </Text>
-            <Text>
-              I’m a simp for functional programming and anti-abuse trust &
-              safety. I also enjoy design and writing on the side when I can
-              find the time.
-            </Text>
+            <Employment
+              position="a full-stack developer"
+              link="https://top.gg"
+              job="Top.gg"
+            />
             <Text>
               As of{" "}
               <Text as="time" dateTime={data.site.buildtime} color="text.400">
@@ -120,7 +143,13 @@ const Bio = React.memo(
             </>
           )}
         </Stack>
-      </>
+        <Flex
+          gridArea="avatar"
+          justifyContent={{ base: "flex-start", lg: "flex-end" }}
+        >
+          {image}
+        </Flex>
+      </Grid>
     )
   })
 )

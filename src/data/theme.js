@@ -33,6 +33,7 @@ const fontSizes = {
   xs: "13px",
   sm: "14px",
   md: "18px",
+  "2md": "20px",
   lg: "22px",
   xl: "24px",
   "2xl": "32px",
@@ -66,7 +67,7 @@ export function createTheme(theme) {
           fontWeight: "bold",
           fontSize: "0.85em",
           background: pick({
-            light: colors.bg[300].light,
+            light: "#e3e3e399",
             dark: "#2b141d",
           }),
           padding: "0 6px",

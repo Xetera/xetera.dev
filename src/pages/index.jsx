@@ -2,29 +2,44 @@ import React from "react"
 import { graphql } from "gatsby"
 import Bio from "../components/Bio"
 import { PostList } from "../components/PostShared"
-import { Layout, LayoutContent } from "../components/Layout"
+import { Layout, LayoutContent, StackedSection } from "../components/Layout"
 import { Flex, Grid, Stack, Text } from "@chakra-ui/layout"
 import { Helmet } from "react-helmet"
 import SEO from "../components/Seo"
 import { RiGithubFill, RiRssFill } from "react-icons/ri"
 import ExternalLink from "../components/ExternalLink"
+import { SpotifyLikedSongs } from "../components/Music/SpotifyLikedSongs"
+import { SectionHeader } from "../components/Typography"
 
 const BlogIndex = ({ data, pageContext }) => {
   const posts = data.allMdx.edges
   return (
-    <Layout>
+    <Layout
+      display="flex"
+      flexDirection="column"
+      maxWidth="1200px"
+      margin={["0 auto", null, "5% auto", "8% auto"]}
+      gap={{ base: 10, lg: 24 }}
+    >
       <SEO canonical="/" image={pageContext.ogImage} />
       <Helmet>
         <title>{data.site.siteMetadata.title}</title>
       </Helmet>
+      <Bio as="section" />
       <LayoutContent
-        maxWidth="1200px"
-        margin={["0 auto", null, "5% auto", "8% auto"]}
-        gridAutoFlow={["row", null, null]}
-        gridTemplateColumns={["1fr", null, null, "3fr 4fr"]}
+        gridAutoFlow="row"
+        gridTemplateColumns={{ base: "1fr", lg: "repeat(3, 1fr)" }}
+        gridTemplateAreas={{
+          base: `
+          "blog"
+          "spotify"
+        `,
+          lg: `
+            "blog blog spotify"
+          `,
+        }}
       >
-        <Bio as="section" />
-        <Stack as="section" flexFlow="column" spacing={6} width="100%">
+        <StackedSection gridArea="blog" flex={1}>
           <Flex
             flexFlow="row"
             justifyContent="space-between"
@@ -32,15 +47,7 @@ const BlogIndex = ({ data, pageContext }) => {
             width="100%"
           >
             <Flex alignItems="center">
-              <Text
-                fontSize="sm"
-                color="text.300"
-                textTransform="uppercase"
-                letterSpacing="1.5px"
-                fontWeight="medium"
-              >
-                {posts.length} Posts
-              </Text>
+              <SectionHeader>{posts.length} Posts</SectionHeader>
               <ExternalLink
                 color="text.300"
                 ml={2}
@@ -68,7 +75,8 @@ const BlogIndex = ({ data, pageContext }) => {
               <PostList node={node} key={node.fields.slug} />
             ))}
           </Grid>
-        </Stack>
+        </StackedSection>
+        <SpotifyLikedSongs gridArea="spotify" />
       </LayoutContent>
     </Layout>
   )

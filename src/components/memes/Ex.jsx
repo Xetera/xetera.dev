@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react"
-import { T } from "../Markdown"
+import { T } from "../Typography"
 import shuffle from "lodash/shuffle"
 import { Box } from "@chakra-ui/layout"
 
