@@ -42,7 +42,7 @@ const Bio = React.memo(
         <Text
           zIndex={-1}
           transition="all 0.4s"
-          opacity="1"
+          opacity="0"
           transform="translateY(-40px)"
           _groupHover={{
             opacity: "1",
