@@ -7,7 +7,7 @@ import { ColorModeScript } from "@chakra-ui/color-mode"
 import { FontPreload } from "./src/components/Fonts"
 
 export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
-  setHeadComponents([<FontPreload />])
+  setHeadComponents([<FontPreload key="font-preloader" />])
   setPreBodyComponents([
     <ColorModeScript
       initialColorMode={defaultTheme}

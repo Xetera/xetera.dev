@@ -28,13 +28,37 @@ const Bio = React.memo(
 
     const twitter = data.site.siteMetadata.social.twitter
     const image = (
-      <Box
-        borderRadius="lg"
-        overflow="hidden"
-        height="min-content"
-        maxWidth="340px"
-      >
-        <XeteraMedium />
+      <Box role="group" height="min-content">
+        <Box
+          position="relative"
+          zIndex={1}
+          overflow="hidden"
+          maxWidth="340px"
+          height="min-content"
+          borderRadius="lg"
+        >
+          <XeteraMedium />
+        </Box>
+        <Text
+          zIndex={-1}
+          transition="all 0.4s"
+          opacity="1"
+          transform="translateY(-40px)"
+          _groupHover={{
+            opacity: "1",
+            transform: "translateY(0px)",
+          }}
+          color="text.500"
+          fontWeight="light"
+          mt={3}
+          marginInlineStart={3}
+          fontSize="xs"
+        >
+          ☝️ Avatar by{" "}
+          <ExternalLink href="https://twitter.com/_arttella" color="brand.100">
+            @Arttella
+          </ExternalLink>
+        </Text>
       </Box>
     )
     return (
@@ -42,8 +66,8 @@ const Bio = React.memo(
         gap={8}
         gridTemplateAreas={{
           base: `
-        "avatar"
         "bio"
+        "avatar"
       `,
           lg: "'bio avatar'",
         }}
@@ -66,10 +90,13 @@ const Bio = React.memo(
           </Heading>
           <Stack spacing={4} fontSize={{ base: "md", lg: "2md" }}>
             <Text>
-              I like to wear many hats when necessary and make cool ideas come
-              to life. I’m a simp for functional programming and anti-abuse
-              trust & safety. I also enjoy design and writing on the side when I
-              can find the time.
+              I love making ideas come to life with code. I'm a huge fan of
+              functional programming and anti-abuse + trust & safety.
+            </Text>
+            <Text>
+              I'm currently really interested in web automation and security. I
+              also enjoy design and writing on the side when I can find the
+              time.
             </Text>
             <Employment
               position="a full-stack developer"
@@ -94,7 +121,7 @@ const Bio = React.memo(
             <Link
               href="https://github.com/xetera"
               color="unset"
-              _hover={{ color: "brand.100" }}
+              _hover={{ color: "text.100" }}
               aria-label="github link"
             >
               <RiGithubFill size={28} />
@@ -102,7 +129,7 @@ const Bio = React.memo(
             <Link
               href={`https://twitter.com/${twitter}`}
               color="unset"
-              _hover={{ color: "brand.100" }}
+              _hover={{ color: "text.100" }}
               aria-label="twitter link"
             >
               <RiTwitterFill size={28} />

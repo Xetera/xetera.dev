@@ -25,13 +25,13 @@ export const SpotifyLikedSongs = forwardRef((props, ref) => {
         <RiSpotifyFill size={20} />
       </Flex>
       <Grid gap={8}>
-        {Object.values(tracksList).map(tracks => {
+        {Object.values(tracksList).map((tracks, i) => {
           const date = new Date(tracks[0].added_at)
           const dateHeader = formatDistance(date, new Date(), {
             addSuffix: true,
           })
           return (
-            <Flex flexDirection="column" gap={3} key={dateHeader}>
+            <Flex flexDirection="column" gap={3} key={i}>
               <Flex gap={3} alignItems="center">
                 <Box minWidth="25px" h="1px" background="bg.300" />
                 <Text

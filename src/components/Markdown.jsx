@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react"
-import Prism from "prism-react-renderer/prism"
+import Prism from "prismjs/components/prism-core"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import Theme from "prism-react-renderer/themes/vsDark"
 import ThemeLight from "prism-react-renderer/themes/github"

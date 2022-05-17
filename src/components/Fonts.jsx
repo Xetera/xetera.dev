@@ -1,9 +1,8 @@
 import React from "react"
-import { Box } from "@chakra-ui/layout"
 
 export const FontPreload = () => {
   return (
-    <Box>
+    <>
       <link
         as="font"
         href="/fonts/wotfard/wotfard-regularitalic-webfont.ttf"
@@ -60,6 +59,6 @@ export const FontPreload = () => {
         rel="preload"
         crossOrigin="anonymous"
       />
-    </Box>
+    </>
   )
 }

@@ -18,8 +18,8 @@ const BlogIndex = ({ data, pageContext }) => {
       display="flex"
       flexDirection="column"
       maxWidth="1200px"
-      margin={["0 auto", null, "5% auto", "8% auto"]}
-      gap={{ base: 10, lg: 24 }}
+      margin={["0 auto", null, "5% auto"]}
+      gap={{ base: 6, md: 10, lg: 24 }}
     >
       <SEO canonical="/" image={pageContext.ogImage} />
       <Helmet>

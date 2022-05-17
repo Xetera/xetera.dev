@@ -65,7 +65,7 @@ export const baseColors = {
   },
   brand: {
     100: {
-      light: "#a92491",
+      light: "#d3399c",
       dark: "hsl(333deg, 100%, 45%)",
     },
     80: {

@@ -23,6 +23,7 @@ import sample from "lodash/sample"
 import { ExContextWrapper } from "../components/memes/Ex"
 import formatDistance from "date-fns/formatDistance"
 import { DraftDisclaimer } from "../components/post/draft"
+import { T } from "../components/Typography"
 import * as postData from "../components/posts"
 
 const { overrides: MarkdownOverrides, ...rest } = AllMarkdownComponents
@@ -213,6 +214,7 @@ export default function Post(props) {
               <ExContextWrapper>
                 <MDXProvider
                   components={{
+                    T,
                     ...Chatbox,
                     ...MarkdownComponents,
                     ...MarkdownOverrides,

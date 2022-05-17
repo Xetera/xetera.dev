@@ -2,6 +2,7 @@
 title: 📲 Winning the adblock arms race for good
 description: Adblock-proof your Amplitude site metrics (but not 3rd party ads)
 date: "2022-05-15"
+draft: true
 tags:
   - Engineering
   - Guide
@@ -72,8 +73,6 @@ import { AMPLITUDE_IMPORT } from "./amplitude.js"
 
 const http = httpProxy.createProxyServer({
   changeOrigin: true,
-  // all requests should go to root amplitude
-  // regardless of the generated path
   ignorePath: true,
 })
 
