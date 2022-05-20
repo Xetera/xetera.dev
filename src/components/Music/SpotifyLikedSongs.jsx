@@ -5,7 +5,8 @@ import { graphql, useStaticQuery } from "gatsby"
 import { SectionHeader } from "../Typography"
 import { RiSpotifyFill } from "react-icons/ri"
 import { StackedSection } from "../Layout"
-import { forwardRef } from "@chakra-ui/react"
+import { forwardRef } from "@chakra-ui/system"
+import { Skeleton } from "@chakra-ui/skeleton"
 import groupBy from "lodash/groupBy"
 import formatDistance from "date-fns/formatDistance"
 
@@ -17,7 +18,6 @@ export const SpotifyLikedSongs = forwardRef((props, ref) => {
     return `${added.getFullYear()}-${added.getMonth()}-${added.getDate()}`
   })
 
-  console.log(tracksList)
   return (
     <StackedSection ref={ref} {...props}>
       <Flex gap={2} alignItems="center">
@@ -88,7 +88,13 @@ const LikedSong = ({ track }) => {
           }}
           alt={`Album art for "${track.name}" by ${firstArtist.name}`}
           src={mediumImage?.url ?? "#"}
+          htmlHeight="64px"
+          htmlWidth="64px"
           width="64px"
+          height="64px"
+          fallback={<Skeleton width="64px" height="64px" />}
+          fetchpriority="low"
+          loading="lazy"
           minWidth="64px"
           borderRadius="md"
           overflow="hidden"

@@ -25,7 +25,7 @@ const BlogIndex = ({ data, pageContext }) => {
       <Helmet>
         <title>{data.site.siteMetadata.title}</title>
       </Helmet>
-      <Bio as="section" />
+      <Bio />
       <LayoutContent
         gridAutoFlow="row"
         gridTemplateColumns={{ base: "1fr", lg: "repeat(3, 1fr)" }}

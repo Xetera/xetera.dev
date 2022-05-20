@@ -1,5 +1,14 @@
 import React from "react"
 
+export const DomainPreconnect = () => {
+  return (
+    <>
+      {/* spotify CDN does not support HTTP/2 LMFAO */}
+      <link rel="preconnect" href="https://i.scdn.co" />
+    </>
+  )
+}
+
 export const FontPreload = () => {
   return (
     <>

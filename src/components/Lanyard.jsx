@@ -3,22 +3,10 @@ import React from "react"
 import { LanyardProvider } from "../data/providers"
 import { useLanyard } from "../hooks/lanyard"
 
+const xeteraId = "140862798832861184"
+
 const Lanyard = ({ children }) => {
-  // stupid gatsby
-
-  const { site } = useStaticQuery(graphql`
-    query PersistentLayoutQuery {
-      site {
-        siteMetadata {
-          social {
-            discordId
-          }
-        }
-      }
-    }
-  `)
-
-  const lanyard = useLanyard(site.siteMetadata.social.discordId)
+  const lanyard = useLanyard(xeteraId)
 
   return (
     <LanyardProvider.Provider value={lanyard}>

@@ -1,37 +1,35 @@
-import React, { Suspense, useState } from "react"
+import React, { Suspense, useMemo, useState } from "react"
 import { useMount } from "react-use"
 import Navbar from "./Navbar"
-
-const Lanyard = React.lazy(() => import("./Lanyard"))
+import Lanyard from "./Lanyard"
 
 const Player = React.lazy(() =>
   import("./Player/Player").then(r => ({ default: r.Player }))
 )
 
-const PersistentLayout = ({ children }) => {
+const PlayerLoader = React.memo(() => {
   const [mounted, setMounted] = useState(false)
   useMount(() => setMounted(true))
 
-  const LanyardWrapper = mounted ? Lanyard : "div"
-  const content = (
-    <>
-      <Navbar />
-      {mounted && (
-        <Suspense fallback={<div />}>
-          <Player />
-        </Suspense>
-      )}
-      {children}
-    </>
-  )
+  if (!mounted) {
+    return null
+  }
 
-  return !mounted ? (
-    content
-  ) : (
-    <Suspense fallback={content}>
-      <LanyardWrapper>{content}</LanyardWrapper>
+  return (
+    <Suspense fallback={<div />}>
+      <Player />
     </Suspense>
+  )
+})
+
+const PersistentLayout = ({ children }) => {
+  return (
+    <Lanyard>
+      <Navbar />
+      <PlayerLoader />
+      {children}
+    </Lanyard>
   )
 }
 
-export default PersistentLayout
+export default React.memo(PersistentLayout)

@@ -495,12 +495,16 @@ const PlayerControls = ({
                           {i + 1}
                         </Box>
                         <Image
-                          loading="lazy"
                           src={albumArt?.url}
                           alt={`Song: ${r.name}`}
                           h={8}
                           w={8}
                           marginInlineEnd={2}
+                          loading="lazy"
+                          // spotify CDN doesn't support HTTP2 and needs to be
+                          // marked as low priority to prevent it from hogging
+                          // precious bandwidth
+                          fetchpriorit="low"
                         />
                         <VStack alignItems="flex-start" spacing={0}>
                           <Text

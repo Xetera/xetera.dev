@@ -4,10 +4,13 @@ import "./static/fonts/wotfard/stylesheet.css"
 import { wrapRootElement } from "./src/wrappers/gatsby"
 import { defaultTheme } from "./src/data/providers"
 import { ColorModeScript } from "@chakra-ui/color-mode"
-import { FontPreload } from "./src/components/Fonts"
+import { DomainPreconnect, FontPreload } from "./src/components/Head"
 
 export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
-  setHeadComponents([<FontPreload key="font-preloader" />])
+  setHeadComponents([
+    <DomainPreconnect key="domain-preload" />,
+    <FontPreload key="font-preloader" />,
+  ])
   setPreBodyComponents([
     <ColorModeScript
       initialColorMode={defaultTheme}
