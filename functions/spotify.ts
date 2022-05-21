@@ -1,6 +1,5 @@
 import { Handler, HandlerResponse } from "@netlify/functions"
 import fetch from "node-fetch"
-import ms from "ms"
 import cookie from "cookie"
 
 export const SPOTIFY_SCOPES = [
@@ -40,7 +39,8 @@ const redirectUri =
     : "http://localhost:8008/.netlify/functions/spotify"
 
 function makeCookies(token: string, expired = false) {
-  const cookieSettings = `Max-Age=${ms("31d") / 1000}; Path=/`
+  // 31 days
+  const cookieSettings = `Max-Age=${2.678e6}; Path=/`
   if (expired) {
     return [
       `spotifyToken=${token}; ${cookieSettings}; Expires=${new Date(
