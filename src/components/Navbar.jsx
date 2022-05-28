@@ -9,6 +9,7 @@ import { Image } from "@chakra-ui/image"
 import { Skeleton, SkeletonCircle } from "@chakra-ui/skeleton"
 import { LanyardProvider, ThemeProvider } from "../data/providers"
 import Headroom from "react-headroom"
+import { StaticImage } from "gatsby-plugin-image"
 
 const colors = {
   online: "hsl(139, 47.3%, 43.9%)",
@@ -71,24 +72,19 @@ export default function Navbar() {
                   src={lanyard.spotify.album_art_url}
                 />
               ) : lanyard.discord_user ? (
-                <Box position="relative" w="full">
-                  <LazyImage
-                    borderRadius="full"
-                    alt={`Avatar of ${
-                      lanyard.discord_user?.username ?? "Unknown user"
-                    }`}
-                    src={`https://cdn.discordapp.com/avatars/${lanyard.discordId}/${lanyard.discord_user.avatar}.webp?size=256`}
-                  />
-                  <Box
-                    position="absolute"
-                    borderWidth={["3px", "3px", null, "4px"]}
-                    borderColor="bg.100"
-                    right={-1}
-                    bottom={-1}
-                    borderRadius="full"
-                    bg={colors[lanyard?.discord_status ?? "offline"]}
-                    w={["13px", "15px", null, "20px"]}
-                    h={["13px", "15px", null, "20px"]}
+                <Box
+                  position="relative"
+                  w="full"
+                  transition="all 0.2s ease-in-out"
+                  _hover={{
+                    transform: "scale3d(1.1, 1.1, 1.1)",
+                  }}
+                >
+                  <StaticImage
+                    src="../../content/assets/xetera.png"
+                    quality={100}
+                    height={70}
+                    width={70}
                   />
                 </Box>
               ) : (

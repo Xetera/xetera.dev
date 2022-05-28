@@ -135,7 +135,7 @@ module.exports = {
         background_color: `#000000`,
         theme_color: themeColor,
         display: `minimal-ui`,
-        icon: `content/assets/favicon.png`,
+        icon: `content/assets/xetera.png`,
       },
     },
     "gatsby-plugin-open-graph-images",

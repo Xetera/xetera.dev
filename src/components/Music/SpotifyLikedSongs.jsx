@@ -68,7 +68,7 @@ const LikedSong = ({ track }) => {
       href={`https://open.spotify.com/track/${track.id}`}
       target="_blank"
       overflow="hidden"
-      transition="all 0.4s"
+      transition="all 0.2s ease-in-out"
       borderRadius="md"
       borderWidth="1px"
       borderColor="transparent"
