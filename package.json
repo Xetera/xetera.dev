@@ -25,7 +25,7 @@
     "dotenv": "^10.0.0",
     "esm-wallaby": "^3.2.25",
     "framer-motion": "^6.3.3",
-    "gatsby": "^4.14.0",
+    "gatsby": "^4.15.0",
     "gatsby-plugin-catch-links": "^3.12.0",
     "gatsby-plugin-feed": "^3.14.0",
     "gatsby-plugin-google-analytics": "^3.8.0",

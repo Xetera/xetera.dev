@@ -11,7 +11,7 @@ const common = {
 }
 
 export const Xetera = () => {
-  return <StaticImage {...common} src="./xetera_girlboss.jpeg" alt="Xetera" />
+  return <StaticImage {...common} src="./xetera_girlboss_2.jpeg" alt="Xetera" />
 }
 
 export const XeteraMedium = () => {
@@ -22,7 +22,7 @@ export const XeteraMedium = () => {
       quality={100}
       layout="fixed"
       placeholder="tracedSVG"
-      src="./xetera_girlboss.jpeg"
+      src="./xetera_girlboss_2.jpeg"
       alt="Xetera"
     />
   )
@@ -34,7 +34,7 @@ export const XeteraLarge = () => {
       height={600}
       quality={100}
       layout="fixed"
-      src="./xetera_girlboss.jpeg"
+      src="./xetera_girlboss_2.jpeg"
       alt="Xetera"
     />
   )
