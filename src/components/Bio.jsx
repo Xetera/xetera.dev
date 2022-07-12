@@ -96,11 +96,6 @@ const Bio = React.memo(() => {
             I'm currently really interested in web automation and security. I
             also enjoy design and writing on the side when I can find the time.
           </Text>
-          <Employment
-            position="a full-stack developer"
-            link="https://top.gg"
-            job="Top.gg"
-          />
           <Text>
             As of{" "}
             <Text as="time" dateTime={data.site.buildtime} color="text.400">
