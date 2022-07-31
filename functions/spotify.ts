@@ -8,16 +8,15 @@ export const SPOTIFY_SCOPES = [
   "user-read-email",
   "user-read-private",
 ]
-const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env
+const { SPOTIFY_MUSIC_CLIENT_ID, SPOTIFY_MUSIC_CLIENT_SECRET } = process.env
 
 const authorization = Buffer.from(
-  `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
+  `${SPOTIFY_MUSIC_CLIENT_ID}:${SPOTIFY_MUSIC_CLIENT_SECRET}`
 ).toString("base64")
 
 async function refreshToken(refresh: string) {
   const searchParams = new URLSearchParams({
-    // response_type: "code",
-    client_id: SPOTIFY_CLIENT_ID!,
+    client_id: SPOTIFY_MUSIC_CLIENT_ID!,
     scope: SPOTIFY_SCOPES.join(" "),
     redirect_uri: redirectUri,
     grant_type: "refresh_token",
@@ -114,7 +113,7 @@ const handler: Handler = async (event, context) => {
     console.log(event.queryStringParameters)
     const searchParams = new URLSearchParams({
       response_type: "code",
-      client_id: SPOTIFY_CLIENT_ID!,
+      client_id: SPOTIFY_MUSIC_CLIENT_ID!,
       scope: SPOTIFY_SCOPES.join(" "),
       redirect_uri: redirectUri,
       grant_type: "authorization_code",

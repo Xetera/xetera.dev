@@ -414,7 +414,7 @@ const PlayerControls = ({
                     onChange={e => setVolume(e / 100)}
                   >
                     <SliderTrack background="bg.100">
-                      <SliderFilledTrack bg="brandBackground.200" />
+                      <SliderFilledTrack background="brand.100" />
                     </SliderTrack>
                     <SliderThumb />
                   </Slider>
@@ -824,7 +824,7 @@ const Seeker = ({ seek, position, duration }) => {
         h="3px"
       >
         <SliderTrack background="bgSecondary">
-          <SliderFilledTrack bg="brand.100" />
+          <SliderFilledTrack background="brand" />
         </SliderTrack>
         <SliderThumb
           opacity={trackHover || trackDrag ? "1" : "0"}
