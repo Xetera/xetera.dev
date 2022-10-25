@@ -49,7 +49,7 @@ const BioImage = React.memo(() => (
       fontSize="xs"
     >
       ☝️ Avatar by{" "}
-      <ExternalLink href="https://twitter.com/_arttella" color="brand.100">
+      <ExternalLink href="https://twitter.com/linyazy" color="brand.100">
         @Arttella
       </ExternalLink>
     </Text>
