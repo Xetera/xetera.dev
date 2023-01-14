@@ -72,6 +72,10 @@ export const baseColors = {
       light: "hsl(333deg, 100%, 45%)",
       dark: "hsl(333deg, 100%, 45%)",
     },
+    20: {
+      light: "hsl(333deg, 100%, 45%)",
+      dark: "hsl(333deg, 100%, 45%)",
+    },
   },
   brandSecondary: {
     dark: "#61b3cc",
@@ -101,6 +105,10 @@ export const colors = {
   discordBackground: {
     dark: baseColors.bgSecondary.dark,
     light: "#f9f9f9",
+  },
+  bookBackground: {
+    dark: 'rgb(0 0 0 / 0.2)',
+    light: 'rgb(255 255 255 / 0.2);'
   },
   discordTextColor: { light: "#2e3338", dark: "#dcddde" },
   highlight: {

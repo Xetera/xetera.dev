@@ -20,10 +20,6 @@ export const SpotifyLikedSongs = forwardRef((props, ref) => {
 
   return (
     <StackedSection ref={ref} {...props}>
-      <Flex gap={2} alignItems="center">
-        <SectionHeader>My Liked Songs</SectionHeader>
-        <RiSpotifyFill size={20} />
-      </Flex>
       <Grid gap={8}>
         {Object.values(tracksList).map((tracks, i) => {
           const date = new Date(tracks[0].added_at)

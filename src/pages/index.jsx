@@ -10,6 +10,7 @@ import { RiGithubFill, RiRssFill } from "react-icons/ri"
 import ExternalLink from "../components/ExternalLink"
 import { SpotifyLikedSongs } from "../components/Music/SpotifyLikedSongs"
 import { SectionHeader } from "../components/Typography"
+import { Sidebar } from "../components/Sidebar/Sidebar"
 
 const BlogIndex = ({ data, pageContext }) => {
   const posts = data.allMdx.edges
@@ -76,7 +77,7 @@ const BlogIndex = ({ data, pageContext }) => {
             ))}
           </Grid>
         </StackedSection>
-        <SpotifyLikedSongs gridArea="spotify" />
+        <Sidebar />
       </LayoutContent>
     </Layout>
   )
