@@ -5,8 +5,12 @@ import { wrapRootElement } from "./src/wrappers/gatsby"
 import { defaultTheme } from "./src/data/providers"
 import { ColorModeScript } from "@chakra-ui/color-mode"
 import { DomainPreconnect, FontPreload } from "./src/components/Head"
+import { GatsbySSR } from "gatsby"
 
-export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
+export const onRenderBody = ({
+  setPreBodyComponents,
+  setHeadComponents,
+}) => {
   setHeadComponents([
     <DomainPreconnect key="domain-preload" />,
     <FontPreload key="font-preloader" />,
