@@ -1839,7 +1839,7 @@
     "@chakra-ui/form-control" "2.0.16"
     "@chakra-ui/shared-utils" "2.0.5"
 
-"@chakra-ui/theme-tools@2.0.17", "@chakra-ui/theme-tools@^2.4.6":
+"@chakra-ui/theme-tools@2.0.17", "@chakra-ui/theme-tools@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme-tools/-/theme-tools-2.0.17.tgz#9496094336c9480f950c8d7ab6e05f1c19caa955"
   integrity sha512-Auu38hnihlJZQcPok6itRDBbwof3TpXGYtDPnOvrq4Xp7jnab36HLt7KEXSDPXbtOk3ZqU99pvI1en5LbDrdjg==

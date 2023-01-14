@@ -10,7 +10,7 @@
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^2.0.1",
     "@chakra-ui/react": "^2.4.6",
-    "@chakra-ui/theme-tools": "^2.4.6",
+    "@chakra-ui/theme-tools": "^2.0.17",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mdx-js/mdx": "^1.6.22",
