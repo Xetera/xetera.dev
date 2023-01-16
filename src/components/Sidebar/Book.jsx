@@ -14,7 +14,7 @@ export function Book(props) {
     author
   )}/dp/${props.asin}`
 
-  const percentageText = Number(props.percentageRead.toFixed(1))
+  const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)))
   return (
     <Box
       role="group"
@@ -97,7 +97,7 @@ export function Book(props) {
                   "linear-gradient(to left, var(--chakra-colors-brand-100), var(--chakra-colors-brand-80))",
               },
             }}
-            value={Math.ceil(props.percentageRead)}
+            value={percentageRead}
           />
         </Flex>
         <Flex direction="column" gap="3px">
@@ -110,9 +110,7 @@ export function Book(props) {
             borderWidth="1px"
             borderColor="borderSubtle"
           >
-            {props.percentageRead === 100
-              ? "Finished"
-              : `Read ${percentageText}%`}
+            {percentageRead === 100 ? "Finished" : `Read ${percentageRead}%`}
           </Tag>
           <Text fontWeight="medium" fontSize={["sm", "md"]} color="text.100">
             {props.title}
