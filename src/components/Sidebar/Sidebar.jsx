@@ -33,7 +33,7 @@ const tab = {
 export function Sidebar() {
   return (
     <Box>
-      <Tabs variant="unstyled">
+      <Tabs variant="unstyled" isLazy>
         <TabList
           mb={3}
           color="text.300"
