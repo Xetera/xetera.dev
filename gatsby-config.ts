@@ -2,7 +2,6 @@ import "dotenv/config";
 import path from "path";
 import cheerio from "cheerio";
 import type { GatsbyConfig } from "gatsby";
-console.log(process.env.GATSBY_COOKIES)
 
 const fixRelativeLinks = (html: string, siteUrl: string) => {
 	const $ = cheerio.load(html, {

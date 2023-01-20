@@ -121,12 +121,11 @@ export const WideBanner = forwardRef((props, ref) => {
 
   return (
     <Box
-      width="100vw"
-      left="50%"
-      marginLeft="-50vw"
-      marginRight="-50vw"
-      position="relative"
+      width="auto"
       overflow="hidden"
+      gridColumn="1 / -1"
+      marginLeft={-6}
+      marginRight={-6}
       mb={6}
       // background="bgSecondary"
       ref={ref}
