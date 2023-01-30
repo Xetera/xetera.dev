@@ -70,7 +70,5 @@
   font-style: normal;
   src: local("JetBrains Mono Regular"), local("JetBrainsMono-Regular"),
     url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
-  font-feature-settings: "aalt" 1, "calt" 1, "case" 1, "ccmp" 1, "frac" 1,
-    "ordn" 1, "sinf" 1, "subs" 1, "sups" 1, "zero" 1, "mark" 1, "mkmk" 1;
   font-display: swap;
 }
