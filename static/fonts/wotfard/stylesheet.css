@@ -69,6 +69,6 @@
   font-family: "JetBrains Mono";
   font-style: normal;
   src: local("JetBrains Mono Regular"), local("JetBrainsMono-Regular"),
-    url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+    url("/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2") format("woff2");
   font-display: swap;
 }
