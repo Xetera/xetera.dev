@@ -1,0 +1,67 @@
+---
+import { Picture } from "@astrojs/image/components";
+import { formatDistance } from "date-fns";
+import type { KindleBookDetails } from "kindle-api";
+
+interface Props extends KindleBookDetails {
+  class?: string;
+}
+
+const { props } = Astro;
+
+const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)));
+const lastRead = formatDistance(new Date(props.progress.syncDate), new Date(), {
+  addSuffix: true,
+});
+---
+
+<article class:list={[props.class, "relative rounded overflow-hidden mb-1"]}>
+  <Picture
+    background="black"
+    alt={`Book cover image for ${props.title}`}
+    widths={[500]}
+    sizes=""
+    loading="lazy"
+    class="w-full h-full object-cover aspect-ratio-[2/3] opacity-100"
+    aspectRatio="2:3"
+    src={props.productUrl}
+  />
+  <progress
+    class="book-progress-bar transition-all absolute mt-1 bottom-0 left-0 right-0 w-full h-1"
+    max={100}
+    value={percentageRead}
+  >
+  </progress>
+</article>
+
+<div
+  class="flex justify-between text-sm w-full color-text-400 items-center mt-2"
+>
+  <p>
+    {percentageRead === 100 ? "Read" : `${percentageRead}%`}
+  </p>
+  <p>{lastRead}</p>
+</div>
+
+<style>
+  .book-progress-bar,
+  .book-progress-bar[value] {
+    appearance: none;
+    background: rgb(255 255 255 / 0.2);
+
+    /* Get rid of default border in Firefox. */
+    border: none;
+  }
+
+  .book-progress-bar[value]::-moz-progress-bar {
+    border-radius: 3px;
+    background: var(--brand-900);
+  }
+  .book-progress-bar[value]::-webkit-progress-bar {
+    background: rgb(255 255 255 / 0.2);
+  }
+  .book-progress-bar[value]::-webkit-progress-value {
+    border-radius: 3px;
+    background: var(--brand-900);
+  }
+</style>

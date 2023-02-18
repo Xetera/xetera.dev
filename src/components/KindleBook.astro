@@ -1,0 +1,99 @@
+---
+import { Picture } from "@astrojs/image/components";
+import { formatDistance } from "date-fns";
+import type { KindleBookDetails } from "kindle-api";
+
+interface Props extends KindleBookDetails {}
+
+function skewer(word: string) {
+  return word.replace(/\s+/g, "-");
+}
+
+const { props } = Astro;
+const [firstAuthor] = props.authors;
+const { firstName, lastName } = firstAuthor ?? {};
+
+const author = `${firstName ?? ""} ${lastName ?? ""}`.trim();
+const link = `https://www.amazon.com/${skewer(props.title)}-${skewer(
+  author
+)}/dp/${props.asin}`;
+const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)));
+---
+
+<a
+  class="book-root group relative overflow-hidden rounded p-3 flex flex-col transition-all hover:-translate-y-1 @container"
+  target="_blank"
+  rel="noopener noreferrer"
+  href={link}
+>
+  <div class="flex gap-2">
+    <div
+      class="picture-container flex md:flex-col overflow-hidden rounded-sm relative max-w-[100px] @xs:max-w-[140px] lg:max-w-[140px] w-full flex-shrink-0 h-full z-2 outline outline-offset outline-1 outline-body-800"
+    >
+      <Picture
+        background="black"
+        alt={`Book cover image for ${props.title}`}
+        widths={[300]}
+        sizes=""
+        loading="lazy"
+        class="w-full h-full rounded object-cover aspect-ratio-[2/3] opacity-100"
+        aspectRatio="2:3"
+        src={props.productUrl}
+      />
+      {
+        props.bookType === "sample" && (
+          <p class="text-xs tracking-wider bg-body-400 font-lg absolute top-0 right-0 tracking-wide text-center w-full sample-banner">
+            SAMPLE
+          </p>
+        )
+      }
+    </div>
+    <Picture
+      alt=""
+      sizes=""
+      background="black"
+      widths={[300]}
+      aspectRatio="2:3"
+      class="select-none absolute top-0 right-0 transition-all group-hover:opacity-[0.10] z-0 scale-115 rotate-5 opacity-8 bg-[rgb(0 0 0 / 0.04)] w-full object-fit"
+      src={props.productUrl}
+    />
+    <div class="flex flex-col z-1 gap-1">
+      <h3
+        class="font-medium text-sm @[320px]:text-base lg:text-base color-text-900 z-1"
+      >
+        {props.title}
+      </h3>
+      <p class="text-xs @[320px]:text-base lg:text-base color-text-300 z-1">
+        {author}
+      </p>
+      <p class="text-xs @[320px]:text-sm lg:text-sm mt-auto color-text-500 z-1">
+        Last read{" "}
+        {
+          formatDistance(new Date(props.progress.syncDate), new Date(), {
+            addSuffix: true,
+          })
+        }
+      </p>
+    </div>
+  </div>
+</a>
+
+<style>
+  .book-root {
+    border: 1px solid rgb(255 255 255 / 0.11);
+    box-shadow: 0 4px 6px rgb(0 0 0/ 0.1);
+    backdrop-blur: 12px;
+    -webkit-backdrop-filter: blur(5px);
+    background: rgb(255 255 255 / 0.2);
+  }
+  html.dark .book-root {
+    background: rgb(0 0 0 / 0.2);
+  }
+  :global(.picture-container > picture) {
+    display: flex;
+    flex: 1;
+  }
+  .sample-banner {
+    transform: rotate(45deg) translateY(-14px) translateX(41px);
+  }
+</style>

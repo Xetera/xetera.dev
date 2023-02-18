@@ -1,0 +1,66 @@
+---
+import { getBooks } from "🛠️/kindle";
+import ExternalLink from "🧱/ExternalLink.astro";
+import HomepageSection from "🧱/HomepageSection.astro";
+import SectionHeader from "🧱/SectionHeader.astro";
+import Book from "./Book.astro";
+
+function skewer(word: string) {
+  return word.replace(/\s+/g, "-");
+}
+const books = await getBooks();
+const allCount = books.length;
+const showCount = 6;
+const showing = books.slice(0, showCount);
+const className = "book-item outline outline-1 outline-body-800 rounded";
+---
+
+<div class="grid gap-4">
+  <HomepageSection class="grid">
+    <SectionHeader>
+      My Reading List 📚
+
+      <span slot="aside" class="color-text-500 text-sm"
+        >Generated <ExternalLink
+          href="https://github.com/xetera/kindle-api"
+          target="_blank"
+          class="color-brand-500 underlined inline-flex"
+        >
+          automatically
+        </ExternalLink></span
+      >
+    </SectionHeader>
+    <div class="grid gap-4 book-grid overflow-x-auto overflow-y-hidden">
+      {
+        showing.map((book) => {
+          const [firstAuthor] = book.authors;
+          const { firstName, lastName } = firstAuthor ?? {};
+          const author = `${firstName ?? ""} ${lastName ?? ""}`.trim();
+          const link = `https://www.amazon.com/${skewer(book.title)}-${skewer(
+            author
+          )}/dp/${book.asin}`;
+          const render = <Book {...book} class={className} />;
+          return (
+            <a href={link} target="_blank">
+              {render}
+            </a>
+          );
+        })
+      }
+    </div>
+  </HomepageSection>
+</div>
+
+<style>
+  .book-grid {
+    grid-auto-columns: minmax(160px, 1fr);
+    grid-auto-flow: column;
+  }
+  .book-grid .book-item {
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  .book-grid .book-item:hover {
+    opacity: 1;
+  }
+</style>

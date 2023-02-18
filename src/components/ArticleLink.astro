@@ -1,0 +1,78 @@
+---
+import { Picture } from "@astrojs/image/components";
+import type { CollectionEntry } from "astro:content";
+import { routes } from "src/routing";
+import { formatDistance } from "date-fns";
+import getReadingTime from "reading-time";
+
+export type Props = CollectionEntry<"blog"> & { isNew: boolean };
+const { data, slug, isNew, body } = Astro.props;
+const { banner } = data;
+const readingTime = getReadingTime(body);
+---
+
+<a
+  href={routes.article(slug)}
+  class="flex group h-full border-body-700 border-1 hover:border-body-500 transition-all duration-300 transform-gpu hover:-translate-y-1 rounded overflow-hidden article-entry"
+>
+  <div class="flex flex-row flex-1 relative bg-body-800">
+    <div class="z-1 pt-3 flex flex-col flex-1">
+      <h2 class="text-lg font-medium px-3">
+        {data.title}
+      </h2>
+      <p class="px-3 mb-2 text-base color-text-100">
+        {data.description}
+      </p>
+      <time
+        class="text-sm color-text-300 mb-2 px-3"
+        datetime={data.date.toString()}
+        >Posted {
+          formatDistance(data.date, new Date(), { addSuffix: true })
+        }</time
+      >
+      <hr class="w-full article-bottom-border h-[1px]" />
+      <ul class="flex px-3 py-2 gap-2 flex-wrap text-xs color-text-100">
+        <div class="mr-2 color-text-300">{readingTime.text}</div>
+        <div class="h-full w-[1px] bg-body-700 mr-2"></div>
+        {data.tags.map((tag) => <div class="pr-2">{tag}</div>)}
+      </ul>
+    </div>
+    {
+      banner && (
+        <div
+          style={{ aspectRatio: "16/9" }}
+          class="display-none lg:display-block ml-auto overflow-hidden rounded overflow-hidden z-2 max-w-[200px] w-full object-cover h-full ml-auto flex-shrink-0"
+        >
+          {isNew && (
+            <div class="z-2 tracking-wider font-bold text-xs absolute right-0 top-0 text-center rounded m-2 px-2 bg-brand-900 color-white new-tag">
+              NEW
+            </div>
+          )}
+          <Picture
+            widths={[500]}
+            background="white"
+            sizes=""
+            alt=""
+            loading="lazy"
+            style={{
+              aspectRatio: "16/9",
+            }}
+            class="article-image object-cover bg-body-900 z-0 w-full image-overlay transition-all h-full"
+            src={banner.url}
+            aspectRatio="16:9"
+          />
+        </div>
+      )
+    }
+  </div>
+</a>
+
+<style>
+  .article-bottom-border {
+    border: none;
+    background: linear-gradient(to right, var(--body-700), transparent);
+  }
+  .article-image {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+  }
+</style>

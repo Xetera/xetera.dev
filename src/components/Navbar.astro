@@ -1,0 +1,54 @@
+---
+import { Picture } from "@astrojs/image/components";
+---
+
+<nav class="px-6 py-4 fixed top-0 w-full navbar" id="navbar">
+  <ul class="w-full flex justify-between">
+    <li>
+      <a href="/" rel="prefetch">
+        <Picture
+          class="hover:scale-110 transition-all"
+          src="/avatars/xetera.png"
+          alt="Home button"
+          height={40}
+          widths={[80]}
+          aspectRatio={1}
+          width={40}
+          sizes=""
+          background="rgb(0,0,0)"
+        />
+      </a>
+    </li>
+    <li role="button" id="theme-switcher" aria-label="Switch theme">
+      <svg
+        stroke="currentColor"
+        fill="currentColor"
+        stroke-width="0"
+        viewBox="0 0 20 20"
+        height="40px"
+        width="40px"
+        xmlns="http://www.w3.org/2000/svg"
+        ><path
+          fill-rule="evenodd"
+          d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+          clip-rule="evenodd"></path></svg
+      >
+    </li>
+  </ul>
+</nav>
+
+<style>
+  .navbar {
+    z-index: 2;
+  }
+</style>
+
+<script>
+  import { persistTheme, toggleTheme } from "src/scripts/theme-switcher";
+
+  const switcher = document.querySelector("#theme-switcher")!;
+  switcher.addEventListener("click", () => {
+    const nextTheme = toggleTheme();
+    persistTheme(nextTheme);
+  });
+</script>

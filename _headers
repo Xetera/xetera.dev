@@ -4,7 +4,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: same-origin
   Strict-Transport-Security: max-age=31536000
-/static/*
+/fonts/*
   Cache-Control: "public, max-age=360000"
 /rss.xml
   Cache-Control: "public, max-age=3600"

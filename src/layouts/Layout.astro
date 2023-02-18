@@ -1,0 +1,57 @@
+---
+import "💅/theme.css";
+import "💅/fonts.css";
+import "💅/links.css";
+import "💅/article.css";
+import BaseHead, { Props as BaseHeadProps } from "🧱/BaseHead.astro";
+
+export interface Props extends BaseHeadProps {
+  class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead {...rest} />
+  </head>
+  <body class:list={["h-full flex bg-body-900 color-text-800", className]}>
+    <div class="flex flex-col items-center w-full bg-body-900 transition-all">
+      <slot />
+    </div>
+    <style is:global>
+      * {
+        word-break: break-word;
+      }
+      code {
+        counter-reset: step;
+        counter-increment: step 0;
+      }
+
+      code .line::before {
+        content: counter(step);
+        counter-increment: step;
+        width: 1rem;
+        margin-right: 1.5rem;
+        display: inline-block;
+        text-align: right;
+        color: var(--astro-code-token-comment);
+      }
+
+      html {
+        font-family: var(--font-family-sans);
+      }
+      code,
+      pre {
+        font-family: ui-monospace, "Jetbrains Mono", Menlo, Monaco,
+          Lucida Console, Liberation Mono, DejaVu Sans Mono,
+          Bitstream Vera Sans Mono, Courier New, monospace !important;
+      }
+      iframe {
+        max-width: 100%;
+      }
+    </style>
+  </body>
+</html>

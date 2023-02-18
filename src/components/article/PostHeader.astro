@@ -1,0 +1,77 @@
+---
+import { Picture } from "@astrojs/image/components";
+import { format } from "date-fns";
+import Tag from "🧱/Tag.astro";
+
+interface Props {
+  banner?: string;
+  type: "article";
+  readingTime: string;
+  title: string;
+  subtitle: string;
+  tags: string[];
+  date: Date;
+  topImage?: string | undefined;
+}
+const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
+---
+
+<div class="flex gap-2 items-center relative z-1 font-sans">
+  <span class="whitespace-nowrap inline-flex items-center">
+    <div class="color-brand-900 font-800 uppercase tracking-wider">
+      {readingTime}
+    </div>
+  </span>
+</div>
+
+<h1
+  class="m-0 article-title color-text-700 text-5xl lg:text-6xl font-900 z-1 leading-relaxed"
+>
+  {title}
+</h1>
+
+{
+  banner && (
+    <Picture
+      background="white"
+      alt="Banner image"
+      sizes="(min-width: 500px) 800px, 400px"
+      aspectRatio="16:9"
+      src={banner}
+      class="aspect-ratio-[16/9] w-full rounded outline outline-1 outline-body-800"
+      widths={[800, 400]}
+    />
+  )
+}
+
+<h2 class="mt-0 color-text-300 font-300 text-3xl z-1 mb-8 text-center">
+  {subtitle}
+</h2>
+
+<hr
+  class="mt-2 mb-2 border-top-1 w-full h-[1px] bg-body-800 col-span-full transition-all"
+/>
+
+<div class="flex gap-3 color-text-400 items-baseline justify-between">
+  <div
+    class="list-none m-0 p-0 font-medium text-sm flex gap-4 uppercase z-1 font-sans"
+  >
+    {tags.map((tag) => <Tag>{tag}</Tag>)}
+  </div>
+  <span class="font-sans font-400">
+    Published <time datetime={date.toISOString()} class="color-text-800"
+      >{format(date, "PP")}</time
+    >
+  </span>
+</div>
+<!-- <div
+  class="display-none xl:display-flex ml-4 col-start-3 color-text-100 text-sm items-center"
+>
+  {since}
+</div> -->
+
+<style>
+  h1.article-title {
+    line-height: 1.35;
+  }
+</style>

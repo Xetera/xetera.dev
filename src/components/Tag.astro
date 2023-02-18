@@ -1,0 +1,9 @@
+---
+interface Props {
+  class?: string;
+}
+---
+
+<span class:list={["color-brand-900 rounded-sm", Astro.props.class]}>
+  <slot />
+</span>

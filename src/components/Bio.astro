@@ -1,0 +1,112 @@
+---
+import { Picture } from "@astrojs/image/components";
+import ExternalLink from "./ExternalLink.astro";
+import Email from "./icons/Email.astro";
+import Github from "./icons/Github.astro";
+import Twitter from "./icons/Twitter.astro";
+import ItsMe from "./ItsMe.astro";
+---
+
+<div class="flex flex-col md:flex-row justify-between w-full gap-8">
+  <div class="flex flex-col gap-4 flex-grow-0 max-w-[42rem] text-xl leading-8">
+    <h1 class="text-4xl lg:text-7xl font-900 mb-2">Hi, I'm Xetera.</h1>
+
+    <div class="color-text-400 flex flex-col gap-4">
+      <p>
+        I love making ideas come to life with code. I'm a huge fan of functional
+        programming and anti-abuse + trust & safety.
+      </p>
+      <p>
+        I've recently been learning about reverse engineering, security, and
+        internet censorship. I like both kpop and metal, and think pinapple
+        belongs on pizza.
+      </p>
+      <p>
+        I'm currently based in <del class="color-text-100">Turkey</del> Türkiye,
+        Istanbul but also in general as well.
+      </p>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="flex gap-4 text-3xl color-text-700">
+        {
+          import.meta.env.SOCIAL_GITHUB && (
+            <ExternalLink
+              noIcon
+              href={`https://github.com/${import.meta.env.SOCIAL_GITHUB}`}
+              target="_blank"
+              class="hover:color-text-900"
+            >
+              <Github />
+            </ExternalLink>
+          )
+        }
+        {
+          import.meta.env.SOCIAL_TWITTER && (
+            <ExternalLink
+              noIcon
+              href={`https://twitter.com/${import.meta.env.SOCIAL_TWITTER}`}
+              target="_blank"
+              class="hover:color-text-900"
+            >
+              <Twitter />
+            </ExternalLink>
+          )
+        }
+        {
+          import.meta.env.SOCIAL_EMAIL && (
+            <ExternalLink
+              noIcon
+              {
+              /* sorry crawlers 🤭 */ }
+              href=""
+              target="_blank"
+              class="email-target hover:color-text-900"
+            >
+              <Email />
+            </ExternalLink>
+          )
+        }
+        <noscript
+          class="obfuscated-email text-xs flex color-text-200 font-400"
+          data-email={JSON.stringify(
+            import.meta.env.SOCIAL_EMAIL.split("").map((char: string) =>
+              char.codePointAt(0)
+            )
+          )}
+        >
+          Javascript must be enabled for email
+        </noscript>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="relative w-full max-w-[300px] aspect-ratio-1 flex-shrink-0 group relative h-min"
+  >
+    <Picture
+      id="custom-avatar"
+      alt="Profile picture"
+      class="rounded-md z-2 outline outline-1 rounded outline-body-800 h-full"
+      src="/avatars/xetera_mj.png"
+      aspectRatio={1}
+      widths={[600]}
+      sizes=""
+      background="#f5c4c6"
+      loading="lazy"
+      width={300}
+    />
+    <ItsMe />
+  </div>
+</div>
+
+<script>
+  const email = document.querySelector(
+    ".obfuscated-email"
+  )! as HTMLAnchorElement;
+  const emailTarget = document.querySelector(
+    ".email-target"
+  )! as HTMLDivElement;
+
+  const myEmail: number[] = JSON.parse(email.dataset.email ?? "[]");
+  emailTarget.setAttribute("href", `mailto:${String.fromCharCode(...myEmail)}`);
+</script>

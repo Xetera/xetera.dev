@@ -1,0 +1,140 @@
+:root {
+  --gap-1: 2px;
+  --gap-2: 4px;
+  --gap-3: 8px;
+  --accent: 124, 58, 237;
+  --font-family-sans: "Hanken Grotesk", "Wotfard", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+  --font-family-serif: "Canela Text", "Canela Deck", serif;
+  --accent-gradient: linear-gradient(
+    45deg,
+    rgb(var(--accent)),
+    #da62c4 30%,
+    white 60%
+  );
+}
+
+html {
+  color-scheme: light;
+  text-rendering: optimizeLegibility;
+  /* body light */
+
+  --highlight: #ff0061;
+  --brand-100: #fde6f5;
+
+  --brand-rgb-900: 220 17 95;
+  --brand-900: rgb(var(--brand-rgb-900));
+  --brand-500: #a55087;
+
+  /* body light */
+
+  --body-200: hsl(225 21% 69%);
+  --body-300: hsl(225 21% 73%);
+  --body-400: hsl(225 21% 79%);
+  --body-500: hsl(225 21% 83%);
+  --body-600: hsl(225 21% 88%);
+  --body-700: hsl(225 21% 93%);
+  --body-800: hsl(225 21% 96%);
+  --body-900: hsl(225 21% 99%);
+
+  /* text light */
+
+  --text-100: hsl(225 8% 48%);
+  --text-200: hsl(225 8% 40%);
+  --text-300: hsl(225 8% 34%);
+  --text-400: hsl(225 8% 27%);
+  --text-500: hsl(225 8% 21%);
+  --text-600: hsl(225 8% 17%);
+  --text-700: hsl(225 8% 13%);
+  --text-800: hsl(225 8% 10%);
+  --text-900: hsl(225 8% 5%);
+
+  --astro-code-color-text: rgb(34, 34, 34);
+  --astro-code-color-background: white;
+  --astro-code-token-constant: #1976d2;
+  --astro-code-token-string: burlywood;
+  --astro-code-token-comment: rgba(115, 138, 148, 0.4);
+  --astro-code-token-keyword: #d32f2f;
+  --astro-code-token-parameter: seashell;
+  --astro-code-token-function: #6f42c1;
+  --astro-code-token-string-expression: #22863a;
+  --astro-code-token-punctuation: #24292eff;
+  --astro-code-token-link: honeydew;
+}
+
+html.dark {
+  color-scheme: dark;
+  /* brand dark */
+  --brand-rgb-100: 15 17 23;
+  --brand-100: #241319;
+
+  --brand-rgb-900: 230 0 103;
+  --brand-900: rgb(var(--brand-rgb-900));
+  --brand-500: #c968a7;
+
+  --highlight: yellow;
+
+  /* body dark */
+
+  --body-100: hsl(225 21% 35%);
+  --body-200: hsl(225 21% 30%);
+  --body-300: hsl(225 21% 26%);
+  --body-400: hsl(225 21% 23%);
+  --body-500: hsl(225 21% 19%);
+  --body-600: hsl(225 21% 16%);
+  --body-700: hsl(225 21% 12%);
+  --body-800: hsl(225 21% 9%);
+  --body-900: hsl(225 21% 7%);
+
+  /* text dark */
+
+  --text-900: hsl(0 0% 100%);
+  --text-800: hsl(223 23% 94%);
+  --text-700: hsl(226 21% 88%);
+  --text-600: hsl(227 21% 83%);
+  --text-500: hsl(225 21% 78%);
+  --text-400: hsl(226 21% 73%);
+  --text-300: hsl(225 21% 68%);
+  --text-200: hsl(225 21% 61%);
+  --text-100: hsl(224 21% 53%);
+
+  --astro-code-color-text: rgb(255, 255, 255);
+  --astro-code-color-background: #171923;
+  --astro-code-token-constant: #f78c6c;
+  --astro-code-token-string: burlywood;
+  /* comment var is reused */
+  /* --astro-code-token-comment: salmon; */
+  --astro-code-token-keyword: powderblue;
+  --astro-code-token-parameter: seashell;
+  --astro-code-token-function: #82aaff;
+  --astro-code-token-string-expression: #c3e88d;
+  --astro-code-token-punctuation: linen;
+  --astro-code-token-link: honeydew;
+}
+
+.astro-code {
+  outline: 1px solid var(--body-800);
+}
+
+/* including p3 versions of vivid colors */
+@media (color-gamut: p3) {
+  html {
+    --brand-900: color(display-p3 0.785 0.071 0.547);
+    --astro-code-token-keyword: color(display-p3 0.96 0.299 0.264);
+    --astro-code-token-string-expression: color(display-p3 0.034 0.53 0.034);
+  }
+  html.dark {
+    --brand-900: color(display-p3 0.935 0.098 0.391);
+    --highlight: color(display-p3 1 1 0.13);
+  }
+}
+
+/* opting the user out of animations on reduced motion */
+@media (prefers-reduced-motion) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

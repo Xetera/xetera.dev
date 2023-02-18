@@ -1,0 +1,46 @@
+---
+import "💅/article.css";
+import PostHeader from "🧱/article/PostHeader.astro";
+import Navbar from "🧱/Navbar.astro";
+import type { MarkdownLayoutProps } from "astro";
+import Layout from "./Layout.astro";
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
+  imageTop?: {
+    src: string;
+    opacity?: number;
+  };
+}>;
+
+const { frontmatter, content } = Astro.props;
+const { minutesRead } = content;
+---
+
+<Layout title={frontmatter.title} themeColor="#262b3b">
+  <Navbar />
+  <article
+    class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base"
+  >
+    <header class="w-full px-6 lg:px-0 pt-8xl pb-3xl article-grid">
+      <PostHeader
+        banner={frontmatter.banner?.url}
+        date={new Date(frontmatter.date)}
+        title={frontmatter.title}
+        readingTime={String(minutesRead)}
+        subtitle={frontmatter.description}
+        topImage={frontmatter?.imageTop?.src}
+        tags={frontmatter.tags}
+        type="article"
+      />
+    </header>
+    <main
+      class="article-grid px-6 lg:px-0 larger-line-height text-xl lg:text-2xl leading-10 mt-2xl color-text-700 leading-looser"
+    >
+      <slot />
+    </main>
+  </article>
+</Layout>

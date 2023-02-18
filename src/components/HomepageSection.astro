@@ -1,0 +1,9 @@
+---
+interface Props {
+  class?: string;
+}
+---
+
+<div class:list={[Astro.props.class, "flex-col gap-4"]}>
+  <slot />
+</div>

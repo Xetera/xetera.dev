@@ -1,0 +1,37 @@
+---
+import { Picture } from "@astrojs/image/components";
+import type { PlaylistTrack, Track } from "spotify-types";
+
+interface Props extends PlaylistTrack {}
+
+const { props } = Astro;
+const track = props.track as Track;
+
+const art = track.album.images[0];
+---
+
+<article class="flex gap-3">
+  {
+    art && (
+      <Picture
+        sizes=""
+        background="black"
+        alt={`Album art for ${track.name}`}
+        aspectRatio="1:1"
+        width={64}
+        widths={[64]}
+        src={art.url}
+        loading="lazy"
+        class="rounded aspect-ratio-1 outline outline-1 outline-body-700"
+      />
+    )
+  }
+  <div class="flex flex-col justify-center">
+    <h2 aria-label="Track name" class="color-text-800 font-medium">
+      {track.name}
+    </h2>
+    <h3 aria-label="Track artist" class="color-text-100">
+      {track.artists[0]?.name}
+    </h3>
+  </div>
+</article>

@@ -1,0 +1,83 @@
+---
+import ArticleLink from "🧱/ArticleLink.astro";
+import Bio from "🧱/Bio.astro";
+import Navbar from "🧱/Navbar.astro";
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Rss from "🧱/icons/Rss.astro";
+import { sub } from "date-fns";
+import SectionHeader from "🧱/SectionHeader.astro";
+import HomepageSection from "🧱/HomepageSection.astro";
+import BookGrid from "🧱/kindle/BookGrid.astro";
+import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
+
+const posts = await getCollection("blog");
+const visiblePosts = posts
+  .flatMap((post) => (post.data.draft ? [] : [post]))
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
+---
+
+<Layout title="Xetera">
+  <Navbar />
+  <main class="flex justify-center w-full my-7xl lg:my-[10%] homepage mx-6">
+    <div
+      class="flex flex-col gap-8 md:gap-12 mx-auto max-w-6xl w-full px-4 md:px-6"
+    >
+      <div class="mb-8">
+        <Bio />
+      </div>
+      <aside>
+        <BookGrid />
+      </aside>
+      <div class="grid grid-cols-3 gap-4 sm:gap-8">
+        <div class="col-span-full md:col-span-2 flex flex-col gap-4">
+          <HomepageSection class="col-span-full md:col-span-2 flex">
+            <SectionHeader>
+              {visiblePosts.length} Articles 📝
+              <a
+                slot="aside"
+                href="/rss.xml"
+                class="underlined flex items-center gap-2 color-text-500"
+              >
+                <p>Subscribe to the RSS feed</p>
+                <Rss />
+              </a>
+            </SectionHeader>
+            <div class="flex flex-col gap-3">
+              {
+                visiblePosts.map((post) => {
+                  const banner = post.data.banner;
+
+                  const isNew = sub(new Date(), { days: 30 }) < post.data.date;
+
+                  return (
+                    <div class:list={["masonry-item"]}>
+                      <ArticleLink {...post} isNew={isNew} />
+                    </div>
+                  );
+                })
+              }
+            </div>
+          </HomepageSection>
+        </div>
+        <aside class="col-span-full md:col-span-1">
+          <SpotifySidebar />
+          <!-- <KindleSidebar /> -->
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .masonry-grid {
+    grid-auto-flow: row dense;
+    grid-auto-rows: fit-content(20%);
+    /* grid-template-rows: repeat() */
+  }
+  /* @supports (grid-template-rows: masonry) {
+    .masonry-grid {
+      grid-template-rows: masonry;
+    }
+  } */
+</style>
