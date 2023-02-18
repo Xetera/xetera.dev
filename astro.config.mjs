@@ -5,12 +5,10 @@ import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from './reading-time.mjs';
 import image from "@astrojs/image";
 import prefetch from "@astrojs/prefetch";
-import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
-import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
 
 // https://astro.build/config

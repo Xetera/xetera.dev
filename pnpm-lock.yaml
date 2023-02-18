@@ -16,8 +16,8 @@ specifiers:
   '@types/react-dom': ^18.0.6
   '@types/spotify-api': ^0.0.20
   '@unocss/preset-icons': ^0.49.4
-  '@unocss/preset-typography': ^0.49.1
-  '@unocss/reset': ^0.49.1
+  '@unocss/preset-typography': 0.49.1
+  '@unocss/reset': 0.49.1
   '@unocss/transformer-variant-group': ^0.49.4
   astro: ^2.0.12
   autoprefixer: ^10.4.13
@@ -43,7 +43,7 @@ specifiers:
   rollup: ^3.15.0
   sharp: ^0.31.3
   spotify-types: ^1.0.7
-  unocss: ^0.49.1
+  unocss: 0.49.1
   vite: ^4.0.4
 
 dependencies:
@@ -820,6 +820,19 @@ packages:
       - supports-color
     dev: false
 
+  /@iconify/utils/2.1.4:
+    resolution: {integrity: sha512-7vzsYIvxv5Hng0MNEtSSnyMBD/+zqnORqmKiYsSgpMBGSz1r93URgBZHPYCZ1/gpoaVstYW4/SVLGCMJBNMCLQ==}
+    dependencies:
+      '@antfu/install-pkg': 0.1.1
+      '@antfu/utils': 0.7.2
+      '@iconify/types': 2.0.0
+      debug: 4.3.4
+      kolorist: 1.7.0
+      local-pkg: 0.4.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
     engines: {node: '>=6.0.0'}
@@ -1174,7 +1187,7 @@ packages:
   /@unocss/preset-icons/0.49.1:
     resolution: {integrity: sha512-bRrJTToSBxHK54z3PB2Dp3voI+Q7O+VNYLNkpSTq2mmcsxT7O0ITGVag+iLAS9sU7nbgwAo5l++so4JrmtTiAQ==}
     dependencies:
-      '@iconify/utils': 2.0.12
+      '@iconify/utils': 2.1.4
       '@unocss/core': 0.49.1
       ohmyfetch: 0.4.21
     transitivePeerDependencies:
@@ -3014,6 +3027,10 @@ packages:
 
   /kolorist/1.6.0:
     resolution: {integrity: sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==}
+    dev: false
+
+  /kolorist/1.7.0:
+    resolution: {integrity: sha512-ymToLHqL02udwVdbkowNpzjFd6UzozMtshPQKVi5k1EjKRqKqBrOnE9QbLEb0/pV76SAiIT13hdL8R6suc+f3g==}
     dev: false
 
   /levn/0.4.1:
