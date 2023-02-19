@@ -23,13 +23,13 @@ const { title, description, themeColor } = Astro.props
 />
 <title>{title}</title>
 <!-- Repeating a little bit of code here to make sure this is inlined properly -->
-<script>
+<script is:inline>
   const modes = ["dark", "light", "system"]
 
   const DEFAULT_THEME_MODE = "system"
   const THEME_KEY = "theme"
 
-  function isMode(input: string) {
+  function isMode(input) {
     return modes.includes(input)
   }
 
@@ -46,7 +46,7 @@ const { title, description, themeColor } = Astro.props
     return preference
   }
 
-  function setKnownTheme(theme: string) {
+  function setKnownTheme(theme) {
     if (theme === "dark") {
       document.documentElement.classList.add("dark")
     } else {
@@ -54,21 +54,22 @@ const { title, description, themeColor } = Astro.props
     }
   }
 
-  export function setThemeDisplay(mode: string) {
-    if (mode === "system") {
-      const shouldBeDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches
-      setKnownTheme(shouldBeDark ? "dark" : "light")
-    } else {
-      setKnownTheme(mode)
-    }
+  export function setThemeDisplay(mode) {
+    // if (mode === "system") {
+    //   const shouldBeDark = window.matchMedia(
+    //     "(prefers-color-scheme: dark)"
+    //   ).matches
+    //   setKnownTheme(shouldBeDark ? "dark" : "light")
+    // } else {
+    // }
+    setKnownTheme(mode === "system" ? "light" : mode)
   }
 
-  export function addThemeChangeListener(f: (mode: string) => void) {
+  export function addThemeChangeListener(f) {
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", e => {
+        console.info(`Theme was changed`)
         const darkModeOn = e.matches
         f(darkModeOn ? "dark" : "light")
       })
