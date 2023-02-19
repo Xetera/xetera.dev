@@ -13,6 +13,10 @@ export default unocss({
 		presetUno(),
 		presetTypography({
 			cssExtend: {
+				"pre,code": {
+					"white-space": 'pre-line',
+					"word-break": "break-word",
+				},
 				code: {
 					"line-height": "150%",
 				},

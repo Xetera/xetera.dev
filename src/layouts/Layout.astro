@@ -30,19 +30,22 @@ const { class: className, component: Component, ...rest } = Astro.props
       * {
         word-break: break-word;
       }
-      code {
-        counter-reset: step;
-        counter-increment: step 0;
-      }
 
-      code .line::before {
-        content: counter(step);
-        counter-increment: step;
-        width: 1rem;
-        margin-right: 1.5rem;
-        display: inline-block;
-        text-align: right;
-        color: var(--astro-code-token-comment);
+      @media only screen and (min-width: 768px) {
+        code {
+          counter-reset: step;
+          counter-increment: step 0;
+        }
+
+        code .line::before {
+          content: counter(step);
+          counter-increment: step;
+          width: 1rem;
+          margin-right: 1.5rem;
+          display: inline-block;
+          text-align: right;
+          color: var(--astro-code-token-comment);
+        }
       }
 
       html {

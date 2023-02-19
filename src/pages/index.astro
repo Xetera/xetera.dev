@@ -1,20 +1,20 @@
 ---
-import ArticleLink from "🧱/ArticleLink.astro";
-import Bio from "🧱/Bio.astro";
-import Navbar from "🧱/Navbar.astro";
-import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import Rss from "🧱/icons/Rss.astro";
-import { sub } from "date-fns";
-import SectionHeader from "🧱/SectionHeader.astro";
-import HomepageSection from "🧱/HomepageSection.astro";
-import BookGrid from "🧱/kindle/BookGrid.astro";
-import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
+import ArticleLink from "🧱/ArticleLink.astro"
+import Bio from "🧱/Bio.astro"
+import Navbar from "🧱/Navbar.astro"
+import { getCollection } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import Rss from "🧱/icons/Rss.astro"
+import { sub } from "date-fns"
+import SectionHeader from "🧱/SectionHeader.astro"
+import HomepageSection from "🧱/HomepageSection.astro"
+import BookGrid from "🧱/kindle/BookGrid.astro"
+import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro"
 
-const posts = await getCollection("blog");
+const posts = await getCollection("blog")
 const visiblePosts = posts
-  .flatMap((post) => (post.data.draft ? [] : [post]))
-  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
+  .flatMap(post => (post.data.draft ? [] : [post]))
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
 ---
 
 <Layout title="Xetera">
@@ -26,11 +26,8 @@ const visiblePosts = posts
       <div class="mb-8">
         <Bio />
       </div>
-      <aside>
-        <BookGrid />
-      </aside>
       <div class="grid grid-cols-3 gap-4 sm:gap-8">
-        <div class="col-span-full md:col-span-2 flex flex-col gap-4">
+        <div class="col-span-full md:col-span-2 flex flex-col gap-8">
           <HomepageSection class="col-span-full md:col-span-2 flex">
             <SectionHeader>
               {visiblePosts.length} Articles 📝
@@ -45,20 +42,23 @@ const visiblePosts = posts
             </SectionHeader>
             <div class="flex flex-col gap-3">
               {
-                visiblePosts.map((post) => {
-                  const banner = post.data.banner;
+                visiblePosts.map(post => {
+                  const banner = post.data.banner
 
-                  const isNew = sub(new Date(), { days: 30 }) < post.data.date;
+                  const isNew = sub(new Date(), { days: 30 }) < post.data.date
 
                   return (
                     <div class:list={["masonry-item"]}>
                       <ArticleLink {...post} isNew={isNew} />
                     </div>
-                  );
+                  )
                 })
               }
             </div>
           </HomepageSection>
+          <aside>
+            <BookGrid />
+          </aside>
         </div>
         <aside class="col-span-full md:col-span-1">
           <SpotifySidebar />

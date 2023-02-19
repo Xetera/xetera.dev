@@ -72,7 +72,7 @@ html.dark {
   color-scheme: dark;
   /* brand dark */
   --brand-rgb-100: 15 17 23;
-  --brand-100: #241319;
+  --brand-100: #380f20;
 
   --brand-rgb-900: 230 0 103;
   --brand-900: rgb(var(--brand-rgb-900));
