@@ -24,8 +24,6 @@ if (Astro.props.article) {
   throw Error("Invalid render condition")
 }
 
-console.log(article)
-
 const { Content } = await article.render()
 ---
 
