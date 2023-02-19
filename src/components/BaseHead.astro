@@ -52,6 +52,7 @@ const { title, description, themeColor } = Astro.props
     } else {
       document.documentElement.classList.remove("dark")
     }
+    localStorage.setItem(THEME_KEY, theme)
   }
 
   export function setThemeDisplay(mode) {
