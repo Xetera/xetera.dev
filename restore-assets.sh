@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-cp -r /opt/build/cache/personal .astro
-cp -r /opt/build/cache/build dist
-chown -R $USER: dist
-chown -R $USER: .astro
+if [ -d "/opt/build/cache/personal" ]; then
+  cp -r /opt/build/cache/build dist
+  chown -R $USER: dist
+fi
+
+if [ -d "/opt/build/cache/personal" ]; then
+  cp -r /opt/build/cache/personal .astro
+  chown -R $USER: .astro
+fi
