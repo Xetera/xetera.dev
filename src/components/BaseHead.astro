@@ -33,7 +33,7 @@ const { title, description, themeColor } = Astro.props
     return modes.includes(input)
   }
 
-  export function getColorMode() {
+  function getColorMode() {
     const preferenceRaw = localStorage.getItem(THEME_KEY)
     const isValid = preferenceRaw && isMode(preferenceRaw)
 
@@ -55,7 +55,7 @@ const { title, description, themeColor } = Astro.props
     localStorage.setItem(THEME_KEY, theme)
   }
 
-  export function setThemeDisplay(mode) {
+  function setThemeDisplay(mode) {
     // if (mode === "system") {
     //   const shouldBeDark = window.matchMedia(
     //     "(prefers-color-scheme: dark)"
@@ -66,7 +66,7 @@ const { title, description, themeColor } = Astro.props
     setKnownTheme(mode === "system" ? "light" : mode)
   }
 
-  export function addThemeChangeListener(f) {
+  function addThemeChangeListener(f) {
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", e => {
