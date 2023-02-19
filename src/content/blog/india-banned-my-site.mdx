@@ -13,14 +13,12 @@ tags:
   - Censorship
   - Investigation
 ---
-import * as React from 'react'
+
+import * as React from "react"
 // import '🧱/article/DiscordProfiles.astro'
 import { Image } from "@astrojs/image/components"
-import { DiscordMessage, DiscordMessages } from "@skyra/discord-components-react"
-
 
 A few days ago I got a ping from one of the moderators in the Top.gg Discord server about something I've never seen happen before.
-
 
 export const marcoProps = {
   username: "marco_rennmaus | Rennmoose2",
@@ -41,6 +39,7 @@ export const dracProps = {
 }
 
 {/* <DiscordMessageContainer mb={6}>
+
   <DiscordMessage
     messages={[
       <DiscordMessageText>
@@ -67,7 +66,10 @@ I'm sorry? Why would a documentation site get banned by the Indian government? S
 <DiscordMessageContainer mb={6}>
   <DiscordMessage
     messages={[
-      <Image src={"/article-assets/india-banned-my-site/proof-original.png"} mb={2} />,
+      <Image
+        src={"/article-assets/india-banned-my-site/proof-original.png"}
+        mb={2}
+      />,
       "any reason why?",
       "you have some expired license for that URL or something?",
     ]}
@@ -80,7 +82,10 @@ I'm sorry? Why would a documentation site get banned by the Indian government? S
     messages={[
       "lemme check with a VPN",
       "huh, weird",
-      <Image src={"/article-assets/india-banned-my-site/proof-xet.png"} mb={2} />,
+      <Image
+        src={"/article-assets/india-banned-my-site/proof-xet.png"}
+        mb={2}
+      />,
       "could be getting caught in a wide net cast on some subdomains",
     ]}
     date="06/28/2021"
@@ -114,7 +119,6 @@ I'm also not convinced this is a global ban. Sure, a documentation site doesn't 
 
 Let's check in with people in a different server.
 
-
 export const windowsUserProps = {
   username: "windows user",
   avatar: "/article-assets/india-banned-my-site/windows-user.png",
@@ -122,7 +126,7 @@ export const windowsUserProps = {
 
 export const skyProps = {
   username: "Sky",
-  avatar:  "/article-assets/india-banned-my-site/sky-avatar.png",
+  avatar: "/article-assets/india-banned-my-site/sky-avatar.png",
   roleColor: "teal.400",
 }
 
@@ -368,7 +372,4 @@ As for the reason for the censor itself, I'm still not sure but my team and I ar
 ## Solution
 
 If you're being affected by this, the easiest solution is to change your DNS server your device or preferably your router uses to <CloudflareDns /> or any other public DNS server that isn't limited by Indian censorship. You do **not** need a VPN as it doesn't seem like the DoT uses packet inspection and relies only on DNS lookups. If you're using GitHub Pages to host your site, switch over to an alternative like [Cloudflare Pages](https://pages.cloudflare.com/) or [Netlify](https://netlify.com) to make sure you don't run into the ~~great~~ mediocre firewall of India.
-*/} 
-
-<script type="module" src="https://unpkg.com/@skyra/discord-components-core"
-></script>
+\*/}

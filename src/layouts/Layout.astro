@@ -1,15 +1,15 @@
 ---
-import "💅/theme.css";
-import "💅/fonts.css";
-import "💅/links.css";
-import "💅/article.css";
-import BaseHead, { Props as BaseHeadProps } from "🧱/BaseHead.astro";
+import "💅/theme.css"
+import "💅/fonts.css"
+import "💅/links.css"
+import "💅/article.css"
+import BaseHead, { Props as BaseHeadProps } from "🧱/BaseHead.astro"
 
 export interface Props extends BaseHeadProps {
-  class?: string;
+  class?: string
 }
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, ...rest } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -18,6 +18,9 @@ const { class: className, ...rest } = Astro.props;
     <BaseHead {...rest} />
   </head>
   <body class:list={["h-full flex bg-body-900 color-text-800", className]}>
+    <script is:inline>
+      0
+    </script>
     <div class="flex flex-col items-center w-full bg-body-900 transition-all">
       <slot />
     </div>
