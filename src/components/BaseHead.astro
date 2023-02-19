@@ -4,6 +4,7 @@ export interface Props {
   description?: string
   themeColor?: string
 }
+
 const { title, description, themeColor } = Astro.props
 ---
 
@@ -21,6 +22,7 @@ const { title, description, themeColor } = Astro.props
   href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;900&display=swap"
   rel="stylesheet"
 />
+<slot name="head" />
 <title>{title}</title>
 <!-- Repeating a little bit of code here to make sure this is inlined properly -->
 <script is:inline>

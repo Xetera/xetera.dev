@@ -9,13 +9,15 @@ export interface Props extends BaseHeadProps {
   class?: string
 }
 
-const { class: className, ...rest } = Astro.props
+const { class: className, component: Component, ...rest } = Astro.props
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead {...rest} />
+    <BaseHead {...rest}>
+      <slot name="head" slot="head" />
+    </BaseHead>
   </head>
   <body class:list={["h-full flex bg-body-900 color-text-800", className]}>
     <script is:inline>

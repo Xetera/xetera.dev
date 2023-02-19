@@ -8,6 +8,7 @@ import Layout from "./Layout.astro"
 type Props = MarkdownLayoutProps<{
   title: string
   date: string
+  banner: { url: string }
   description: string
   tags: string[]
   imageTop?: {
@@ -21,6 +22,14 @@ const { minutesRead } = content
 ---
 
 <Layout title={frontmatter.title} themeColor="#262b3b">
+  <link
+    slot="head"
+    rel="preload"
+    href="/fonts/canela/canela-deck-bold-compressed.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
   <Navbar />
   <article
     class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base"
