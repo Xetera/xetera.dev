@@ -19,9 +19,13 @@ import WideMedia from "🧱/article/WideMedia.astro"
 import WidePicture from "🧱/article/WidePicture.astro"
 import Picture from "🧱/article/Picture.astro"
 
-<a href="https://github.com/xetera/jiu" target="_blank">
-  <Picture
-    aspectRatio="2:1"
+<a
+  href="https://github.com/xetera/jiu"
+  target="_blank"
+  class="external-link w-full"
+>
+  <WidePicture
+    aspectRatio="1024:512"
     widths={[800]}
     class="rounded w-full mx-auto outline outline-1 outline-body-800"
     src={`https://opengraph.githubassets.com/1/Xetera/jiu`}

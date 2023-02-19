@@ -23,13 +23,13 @@ const { title, description, themeColor } = Astro.props
 />
 <title>{title}</title>
 <!-- Repeating a little bit of code here to make sure this is inlined properly -->
-<script type="module" is:inline>
+<script>
   const modes = ["dark", "light", "system"]
 
   const DEFAULT_THEME_MODE = "system"
   const THEME_KEY = "theme"
 
-  function isMode(input) {
+  function isMode(input: string) {
     return modes.includes(input)
   }
 
@@ -46,7 +46,7 @@ const { title, description, themeColor } = Astro.props
     return preference
   }
 
-  function setKnownTheme(theme) {
+  function setKnownTheme(theme: string) {
     if (theme === "dark") {
       document.documentElement.classList.add("dark")
     } else {
@@ -54,7 +54,7 @@ const { title, description, themeColor } = Astro.props
     }
   }
 
-  export function setThemeDisplay(mode) {
+  export function setThemeDisplay(mode: string) {
     if (mode === "system") {
       const shouldBeDark = window.matchMedia(
         "(prefers-color-scheme: dark)"
@@ -65,7 +65,7 @@ const { title, description, themeColor } = Astro.props
     }
   }
 
-  export function addThemeChangeListener(f) {
+  export function addThemeChangeListener(f: (mode: string) => void) {
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", e => {
