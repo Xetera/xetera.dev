@@ -7,12 +7,17 @@
     BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue", sans-serif;
   --font-family-serif: "Canela Text", "Canela Deck", serif;
+  --font-family-serif-title: "Canela Deck", serif;
   --accent-gradient: linear-gradient(
     45deg,
     rgb(var(--accent)),
     #da62c4 30%,
     white 60%
   );
+}
+
+.font-serif-title {
+  font-family: var(--font-family-serif-title);
 }
 
 html {

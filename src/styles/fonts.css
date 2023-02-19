@@ -1,21 +1,14 @@
 @font-face {
   font-family: "Canela Text";
-  src: url("/fonts/canela/CanelaText-Light.woff2");
+  src: url("/fonts/canela/canela-text-light-compressed.woff2") format("woff2");
   font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Canela Text";
-  src: url("/fonts/canela/CanelaText-Regular.woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Canela Deck";
-  src: url("/fonts/canela/CanelaDeck-Bold.woff2");
-  font-weight: 600;
+  src: url("/fonts/canela/canela-deck-bold-compressed.woff2") format("woff2");
+  font-weight: 800;
   font-display: swap;
 }
 
@@ -24,7 +17,7 @@
   font-family: "Jetbrains Mono";
   font-style: normal;
   src: local("JetBrains Mono Regular"), local("JetBrainsMono-Regular"),
-    url("/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2") format("woff2");
+    url("/fonts/jetbrains-mono/regular-compressed.woff2") format("woff2");
   font-display: swap;
 }
 
@@ -33,6 +26,6 @@
   font-family: "Jetbrains Mono";
   font-style: normal;
   src: local("JetBrains Mono Regular"), local("JetBrainsMono-Regular"),
-    url("/fonts/jetbrains-mono/JetBrainsMono-Medium.woff2") format("woff2");
+    url("/fonts/jetbrains-mono/medium-compressed.woff2") format("woff2");
   font-display: swap;
 }
