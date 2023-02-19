@@ -13,11 +13,21 @@ export default unocss({
 		presetUno(),
 		presetTypography({
 			cssExtend: {
+				"pre>code": {
+					"min-width": "max-content",
+					display: "block",
+					"width": "100%"
+				},
 				"pre,code": {
-					"white-space": 'pre-line',
-					"word-break": "break-word",
+					"word-break": "inherit",
+					"white-space": "inherit",
+				},
+				"pre > code": {
+					"word-break": "unset",
 				},
 				code: {
+					"white-space": 'pre-line',
+					"word-break": "break-word",
 					"line-height": "150%",
 				},
 				p: {
