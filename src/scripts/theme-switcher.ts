@@ -42,6 +42,7 @@ export function setThemeDisplay(mode: Mode): void {
 		setKnownTheme(shouldBeDark ? "dark" : "light");
 	} else {
 		setKnownTheme(mode);
+		persistTheme(mode);
 	}
 }
 
