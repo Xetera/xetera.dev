@@ -14,11 +14,12 @@ banner:
 ---
 
 import WideMedia from "🧱/article/WideMedia.astro"
+import WidePicture from "🧱/article/WidePicture.astro"
 import T from "🧱/T.astro"
 import Callout from "🧱/article/Callout.astro"
 import ExternalLink from "🧱/ExternalLink.astro"
 
-export const Toastable = ({ text}) => <span>{text}</span>
+export const Toastable = ({ text }) => <span>{text}</span>
 
 export const Definition = ({ title }) => <span>{title}</span>
 
@@ -52,7 +53,11 @@ As of fairly recently --specifically during the time of the industrial revolutio
 
 <WideMedia caption="A classroom of girls in the Victorian era wishing they could be doing literally anything else right now." >
 
-<img src="/article-assets/why-does-school-suck-so-much/victorian.jpg" alt="victorian girls in captivity" />
+<WidePicture
+  src="/article-assets/why-does-school-suck-so-much/victorian.jpg"
+  alt="victorian girls in captivity"
+  aspectRatio="736:465"
+/>
 
 </WideMedia>
 
@@ -100,9 +105,7 @@ Now in <CurrentYear />, as our global economies are transitioning out of the <Se
 
 Remember when you were a kid and you heard _that_ question? You know the one I'm talking about...
 
-<div
-  class="text-center color-text-900 mb-6 font-black text-lg md:text-xl"
->
+<div class="text-center color-text-900 mb-6 font-black text-lg md:text-xl">
   So Jakey, what do you want to be when you grow up?
 </div>
 
@@ -123,64 +126,11 @@ The bottom line is that school does **absolutely nothing** to expose you to diff
 
 Also, I don't mean valuable knowledge in the same way an annoying middle-schooler would talk about it in science class going:
 
-{/* 
-import { Kekw, Omegalul } from "@src/components/Emotes"
-
-export const kekw = (
-  <Box display="inline" htmlWidth="20px" verticalAlign="top">
-    <Kekw />
-  </Box>
-)
-
-<WhatsappContainer>
-  <WhatsappMessage
-    username="Class clown"
-    other={true}
-    number="+1 (234) 567-8910"
-    color="rgb(230, 159, 115)"
-    time="9:21 AM"
-    messages={[
-      <>
-        Ummm excuse me, Ms. Holloway? When are we ever going to need to know
-        what a shield volcano is outside of this class?{" "}
-        <Box display="inline" htmlWidth="20px" verticalAlign="top">
-          <Omegalul />
-        </Box>
-      </>,
-    ]}
-  />
-  <WhatsappMessage
-    username="D student"
-    number="+123 (456) 689-1011"
-    color="rgb(120, 159, 115)"
-    time="9:21 AM"
-    other={true}
-    messages={[
-      <>
-        {kekw} {kekw} {kekw} {kekw}
-      </>,
-    ]}
-  />
-  <WhatsappMessage
-    username="Detention magnet"
-    number="+1 (234) 567-1234"
-    color="blue.400"
-    time="9:22 AM"
-    other={true}
-    messages={[
-      <>
-        {kekw} {kekw} {kekw}
-      </>,
-    ]}
-  />
-  <WhatsappMessage
-    color="rgb(120, 159, 115)"
-    time="9:22 AM"
-    messages={["I hate this job so much."]}
-  />
-</WhatsappContainer>
-*/}
-I'm referring to the kind of information **YOU** consider to be valuable. Whether that's the knowledge that will help you succeed in life, like writing a good resume, or knowledge you find fun and engaging just for the sake of it. If you want to find something you're interested in pursuing in the long term and you think school is going to help you with that, I have some bad news for you.
+I'm referring to the kind of information **YOU** consider to be valuable. Whether
+that's the knowledge that will help you succeed in life, like writing a good resume,
+or knowledge you find fun and engaging just for the sake of it. If you want to find
+something you're interested in pursuing in the long term and you think school is
+going to help you with that, I have some bad news for you.
 
 All of this happens because there's one important thing that's changed in the last few decades that educational institutions have not managed to keep up with, which is that information is now easily accessible online. The benefits of "giving" someone knowledge aren't as pronounced when you can simply learn those things yourself with little effort. Combined with the increase of the "surface area" of information you need to know, it's clear that students need guidance and mentorship to navigate their way to what will work well for them, not knowledge. You can learn things from anywhere; that's not the issue anymore.
 
@@ -192,108 +142,12 @@ The reason I feel so strongly about this topic is that I know most people --if n
 
 You can see the amazement in people as they realize that learning is an incredible feeling and that **school doesn't have to be synonymous with education**. Unfortunately, that is the way most of us feel, as we get put through this system starting as early as age 5, and it leads to a painful internal conflict for kids who realize the current education system isn't their cup of tea and they don't perform well in school because of it. They often think that they are just too dumb to understand concepts like math and science and arrive at the inevitable conclusion that they don't like <T>learning</T>.
 
-{/* 
-import { ThisArrow } from "@src/components/Emotes"
-
-export const friendProps = {
-  username: "Tzuyu",
-  roleColor: "green.500",
-  date: "2:25 PM",
-  avatar: <TzuyuAvatar />,
-}
-
-<DiscordMessageContainer mb={6}>
-  <DiscordMessage
-    {...friendProps}
-    messages={[
-      "DUDE",
-      <DiscordMessageText>
-        have you seen this guy's videos?{" "}
-        <ExternalLink href="https://www.youtube.com/watch?v=X32dce7_D48">
-          https://www.youtube.com/watch?v=X32dce7_D48
-        </ExternalLink>
-      </DiscordMessageText>,
-      <DiscordMessageText my={3}>
-        <DiscordEmbed
-          color="red.500"
-          top="Youtube"
-          title="Eddie Woo"
-          content={
-            <Link
-              href="https://www.youtube.com/watch?v=X32dce7_D48"
-              color="blue.400"
-            >
-              Why is 0! = 1?
-            </Link>
-          }
-        >
-          <Box
-            as="iframe"
-            borderRadius="md"
-            width="100%"
-            height="315px"
-            src="https://www.youtube-nocookie.com/embed/X32dce7_D48"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
-        </DiscordEmbed>
-      </DiscordMessageText>,
-      "Man if Ms. Connell taught us math like this I would've had a degree in math already",
-    ]}
-    reactions={[{ name: ":this:", reactCount: 2, image: <ThisArrow /> }]}
-  />
-  <DiscordMessage
-    username="Xetera"
-    roleColor="purple.500"
-    date="2:25 PM"
-    avatar={Xetera}
-    messages={["But you don't even have a highschool diploma yet"]}
-  />
-  <DiscordMessage
-    {...friendProps}
-    messages={[
-      "Shut up",
-      "watch the video",
-      <DiscordMessageText>
-        Why does math feel like torture in school when it's so fun on youtube...{" "}
-        <Link href="https://www.youtube.com/watch?v=Kas0tIxDvrg">
-          https://www.youtube.com/watch?v=Kas0tIxDvrg
-        </Link>
-      </DiscordMessageText>,
-      <DiscordMessageText my={3}>
-        <DiscordEmbed
-          color="red.500"
-          top="Youtube"
-          title="3Blue1Brown"
-          content={
-            <Link
-              href="https://www.youtube.com/watch?v=Kas0tIxDvrg"
-              color="blue.400"
-            >
-              Exponential growth and epidemics{" "}
-            </Link>
-          }
-        >
-          <Box
-            as="iframe"
-            borderRadius="md"
-            width="100%"
-            height="315px"
-            src="https://www.youtube-nocookie.com/embed/Kas0tIxDvrg"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
-        </DiscordEmbed>
-      </DiscordMessageText>,
-    ]}
-  />
-</DiscordMessageContainer>
-*/}
-Obviously this isn't specific to YouTube, but there's clearly something about this style of learning and exposure of new concepts that touches people's hearts to the point where those who don't see themselves as an average school fan find themselves to be an average YouTube enjoyer. So what is it about this medium that feels so different from school? Let's look at that question by exploring the differences between what it means to be educator in the school system vs online media.
+Obviously this isn't specific to YouTube, but there's clearly something about
+this style of learning and exposure of new concepts that touches people's hearts
+to the point where those who don't see themselves as an average school fan find themselves
+to be an average YouTube enjoyer. So what is it about this medium that feels so different
+from school? Let's look at that question by exploring the differences between what
+it means to be educator in the school system vs online media.
 
 ### Educational Differences
 
@@ -302,6 +156,7 @@ YouTube forces content creators to compete for your attention at any given momen
 Teaching online is also difficult work, and naturally, the people who choose to go through with it are those who have a special knack for teaching and content creation. I can only think of a single one of my college professors who could even imagine of doing what they do at school on the internet where you have to actually be good at explaining ideas to see any amount of success.
 
 {<Callout>
+
   <p class="color-text-400">
     Shoutout to my man Henry Carnie, one of the only college professors I had who was actually good at what he does and got me interested in History.
   </p>
@@ -310,38 +165,6 @@ Teaching online is also difficult work, and naturally, the people who choose to 
 Things go a little differently for formal education.
 
 First, society expects you to attend school. <T>Don't believe me?</T> What's the kind of reaction do you think you get after you tell a family member that you don't want to go to university?
-
-{/* <WhatsappContainer>
-  <WhatsappMessage
-    other={false}
-    number="+1 (234) 567-8910"
-    time="10:21 PM"
-    messages={[
-      "Hey auntie, I decided to drop out of school, it just wasn't for me.",
-    ]}
-  />
-  <WhatsappMessage
-    username="Sophie"
-    other={true}
-    number="+い (四八八) 九二三一五"
-    color="rgb(230, 159, 115)"
-    time="10:22 PM"
-    wrapFirst
-    messages={[
-      "WHAT? Why?",
-      "Have you told your mom yet?",
-      "What are you gonna do now?",
-      "Did we pay for your highschool just so you can drop out of college?",
-      "I can't believe you'd be so irresponsible",
-    ]}
-  />
-  <WhatsappMessage
-    other={false}
-    time="10:24 PM"
-    messages={["Ok good talk", "bye"]}
-  />
-</WhatsappContainer> */}
-
 
 You need a reason to choose not to go to school, and a good one at that too. That's an <T>incredible</T> leverage for educational institutions. For that reason, schools have to do relatively little to ensure that new students keep coming in year after year in terms of enticing students other than existing in a convenient physical location and not having a bad reputation.
 
@@ -360,15 +183,15 @@ This stark contrast between the two types of education goes a long way to explai
 I can assure you that schools have done less to drive interest in civil engineering on a per-capita basis than this YouTube channel has. These viewers and educators are the ones who will be leading the slow transformation of the education standards around the world in the next 50 years.
 
 <WideMedia>
-<iframe
-  width="560"
-  height="315"
-  src="https://www.youtube-nocookie.com/embed/yZwfcMSDBHs"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-></iframe>
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube-nocookie.com/embed/yZwfcMSDBHs"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
 </WideMedia>
 
 As some final thoughts, if you're still in school, I highly encourage you to do your best to explore different fields you might be interested in by yourself instead of waiting for school to do it for you. One of the most liberating feelings in the world is knowing that you can learn anything you need without being dependent on someone teaching you the curriculum. When you have the freedom to explore the things <T>you</T> like, learning no longer becomes a chore.
@@ -378,6 +201,7 @@ If you know you like eating fish, don't wait for someone to give you a fish or t
 import { RiChat1Fill } from "react-icons/ri/index.js"
 
 {<Callout icon={<RiChat1Fill />} title="Footnote">
+
   <p text="color-text-300">
     Try to take what I've written here with a grain of salt. I never finished my
     degree and I'm obviously projecting my own experiences in the education

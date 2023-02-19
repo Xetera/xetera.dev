@@ -1,0 +1,35 @@
+---
+import { Picture } from "@astrojs/image/components"
+
+interface Props {
+  src: string
+  aspectRatio: number | `${number}:${number}`
+  alt: string
+  noBorder?: boolean
+}
+
+const { props } = Astro
+---
+
+<Picture
+  src={props.src}
+  widths={[800, 500]}
+  class:list={[
+    "h-full w-full",
+    !props.noBorder && "outline outline-1 outline-body-800 rounded",
+  ]}
+  style={{
+    aspectRatio:
+      typeof props.aspectRatio === "string"
+        ? props.aspectRatio.replace(":", "/")
+        : props.aspectRatio,
+    maxWidth:
+      typeof props.aspectRatio === "string"
+        ? `${props.aspectRatio.split(":")[0]}px`
+        : "100%",
+  }}
+  sizes="(min-width: 500px) 800px, 500px"
+  background="white"
+  aspectRatio={props.aspectRatio}
+  alt={props.alt}
+/>

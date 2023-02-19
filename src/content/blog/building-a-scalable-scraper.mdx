@@ -13,10 +13,11 @@ banner:
   aspectRatio: "4:7"
 ---
 
-import Caption from "🧱/Caption.astro";
-import T from "🧱/T.astro";
-import WideMedia from "🧱/article/WideMedia.astro";
-import { Picture } from "@astrojs/image/components";
+import Caption from "🧱/Caption.astro"
+import T from "🧱/T.astro"
+import WideMedia from "🧱/article/WideMedia.astro"
+import WidePicture from "🧱/article/WidePicture.astro"
+import Picture from "🧱/article/Picture.astro"
 
 <a href="https://github.com/xetera/jiu" target="_blank">
   <Picture
@@ -33,7 +34,7 @@ I decided to solve this with what I know best, a scraper that I named **Jiu** af
 
 Normally this kind of image retrieval task is trivial to work with if all you need to check is a handful of pages on a single site. It's nothing more than a <T>for</T> loop, some database lookups, and a bunch of HTTP requests. But I was planning on scraping many websites, which meant the solution had to be easily extendable to support new sites. I also had to consider another thing, which is that I don't wanna like... be an asshole? I don't like it when devs carelessly hammer my website with requests. So given the nature of what I'm doing, it would be pretty hypocritical of me to try to do the same for others. This meant that while working on this service, I first had to exhaust all of the "good guy" workarounds before I moved on to less-friendly measures like rotating IPs and pretending to be a real user with puppeteer.
 
-{/* <Caption>Also, proxies that work well are expensive, and I'm cheap</Caption> */}
+{<Caption>Also, proxies that work well are expensive, and I'm cheap</Caption>}
 
 This project was originally meant to be a part of Kiyomi, but I figured the problem of finding images online was generic enough that it could be <a href="https://github.com/xetera/jiu" target="_blank">its own standalone thing</a>. Solving some of these problems has been incredibly fun and a huge learning process for me, so I'd like to document at least some of the ways I dealt with them.
 
@@ -42,14 +43,20 @@ This project was originally meant to be a part of Kiyomi, but I figured the prob
 This isn't crucial to understanding the problem, but I want to share the infrastructure Jiu sits on top of because it could provide important context. Also, I spent a lot of time working on this and drawing the diagram for it, so I'm going to need someone to look at it.
 
 <WideMedia contain caption="Kiyomi architecture map">
-
-<img src="/article-assets/building-a-scalable-scraper/kiyomi_arch.png" />
-
+  <WidePicture
+    src="/article-assets/building-a-scalable-scraper/kiyomi_arch.png?aspectRatio=2"
+    alt="kiyomi architecture map"
+    aspectRatio="1760:896"
+  />
 </WideMedia>
 
 New images Jiu finds on supported sites are stored in a database isolated from every other service and get published to RabbitMQ for consumers to do whatever with. Jiu also runs its own webserver to allow dynamically adding and removing new providers, querying the stats of scrapes, and displaying its schedule/history.
 
-![](/article-assets/building-a-scalable-scraper/scrape_schedule.png)
+<WidePicture
+  src="/article-assets/building-a-scalable-scraper/scrape_schedule.png"
+  alt="scrape schedule"
+  aspectRatio="1154:842"
+/>
 
 The requirements for building this scraper are:
 
@@ -64,29 +71,23 @@ The requirements for building this scraper are:
 
 ## I am scraping respectfully
 
-{/*
-
-<img
-  as="img"
-  mt={2}
-  ml={4}
-  mb={[4, null, "unset"]}
-  float={["unset", null, "right"]}
-  src="https://i.kym-cdn.com/photos/images/original/001/936/074/bb8.png"
-  width="120px"
-/>
-
-*/}
-
 The easiest way to prevent spamming a server with requests is to just not send it many requests, duh. This is an obvious one, but it's something that works surprisingly well for what we're building. Because the point of Jiu is to <span color="green.400" text="eventually">It's pronounced "eventual consistency", not "wow this program is so slow wtf?"</span> detect all images posted on social media and not as soon as possible. We can use this to our advantage when deciding the architecture of the scraper.
 
 A common way of implementing these scrapers is something commonly referred to as a monitor. A monitor takes one or a handful of critical pages and bombards it with requests to detect a change as soon as possible.
 
-![monitor](/article-assets/building-a-scalable-scraper/monitor.png)
+<Picture
+  src="/article-assets/building-a-scalable-scraper/monitor.png"
+  alt="monitor"
+  aspectRatio="551:539"
+/>
 
 This is useful for reacting to changes made in a website quickly, but it's not that important for this specific use case. Instead, the goal here is to detect changes across <T>every</T> social media account that posts about Kpop, but in a sustainable way (aka slowly). So we want the same volume of requests, just spread out thinner over time and across significantly more pages.
 
-![slow monitor](/article-assets/building-a-scalable-scraper/slow_monitor.png)
+<Picture
+  alt="slow monitor"
+  aspectRatio="551:551"
+  src="/article-assets/building-a-scalable-scraper/slow_monitor.png"
+/>
 
 ## Priority
 
@@ -105,17 +106,20 @@ At the start of the day, a database that looks like the following will get these
 | C             | 0.5      | 2.5    |
 
 <WideMedia contain caption="Example list of scheduled scrapes">
-
-<img src="/article-assets/building-a-scalable-scraper/bad_distribution.png" />
-
+  <WidePicture
+    src="/article-assets/building-a-scalable-scraper/bad_distribution.png"
+    aspectRatio="1667:319"
+  />
 </WideMedia>
 
 After every successful scrape, the next priority of the provider is calculated by getting the latest scrape result + the past 30 scrapes, and summing up the amount of images it found per check, weighed by how long ago the scrape was from the current day.
 
 <WideMedia contain caption="Example list of scheduled scrapes">
 
-<img src="/article-assets/building-a-scalable-scraper/priority_graph.png" />
-
+<WidePicture
+  src="/article-assets/building-a-scalable-scraper/priority_graph.png"
+  aspectRatio="1776:736"
+/>
 </WideMedia>
 
 This makes sure that an inactive account that starts to post images gets a higher bump in priority, and an active account that stops posting images gets knocked down an equivalent amount.
@@ -128,7 +132,10 @@ Once all the tasks that need to run within the next 24 hours are identified, the
 
 That day's worth of pending requests need to be grouped by their provider type --think Instagram, Twitter, etc.-- and scheduled in an evenly-spaced manner using a linear interpolation between <T>NOW()</T> and <T>NOW() + 24 hours</T>
 
-![](/article-assets/building-a-scalable-scraper/task_distribution.png)
+<Picture
+  src="/article-assets/building-a-scalable-scraper/task_distribution.png"
+  aspectRatio="987:799"
+/>
 
 ```css
 /* scheduling algorithms be like */
@@ -142,15 +149,27 @@ This method of scheduling ensures that pages on different domains that don't sha
 
 With what we know now, let's take another look at the scheduled tasks from last time and imagine each letter is an individual Twitter page, each scheduled to get processed at an even interval after the other.
 
-![example of a list of scheduled scrapes](/article-assets/building-a-scalable-scraper/bad_distribution.png)
+<WideMedia>
+  <WidePicture
+    alt="example of bad distribution"
+    src="/article-assets/building-a-scalable-scraper/bad_distribution.png"
+    aspectRatio="1658:305"
+  />
+</WideMedia>
 
-<Caption>Can you spot the inefficiency here?</Caption>{" "}
+{<Caption>Can you spot the inefficiency here?</Caption>}
 
 We're scheduling the same page to be scraped multiple times right after each other. We're making sure to space the scrapes within the same provider evenly but leaving uneven spaces between repeated scrapes.
 
 The correct order of the tasks should be more like this:
 
-![example of well-spaced provider distribution](/article-assets/building-a-scalable-scraper/good_distribution.png)
+<WideMedia>
+  <WidePicture
+    src="/article-assets/building-a-scalable-scraper/good_distribution.png"
+    alt="example of well-spaced provider distribution"
+    aspectRatio="1658:305"
+  />
+</WideMedia>
 
 For this reason, Jiu tries its best to maximize the spacing between requests going to the same endpoint so that there's enough time for content to update.
 
@@ -162,18 +181,18 @@ Another unfortunate problem that must be dealt with is that not every single web
 
 Now, I know that reverse engineering and using a private API for fetching data and going outside the boundaries of what a site thinks is acceptable kind of contradicts wanting to be nice to websites and not spamming them. But using official APIs can get us rate-limited quickly, even with large gaps in requests. I'm going out of my way to be careful with the sites I'm scraping, so I deserve this. Besides, I know what's best for Twitter more than Twitter knows what's best for herself, and I promise I will treat her like the queen she is if she just gives me a chance.
 
-import NiceGuy from "/article-assets/building-a-scalable-scraper/nice_guy.mp4";
+import NiceGuy from "/article-assets/building-a-scalable-scraper/nice_guy.mp4"
 
 <video controls maxH="600px" margin="0 auto" mb={3}>
   <source src={NiceGuy} />
 </video>
 
-{/* <Caption>
+{<Caption>
 
   <a href="https://vm.tiktok.com/ZM83u526w/" target="_blank" fontSize="14px">
     context
   </a>
-</Caption> */}
+</Caption>}
 
 ## Architecture and Code
 
@@ -188,36 +207,36 @@ class Provider {
   constructor(public siteName: string) {}
 
   async scrape(url: string): Promise<Image[]> {
-    const images = await this.request(url);
-    return this.extractAllImages(images);
+    const images = await this.request(url)
+    return this.extractAllImages(images)
   }
 }
 ```
 
-{/* <Caption>
+{<Caption>
 Try to use your imagination for the functions I haven't defined
 
-</Caption> */}
+</Caption>}
 
 We should now account for the possibility that this is the first time we're gathering data from that page and haven't seen any images. We need to add a pagination concept so our scraper can go through the page history and grab everything.
 
 ```ts {h:"3-16"}
 class Provider {
   async scrape(url: string): Promise<Image[]> {
-    let target = url;
-    const images: Image[] = [];
+    let target = url
+    const images: Image[] = []
     while (true) {
-      const response = await this.request(target);
-      const pagination = this.getPagination(response);
-      images.push(this.extractAllImages(response));
+      const response = await this.request(target)
+      const pagination = this.getPagination(response)
+      images.push(this.extractAllImages(response))
       if (pagination.hasNextPage) {
         // turns ?page=1 into ?page=2
-        target = this.getNextPage(target);
+        target = this.getNextPage(target)
       } else {
-        break;
+        break
       }
     }
-    return images;
+    return images
   }
 }
 ```
@@ -227,26 +246,26 @@ Now we have a way of getting all images from a website. Except, with this approa
 ```ts {h:"8-14"}
 class Provider {
   async scrape(url: string, seen: string[]): Promise<Image[]> {
-    let target = url;
-    const images: Image[] = [];
+    let target = url
+    const images: Image[] = []
     while (true) {
-      const response = await this.request(target);
-      const pagination = this.getPagination(response);
-      const found = this.extractAllImages(response);
-      const unseen = this.allUnseenImages(found, seen);
-      images.push(unseen);
+      const response = await this.request(target)
+      const pagination = this.getPagination(response)
+      const found = this.extractAllImages(response)
+      const unseen = this.allUnseenImages(found, seen)
+      images.push(unseen)
       if (unseen.length !== found.length) {
         // some of the images we scraped were seen before
-        break;
+        break
       }
       if (pagination.hasNextPage) {
         // turns ?page=1 into ?page=2
-        target = this.getNextPage(target);
+        target = this.getNextPage(target)
       } else {
-        break;
+        break
       }
     }
-    return images;
+    return images
   }
 }
 ```
@@ -272,16 +291,16 @@ Let's call the new class that will decouple that logic `Scraper`, and clean up t
 ```ts
 class Scraper {
   async scrape(provider: Provider, url: string): Promise<Image[]> {
-    const seen = await this.getLatestResultsFor(provider);
-    const found = await provider.process(url);
-    return provider.allUnseenImages(found, seen);
+    const seen = await this.getLatestResultsFor(provider)
+    const found = await provider.process(url)
+    return provider.allUnseenImages(found, seen)
   }
 }
 
 class Provider {
   async process(url: string): Promise<Image[]> {
-    const response = await this.request(target);
-    return this.extractAllImages(response);
+    const response = await this.request(target)
+    return this.extractAllImages(response)
   }
 }
 ```
@@ -293,58 +312,79 @@ This works well for checking images. We can do something similar to re-implement
 ```ts
 class Scraper {
   async scrape(provider: Provider, url: string): Promise<Image[]> {
-    const seen = await this.getLatestResultsFor(provider);
+    const seen = await this.getLatestResultsFor(provider)
     // undefined in the initial iteration
-    let pagination: Pagination | undefined;
-    let images: Image[] = [];
+    let pagination: Pagination | undefined
+    let images: Image[] = []
     while (true) {
-      const result = await provider.process(url, pagination);
-      const unseen = provider.allUnseenImages(found, seen);
-      images.push(unseen);
+      const result = await provider.process(url, pagination)
+      const unseen = provider.allUnseenImages(found, seen)
+      images.push(unseen)
       if (unseen.length !== result.images.length) {
-        break;
+        break
       }
       if (result.nextPage) {
-        pagination = result.nextPage;
+        pagination = result.nextPage
       } else {
-        break;
+        break
       }
     }
-    return images;
+    return images
   }
 }
 
 type Pagination =
   | { type: "cursor"; id: string }
-  | { type: "page"; index: number };
+  | { type: "page"; index: number }
 
-type ProviderResult = { images: Image[]; nextPage?: Pagination };
+type ProviderResult = { images: Image[]; nextPage?: Pagination }
 
 class Provider {
   async process(url: string, pagination?: Pagination): Promise<ProviderResult> {
-    const target = this.buildUrlWithPagination(url, pagination);
-    const response = await this.request(target);
-    const images = this.extractAllImages(response);
-    const nextPage = this.extractNextPage(response);
+    const target = this.buildUrlWithPagination(url, pagination)
+    const response = await this.request(target)
+    const images = this.extractAllImages(response)
+    const nextPage = this.extractNextPage(response)
 
-    return { images, nextPage };
+    return { images, nextPage }
   }
 }
 ```
 
-This approach works perfectly! Though, the observant functional programmers <img verticalAlign="baseline" alt="among us" display="inline-block" src={"/article-assets/building-a-scalable-scraper/amogu.png"} w="75px" /> may have noticed that the thing we're doing here looks awfully similar to <T>array.reduce</T>. We're going through a loop and feeding the result of a function call in one iteration (in our case, pagination) back into the function called in the next iteration, much like reduce. It could be useful to re-package iteration logic with a functional helper if it makes things easier to reason about.
+This approach works perfectly! Though, the observant functional programmers
+
+<WidePicture
+  noBorder
+  alt="among us"
+  aspectRatio="505:131"
+  src={"/article-assets/building-a-scalable-scraper/amogu.png"}
+/>
+
+may have noticed that the thing we're doing here looks awfully similar to <T>array.reduce</T>. We're going through a loop and feeding the result of a function call in one iteration (in our case, pagination) back into the function called in the next iteration, much like reduce. It could be useful to re-package iteration logic with a functional helper if it makes things easier to reason about.
 
 As a refresher, `reduce` (also referred to as `fold` in some languages) works by doing something like the following, where it takes an <T>A'</T>, an array of values, and produces <T>E'</T> as an output.
 
-![a diagram explaining how fold/reduce works](/article-assets/building-a-scalable-scraper/reduce.png)
+<WideMedia>
+  <WidePicture
+    src="/article-assets/building-a-scalable-scraper/reduce.png"
+    aspectRatio="1467:472"
+    alt="a diagram explaining how fold/reduce works"
+  />
+</WideMedia>
 
 export const Light = ({ children }) => (
   <span class="color-text-400">{children}</span>
-);
+)
 
 But this doesn't quite work for us. We have an initial seed value of a URL, yes. But we don't have an array of things we can go over. Instead we want to <T>create</T> that array of things <Light>(image URLs)</Light> as a result of repeatedly applying a function <Light>(scrape)</Light> on something <Light>(pagination)</Light>. Almost like a fold, but the other way around. Thankfully the thing we're looking for here is a well-known concept like `fold` and is unsurprisingly called `unfold`.
 
-![a diagram explaining how unfold works](/article-assets/building-a-scalable-scraper/unfold.png)
+<WideMedia>
+  <WidePicture
+    src="/article-assets/building-a-scalable-scraper/unfold.png"
+    aspectRatio="1586:409"
+    alt="a diagram explaining how unfold works"
+  />
+</WideMedia>
 
 We start with an initial value <T>A'</T> and produce two outputs, one as the value that will be "pushed" into an array and the other which will get passed as an argument into the next iteration.
 
@@ -353,14 +393,14 @@ class Scraper {
   scrape(provider: Provider, url: string): AsyncGenerator<Image[]> {
     // initial value is `undefined` beceause
     // the first scrape has no pagination
-    return unfold(undefined, async (pagination) => {
-      const result = await provider.process(url, pagination);
+    return unfold(undefined, async pagination => {
+      const result = await provider.process(url, pagination)
       if (result.nextPage) {
-        return next(result.images, result.nextPage);
+        return next(result.images, result.nextPage)
       } else {
-        return stop(result.images);
+        return stop(result.images)
       }
-    });
+    })
   }
 }
 ```
@@ -370,18 +410,18 @@ The hypothetical <T>stop</T> function here lets us signal the unfold to stop ear
 This approach to iteration lets us decouple logic even further. Unlike `fold` which reduces an iterable into a single value synchronously, `unfold` generates an array of values. If the operation that is being run to generate values is asynchronous, that array can also be represented as an <T>infinite stream</T> of values that a consumer can stop generating at any point. [Async iterators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) are great for doing this in Javascript.
 
 ```ts
-const seen = await getLatestResultsFor(provider);
+const seen = await getLatestResultsFor(provider)
 for await (const images of scraper.scrape(provider, url)) {
-  const unseen = scraper.getUnseenImages(images, seen);
+  const unseen = scraper.getUnseenImages(images, seen)
   if (unseen.length !== images.length) {
     // scraping stops here because the generator
     // is no longer being consumed
-    break;
+    break
   }
-  await processImages(unseen);
+  await processImages(unseen)
   // delay the next iteration of the scrape
   // for 1 second
-  await sleep(1000);
+  await sleep(1000)
 }
 ```
 
@@ -392,48 +432,48 @@ Error handling and other related things can also be done now by enriching the re
 ```ts
 type ProcessResult =
   | { type: "success"; result: ProviderResult }
-  | { type: "error"; response: Response };
+  | { type: "error"; response: Response }
 
 type ErrorHandle =
   | { type: "tryAgain" }
   | { type: "tryAuth" }
-  | { type: "cantContinue"; reason: Error };
+  | { type: "cantContinue"; reason: Error }
 
 async function iterate(pagination?: Pagination) {
-  const process = await provider.process(url, pagination);
+  const process = await provider.process(url, pagination)
   if (process.error) {
-    const decision: ErrorHandle = await provider.onError(process.response);
+    const decision: ErrorHandle = await provider.onError(process.response)
     switch (decision.type) {
       case "tryAgain":
         // retry logic with an unfold is nothing
         // more than recursion
-        return iterate(pagination);
+        return iterate(pagination)
       case "tryAuth":
-        await provider.authenticate();
-        return iterate(pagination);
+        await provider.authenticate()
+        return iterate(pagination)
       case "cantContinue":
         // handle errors here :)
-        return stop([]);
+        return stop([])
     }
   }
-  const { images, nextPage } = process.result;
+  const { images, nextPage } = process.result
   if (nextPage) {
-    return next(images, nextPage);
+    return next(images, nextPage)
   } else {
-    return stop(images);
+    return stop(images)
   }
 }
 
 // inside scraper
-return unfold(undefined, iterate);
+return unfold(undefined, iterate)
 ```
 
 Now, adding new providers is simple. It requires no duplication of control flow and not even a class. All that's needed is some object that satisfies an interface. Notice how even with a function like `onError`, we are simply taking a response as input and returning <T>a decision</T> as a response, not performing an action. This framework allows the gears of `Scraper` and `Provider` to turn together without stepping over each other's toes. Providers only know how to go, and scrapers only know how to tell providers to go.
 
 ```ts
 interface Provider {
-  process(url: string, pagination?: Pagination): Promise<ProviderResult>;
-  onError(response: Response): Promise<ErrorHandle>;
+  process(url: string, pagination?: Pagination): Promise<ProviderResult>
+  onError(response: Response): Promise<ErrorHandle>
   // any other functionality that could be customizable per site
 }
 ```
@@ -445,5 +485,3 @@ I've skipped over how further implementation details of providers, persistence, 
 There are a couple more intriguing things I've come across while working on Kiyomi that I want to write about, like perceptual hashing and face recognition, but those will have to wait until I actually have any idea what I'm doing with them.
 
 Here's <a href="https://github.com/Xetera/jiu" target="_blank">Jiu</a> if you're interested, and <a href="https://kiyomi.io" target="_blank">Kiyomi</a>.
-
-hi [test](https://google.com)

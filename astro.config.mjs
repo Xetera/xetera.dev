@@ -9,16 +9,20 @@ import react from "@astrojs/react";
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
+import m2dx from "astro-m2dx"
 
+/** @type {import('astro-m2dx').Options} */
+const m2dxOptions = {
+  normalizePaths: true,
+  exportComponents: true,
+  unwrapImages: true,
+};
 
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL,
   markdown: {
-    // remarkRehype: {
-
-    // },
-    remarkPlugins: [remarkReadingTime, rehypeSlug, rehypeAutolinkHeadings, rehypeExternalLinks],
+    remarkPlugins: [[m2dx, m2dxOptions], remarkReadingTime, rehypeSlug, rehypeAutolinkHeadings, rehypeExternalLinks],
     extendDefaultPlugins: true,
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
