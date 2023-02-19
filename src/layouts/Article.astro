@@ -1,23 +1,23 @@
 ---
-import "💅/article.css";
-import PostHeader from "🧱/article/PostHeader.astro";
-import Navbar from "🧱/Navbar.astro";
-import type { MarkdownLayoutProps } from "astro";
-import Layout from "./Layout.astro";
+import "💅/article.css"
+import PostHeader from "🧱/article/PostHeader.astro"
+import Navbar from "🧱/Navbar.astro"
+import type { MarkdownLayoutProps } from "astro"
+import Layout from "./Layout.astro"
 
 type Props = MarkdownLayoutProps<{
-  title: string;
-  date: string;
-  description: string;
-  tags: string[];
+  title: string
+  date: string
+  description: string
+  tags: string[]
   imageTop?: {
-    src: string;
-    opacity?: number;
-  };
-}>;
+    src: string
+    opacity?: number
+  }
+}>
 
-const { frontmatter, content } = Astro.props;
-const { minutesRead } = content;
+const { frontmatter, content } = Astro.props
+const { minutesRead } = content
 ---
 
 <Layout title={frontmatter.title} themeColor="#262b3b">

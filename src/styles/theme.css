@@ -129,12 +129,3 @@ html.dark {
     --highlight: color(display-p3 1 1 0.13);
   }
 }
-
-/* opting the user out of animations on reduced motion */
-@media (prefers-reduced-motion) {
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation: none !important;
-  }
-}

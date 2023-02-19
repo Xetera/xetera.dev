@@ -3,6 +3,7 @@ layout: "🗺️/Article.astro"
 title: "🖼️ Optimizing images with WebP in Node.js"
 date: "2021-04-04"
 description: "Use ffmpeg to improve your images but watch out for one thing..."
+slug: "optimizing-images-with-webp"
 banner:
   url: "/article-assets/converting-webp/banner.png"
   aspectRatio: "2:3"
@@ -11,8 +12,8 @@ tags:
   - Bug
 ---
 
-import { Picture } from "@astrojs/image/components";
-export const Toastable = ({ text }) => <span>{text}</span>;
+import { Picture } from "@astrojs/image/components"
+export const Toastable = ({ text }) => <span>{text}</span>
 
 export const ExampleImage = ({ title, text, size, children, src }) => {
   return (
@@ -35,8 +36,8 @@ export const ExampleImage = ({ title, text, size, children, src }) => {
       </div>
       <p class="m-0 p-4 leading-relaxed text-lg">{text}</p>
     </article>
-  );
-};
+  )
+}
 
 If you're going to be accepting and serving images in your webserver, it's a good idea to make sure they don't take up HUGE amounts of space. Storage doesn't grow on trees you know. A portion of what makes images take up a lot of space is its quality, images that look better take more space than those that look 💩.
 
@@ -70,7 +71,7 @@ export const Reduction = () => (
     The example image is optimized to load faster on your browser. These values
     are from the raw images that were used.
   </Toastable>
-);
+)
 
 Can you see the difference? I sure can't. Try opening them in a new tab and zoom in, it's still not noticeable. The conversion from Png WebP here is saving us that many bytes which makes the image load faster. That's a <Reduction /> for free.
 
@@ -94,7 +95,7 @@ export const Jpeg = () => (
   <Toastable text="Jpeg" class="text-green-300">
     JPEG and JPG refer to the exact same file type, just with different names.
   </Toastable>
-);
+)
 
 Nothing too fancy here, we're simply setting `image.png` as the input file and turning it into a `image.jpeg`. Ffmpeg is able to infer that we want a <Jpeg /> output We can also pass in any kind of option we want. If we're converting to WebP, we can control the quality of the resulting file through these options.
 
@@ -107,39 +108,39 @@ This will produce a fairly low quality but an amazingly small webp version of ou
 CLI programs can be a bit of a pain to run so let's jump on fluent-ffmpeg which is a more convenient version of the api.
 
 ```ts {title: "lib/image.ts", lines:true}
-import ffmpeg from "fluent-ffmpeg";
-import * as fs from "fs";
-import { Readable } from "stream";
+import ffmpeg from "fluent-ffmpeg"
+import * as fs from "fs"
+import { Readable } from "stream"
 
 function convertImage(imagePath: string, outputName: string) {
-  ffmpeg().input(image).saveToFile(outputName);
+  ffmpeg().input(image).saveToFile(outputName)
 }
 
-convertImage("./image.png", "./image.webp");
+convertImage("./image.png", "./image.webp")
 ```
 
 This produces the same output as the one above, but it's not very practical, let's look at an express example where a user uploads an image using `multipart/form-data`.
 
 ```ts {lines: true}
-import express from "express";
-import multer from "multer";
-import fs from "fs/promises";
-import { convertImage } from "./lib/image";
+import express from "express"
+import multer from "multer"
+import fs from "fs/promises"
+import { convertImage } from "./lib/image"
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "uploads/" })
 
-const app = express();
+const app = express()
 
 app.post("/profile", upload.single("avatar"), async (req, res, next) => {
-  convertImage(req.file.path, "./image.webp");
+  convertImage(req.file.path, "./image.webp")
   // image.webp is now available on disk
-});
+})
 ```
 
 That's it, that's all you need to convert images to webp, wasn't so problematic was it? Except there's a problem, this method of doing conversions is extremely inefficient. We're writing the original file to disk first even though we just end up reading it again right afterwards. Thankfully multer allows only saving things in memory without writing to disk with the following.
 
 ```ts {lang:false}
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage() })
 ```
 
 <p class="text-sm leading-7">
@@ -162,37 +163,37 @@ In english terms that's equivalent to
 In fluent-ffmpeg, doing this kind of piping requires the input to be a `ReadableStream`. The conversion between Buffers and Streams is a bit hacky and it involves manually disabling some internal methods but it's doable and works just fine.
 
 ```ts {title: "lib/image.ts", lines:true}
-import { Readable } from "stream";
+import { Readable } from "stream"
 
 function convertImage(image: Readable, outputName: string) {
-  ffmpeg().input(image).saveToFile(outputName);
+  ffmpeg().input(image).saveToFile(outputName)
 }
 
 export function bufferToStream(buffer: Buffer): Readable {
-  const readable = new Readable();
-  readable._read = () => {};
-  readable.push(buffer);
-  readable.push(null);
-  return readable;
+  const readable = new Readable()
+  readable._read = () => {}
+  readable.push(buffer)
+  readable.push(null)
+  return readable
 }
 ```
 
 this now lets us patch the previous function like so.
 
 ```ts {lines: true}
-import express from "express";
-import multer from "multer";
-import { bufferToStream, convertImage } from "./lib/image";
+import express from "express"
+import multer from "multer"
+import { bufferToStream, convertImage } from "./lib/image"
 
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage() })
 
-const app = express();
+const app = express()
 
 app.post("/profile", upload.single("avatar"), async (req, res, next) => {
-  const stream = bufferToStream(req.file.buffer);
-  convertImage(stream, "./image.webp");
+  const stream = bufferToStream(req.file.buffer)
+  convertImage(stream, "./image.webp")
   // image.webp is now available on disk
-});
+})
 ```
 
 This method works pretty well but we still have the same issue on the _other end_. We're saving an image to disk but often we want to do something like upload it to S3 or save it somewhere else and writing the image to a file ends up being a pointless operation that takes time and resources. For this example we're going to pretend we want an output we can pass along to the AWS sdk to upload on S3 instead of saving on disk. https://wasabi.com is a great service for this.
@@ -200,15 +201,15 @@ This method works pretty well but we still have the same issue on the _other end
 Thankfully, ffmpeg allows outputting a stream just as it allows for a stream input. To do that we will use a `PassThrough` stream which, as the name states, just passes the stream through. We use this to capture the output of the conversion.
 
 ```ts {title: "lib/image.ts", lines:true}
-import { Readable, PassThrough } from "stream";
+import { Readable, PassThrough } from "stream"
 
 function convertImage(image: Readable, outputFormat: string) {
-  const passthrough = new PassThrough();
+  const passthrough = new PassThrough()
   ffmpeg()
     .input(image)
     .outputFormat(outputFormat)
-    .stream(passthrough, { end: true });
-  return passthrough;
+    .stream(passthrough, { end: true })
+  return passthrough
 }
 ```
 
@@ -218,10 +219,10 @@ For testing purposes, we can try writing this to a file manually.
 
 ```ts {lines:true}
 app.post("/profile", upload.single("avatar"), (req, res, next) => {
-  const stream = bufferToStream(req.file.buffer);
-  const output = convertImage(stream, "webp");
-  output.pipe(fs.createWriteStream("./image.webp"));
-});
+  const stream = bufferToStream(req.file.buffer)
+  const output = convertImage(stream, "webp")
+  output.pipe(fs.createWriteStream("./image.webp"))
+})
 ```
 
 Aaand it work- wait... what the hell is this?
@@ -267,29 +268,29 @@ This bug isn't the end of the world for us though. We can fix it by simply movin
 One problem we run into when implementing this fix is that streams are not directly editable and we have to consume the entire stream first and then concat the chunks into a single buffer before we can start picking apart the bytes.
 
 ```ts {title: "lib/image.ts", lines:true}
-import { Readable, PassThrough } from "stream";
+import { Readable, PassThrough } from "stream"
 
 function convertImage(image: Readable, outputFormat: string) {
   return new Promise((resolve, reject) => {
-    const chunks: Buffer[] = [];
-    const passthrough = new PassThrough();
+    const chunks: Buffer[] = []
+    const passthrough = new PassThrough()
     ffmpeg()
       .input(image)
       .outputFormat(outputFormat)
       .on("error", reject)
-      .stream(passthrough, { end: true });
-    passthrough.on("data", (data) => chunks.push(data));
-    passthrough.on("error", reject);
+      .stream(passthrough, { end: true })
+    passthrough.on("data", data => chunks.push(data))
+    passthrough.on("error", reject)
     passthrough.on("end", () => {
-      const originalImage = Buffer.concat(chunks);
+      const originalImage = Buffer.concat(chunks)
       const editedImage = originalImage
         // copy everything after the last 4 bytes into the 4th position
         .copyWithin(4, -4)
         // trim off the extra last 4 bytes ffmpeg added
-        .slice(0, -4);
-      return resolve(editedImage);
-    });
-  });
+        .slice(0, -4)
+      return resolve(editedImage)
+    })
+  })
 }
 ```
 
@@ -300,24 +301,24 @@ And it worked!
 Now we can publish to s3 easily with
 
 ```ts {lines: true, name: "lib/upload"}
-import express from "express";
-import multer from "multer";
-import { S3, Endpoint } from "aws-sdk";
-import { credentials } from "./config";
-import { bufferToStream, convertImage } from "./lib/image";
+import express from "express"
+import multer from "multer"
+import { S3, Endpoint } from "aws-sdk"
+import { credentials } from "./config"
+import { bufferToStream, convertImage } from "./lib/image"
 
-const upload = multer({ storage: multer.memoryStorage() });
-const app = express();
+const upload = multer({ storage: multer.memoryStorage() })
+const app = express()
 
 export const wasabi = new S3({
   endpoint: new Endpoint("s3.wasabisys.com"),
   credentials,
   s3ForcePathStyle: true,
-});
+})
 
 app.post("/profile", upload.single("avatar"), async (req, res, next) => {
-  const stream = bufferToStream(req.file.buffer);
-  const output = await convertImage(stream, "webp");
+  const stream = bufferToStream(req.file.buffer)
+  const output = await convertImage(stream, "webp")
   await wasabi
     .putObject({
       Bucket: process.env.MY_BUCKET,
@@ -325,8 +326,8 @@ app.post("/profile", upload.single("avatar"), async (req, res, next) => {
       Key: "test.webp",
       Data: output,
     })
-    .promise();
-});
+    .promise()
+})
 ```
 
 And that's all! You have an optimized webp optimized image uploader for your app. You might want to also convert to some fallback formats like jpeg if you want to support older browsers just in case.
