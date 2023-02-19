@@ -1,19 +1,19 @@
 ---
-import { Picture } from "@astrojs/image/components";
-import { format } from "date-fns";
-import Tag from "🧱/Tag.astro";
+import { Picture } from "@astrojs/image/components"
+import { format } from "date-fns"
+import Tag from "🧱/Tag.astro"
 
 interface Props {
-  banner?: string;
-  type: "article";
-  readingTime: string;
-  title: string;
-  subtitle: string;
-  tags: string[];
-  date: Date;
-  topImage?: string | undefined;
+  banner?: string
+  type: "article"
+  readingTime: string
+  title: string
+  subtitle: string
+  tags: string[]
+  date: Date
+  topImage?: string | undefined
 }
-const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
+const { readingTime, title, subtitle, tags, date, banner } = Astro.props
 ---
 
 <div class="flex gap-2 items-center relative z-1 font-sans">
@@ -38,6 +38,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
       sizes="(min-width: 500px) 800px, 400px"
       aspectRatio="16:9"
       src={banner}
+      loading="eager"
       class="aspect-ratio-[16/9] w-full rounded outline outline-1 outline-body-800"
       widths={[800, 400]}
     />
@@ -56,7 +57,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
   <div
     class="list-none m-0 p-0 font-medium text-sm flex gap-4 uppercase z-1 font-sans"
   >
-    {tags.map((tag) => <Tag>{tag}</Tag>)}
+    {tags.map(tag => <Tag>{tag}</Tag>)}
   </div>
   <span class="font-sans font-400">
     Published <time datetime={date.toISOString()} class="color-text-800"

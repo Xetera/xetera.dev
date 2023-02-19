@@ -1,14 +1,14 @@
 ---
-import { Picture } from "@astrojs/image/components";
-import type { CollectionEntry } from "astro:content";
-import { routes } from "src/routing";
-import { formatDistance } from "date-fns";
-import getReadingTime from "reading-time";
+import { Picture } from "@astrojs/image/components"
+import type { CollectionEntry } from "astro:content"
+import { routes } from "src/routing"
+import { formatDistance } from "date-fns"
+import getReadingTime from "reading-time"
 
-export type Props = CollectionEntry<"blog"> & { isNew: boolean };
-const { data, slug, isNew, body } = Astro.props;
-const { banner } = data;
-const readingTime = getReadingTime(body);
+export type Props = CollectionEntry<"blog"> & { isNew: boolean }
+const { data, slug, isNew, body } = Astro.props
+const { banner } = data
+const readingTime = getReadingTime(body)
 ---
 
 <a
@@ -34,7 +34,7 @@ const readingTime = getReadingTime(body);
       <ul class="flex px-3 py-2 gap-2 flex-wrap text-xs color-text-100">
         <div class="mr-2 color-text-300">{readingTime.text}</div>
         <div class="h-full w-[1px] bg-body-700 mr-2"></div>
-        {data.tags.map((tag) => <div class="pr-2">{tag}</div>)}
+        {data.tags.map(tag => <div class="pr-2">{tag}</div>)}
       </ul>
     </div>
     {
