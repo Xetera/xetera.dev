@@ -8,3 +8,6 @@ mkdir -p /opt/build/cache/build
 
 cp -r .astro/cache /opt/build/cache/personal
 cp -r dist/_astro /opt/build/cache/build
+
+# these files have to be accessible to netlify in the build folder
+cp _headers _redirects dist
