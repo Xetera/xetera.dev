@@ -1,2 +1,2 @@
 [[plugins]]
-    package = "./plugins/webmention-cache"
+    package = "./plugins/asset-cache"
