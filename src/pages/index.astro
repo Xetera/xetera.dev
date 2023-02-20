@@ -43,15 +43,9 @@ const visiblePosts = posts
             <div class="flex flex-col gap-3">
               {
                 visiblePosts.map(post => {
-                  const banner = post.data.banner
-
                   const isNew = sub(new Date(), { days: 30 }) < post.data.date
 
-                  return (
-                    <div class:list={["masonry-item"]}>
-                      <ArticleLink {...post} isNew={isNew} />
-                    </div>
-                  )
+                  return <ArticleLink {...post} isNew={isNew} />
                 })
               }
             </div>
@@ -68,16 +62,3 @@ const visiblePosts = posts
     </div>
   </main>
 </Layout>
-
-<style>
-  .masonry-grid {
-    grid-auto-flow: row dense;
-    grid-auto-rows: fit-content(20%);
-    /* grid-template-rows: repeat() */
-  }
-  /* @supports (grid-template-rows: masonry) {
-    .masonry-grid {
-      grid-template-rows: masonry;
-    }
-  } */
-</style>

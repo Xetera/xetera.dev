@@ -9,7 +9,6 @@ function skewer(word: string) {
   return word.replace(/\s+/g, "-")
 }
 const books = await getBooks()
-const allCount = books.length
 const showCount = 6
 const showing = books.slice(0, showCount)
 const className = "book-item outline outline-1 outline-body-800 rounded"
