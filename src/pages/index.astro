@@ -45,7 +45,11 @@ const visiblePosts = posts
                 visiblePosts.map(post => {
                   const isNew = sub(new Date(), { days: 30 }) < post.data.date
 
-                  return <ArticleLink {...post} isNew={isNew} />
+                  return (
+                    <div>
+                      <ArticleLink {...post} isNew={isNew} />
+                    </div>
+                  )
                 })
               }
             </div>
