@@ -1,6 +1,5 @@
 ---
 import { Picture } from "@astrojs/image/components"
-import { formatDistance } from "date-fns"
 import type { KindleBookDetails } from "kindle-api"
 
 interface Props extends KindleBookDetails {
@@ -10,9 +9,6 @@ interface Props extends KindleBookDetails {
 const { props } = Astro
 
 const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)))
-const lastRead = formatDistance(new Date(props.progress.syncDate), new Date(), {
-  addSuffix: true,
-})
 ---
 
 <article class:list={[props.class, "relative rounded mb-1"]}>
@@ -27,20 +23,34 @@ const lastRead = formatDistance(new Date(props.progress.syncDate), new Date(), {
     src={props.productUrl}
   />
   <progress
-    class="book-progress-bar transition-all absolute mt-1 bottom-0 left-0 right-0 w-full h-1"
+    class="book-progress-bar transition-all absolute mt-1 bottom-0 left-0 right-0 w-full h-[2px]"
     max={100}
     value={percentageRead}
   >
   </progress>
 </article>
 <div
-  class="flex transition-all justify-between text-sm w-full color-text-600 items-center mt-2"
+  class="flex transition-all text-sm w-full color-text-400 justify-center mt-2"
 >
-  <p>
-    {percentageRead === 100 ? "Read" : `${percentageRead}%`}
-  </p>
-  <p>{lastRead}</p>
+  <p data-sync-date={props.progress.syncDate} class="last-read"></p>
 </div>
+
+<script>
+  import formatDistance from "date-fns/formatDistance"
+  const lastReadAll = document.querySelectorAll(".last-read")
+  lastReadAll.forEach(lastRead => {
+    if (lastRead instanceof HTMLParagraphElement) {
+      const readTime = formatDistance(
+        new Date(lastRead.dataset.syncDate as string),
+        new Date(),
+        {
+          addSuffix: true,
+        }
+      )
+      lastRead.textContent = readTime
+    }
+  })
+</script>
 
 <style>
   .book-progress-bar,
