@@ -122,6 +122,12 @@ html.dark {
   outline: 1px solid var(--body-800);
 }
 
+pre > code {
+  display: flex !important;
+  flex-direction: column;
+  gap: 5px;
+}
+
 /* including p3 versions of vivid colors */
 @media (color-gamut: p3) {
   html {

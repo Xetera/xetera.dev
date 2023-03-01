@@ -1,24 +1,24 @@
 ---
-import "💅/article.css"
-import PostHeader from "🧱/article/PostHeader.astro"
-import Navbar from "🧱/Navbar.astro"
-import type { MarkdownLayoutProps } from "astro"
-import Layout from "./Layout.astro"
+import "💅/article.css";
+import PostHeader from "🧱/article/PostHeader.astro";
+import Navbar from "🧱/Navbar.astro";
+import type { MarkdownLayoutProps } from "astro";
+import Layout from "./Layout.astro";
 
 type Props = MarkdownLayoutProps<{
-  title: string
-  date: string
-  banner: { url: string }
-  description: string
-  tags: string[]
+  title: string;
+  date: string;
+  banner: { url: string };
+  description: string;
+  tags: string[];
   imageTop?: {
-    src: string
-    opacity?: number
-  }
-}>
+    src: string;
+    opacity?: number;
+  };
+}>;
 
-const { frontmatter, content } = Astro.props
-const { minutesRead } = content
+const { frontmatter, content } = Astro.props;
+const { minutesRead } = content;
 ---
 
 <Layout title={frontmatter.title} themeColor="#262b3b">
@@ -32,9 +32,9 @@ const { minutesRead } = content
   />
   <Navbar />
   <article
-    class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base"
+    class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base w-full"
   >
-    <header class="w-full px-6 lg:px-0 pt-8xl pb-3xl article-grid">
+    <header class="w-full px-6 lg:px-0 pt-6xl pb-3xl article-grid">
       <PostHeader
         banner={frontmatter.banner?.url}
         date={new Date(frontmatter.date)}
@@ -47,7 +47,7 @@ const { minutesRead } = content
       />
     </header>
     <main
-      class="article-grid px-6 lg:px-0 larger-line-height text-xl lg:text-2xl leading-10 mt-2xl color-text-700 leading-looser"
+      class="main-article article-grid px-6 lg:px-0 larger-line-height text-xl lg:text-2xl leading-10 my-2xl color-text-700 leading-looser w-full"
     >
       <slot />
     </main>

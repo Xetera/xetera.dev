@@ -1,10 +1,10 @@
 ---
-import { Picture } from "@astrojs/image/components"
-import ExternalLink from "./ExternalLink.astro"
-import Email from "./icons/Email.astro"
-import Github from "./icons/Github.astro"
-import Twitter from "./icons/Twitter.astro"
-import ItsMe from "./ItsMe.astro"
+import { Picture } from "@astrojs/image/components";
+import ExternalLink from "./ExternalLink.astro";
+import Email from "./icons/Email.astro";
+import Github from "./icons/Github.astro";
+import Twitter from "./icons/Twitter.astro";
+import ItsMe from "./ItsMe.astro";
 ---
 
 <div class="flex flex-col md:flex-row justify-between w-full gap-8">
@@ -56,8 +56,6 @@ import ItsMe from "./ItsMe.astro"
           import.meta.env.SOCIAL_EMAIL && (
             <ExternalLink
               noIcon
-              {
-              /* sorry crawlers 🤭 */ }
               href=""
               target="_blank"
               class="email-target hover:color-text-900"
@@ -101,9 +99,11 @@ import ItsMe from "./ItsMe.astro"
 <script>
   const email = document.querySelector(
     ".obfuscated-email"
-  )! as HTMLAnchorElement
-  const emailTarget = document.querySelector(".email-target")! as HTMLDivElement
+  )! as HTMLAnchorElement;
+  const emailTarget = document.querySelector(
+    ".email-target"
+  )! as HTMLDivElement;
 
-  const myEmail: number[] = JSON.parse(email.dataset.email ?? "[]")
-  emailTarget.setAttribute("href", `mailto:${String.fromCharCode(...myEmail)}`)
+  const myEmail: number[] = JSON.parse(email.dataset.email ?? "[]");
+  emailTarget.setAttribute("href", `mailto:${String.fromCharCode(...myEmail)}`);
 </script>

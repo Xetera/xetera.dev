@@ -10,7 +10,10 @@ const kindle = await Kindle.fromConfig({
 export const getBooks = withCache(`books-${today()}.json`, async () => {
 	let data: KindleBookDetails[] = [];
 	console.log("Fetching kindle books");
-	for (const book of kindle.defaultBooks.slice(0, 10)) {
+	for (const book of kindle.defaultBooks.slice(
+		0,
+		import.meta.env.KINDLE_MAX_BOOKS_FETCH ?? 10,
+	)) {
 		const details = await book.details();
 		if (details.progress.position === -1) {
 			console.log(`Not adding ${details.title}`);
@@ -20,7 +23,7 @@ export const getBooks = withCache(`books-${today()}.json`, async () => {
 
 		console.log(`Fetched book ${details.title}`);
 		// add a delay after each book lookup to not spam and get banned
-		await setTimeout(300);
+		await setTimeout(100);
 		data.push(fullDetails);
 	}
 	console.log("Finished fetching kindle books");

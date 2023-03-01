@@ -1,25 +1,27 @@
 ---
-import { Picture } from "@astrojs/image/components"
-import { format } from "date-fns"
-import Tag from "🧱/Tag.astro"
+import { Picture } from "@astrojs/image/components";
+import { format } from "date-fns";
+import Tag from "🧱/Tag.astro";
 
 interface Props {
-  banner?: string
-  type: "article"
-  readingTime: string
-  title: string
-  subtitle: string
-  tags: string[]
-  date: Date
-  topImage?: string | undefined
+  banner?: string;
+  type: "article";
+  readingTime: string;
+  title: string;
+  subtitle: string;
+  tags: string[];
+  date: Date;
+  topImage?: string | undefined;
 }
-const { readingTime, title, subtitle, tags, date, banner } = Astro.props
+const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
 ---
 
-<div
-  class="flex gap-2 items-center relative text-sm lg:text-base z-1 font-sans whitespace-nowrap inline-flex items-center color-brand-900 font-800 uppercase tracking-wider"
->
-  {readingTime}
+<div class="flex gap-4 font-sans items-center">
+  <div
+    class="flex gap-6 items-center text-sm lg:text-base font-sans whitespace-nowrap inline-flex items-center color-brand-900 font-800 uppercase tracking-wider"
+  >
+    {readingTime}
+  </div>
 </div>
 
 <h1
@@ -44,7 +46,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props
 }
 
 <h2
-  class="mt-0 color-text-300 font-300 text-xl lg:text-3xl z-1 mb-8 text-center"
+  class="mt-0 color-text-300 text-xl lg:text-3xl z-1 mb-8 text-center font-serif"
 >
   {subtitle}
 </h2>
@@ -56,8 +58,10 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props
 <div
   class="flex gap-3 color-text-400 items-baseline justify-between flex-wrap text-xs md:text-sm lg:text-base font-sans"
 >
-  <div class="list-none m-0 p-0 font-medium flex gap-4 uppercase z-1 flex-wrap">
-    {tags.map(tag => <Tag class="bg-brand-100 px-3 py-1 rounded">{tag}</Tag>)}
+  <div
+    class="list-none m-0 p-0 font-medium flex gap-4 uppercase z-1 flex-wrap text-xs"
+  >
+    {tags.map((tag) => <Tag class="bg-brand-100 px-3 py-1 rounded">{tag}</Tag>)}
   </div>
   <span class="font-400">
     Published <time datetime={date.toISOString()} class="color-text-800"
@@ -65,11 +69,6 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props
     >
   </span>
 </div>
-<!-- <div
-  class="display-none xl:display-flex ml-4 col-start-3 color-text-100 text-sm items-center"
->
-  {since}
-</div> -->
 
 <style>
   h1.article-title {

@@ -1,44 +1,42 @@
 ---
-import { Picture } from "@astrojs/image/components"
-import type { KindleBookDetails } from "kindle-api"
+import { Picture } from "@astrojs/image/components";
+import type { KindleBookDetails } from "kindle-api";
 
 interface Props extends KindleBookDetails {
-  class?: string
+  class?: string;
 }
 
-const { props } = Astro
+const { props } = Astro;
 
-const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)))
+const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)));
 ---
 
-<article class:list={[props.class, "relative rounded mb-1"]}>
+<article class:list={[props.class, "relative flex flex-col gap-1"]}>
   <Picture
     background="black"
     alt={`Book cover image for ${props.title}`}
     widths={[500]}
     sizes=""
     loading="lazy"
-    class="w-full h-full object-cover aspect-ratio-[2/3] opacity-100"
+    class="w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
     aspectRatio="2:3"
     src={props.productUrl}
   />
   <progress
-    class="book-progress-bar transition-all absolute mt-1 bottom-0 left-0 right-0 w-full h-[2px]"
+    class="book-progress-bar transition-all w-full h-1"
     max={100}
     value={percentageRead}
   >
   </progress>
+  <div class="flex transition-all text-sm w-full color-text-400 justify-center">
+    <p data-sync-date={props.progress.syncDate} class="last-read">loading...</p>
+  </div>
 </article>
-<div
-  class="flex transition-all text-sm w-full color-text-400 justify-center mt-2"
->
-  <p data-sync-date={props.progress.syncDate} class="last-read"></p>
-</div>
 
 <script>
-  import formatDistance from "date-fns/formatDistance"
-  const lastReadAll = document.querySelectorAll(".last-read")
-  lastReadAll.forEach(lastRead => {
+  import formatDistance from "date-fns/formatDistance";
+  const lastReadAll = document.querySelectorAll(".last-read");
+  lastReadAll.forEach((lastRead) => {
     if (lastRead instanceof HTMLParagraphElement) {
       const readTime = formatDistance(
         new Date(lastRead.dataset.syncDate as string),
@@ -46,31 +44,29 @@ const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)))
         {
           addSuffix: true,
         }
-      )
-      lastRead.textContent = readTime
+      );
+      lastRead.textContent = readTime;
     }
-  })
+  });
 </script>
 
 <style>
   .book-progress-bar,
   .book-progress-bar[value] {
     appearance: none;
-    background: rgb(255 255 255 / 0.2);
+    background: transparent;
 
     /* Get rid of default border in Firefox. */
     border: none;
   }
 
   .book-progress-bar[value]::-moz-progress-bar {
-    border-radius: 3px;
     background: var(--brand-900);
   }
   .book-progress-bar[value]::-webkit-progress-bar {
-    background: rgb(255 255 255 / 0.2);
+    background: transparent;
   }
   .book-progress-bar[value]::-webkit-progress-value {
-    border-radius: 3px;
     background: var(--brand-900);
   }
 </style>

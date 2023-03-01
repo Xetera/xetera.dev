@@ -5,7 +5,7 @@ a.underlined,
   transition: opacity 300ms, transform 300ms;
 }
 
-.article-grid a {
+.article-grid:where(a) {
   display: inline-flex;
   align-items: flex-start;
   word-break: keep-all;

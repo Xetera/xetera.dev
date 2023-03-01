@@ -1,30 +1,66 @@
 ---
-import { getCollection, getEntryBySlug } from "astro:content"
+import { getCollection, getEntryBySlug } from "astro:content";
+import { HiChevronDoubleUp } from "react-icons/hi/index.js";
 
 export const getStaticPaths = async () => {
-  const articles = await getCollection("blog")
-  return articles.map(article => {
+  const articles = await getCollection("blog");
+  return articles.map((article) => {
     return {
       params: { article: article.slug },
       props: { article },
-    }
-  })
-}
+    };
+  });
+};
 
-type ArticleType = Awaited<ReturnType<typeof getCollection<"blog">>>[number]
+type ArticleType = Awaited<ReturnType<typeof getCollection<"blog">>>[number];
 
-let article: ArticleType
+let article: ArticleType;
 
 if (Astro.props.article) {
-  article = Astro.props.article
+  article = Astro.props.article;
 } else if (Astro.params.article) {
-  const { article: articleSlug } = Astro.params
-  article = (await getEntryBySlug("blog", articleSlug)) as ArticleType
+  const { article: articleSlug } = Astro.params;
+  article = (await getEntryBySlug("blog", articleSlug)) as ArticleType;
 } else {
-  throw Error("Invalid render condition")
+  throw Error("Invalid render condition");
 }
 
-const { Content } = await article.render()
+const { Content } = await article.render();
 ---
 
 <Content />
+
+<div class="article-data display-none" data-article-id={article.slug}></div>
+
+<button
+  class="to-top-button flex items-center gap-2 opacity-0 transition-all appearance-none fixed bottom-4 left-16 color-text-200 duration-300 hover:color-brand-900 font-sans"
+>
+  <HiChevronDoubleUp />
+  <span>Go Up</span>
+</button>
+
+<script>
+  import throttle from "lodash/throttle";
+  const articleElement = document.querySelector(".article-data");
+  if (articleElement instanceof HTMLElement) {
+    localStorage.setItem(`article-${articleElement.dataset.articleId}`, "1");
+  }
+  const toTop = document.querySelector(".to-top-button") as HTMLButtonElement;
+  document.addEventListener(
+    "scroll",
+    throttle(() => {
+      if (window.scrollY > 1000) {
+        toTop.classList.remove("opacity-0");
+      } else {
+        toTop.classList.add("opacity-0");
+      }
+    }, 200)
+  );
+  toTop.addEventListener("click", () => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: 0,
+      left: 0,
+    });
+  });
+</script>
