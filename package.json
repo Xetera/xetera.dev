@@ -24,7 +24,7 @@
     "@types/react-dom": "^18.0.6",
     "@unocss/preset-icons": "^0.49.4",
     "@unocss/transformer-variant-group": "^0.49.4",
-    "astro": "^2.0.12",
+    "astro": "^2.1.2",
     "astro-m2dx": "^0.7.15",
     "astro-m2dx-image": "^0.0.14",
     "autoprefixer": "^10.4.13",

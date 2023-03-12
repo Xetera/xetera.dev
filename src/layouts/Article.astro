@@ -8,7 +8,6 @@ import Layout from "./Layout.astro";
 type Props = MarkdownLayoutProps<{
   title: string;
   date: string;
-  banner: { url: string };
   description: string;
   tags: string[];
   imageTop?: {
@@ -18,6 +17,7 @@ type Props = MarkdownLayoutProps<{
 }>;
 
 const { frontmatter, content } = Astro.props;
+console.log(frontmatter);
 const { minutesRead } = content;
 ---
 
@@ -36,7 +36,7 @@ const { minutesRead } = content;
   >
     <header class="w-full px-6 lg:px-0 pt-6xl pb-3xl article-grid">
       <PostHeader
-        banner={frontmatter.banner?.url}
+        banner={frontmatter.banner}
         date={new Date(frontmatter.date)}
         title={frontmatter.title}
         readingTime={String(minutesRead)}

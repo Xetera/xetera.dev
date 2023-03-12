@@ -1,16 +1,16 @@
 ---
-import { Picture } from "@astrojs/image/components"
+import { Image } from "astro:assets";
 
 interface Props {
-  src: string
-  aspectRatio: number | `${number}:${number}`
-  alt: string
+  src: string;
+  aspectRatio: number | `${number}:${number}`;
+  alt: string;
 }
 
-const { props } = Astro
+const { props } = Astro;
 ---
 
-<Picture
+<Image
   class="w-full rounded"
   style={{
     aspectRatio:
@@ -19,9 +19,8 @@ const { props } = Astro
         : props.aspectRatio,
   }}
   src={props.src}
-  widths={[1024, 500]}
+  width={1024}
   sizes="(min-width: 500px) 1024px, 500px"
-  background="white"
   aspectRatio={props.aspectRatio}
   alt={props.alt}
 />
