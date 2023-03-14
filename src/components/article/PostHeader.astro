@@ -1,13 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import { format } from "date-fns";
+import type { BlogSchema } from "src/content/config";
 import Tag from "🧱/Tag.astro";
-import { relative, resolve } from "node:path";
-import * as url from "url";
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+
 interface Props {
-  banner?: string;
+  banner?: BlogSchema["banner"];
   type: "article";
   readingTime: string;
   title: string;
@@ -17,11 +15,6 @@ interface Props {
   topImage?: string | undefined;
 }
 const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
-const relativeBanner = relative(__dirname, banner).replace(
-  "../../",
-  "../../src/"
-);
-console.log("aaaa", relativeBanner);
 ---
 
 <div class="flex gap-4 font-sans items-center">
@@ -45,7 +38,7 @@ console.log("aaaa", relativeBanner);
       sizes="(min-width: 500px) 800px, 400px"
       width={800}
       height={(800 * 16) / 9}
-      src={relativeBanner}
+      src={banner}
       loading="eager"
       class="m-0 aspect-ratio-[16/9] w-full rounded outline outline-1 outline-body-800"
     />

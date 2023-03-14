@@ -4,20 +4,14 @@ import PostHeader from "🧱/article/PostHeader.astro";
 import Navbar from "🧱/Navbar.astro";
 import type { MarkdownLayoutProps } from "astro";
 import Layout from "./Layout.astro";
+import type { BlogSchema } from "src/content/config";
 
-type Props = MarkdownLayoutProps<{
-  title: string;
-  date: string;
-  description: string;
-  tags: string[];
-  imageTop?: {
-    src: string;
-    opacity?: number;
-  };
-}>;
+type Props = MarkdownLayoutProps<BlogSchema> & {
+  content: { minutesRead: string };
+};
 
 const { frontmatter, content } = Astro.props;
-console.log(frontmatter);
+console.log("relative image is =", frontmatter.banner);
 const { minutesRead } = content;
 ---
 

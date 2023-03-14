@@ -13,6 +13,7 @@ banner: "../../assets/building-a-scalable-scraper/banner.png"
 
 import Caption from "🧱/Caption.astro"
 import T from "🧱/T.astro"
+import { Image } from "astro:assets"
 import WideMedia from "🧱/article/WideMedia.astro"
 import WidePicture from "🧱/article/WidePicture.astro"
 import Picture from "🧱/article/Picture.astro"
@@ -22,9 +23,10 @@ import Picture from "🧱/article/Picture.astro"
   target="_blank"
   class="external-link w-full"
 >
-  <WidePicture
-    aspectRatio="1024:512"
-    widths={[800]}
+  <Image
+    alt="Jiu GitHub repo"
+    height={400}
+    width={800}
     class="rounded w-full mx-auto outline outline-1 outline-body-800"
     src={`https://opengraph.githubassets.com/1/Xetera/jiu`}
   />
@@ -44,9 +46,11 @@ This project was originally meant to be a part of Kiyomi, but I figured the prob
 
 This isn't crucial to understanding the problem, but I want to share the infrastructure Jiu sits on top of because it could provide important context. Also, I spent a lot of time working on this and drawing the diagram for it, so I'm going to need someone to look at it.
 
+import kiyomiArch from "../../assets/building-a-scalable-scraper/kiyomi_arch.png"
+
 <WideMedia contain caption="Kiyomi architecture map">
   <WidePicture
-    src="/article-assets/building-a-scalable-scraper/kiyomi_arch.png?aspectRatio=2"
+    src={kiyomiArch}
     alt="kiyomi architecture map"
     aspectRatio="1760:896"
   />
@@ -54,10 +58,11 @@ This isn't crucial to understanding the problem, but I want to share the infrast
 
 New images Jiu finds on supported sites are stored in a database isolated from every other service and get published to RabbitMQ for consumers to do whatever with. Jiu also runs its own webserver to allow dynamically adding and removing new providers, querying the stats of scrapes, and displaying its schedule/history.
 
+import scrapeSchedule from "../../assets/building-a-scalable-scraper/scrape_schedule.png"
+
 <WidePicture
-  src="/article-assets/building-a-scalable-scraper/scrape_schedule.png"
+  src={scrapeSchedule}
   alt="scrape schedule"
-  aspectRatio="1154:842"
 />
 
 The requirements for building this scraper are:
@@ -77,18 +82,22 @@ The easiest way to prevent spamming a server with requests is to just not send i
 
 A common way of implementing these scrapers is something commonly referred to as a monitor. A monitor takes one or a handful of critical pages and bombards it with requests to detect a change as soon as possible.
 
+import monitor from "../../assets/building-a-scalable-scraper/monitor.png"
+
 <Picture
-  src="/article-assets/building-a-scalable-scraper/monitor.png"
+  src={monitor}
   alt="monitor"
   aspectRatio="551:539"
 />
 
 This is useful for reacting to changes made in a website quickly, but it's not that important for this specific use case. Instead, the goal here is to detect changes across <T>every</T> social media account that posts about Kpop, but in a sustainable way (aka slowly). So we want the same volume of requests, just spread out thinner over time and across significantly more pages.
 
+import slowMonitor from "../../assets/building-a-scalable-scraper/slow_monitor.png"
+
 <Picture
   alt="slow monitor"
   aspectRatio="551:551"
-  src="/article-assets/building-a-scalable-scraper/slow_monitor.png"
+  src={slowMonitor}
 />
 
 ## Priority
@@ -109,19 +118,20 @@ At the start of the day, a database that looks like the following will get these
 
 <WideMedia contain caption="Example list of scheduled scrapes">
   <WidePicture
-    src="/article-assets/building-a-scalable-scraper/bad_distribution.png"
+    src={badDistr}
     aspectRatio="1667:319"
   />
 </WideMedia>
 
 After every successful scrape, the next priority of the provider is calculated by getting the latest scrape result + the past 30 scrapes, and summing up the amount of images it found per check, weighed by how long ago the scrape was from the current day.
 
-<WideMedia contain caption="Example list of scheduled scrapes">
+import priorityGraph from "../../assets/building-a-scalable-scraper/priority_graph.png"
 
-<WidePicture
-  src="/article-assets/building-a-scalable-scraper/priority_graph.png"
-  aspectRatio="1776:736"
-/>
+<WideMedia contain caption="Example list of scheduled scrapes">
+  <WidePicture
+    src={priorityGraph}
+    aspectRatio="1776:736"
+  />
 </WideMedia>
 
 This makes sure that an inactive account that starts to post images gets a higher bump in priority, and an active account that stops posting images gets knocked down an equivalent amount.
@@ -134,8 +144,10 @@ Once all the tasks that need to run within the next 24 hours are identified, the
 
 That day's worth of pending requests need to be grouped by their provider type --think Instagram, Twitter, etc.-- and scheduled in an evenly-spaced manner using a linear interpolation between <T>NOW()</T> and <T>NOW() + 24 hours</T>
 
+import taskDistr from "../../assets/building-a-scalable-scraper/task_distribution.png"
+
 <Picture
-  src="/article-assets/building-a-scalable-scraper/task_distribution.png"
+  src={taskDistr}
   aspectRatio="987:799"
 />
 
@@ -151,10 +163,12 @@ This method of scheduling ensures that pages on different domains that don't sha
 
 With what we know now, let's take another look at the scheduled tasks from last time and imagine each letter is an individual Twitter page, each scheduled to get processed at an even interval after the other.
 
+import badDistr from "../../assets/building-a-scalable-scraper/bad_distribution.png"
+
 <WideMedia>
   <WidePicture
     alt="example of bad distribution"
-    src="/article-assets/building-a-scalable-scraper/bad_distribution.png"
+    src={badDistr}
     aspectRatio="1658:305"
   />
 </WideMedia>
@@ -165,9 +179,11 @@ We're scheduling the same page to be scraped multiple times right after each oth
 
 The correct order of the tasks should be more like this:
 
+import goodDistr from "../../assets/building-a-scalable-scraper/good_distribution.png"
+
 <WideMedia>
   <WidePicture
-    src="/article-assets/building-a-scalable-scraper/good_distribution.png"
+    src={goodDistr}
     alt="example of well-spaced provider distribution"
     aspectRatio="1658:305"
   />
@@ -183,14 +199,13 @@ Another unfortunate problem that must be dealt with is that not every single web
 
 Now, I know that reverse engineering and using a private API for fetching data and going outside the boundaries of what a site thinks is acceptable kind of contradicts wanting to be nice to websites and not spamming them. But using official APIs can get us rate-limited quickly, even with large gaps in requests. I'm going out of my way to be careful with the sites I'm scraping, so I deserve this. Besides, I know what's best for Twitter more than Twitter knows what's best for herself, and I promise I will treat her like the queen she is if she just gives me a chance.
 
-import NiceGuy from "/article-assets/building-a-scalable-scraper/nice_guy.mp4"
+import NiceGuy from "../../assets/building-a-scalable-scraper/nice_guy.mp4"
 
 <video controls maxH="600px" margin="0 auto" mb={3}>
   <source src={NiceGuy} />
 </video>
 
 {<Caption>
-
   <a href="https://vm.tiktok.com/ZM83u526w/" target="_blank" fontSize="14px">
     context
   </a>
@@ -355,20 +370,24 @@ class Provider {
 
 This approach works perfectly! Though, the observant functional programmers
 
+import amogu from "../../assets/building-a-scalable-scraper/amogu.png"
+
 <WidePicture
   noBorder
   alt="among us"
   aspectRatio="505:131"
-  src={"/article-assets/building-a-scalable-scraper/amogu.png"}
+  src={amogu}
 />
 
 may have noticed that the thing we're doing here looks awfully similar to <T>array.reduce</T>. We're going through a loop and feeding the result of a function call in one iteration (in our case, pagination) back into the function called in the next iteration, much like reduce. It could be useful to re-package iteration logic with a functional helper if it makes things easier to reason about.
 
 As a refresher, `reduce` (also referred to as `fold` in some languages) works by doing something like the following, where it takes an <T>A'</T>, an array of values, and produces <T>E'</T> as an output.
 
+import reduce from "../../assets/building-a-scalable-scraper/reduce.png"
+
 <WideMedia>
   <WidePicture
-    src="/article-assets/building-a-scalable-scraper/reduce.png"
+    src={reduce}
     aspectRatio="1467:472"
     alt="a diagram explaining how fold/reduce works"
   />
@@ -380,9 +399,11 @@ export const Light = ({ children }) => (
 
 But this doesn't quite work for us. We have an initial seed value of a URL, yes. But we don't have an array of things we can go over. Instead we want to <T>create</T> that array of things <Light>(image URLs)</Light> as a result of repeatedly applying a function <Light>(scrape)</Light> on something <Light>(pagination)</Light>. Almost like a fold, but the other way around. Thankfully the thing we're looking for here is a well-known concept like `fold` and is unsurprisingly called `unfold`.
 
+import unfold from "../../assets/building-a-scalable-scraper/unfold.png"
+
 <WideMedia>
   <WidePicture
-    src="/article-assets/building-a-scalable-scraper/unfold.png"
+    src={unfold}
     aspectRatio="1586:409"
     alt="a diagram explaining how unfold works"
   />
