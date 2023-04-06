@@ -1,5 +1,6 @@
 ---
 import "💅/article.css";
+import { Image, getImage } from "astro:assets";
 import PostHeader from "🧱/article/PostHeader.astro";
 import Navbar from "🧱/Navbar.astro";
 import type { MarkdownLayoutProps } from "astro";
@@ -11,7 +12,7 @@ type Props = MarkdownLayoutProps<BlogSchema> & {
 };
 
 const { frontmatter, content } = Astro.props;
-console.log("relative image is =", frontmatter.banner);
+console.log("frontmatter", frontmatter);
 const { minutesRead } = content;
 ---
 
@@ -29,6 +30,7 @@ const { minutesRead } = content;
     class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base w-full"
   >
     <header class="w-full px-6 lg:px-0 pt-6xl pb-3xl article-grid">
+      <!-- <Image alt="..." src={frontmatter.banner} width={1920} height={1080} /> -->
       <PostHeader
         banner={frontmatter.banner}
         date={new Date(frontmatter.date)}

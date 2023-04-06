@@ -1,5 +1,6 @@
 a.underlined,
 .article-grid a {
+  display: inline-flex;
   position: relative;
   text-decoration: none;
   transition: opacity 300ms, transform 300ms;
@@ -45,7 +46,7 @@ a.underlined:focus::before,
   content: "";
   width: 1rem;
   background: var(--brand-500);
-  align-items: flex-start;
+  align-self: flex-start;
   height: 1rem;
   margin-top: 0.4rem;
   margin-left: 0.2rem;

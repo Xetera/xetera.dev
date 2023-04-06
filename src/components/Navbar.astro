@@ -1,17 +1,17 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image } from "astro:assets";
+import avatar from "../assets/avatars/xetera.png";
 ---
 
 <nav class="px-6 py-4 top-0 w-full navbar" id="navbar">
   <ul class="w-full flex justify-between">
     <li>
       <a href="/" rel="prefetch">
-        <Picture
+        <Image
           class="hover:scale-110 transition-all"
-          src="../assets/avatars/xetera.png"
+          src={avatar}
           alt="Home button"
           height={40}
-          widths={[80]}
           aspectRatio={1}
           width={40}
           sizes=""

@@ -1,20 +1,20 @@
 ---
-import ArticleLink from "🧱/ArticleLink.astro"
-import Bio from "🧱/Bio.astro"
-import Navbar from "🧱/Navbar.astro"
-import { getCollection } from "astro:content"
-import Layout from "../layouts/Layout.astro"
-import Rss from "🧱/icons/Rss.astro"
-import { sub } from "date-fns"
-import SectionHeader from "🧱/SectionHeader.astro"
-import HomepageSection from "🧱/HomepageSection.astro"
-import BookGrid from "🧱/kindle/BookGrid.astro"
-import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro"
+import ArticleLink from "🧱/ArticleLink.astro";
+import Bio from "🧱/Bio.astro";
+import Navbar from "🧱/Navbar.astro";
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Rss from "🧱/icons/Rss.astro";
+import { sub } from "date-fns";
+import SectionHeader from "🧱/SectionHeader.astro";
+import HomepageSection from "🧱/HomepageSection.astro";
+import BookGrid from "🧱/kindle/BookGrid.astro";
+import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
 
-const posts = await getCollection("blog")
+const posts = await getCollection("blog");
 const visiblePosts = posts
-  .flatMap(post => (post.data.draft ? [] : [post]))
-  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+  .flatMap((post) => (post.data.draft ? [] : [post]))
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
 ---
 
 <Layout title="Xetera">
@@ -42,14 +42,14 @@ const visiblePosts = posts
             </SectionHeader>
             <div class="flex flex-col gap-3">
               {
-                visiblePosts.map(post => {
-                  const isNew = sub(new Date(), { days: 30 }) < post.data.date
+                visiblePosts.map((post) => {
+                  const isNew = sub(new Date(), { days: 30 }) < post.data.date;
 
                   return (
                     <div>
                       <ArticleLink {...post} isNew={isNew} />
                     </div>
-                  )
+                  );
                 })
               }
             </div>

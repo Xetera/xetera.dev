@@ -1,5 +1,5 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 import type { KindleBookDetails } from "kindle-api";
 
 interface Props extends KindleBookDetails {
@@ -12,10 +12,11 @@ const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)));
 ---
 
 <article class:list={[props.class, "relative flex flex-col gap-1"]}>
-  <Picture
+  <Image
     background="black"
     alt={`Book cover image for ${props.title}`}
-    widths={[500]}
+    width={500}
+    height={750}
     sizes=""
     loading="lazy"
     class="w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"

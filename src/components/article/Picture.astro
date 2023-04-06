@@ -1,18 +1,19 @@
 ---
-import { Picture } from "@astrojs/image/components"
+import { Image } from "astro:assets";
 
 interface Props {
-  src: string
-  aspectRatio: number | `${number}:${number}`
-  alt: string
-  noBorder?: boolean
+  src: string;
+  aspectRatio: number | `${number}:${number}`;
+  alt: string;
+  noBorder?: boolean;
 }
 
-const { props } = Astro
+const { props } = Astro;
 ---
 
-<Picture
+<Image
   src={props.src}
+  width={800}
   widths={[800, 500]}
   class:list={[
     "h-full w-full",
@@ -31,5 +32,5 @@ const { props } = Astro
   sizes="(min-width: 500px) 800px, 500px"
   background="white"
   aspectRatio={props.aspectRatio}
-  alt={props.alt}
+  alt={props.alt || ""}
 />

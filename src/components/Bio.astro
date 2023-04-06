@@ -1,10 +1,11 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 import ExternalLink from "./ExternalLink.astro";
 import Email from "./icons/Email.astro";
 import Github from "./icons/Github.astro";
 import Twitter from "./icons/Twitter.astro";
 import ItsMe from "./ItsMe.astro";
+import avatarMj from "../assets/avatars/xetera_mj.png";
 ---
 
 <div class="flex flex-col md:flex-row justify-between w-full gap-8">
@@ -81,16 +82,16 @@ import ItsMe from "./ItsMe.astro";
   <div
     class="relative w-full max-w-[300px] aspect-ratio-1 flex-shrink-0 group relative h-min"
   >
-    <Picture
+    <Image
       id="custom-avatar"
       alt="Profile picture"
       class="rounded-md z-2 outline outline-1 rounded outline-body-800 h-full"
-      src="/avatars/xetera_mj.png"
+      src={avatarMj}
       aspectRatio={1}
-      widths={[600]}
+      width={600}
+      height={600}
       sizes=""
       background="#f5c4c6"
-      width={300}
     />
     <ItsMe />
   </div>

@@ -2,12 +2,13 @@ import { Kindle, KindleBookDetails } from "kindle-api";
 import { setTimeout } from "node:timers/promises";
 import { today, withCache } from "./persistence";
 
-const kindle = await Kindle.fromConfig({
-  cookies: import.meta.env.KINDLE_COOKIES,
-  deviceToken: import.meta.env.KINDLE_DEVICE_TOKEN,
-});
+let kindle: Kindle | undefined;
 
 export const getBooks = withCache(`books-${today()}.json`, async () => {
+  kindle ??= await Kindle.fromConfig({
+    cookies: import.meta.env.KINDLE_COOKIES,
+    deviceToken: import.meta.env.KINDLE_DEVICE_TOKEN,
+  })
   let data: KindleBookDetails[] = [];
   console.log("Fetching kindle books");
 

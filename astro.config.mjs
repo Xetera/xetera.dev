@@ -3,7 +3,6 @@ import { defineConfig } from "astro/config";
 import unocss from "./uno.config.js";
 import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from "./reading-time.mjs";
-import image from "@astrojs/image";
 import prefetch from "@astrojs/prefetch";
 import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
@@ -13,9 +12,9 @@ import m2dx from "astro-m2dx";
 
 /** @type {import('astro-m2dx').Options} */
 const m2dxOptions = {
-  normalizePaths: true,
-  exportComponents: true,
-  unwrapImages: true,
+  // normalizePaths: true,
+  // exportComponents: true,
+  // unwrapImages: true,
 };
 
 // https://astro.build/config
@@ -47,15 +46,14 @@ export default defineConfig({
   integrations: [
     unocss,
     mdx(),
-    image({
-      serviceEntryPoint: "@astrojs/image/sharp",
-      cacheDir: ".sharp",
-    }),
     prefetch({
       throttle: 3,
     }),
     react(),
   ],
   output: "static",
+  image: {
+    service: "astro/assets/services/sharp",
+  },
   // adapter: cloudflare()
 });

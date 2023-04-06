@@ -1,5 +1,5 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 import { formatDistance } from "date-fns";
 import type { KindleBookDetails } from "kindle-api";
 
@@ -30,10 +30,11 @@ const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)));
     <div
       class="picture-container flex md:flex-col overflow-hidden rounded-sm relative max-w-[100px] @xs:max-w-[140px] lg:max-w-[140px] w-full flex-shrink-0 h-full z-2 outline outline-offset outline-1 outline-body-800"
     >
-      <Picture
+      <Image
         background="black"
         alt={`Book cover image for ${props.title}`}
-        widths={[300]}
+        width={300}
+        height={450}
         sizes=""
         loading="lazy"
         class="w-full h-full rounded object-cover aspect-ratio-[2/3] opacity-100"
