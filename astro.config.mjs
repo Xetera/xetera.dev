@@ -46,7 +46,7 @@ export default defineConfig({
   integrations: [unocss, mdx(), prefetch({ throttle: 3 }), react()],
   output: "static",
   // adapter: vercel(),
-  // image: {
-  //   service: "astro/assets/services/sharp",
-  // },
+  image: {
+    service: "astro/assets/services/sharp",
+  },
 });
