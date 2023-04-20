@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 
 interface Props {
-  src: string;
+  src: ImageMetadata;
   aspectRatio: number | `${number}:${number}`;
   alt: string;
 }
@@ -20,6 +20,7 @@ const { props } = Astro;
   }}
   src={props.src}
   width={1024}
+  format="webp"
   sizes="(min-width: 500px) 1024px, 500px"
   alt={props.alt ?? ""}
 />

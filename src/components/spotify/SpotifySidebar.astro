@@ -1,24 +1,23 @@
 ---
-import groupBy from "lodash/groupBy"
-import { formatDistance } from "date-fns"
-import { getSpotifyTracks } from "🛠️/spotify"
-import SpotifySong from "./SpotifySong.astro"
-import SpotifyDateDivider from "./SpotifyDateDivider.astro"
-import HomepageSection from "🧱/HomepageSection.astro"
-import SectionHeader from "🧱/SectionHeader.astro"
-import type { Track } from "spotify-types"
+import groupBy from "lodash/groupBy";
+import { formatDistance } from "date-fns";
+import SpotifySong from "./SpotifySong.astro";
+import SpotifyDateDivider from "./SpotifyDateDivider.astro";
+import HomepageSection from "🧱/HomepageSection.astro";
+import SectionHeader from "🧱/SectionHeader.astro";
+import { meQuery } from "🛠️/me";
 
-const { likedTracks } = await getSpotifyTracks()
+const { likedSongs } = await meQuery;
 
 const augmented = groupBy(
-  likedTracks.items.map(track => ({
+  likedSongs.map((track) => ({
     ...track,
-    distance: formatDistance(new Date(track.added_at as string), new Date(), {
+    distance: formatDistance(new Date(track.likedAt as string), new Date(), {
       addSuffix: true,
     }),
   })),
-  val => val.distance
-)
+  (val) => val.distance
+);
 ---
 
 <HomepageSection class="flex">
@@ -31,17 +30,14 @@ const augmented = groupBy(
           <div>
             <SpotifyDateDivider class="mb-3">{distance}</SpotifyDateDivider>
             <div class="flex flex-col gap-6">
-              {songs.map(song => (
-                <a
-                  href={(song.track as Track).external_urls.spotify}
-                  target="_blank"
-                >
-                  <SpotifySong {...song} />
+              {songs.map((song) => (
+                <a href={song.song.spotifyUrl} target="_blank">
+                  <SpotifySong {...song.song} />
                 </a>
               ))}
             </div>
           </div>
-        )
+        );
       })
     }
   </aside>

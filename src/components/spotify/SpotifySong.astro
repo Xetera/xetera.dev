@@ -1,37 +1,35 @@
 ---
 import { Image } from "astro:assets";
-import type { PlaylistTrack, Track } from "spotify-types";
+import { MeQuery } from "generated/gql/graphql";
 
-interface Props extends PlaylistTrack {}
+type SingleSong = MeQuery["likedSongs"][number]["song"];
+
+interface Props extends SingleSong {}
 
 const { props } = Astro;
-const track = props.track as Track;
-
-const art = track.album.images[0];
 ---
 
 <article class="flex gap-3">
   {
-    art && (
+    props.coverUrl && (
       <Image
         sizes=""
-        background="black"
-        alt={`Album art for ${track.name}`}
-        aspectRatio="1:1"
+        alt={`Album art for ${props.title}`}
+        aspectRatio={1}
         width={64}
         height={64}
-        src={art.url}
+        src={props.coverUrl}
         loading="lazy"
-        class="rounded aspect-ratio-1 outline outline-1 outline-body-700"
+        class="rounded aspect-ratio-1 outline outline-1 outline-body-700 object-cover"
       />
     )
   }
   <div class="flex flex-col justify-center">
     <h2 aria-label="Track name" class="color-text-800 font-medium">
-      {track.name}
+      {props.title}
     </h2>
     <h3 aria-label="Track artist" class="color-text-100">
-      {track.artists[0]?.name}
+      {props.artist}
     </h3>
   </div>
 </article>

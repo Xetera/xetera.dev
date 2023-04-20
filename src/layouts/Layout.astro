@@ -9,7 +9,7 @@ export interface Props extends BaseHeadProps {
   class?: string;
 }
 
-const { class: className, component: Component, ...rest } = Astro.props;
+const { class: className, ...rest } = Astro.props;
 ---
 
 <!DOCTYPE html>

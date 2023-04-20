@@ -9,11 +9,9 @@ export function astReadingTime(md) {
 export function remarkReadingTime() {
   return function (tree, ctx) {
     const { data } = ctx;
-    const readingTime = astReadingTime(tree)
+    const readingTime = astReadingTime(tree);
     // readingTime.text will give us minutes read as a friendly string,
     // i.e. "3 min read"
     data.astro.frontmatter.minutesRead = readingTime.text;
   };
 }
-
-

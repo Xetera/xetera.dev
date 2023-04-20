@@ -9,15 +9,17 @@
     "build": "astro build",
     "preview": "astro preview",
     "build:preview": "yarn build && python3 -m http.server 8000 dist",
-    "astro": "astro"
+    "astro": "astro",
+    "generate": "graphql-codegen-esm --config codegen.cjs"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^6.1.2",
     "@astrojs/mdx": "^0.17.0",
     "@astrojs/prefetch": "^0.1.1",
     "@astrojs/react": "^2.0.2",
     "@astrojs/rss": "^2.1.0",
+    "@astrojs/vercel": "^3.2.2",
     "@fontsource/sriracha": "^4.5.9",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@iconify-json/twemoji": "^1.1.11",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
@@ -30,6 +32,7 @@
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
     "kindle-api": "^0.2.2",
     "lodash": "^4.17.21",
     "mdast-util-to-string": "^3.1.1",
@@ -47,6 +50,9 @@
     "vite": "^4.0.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.3.0",
+    "@graphql-codegen/client-preset": "^3.0.0",
+    "@graphql-codegen/typescript-urql": "^3.7.3",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.13.0",
     "@types/spotify-api": "^0.0.20",
@@ -57,6 +63,7 @@
     "prettier": "^2.8.3",
     "prettier-plugin-astro": "^0.8.0",
     "rollup": "^3.15.0",
-    "spotify-types": "^1.0.7"
+    "spotify-types": "^1.0.7",
+    "typescript": "^5.0.4"
   }
 }

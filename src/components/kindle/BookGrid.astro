@@ -1,16 +1,16 @@
 ---
-import { getBooks } from "🛠️/kindle";
 import ExternalLink from "🧱/ExternalLink.astro";
 import HomepageSection from "🧱/HomepageSection.astro";
 import SectionHeader from "🧱/SectionHeader.astro";
 import Book from "./Book.astro";
+import { meQuery } from "🛠️/me";
 
 function skewer(word: string) {
   return word.replace(/\s+/g, "-");
 }
-const books = await getBooks();
-const showCount = 12;
-const showing = books.slice(0, showCount);
+const { books } = await meQuery;
+const SHOW_COUNT = 8;
+const showing = books.slice(0, SHOW_COUNT) ?? [];
 const className = "book-item rounded";
 ---
 
@@ -29,12 +29,10 @@ const className = "book-item rounded";
         </ExternalLink></span
       >
     </SectionHeader>
-    <div class="grid gap-4 book-grid overflow-x-auto overflow-y-hidden">
+    <div class="grid gap-4 book-grid">
       {
         showing.map((book) => {
-          const [firstAuthor] = book.authors;
-          const { firstName, lastName } = firstAuthor ?? {};
-          const author = `${firstName ?? ""} ${lastName ?? ""}`.trim();
+          const { author } = book;
           const link = `https://www.amazon.com/${skewer(book.title)}-${skewer(
             author
           )}/dp/${book.asin}`;

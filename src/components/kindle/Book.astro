@@ -1,36 +1,47 @@
 ---
 import { Image } from "astro:assets";
-import type { KindleBookDetails } from "kindle-api";
+import type { Book } from "generated/gql/graphql";
 
-interface Props extends KindleBookDetails {
+interface Props
+  extends Pick<Book, "title" | "author" | "coverUrl" | "progress" | "readAt"> {
   class?: string;
 }
 
 const { props } = Astro;
 
-const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)));
+const percentageRead = Math.round(Number(props.progress.toFixed(1)));
 ---
 
-<article class:list={[props.class, "relative flex flex-col gap-1"]}>
-  <Image
-    background="black"
-    alt={`Book cover image for ${props.title}`}
-    width={500}
-    height={750}
-    sizes=""
-    loading="lazy"
-    class="w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
-    aspectRatio="2:3"
-    src={props.productUrl}
-  />
-  <progress
-    class="book-progress-bar transition-all w-full h-1"
-    max={100}
-    value={percentageRead}
+<article class:list={[props.class, "relative group"]}>
+  <div
+    class="rounded outline outline-1 outline-body-600 group-hover:-translate-y-5 transition-250 overflow-hidden"
   >
-  </progress>
-  <div class="flex transition-all text-sm w-full color-text-400 justify-center">
-    <p data-sync-date={props.progress.syncDate} class="last-read">loading...</p>
+    <Image
+      alt={`Book cover image for ${props.title}`}
+      width={500}
+      height={750}
+      sizes=""
+      loading="lazy"
+      class="w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
+      src={props.coverUrl}
+    />
+    {
+      percentageRead < 100 && (
+        <progress
+          class="book-progress-bar transition-all w-full h-[3px] absolute bottom-0"
+          max={100}
+          value={percentageRead}
+        />
+      )
+    }
+  </div>
+  <div
+    class="z-2 flex transition-all text-sm w-full color-text-400 justify-between items-baseline absolute opacity-0 bottom-0 group-hover:opacity-100"
+  >
+    <p class="mr-2 color-text-200 font-semibold text-xs font-mono">
+      {percentageRead < 100 ? `${percentageRead}%` : "Read"}
+    </p>
+    <p data-sync-date={props.readAt} class="last-read">loading...</p>
   </div>
 </article>
 
@@ -45,7 +56,7 @@ const percentageRead = Math.round(Number(props.percentageRead.toFixed(1)));
         {
           addSuffix: true,
         }
-      );
+      ).replace("about ", "~");
       lastRead.textContent = readTime;
     }
   });

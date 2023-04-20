@@ -2,6 +2,7 @@ import "dotenv/config";
 import { defineConfig } from "astro/config";
 import unocss from "./uno.config.js";
 import mdx from "@astrojs/mdx";
+import vercel from "@astrojs/vercel/serverless";
 import { remarkReadingTime } from "./reading-time.mjs";
 import prefetch from "@astrojs/prefetch";
 import react from "@astrojs/react";
@@ -23,7 +24,6 @@ export default defineConfig({
   site: process.env.SITE_URL,
   markdown: {
     remarkPlugins: [
-      [m2dx, m2dxOptions],
       remarkReadingTime,
       rehypeSlug,
       rehypeAutolinkHeadings,
@@ -43,17 +43,10 @@ export default defineConfig({
       wrap: true,
     },
   },
-  integrations: [
-    unocss,
-    mdx(),
-    prefetch({
-      throttle: 3,
-    }),
-    react(),
-  ],
+  integrations: [unocss, mdx(), prefetch({ throttle: 3 }), react()],
   output: "static",
-  image: {
-    service: "astro/assets/services/sharp",
-  },
-  // adapter: cloudflare()
+  // adapter: vercel(),
+  // image: {
+  //   service: "astro/assets/services/sharp",
+  // },
 });

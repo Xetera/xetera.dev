@@ -52,3 +52,9 @@
 :where(.article-grid > astro-island > *) {
   grid-column: 2 / auto;
 }
+
+.article-grid ul {
+  /* fallback */
+  list-style-type: disc;
+  list-style-type: japanese-formal;
+}
