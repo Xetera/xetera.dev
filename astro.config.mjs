@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import unocss from "./uno.config.js";
 import mdx from "@astrojs/mdx";
 import vercel from "@astrojs/vercel/serverless";
-import { remarkReadingTime } from "./reading-time.mjs";
+import { remarkReadingTime } from "./markdown-utils.mjs";
 import prefetch from "@astrojs/prefetch";
 import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
