@@ -40,7 +40,7 @@
     "gatsby-plugin-react-helmet": "^4.8.0",
     "gatsby-plugin-root-import": "^2.0.7",
     "gatsby-plugin-schema-snapshot": "^2.0.0",
-    "gatsby-plugin-sharp": "^4.0.0",
+    "gatsby-plugin-sharp": "^4.25.1",
     "gatsby-plugin-twitter": "^3.8.0",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.24",
     "gatsby-remark-copy-linked-files": "^4.5.0",
