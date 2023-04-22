@@ -10,11 +10,12 @@ interface Props
 const { props } = Astro;
 
 const percentageRead = Math.round(Number(props.progress.toFixed(1)));
+const isUnfinished = percentageRead < 100;
 ---
 
 <article class:list={[props.class, "relative group"]}>
   <div
-    class="rounded outline outline-1 outline-body-600 group-hover:-translate-y-6 transition-250 overflow-hidden"
+    class="z-2 rounded outline outline-1 outline-body-600 group-hover:-translate-y-6 transition-250 overflow-hidden group-hover:shadow-xl"
   >
     <Image
       alt={`Book cover image for ${props.title}`}
@@ -22,11 +23,11 @@ const percentageRead = Math.round(Number(props.progress.toFixed(1)));
       height={750}
       sizes=""
       loading="lazy"
-      class="w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
+      class="z-2 w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
       src={props.coverUrl}
     />
     {
-      percentageRead < 100 && (
+      isUnfinished && (
         <progress
           class="book-progress-bar transition-all w-full h-[3px] absolute bottom-0"
           max={100}
@@ -36,10 +37,10 @@ const percentageRead = Math.round(Number(props.progress.toFixed(1)));
     }
   </div>
   <div
-    class="z-2 flex transition-all text-sm w-full color-text-400 justify-between items-baseline absolute opacity-0 bottom-0 group-hover:opacity-100"
+    class="z-0 flex text-sm w-full color-text-400 justify-between items-baseline absolute opacity-0 bottom-0 transition-300 ease-in-out group-hover:opacity-100"
   >
     <p class="mr-2 color-text-200 font-semibold text-xs font-mono">
-      {percentageRead < 100 ? `${percentageRead}%` : "Read"}
+      {isUnfinished ? `${percentageRead}%` : "Read"}
     </p>
     <p data-sync-date={props.readAt} class="last-read">loading...</p>
   </div>
