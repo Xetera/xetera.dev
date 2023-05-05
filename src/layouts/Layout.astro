@@ -19,12 +19,17 @@ const { class: className, ...rest } = Astro.props;
       <slot name="head" slot="head" />
     </BaseHead>
   </head>
-  <body class:list={["h-full flex bg-body-900 color-text-800", className]}>
+  <body
+    class:list={[
+      "h-full flex bg-body-900 color-text-800 transition-colors",
+      className,
+    ]}
+  >
     <script is:inline>
       0;
     </script>
     <div class="overlay z-0"></div>
-    <div class="flex flex-col items-center w-full transition-all z-1">
+    <div class="flex flex-col items-center w-full z-1">
       <slot />
     </div>
     <style is:global>
