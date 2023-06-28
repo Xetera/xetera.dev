@@ -27,7 +27,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
 </div>
 
 <h1
-  class="m-0 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-900 z-1 leading-relaxed font-serif-title"
+  class="m-0 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl font-900 z-1 leading-relaxed font-serif-title"
 >
   {title}
 </h1>
@@ -41,13 +41,13 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
       height={(1600 * 16) / 9}
       src={banner}
       loading="eager"
-      class="mb-4 aspect-ratio-[16/9] w-full rounded outline outline-1 outline-body-800 object-cover"
+      class="article-banner my-10 aspect-ratio-[16/9] shadow-lg w-full rounded-lg outline outline-1 outline-body-800 object-cover"
     />
   )
 }
 
 <h2
-  class="mt-0 color-text-300 text-xl lg:text-3xl z-1 mb-8 text-center font-serif"
+  class="mt-0 color-text-300 text-xl lg:text-2xl z-1 mb-8 text-center font-serif"
 >
   {subtitle}
 </h2>
@@ -62,7 +62,11 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
   <div
     class="list-none m-0 p-0 font-medium flex gap-4 uppercase z-1 flex-wrap text-xs"
   >
-    {tags.map((tag) => <Tag class="bg-brand-100 px-3 py-1 rounded">{tag}</Tag>)}
+    {
+      tags.map((tag) => (
+        <Tag class="bg-body-800 color-text-600 px-5 py-2 rounded">{tag}</Tag>
+      ))
+    }
   </div>
   <span class="font-400">
     Published <time datetime={date.toISOString()} class="color-text-800"
@@ -72,6 +76,11 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
 </div>
 
 <style>
+  .article-banner {
+    grid-column: 1/-1;
+    max-width: 1200px !important;
+  }
+
   h1.article-title {
     line-height: 1.35;
   }

@@ -5,12 +5,14 @@ import Email from "./icons/Email.astro";
 import Github from "./icons/Github.astro";
 import Twitter from "./icons/Twitter.astro";
 import ItsMe from "./ItsMe.astro";
-import avatarMj from "../assets/avatars/xetera_mj.png";
+import avatarMj from "../assets/avatars/xetera_mj_2.jpeg";
 ---
 
 <div class="flex flex-col md:flex-row justify-between w-full gap-8">
-  <div class="flex flex-col gap-4 flex-grow-0 max-w-[42rem] text-xl leading-8">
-    <h1 class="text-4xl lg:text-7xl font-900 mb-2">Hi, I'm Xetera.</h1>
+  <div class="flex flex-col gap-4 flex-grow-0 max-w-[44rem] text-xl leading-8">
+    <h1 class="text-5xl md:text-6xl lg:text-7xl font-900 mb-2">
+      Hi, I'm Xetera.
+    </h1>
 
     <div class="color-text-400 flex flex-col gap-4">
       <p>
@@ -80,18 +82,19 @@ import avatarMj from "../assets/avatars/xetera_mj.png";
   </div>
 
   <div
-    class="relative w-full max-w-[300px] aspect-ratio-1 flex-shrink-0 group relative h-min"
+    class="relative w-full lg:max-w-[390px] max-w-[300px] aspect-ratio-1 flex-shrink-0 group relative h-min"
   >
+    <span
+      class="rounded-md image-container -z-1 outline outline-1 outline-body-800"
+    ></span>
     <Image
       id="custom-avatar"
       alt="Profile picture"
-      class="rounded-md z-2 outline outline-1 rounded outline-body-800 h-full"
+      class="rounded-md z-2 outline outline-1 rounded outline-body-500 h-full bg-body-900"
       src={avatarMj}
-      aspectRatio={1}
-      width={600}
-      height={600}
+      width={1024}
+      height={1024}
       sizes=""
-      background="#f5c4c6"
     />
     <ItsMe />
   </div>
@@ -107,4 +110,14 @@ import avatarMj from "../assets/avatars/xetera_mj.png";
 
   const myEmail: number[] = JSON.parse(email.dataset.email ?? "[]");
   emailTarget.setAttribute("href", `mailto:${String.fromCharCode(...myEmail)}`);
+
+  const avatar = document.querySelector("#custom-avatar") as HTMLImageElement;
+  avatar!.addEventListener("load", () => {
+    console.log("loaded");
+    avatar!.classList.add("fade-in");
+  });
+
+  if (avatar!.complete) {
+    avatar!.classList.add("fade-in");
+  }
 </script>

@@ -2,21 +2,12 @@ import "dotenv/config";
 import { defineConfig } from "astro/config";
 import unocss from "./uno.config.js";
 import mdx from "@astrojs/mdx";
-import vercel from "@astrojs/vercel/serverless";
 import { remarkReadingTime } from "./markdown-utils.mjs";
 import prefetch from "@astrojs/prefetch";
 import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
-import m2dx from "astro-m2dx";
-
-/** @type {import('astro-m2dx').Options} */
-const m2dxOptions = {
-  // normalizePaths: true,
-  // exportComponents: true,
-  // unwrapImages: true,
-};
 
 // https://astro.build/config
 export default defineConfig({
@@ -47,6 +38,6 @@ export default defineConfig({
   output: "static",
   // adapter: vercel(),
   image: {
-    service: "astro/assets/services/sharp",
+    service: { entrypoint: "astro/assets/services/sharp" },
   },
 });

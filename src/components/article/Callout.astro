@@ -1,12 +1,22 @@
 ---
 interface Props {
   icon?: React.ReactNode;
+  title?: string;
 }
+
+const { title } = Astro.props;
 ---
 
 <aside class="bg-body-800 p-6 not-prose rounded flex gap-4">
   <p>💡</p>
-  <div class="flex flex-col color-text-500">
+  <div class="flex flex-col color-text-500 text-lg">
+    {
+      title && (
+        <h2 class="font-sans font-medium text-xl color-text-800 mb-1">
+          {title}
+        </h2>
+      )
+    }
     <slot />
   </div>
 </aside>

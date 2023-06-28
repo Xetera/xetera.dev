@@ -48,7 +48,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
   <article
     class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base w-full"
   >
-    <header class="w-full px-6 lg:px-0 pt-6xl pb-3xl article-grid">
+    <header class="w-full px-6 pt-6xl pb-3xl article-grid">
       <PostHeader
         banner={frontmatter.banner}
         date={new Date(frontmatter.date)}
@@ -71,7 +71,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
 <div class="article-data display-none" data-article-id={article.slug}></div>
 
 <button
-  class="to-top-button items-center gap-2 opacity-0 transition-all appearance-none display-none xl:display-flex fixed bottom-4 left-16 color-text-200 duration-300 hover:color-brand-900 font-sans"
+  class="z-1 to-top-button items-center gap-2 opacity-0 transition-all appearance-none display-none xl:display-flex fixed bottom-4 left-16 color-text-200 duration-300 hover:color-brand-900 font-sans"
 >
   <HiChevronDoubleUp />
   <span>Go Up</span>

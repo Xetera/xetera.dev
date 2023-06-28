@@ -1,0 +1,21 @@
+<div
+  aria-hidden="true"
+  class="ultrawide absolute top-150% color-text-200 tracking-wider z-2 py-5 px-7 font-light rounded-sm uppercase"
+>
+  Wow you have a <b>really</b> big screen!
+</div>
+
+<style>
+  .ultrawide {
+    left: 0;
+    transform-origin: center left;
+    transform: rotate(-83deg) translateY(50%);
+    display: none;
+  }
+
+  @media only screen and (min-width: 3000px) {
+    .ultrawide {
+      display: block;
+    }
+  }
+</style>

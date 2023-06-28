@@ -9,8 +9,18 @@ imageTop:
   src: /article-assets/whatsapp-sucks/whatsapp.jpg
 ---
 
+import WideMedia from '🧱/article/WideMedia.astro'
 import Callout from '🧱/article/Callout.astro'
 import T from '🧱/T.astro'
+
+<WideMedia contain>
+  <Callout title="2023 Update">
+    <span class="mb-3">
+      Whatsapp has been focusing a lot on creating new features since I wrote this article, and has even updated the web app to work independently of the phone which was by far my biggest complaint with the app.
+    </span>
+    I'm still not its biggest fan but it's a much more usable app than it used to be. So take my opinions here with a grain of salt.
+  </Callout>
+</WideMedia>
 
 <h3>
   <a
@@ -162,7 +172,9 @@ It too, has all the features WhatsApp has and addresses every single one of the 
 
 So if all these apps have so many better features, why are people not using them? What's the _real_ reason people are hanging onto WhatsApp, not wanting to let go? Simply put, it's:
 
-{/*
+
+import { WhatsappContainer, WhatsappMessage } from "../../components/messaging/whatsapp"
+
 
 <WhatsappContainer>
   <WhatsappMessage
@@ -196,7 +208,6 @@ So if all these apps have so many better features, why are people not using them
     messages={["Lmaooo", "Yeah dude we're not switching to Discord"]}
   />
 </WhatsappContainer>
-*/}
 
 The truth is, if you've been using WhatsApp for a long time and all your friends are on it it's kind of difficult to coordinate everyone to jump ship at the same time. That's the vendor lock-in effect that WhatsApp has as its biggest feature...
 
