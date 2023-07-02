@@ -27,7 +27,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
 </div>
 
 <h1
-  class="m-0 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl font-900 z-1 leading-relaxed font-serif-title"
+  class="m-0 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl font-900 z-1 leading-relaxed font-article-title"
 >
   {title}
 </h1>
@@ -38,7 +38,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
       alt="Banner image"
       sizes="(min-width: 500px) 800px, 400px"
       width={1600}
-      height={(1600 * 16) / 9}
+      height={(1600 * 9) / 16}
       src={banner}
       loading="eager"
       class="article-banner my-10 aspect-ratio-[16/9] shadow-lg w-full rounded-lg outline outline-1 outline-body-800 object-cover"
@@ -47,7 +47,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
 }
 
 <h2
-  class="mt-0 color-text-300 text-xl lg:text-2xl z-1 mb-8 text-center font-serif"
+  class="mt-0 color-text-300 text-xl lg:text-2xl z-1 mb-8 text-center font-article"
 >
   {subtitle}
 </h2>

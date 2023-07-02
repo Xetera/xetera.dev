@@ -1,16 +1,30 @@
 import unocss from "unocss/astro";
 import presetUno from "unocss/preset-uno";
 import presetTypography from "unocss/preset-typography";
+import { kebabCase } from "lodash";
 
 /**
  * @param {string} label
- * @param {numb} sizes
+ * @param {number} sizes
  * @returns
  */
 function createMapping(label, sizes) {
   return Object.fromEntries(
     sizes.map((size) => [size, `var(--${label}-${size})`])
   );
+}
+
+/**
+ *
+ * @param {Array<string>} vars
+ * @returns
+ */
+function variables(variables) {
+  const out = Object.fromEntries(
+    variables.map((a) => [a, `var(--${kebabCase(a)})`])
+  );
+  console.log(out);
+  return out;
 }
 
 export default unocss({
@@ -43,20 +57,43 @@ export default unocss({
   ],
   rules: [["text-wrap-balance", { "text-wrap": "balance" }]],
   theme: {
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+          },
+        },
+      },
+    },
     fontFamily: {
       display: "var(--font-family-sans)",
       sans: "var(--font-family-sans)",
-      serif: "var(--font-family-serif)",
+      article: "var(--font-family-article)",
+      articleTitle: "var(--font-family-article-title)",
     },
     colors: {
-      highlight: "var(--highlight)",
-      whatsappChatBackgroundOutgoing:
-        "var(--whatsapp-chat-background-outgoing)",
-      whatsappChatBackgroundIncoming:
-        "var(--whatsapp-chat-background-incoming)",
-      whatsappChatMeta: "var(--whatsapp-chat-meta)",
-      whatsappChatText: "var(--whatsapp-chat-text)",
-      whatsappChatNumber: "var(--whatsapp-chat-number)",
+      ...variables([
+        "highlight",
+        // whatsapp
+        "whatsappChatBackgroundOutgoing",
+        "whatsappChatBackgroundIncoming",
+        "whatsappChatMeta",
+        "whatsappChatText",
+        "whatsappChatNumber",
+        // discord
+        "discordBackground",
+        "discordText",
+        "discordReactionBackground",
+        "discordReactionReactedBackground",
+        "discordReactionReactedBorder",
+        "discordEmbedBackground",
+      ]),
       brand: createMapping(
         "brand",
         [100, 200, 300, 400, 500, 600, 700, 800, 900]

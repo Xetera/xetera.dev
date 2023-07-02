@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { MeQuery } from "generated/gql/graphql";
+import type { MeQuery } from "generated/gql/graphql";
 
 type SingleSong = MeQuery["likedSongs"][number]["song"];
 
@@ -15,7 +15,6 @@ const { props } = Astro;
       <Image
         sizes=""
         alt={`Album art for ${props.title}`}
-        aspectRatio={1}
         width={64}
         height={64}
         src={props.coverUrl}

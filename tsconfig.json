@@ -8,7 +8,9 @@
       "💅/*": ["src/styles/*"],
       "🛠️/*": ["src/scripts/*"],
       "🧱/*": ["src/components/*"],
+      "@article-components/*": ["src/components/article-specific/*"],
       "📸/*": ["src/assets/*"],
+      "@assets/*": ["src/assets/*"],
       "@article/*": ["src/components/article*"],
       "🗺️/*": ["src/layouts/*"],
       "@layouts/*": ["src/layouts/*"]

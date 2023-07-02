@@ -8,7 +8,7 @@ export function Quote({
   return (
     <blockquote className="flex flex-col">
       <hr className="w-full my-4 mb-8 max-w-24 h-[1px] bg-body-700 mx-auto" />
-      <div className="max-w-[40ch] mx-auto text-center font-serif-title color-text-700">
+      <div className="max-w-[40ch] mx-auto text-center font-article-title color-text-700">
         {children}
       </div>
       {author && (

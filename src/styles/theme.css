@@ -6,8 +6,8 @@
   --font-family-sans: "Hanken Grotesk", system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue", sans-serif;
-  --font-family-serif: "Soleil", "Canela Deck", ui-serif, serif;
-  --font-family-serif-title: "Mackinac", serif;
+  --font-family-article: "Soleil", ui-serif, "Canela Deck", ui-serif, serif;
+  --font-family-article-title: "Mackinac", serif;
   --accent-gradient: linear-gradient(
     45deg,
     rgb(var(--accent)),
@@ -16,12 +16,9 @@
   );
 }
 
-.font-serif-title {
-  font-family: var(--font-family-serif-title);
-}
-
 html {
   color-scheme: light;
+  -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   /* body light */
 
@@ -62,12 +59,13 @@ html {
   --whatsapp-chat-background-incoming: #fff;
   --whatsapp-chat-text: #111b21;
   --whatsapp-chat-number: #667781;
+  --discord-background: brown;
 
   --astro-code-color-text: rgb(34, 34, 34);
   --astro-code-color-background: white;
   --astro-code-token-constant: #1976d2;
   --astro-code-token-string: burlywood;
-  --astro-code-token-comment: rgba(115, 138, 148, 0.4);
+  --astro-code-token-comment: rgb(23 30 33 / 61%);
   --astro-code-token-keyword: #d32f2f;
   --astro-code-token-parameter: seashell;
   --astro-code-token-function: #6f42c1;
@@ -121,12 +119,18 @@ html.dark {
   --whatsapp-chat-meta: hsla(0 0% 100% / 0.6);
   --whatsapp-chat-number: #8696a0;
 
+  --discord-background: hsl(225 6.3% 12.5%);
+  --discord-text: hsl(210 9.1% 87.1%);
+  --discord-reaction-background: hsl(220 6.5% 18%);
+  --discord-reaction-reacted-background: hsl(235 85.6% 64.7% / 0.15);
+  --discord-reaction-reacted-border: hsl(235 85.6% 64.7%);
+  --discord-embed-background: hsl(220 6.5% 18%);
+
   --astro-code-color-text: rgb(255, 255, 255);
   --astro-code-color-background: #171923;
   --astro-code-token-constant: #f78c6c;
   --astro-code-token-string: burlywood;
-  /* comment var is reused */
-  /* --astro-code-token-comment: salmon; */
+  --astro-code-token-comment: rgb(204 218 224 / 41%);
   --astro-code-token-keyword: powderblue;
   --astro-code-token-parameter: seashell;
   --astro-code-token-function: #82aaff;

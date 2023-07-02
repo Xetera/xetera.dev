@@ -1,5 +1,4 @@
 ---
-# layout: "🗺️/Article.astro"
 title: "Building a scalable scraper"
 date: "2021-12-25"
 description: My Rust project for (politely) checking thousands of social media pages every day
@@ -8,7 +7,7 @@ tags:
   - Personal Project
   - Rust
 slug: building-a-scalable-scraper
-banner: "~/assets/building-a-scalable-scraper/banner.png"
+banner: "./assets/banner.png"
 ---
 
 import Caption from "🧱/Caption.astro"
@@ -32,7 +31,7 @@ This project was originally meant to be a part of Kiyomi, but I figured the prob
 
 This isn't crucial to understanding the problem, but I want to share the infrastructure Jiu sits on top of because it could provide important context. Also, I spent a lot of time working on this and drawing the diagram for it, so I'm going to need someone to look at it.
 
-import kiyomiArch from "../../../assets/building-a-scalable-scraper/kiyomi_arch.png"
+import kiyomiArch from "./assets/kiyomi_arch.png"
 
 <WideMedia contain caption="Kiyomi architecture map">
   <WidePicture
@@ -44,7 +43,7 @@ import kiyomiArch from "../../../assets/building-a-scalable-scraper/kiyomi_arch.
 
 New images Jiu finds on supported sites are stored in a database isolated from every other service and get published to RabbitMQ for consumers to do whatever with. Jiu also runs its own webserver to allow dynamically adding and removing new providers, querying the stats of scrapes, and displaying its schedule/history.
 
-import scrapeSchedule from "../../../assets/building-a-scalable-scraper/scrape_schedule.png"
+import scrapeSchedule from "./assets/scrape_schedule.png"
 
 <WidePicture
   src={scrapeSchedule}
@@ -68,7 +67,7 @@ The easiest way to prevent spamming a server with requests is to just not send i
 
 A common way of implementing these scrapers is something commonly referred to as a monitor. A monitor takes one or a handful of critical pages and bombards it with requests to detect a change as soon as possible.
 
-import monitor from "../../../assets/building-a-scalable-scraper/monitor.png"
+import monitor from "./assets/monitor.png"
 
 <Picture
   src={monitor}
@@ -78,7 +77,7 @@ import monitor from "../../../assets/building-a-scalable-scraper/monitor.png"
 
 This is useful for reacting to changes made in a website quickly, but it's not that important for this specific use case. Instead, the goal here is to detect changes across <T>every</T> social media account that posts about Kpop, but in a sustainable way (aka slowly). So we want the same volume of requests, just spread out thinner over time and across significantly more pages.
 
-import slowMonitor from "../../../assets/building-a-scalable-scraper/slow_monitor.png"
+import slowMonitor from "./assets/slow_monitor.png"
 
 <Picture
   alt="slow monitor"
@@ -111,7 +110,7 @@ At the start of the day, a database that looks like the following will get these
 
 After every successful scrape, the next priority of the provider is calculated by getting the latest scrape result + the past 30 scrapes, and summing up the amount of images it found per check, weighed by how long ago the scrape was from the current day.
 
-import priorityGraph from "../../../assets/building-a-scalable-scraper/priority_graph.png"
+import priorityGraph from "./assets/priority_graph.png"
 
 <WideMedia contain caption="Example list of scheduled scrapes">
   <WidePicture
@@ -130,7 +129,7 @@ Once all the tasks that need to run within the next 24 hours are identified, the
 
 That day's worth of pending requests need to be grouped by their provider type --think Instagram, Twitter, etc.-- and scheduled in an evenly-spaced manner using a linear interpolation between <T>NOW()</T> and <T>NOW() + 24 hours</T>
 
-import taskDistr from "../../../assets/building-a-scalable-scraper/task_distribution.png"
+import taskDistr from "./assets/task_distribution.png"
 
 <Picture
   src={taskDistr}
@@ -149,7 +148,7 @@ This method of scheduling ensures that pages on different domains that don't sha
 
 With what we know now, let's take another look at the scheduled tasks from last time and imagine each letter is an individual Twitter page, each scheduled to get processed at an even interval after the other.
 
-import badDistr from "../../../assets/building-a-scalable-scraper/bad_distribution.png"
+import badDistr from "./assets/bad_distribution.png"
 
 <WideMedia>
   <WidePicture
@@ -165,7 +164,7 @@ We're scheduling the same page to be scraped multiple times right after each oth
 
 The correct order of the tasks should be more like this:
 
-import goodDistr from "../../../assets/building-a-scalable-scraper/good_distribution.png"
+import goodDistr from "./assets/good_distribution.png"
 
 <WideMedia>
   <WidePicture
@@ -185,7 +184,7 @@ Another unfortunate problem that must be dealt with is that not every single web
 
 Now, I know that reverse engineering and using a private API for fetching data and going outside the boundaries of what a site thinks is acceptable kind of contradicts wanting to be nice to websites and not spamming them. But using official APIs can get us rate-limited quickly, even with large gaps in requests. I'm going out of my way to be careful with the sites I'm scraping, so I deserve this. Besides, I know what's best for Twitter more than Twitter knows what's best for herself, and I promise I will treat her like the queen she is if she just gives me a chance.
 
-import NiceGuy from "../../../assets/building-a-scalable-scraper/nice_guy.mp4"
+import NiceGuy from "./assets/nice_guy.mp4"
 
 <video controls maxH="600px" margin="0 auto" mb={3}>
   <source src={NiceGuy} />
@@ -356,7 +355,7 @@ class Provider {
 
 This approach works perfectly! Though, the observant functional programmers
 
-import amogu from "../../../assets/building-a-scalable-scraper/amogu.png"
+import amogu from "./assets/amogu.png"
 
 <WidePicture
   noBorder
@@ -369,7 +368,7 @@ may have noticed that the thing we're doing here looks awfully similar to <T>arr
 
 As a refresher, `reduce` (also referred to as `fold` in some languages) works by doing something like the following, where it takes an <T>A'</T>, an array of values, and produces <T>E'</T> as an output.
 
-import reduce from "../../../assets/building-a-scalable-scraper/reduce.png"
+import reduce from "./assets/reduce.png"
 
 <WideMedia>
   <WidePicture
@@ -385,7 +384,7 @@ export const Light = ({ children }) => (
 
 But this doesn't quite work for us. We have an initial seed value of a URL, yes. But we don't have an array of things we can go over. Instead we want to <T>create</T> that array of things <Light>(image URLs)</Light> as a result of repeatedly applying a function <Light>(scrape)</Light> on something <Light>(pagination)</Light>. Almost like a fold, but the other way around. Thankfully the thing we're looking for here is a well-known concept like `fold` and is unsurprisingly called `unfold`.
 
-import unfold from "../../../assets/building-a-scalable-scraper/unfold.png"
+import unfold from "./assets/unfold.png"
 
 <WideMedia>
   <WidePicture

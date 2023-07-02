@@ -5,7 +5,9 @@ import { routes } from "src/routing";
 import { formatDistance } from "date-fns";
 import getReadingTime from "reading-time";
 
-export type Props = CollectionEntry<"blog"> & { isNew: boolean };
+export type Props = CollectionEntry<"blog"> & {
+  isNew: boolean;
+};
 const { data, slug, isNew, body } = Astro.props;
 const { banner } = data;
 const readingTime = getReadingTime(body);
@@ -19,23 +21,25 @@ const readingTime = getReadingTime(body);
   class="article-entry flex group h-full transition-transform duration-300 transform-gpu hover:-translate-y-1 rounded overflow-hidden outline outline-1 outline-body-700 bg-body-900"
 >
   <div class="flex flex-row flex-1 relative">
-    <div class="z-1 pt-4 flex flex-col flex-1">
-      <h2 class="text-lg font-medium px-4 mb-1">
-        {data.title}
-      </h2>
-      <p class="px-4 mb-2 color-text-100 mb-2 text-wrap-balance">
-        {data.description}
-      </p>
-      <time
-        class="text-xs color-text-300 mb-2 px-4"
-        datetime={data.date.toString()}
-        >Posted {
-          formatDistance(data.date, new Date(), { addSuffix: true })
-        }</time
-      >
+    <div class="z-1 flex-1">
+      <div class="flex flex-col gap-2 px-4 py-4">
+        <h2 class="text-lg font-medium leading-5">
+          {data.title}
+        </h2>
+        <p class="color-text-100 text-wrap-balance leading-6">
+          {data.description}
+        </p>
+        <time
+          class="text-xs color-text-300 leading-3"
+          datetime={data.date.toString()}
+          >Posted {
+            formatDistance(data.date, new Date(), { addSuffix: true })
+          }</time
+        >
+      </div>
       <hr class="w-full article-bottom-border h-[1px]" />
       <ul class="flex px-4 py-2 gap-2 flex-wrap text-xs color-text-100">
-        <div class="mr-2 color-text-300">{readingTime.text}</div>
+        <div class="color-text-300">{readingTime.text}</div>
         <div class="h-full w-[1px] bg-body-700 mr-2"></div>
         {data.tags.map((tag) => <div class="pr-2">{tag}</div>)}
       </ul>

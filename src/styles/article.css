@@ -1,60 +1,66 @@
-.article-grid {
-  display: grid;
-  font-family: var(--font-family-serif);
-  font-weight: 400;
-  grid-auto-flow: row;
-  grid-template-columns: 1fr min(50rem, 100%) 1fr;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
-  justify-content: center;
-  grid-row-gap: var(--gap-3);
-}
-
-.article-grid :global(code) {
-  background: red;
-}
-
-.main-article :where(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-family-serif-title);
-}
-
-@media screen and (max-width: 500px) {
-  .article-grid > blockquote {
-    padding-left: 0;
+@layer article {
+  .article-grid {
+    display: grid;
+    font-family: var(--font-family-serif);
+    font-weight: 400;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr min(50rem, 100%) 1fr;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    justify-content: center;
+    grid-row-gap: var(--gap-3);
   }
-}
-.article-grid > blockquote {
-  color: var(--text-500);
-  font-size: 1.2em;
-  font-weight: 400;
-  font-style: normal;
-}
 
-.article-grid > blockquote {
-  color: var(--text-500);
-  font-size: 1.2em;
-  font-weight: 400;
-  font-style: normal;
-}
+  .article-grid :global(code) {
+    background: red;
+  }
 
-/* lower specificity */
-:where(.article-grid.larger-line-height > *) {
-  line-height: 2.5rem;
-}
-:where(.article-grid img) {
-  /* centering smaller images */
-  margin: 0 auto;
-}
-:where(.article-grid > *) {
-  grid-column: 2 / auto;
-}
+  .main-article :where(h1, h2, h3, h4, h5, h6):not(.not-prose) {
+    font-family: var(--font-family-article-title);
+  }
 
-:where(.article-grid > astro-island > *) {
-  grid-column: 2 / auto;
-}
+  prose-code:before:hidden prose-code:after:hidden {
+    content: none;
+  }
 
-.article-grid ul {
-  /* fallback */
-  list-style-type: disc;
-  list-style-type: japanese-formal;
+  @media screen and (max-width: 500px) {
+    .article-grid > blockquote {
+      padding-left: 0;
+    }
+  }
+  .article-grid > blockquote {
+    color: var(--text-500);
+    font-size: 1.2em;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .article-grid > blockquote {
+    color: var(--text-500);
+    font-size: 1.2em;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* lower specificity */
+  :where(.article-grid.larger-line-height > *) {
+    line-height: 2.5rem;
+  }
+  :where(.article-grid img) {
+    /* centering smaller images */
+    margin: 0 auto;
+  }
+  :where(.article-grid > *) {
+    grid-column: 2 / auto;
+  }
+
+  :where(.article-grid > astro-island > *) {
+    grid-column: 2 / auto;
+  }
+
+  .article-grid ul {
+    /* fallback */
+    list-style-type: disc;
+    list-style-type: japanese-formal;
+  }
 }

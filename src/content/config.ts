@@ -21,6 +21,7 @@ const blogSchema: Schema = ({ image }) => {
 export type BlogSchema = z.infer<ReturnType<typeof blogSchema>>;
 
 const blogCollection = defineCollection({
+  type: "content",
   schema: ({ image }) => blogSchema({ image }),
   /* ... */
 });

@@ -1,12 +1,12 @@
-a.underlined,
-.article-grid a {
+a:where(.underlined),
+.article-grid :where(a) {
   display: inline-flex;
   position: relative;
   text-decoration: none;
   transition: opacity 300ms, transform 300ms;
 }
 
-.article-grid:where(a) {
+.article-grid :where(a:not(.external-link)) {
   display: inline-flex;
   align-items: flex-start;
   word-break: keep-all;
@@ -40,8 +40,8 @@ a.underlined:focus::before,
 }
 
 /* ExternalLink component has an edge case to cover this */
-.article-grid a[href^="http"]:not(.external-link)::after,
-.article-grid a[href^="https://"]:not(.external-link)::after
+.article-grid.article a[href^="http"]:not(.external-link)::after,
+.article-grid.article a[href^="https://"]:not(.external-link)::after
 {
   content: "";
   width: 1rem;
