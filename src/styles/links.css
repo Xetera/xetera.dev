@@ -1,9 +1,11 @@
 a:where(.underlined),
-.article-grid :where(a) {
+.article-grid :where(a:not(.external-link)) {
   display: inline-flex;
   position: relative;
   text-decoration: none;
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 .article-grid :where(a:not(.external-link)) {
@@ -23,11 +25,13 @@ a.underlined::before,
   height: 1px;
   background: var(--body-400);
   opacity: 0;
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 a.underlined:hover,
-.article-grid a:hover {
+.article-grid a:not(.external-link):hover {
   transform: translateY(-0.1em);
 }
 

@@ -6,7 +6,7 @@ import avatar from "../assets/avatars/xetera.png";
 <nav class="px-6 py-4 top-0 w-full navbar" id="navbar">
   <ul class="w-full flex justify-between">
     <li>
-      <a href="/" rel="prefetch">
+      {Astro.url.pathname !== "/" && <a href="/" rel="prefetch">
         <Image
           class="hover:scale-110 transition-all w-[50px]"
           src={avatar}
@@ -15,7 +15,7 @@ import avatar from "../assets/avatars/xetera.png";
           height={140}
           width={140}
         />
-      </a>
+      </a>}
     </li>
     <li role="button" id="theme-switcher" aria-label="Switch theme">
       <div

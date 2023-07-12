@@ -20,11 +20,9 @@ function createMapping(label, sizes) {
  * @returns
  */
 function variables(variables) {
-  const out = Object.fromEntries(
+  return Object.fromEntries(
     variables.map((a) => [a, `var(--${kebabCase(a)})`])
   );
-  console.log(out);
-  return out;
 }
 
 export default unocss({
@@ -93,6 +91,7 @@ export default unocss({
         "discordReactionReactedBackground",
         "discordReactionReactedBorder",
         "discordEmbedBackground",
+        "discordPrimary500"
       ]),
       brand: createMapping(
         "brand",

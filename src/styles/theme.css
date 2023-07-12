@@ -59,7 +59,14 @@ html {
   --whatsapp-chat-background-incoming: #fff;
   --whatsapp-chat-text: #111b21;
   --whatsapp-chat-number: #667781;
-  --discord-background: brown;
+
+  --discord-background: hsl(0 0% 100%);
+  --discord-text: hsl(223 6.7% 20.6%);
+  --discord-reaction-background: hsl(220 13% 95.5%);
+  --discord-reaction-reacted-background: hsl(235 85.6% 64.7% / 0.15);
+  --discord-reaction-reacted-border: hsl(235 85.6% 64.7%);
+  --discord-embed-background:var(--discord-reaction-background);
+  --discord-primary-500: hsl(228 6% 32.5%);
 
   --astro-code-color-text: rgb(34, 34, 34);
   --astro-code-color-background: white;
@@ -124,7 +131,7 @@ html.dark {
   --discord-reaction-background: hsl(220 6.5% 18%);
   --discord-reaction-reacted-background: hsl(235 85.6% 64.7% / 0.15);
   --discord-reaction-reacted-border: hsl(235 85.6% 64.7%);
-  --discord-embed-background: hsl(220 6.5% 18%);
+  --discord-embed-background: var(--discord-reaction-background);
 
   --astro-code-color-text: rgb(255, 255, 255);
   --astro-code-color-background: #171923;
