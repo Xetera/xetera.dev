@@ -1,7 +1,7 @@
 @layer article {
   .article-grid {
     display: grid;
-    font-family: var(--font-family-serif);
+    font-family: var(--font-family-sans);
     font-weight: 400;
     grid-auto-flow: row;
     grid-template-columns: 1fr min(50rem, 100%) 1fr;
