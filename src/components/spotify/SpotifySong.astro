@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { MeQuery } from "generated/gql/graphql";
+import { SongSkeleton } from "./SpotifySongSkeleton"
 
 type SingleSong = MeQuery["likedSongs"][number]["song"];
 
@@ -9,26 +10,22 @@ interface Props extends SingleSong {}
 const { props } = Astro;
 ---
 
-<article class="flex gap-3">
+<SongSkeleton
+  title={props.title}
+  artist={props.artist}
+>
   {
     props.coverUrl && (
       <Image
+        slot="image"
         sizes=""
         alt={`Album art for ${props.title}`}
         width={64}
         height={64}
         src={props.coverUrl}
         loading="lazy"
-        class="rounded aspect-ratio-1 outline outline-1 outline-body-700 object-cover"
+        class="rounded aspect-ratio-1 outline outline-1 outline-body-700 object-cover h-[64px] w-[64px]"
       />
     )
   }
-  <div class="flex flex-col justify-center">
-    <h2 aria-label="Track name" class="color-text-800 font-medium">
-      {props.title}
-    </h2>
-    <h3 aria-label="Track artist" class="color-text-100">
-      {props.artist}
-    </h3>
-  </div>
-</article>
+</SongSkeleton>

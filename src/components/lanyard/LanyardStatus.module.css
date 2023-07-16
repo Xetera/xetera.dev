@@ -1,0 +1,13 @@
+.progress {
+  -webkit-appearance: none;
+  outline: var(--body-700) 3px;
+  appearance: none;
+}
+
+.progress[value]::-webkit-progress-value {
+  background-color: var(--brand-900);
+}
+
+.progress[value]::-webkit-progress-bar {
+  background-color: var(--body-800);
+}

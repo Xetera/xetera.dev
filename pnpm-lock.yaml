@@ -101,6 +101,9 @@ dependencies:
   unocss:
     specifier: 0.49.1
     version: 0.49.1(rollup@3.26.2)(vite@4.4.2)
+  use-lanyard:
+    specifier: ^1.4.4
+    version: 1.4.4
   vite:
     specifier: ^4.4.2
     version: 4.4.2(@types/node@18.16.19)
@@ -7441,6 +7444,11 @@ packages:
   /urlpattern-polyfill@9.0.0:
     resolution: {integrity: sha512-WHN8KDQblxd32odxeIgo83rdVDE2bvdkb86it7bMhYZwWKJz0+O0RK/eZiHYnM+zgt/U7hAHOlCQGfjjvSkw2g==}
     dev: true
+
+  /use-lanyard@1.4.4:
+    resolution: {integrity: sha512-QceDXahv4LlEt+0cTbLwOTgeCA+83BEi26m//2mu/bZkmiHyiF3ZsUYGeukkc0cCLwGm4mm5XVgy71YO6PINxQ==}
+    engines: {node: '>=14'}
+    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}

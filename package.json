@@ -45,6 +45,7 @@
     "remark-mdx-code-meta": "^2.0.0",
     "sharp": "^0.32.1",
     "unocss": "0.49.1",
+    "use-lanyard": "^1.4.4",
     "vite": "^4.4.2"
   },
   "devDependencies": {

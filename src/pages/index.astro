@@ -11,6 +11,7 @@ import HomepageSection from "🧱/HomepageSection.astro";
 import BookGrid from "🧱/kindle/BookGrid.astro";
 import Ultrawide from "🧱/misc/Ultrawide.astro";
 import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
+import { LanyardStatus } from "🧱/lanyard/LanyardStatus"
 
 const posts = await getCollection("blog");
 const visiblePosts = posts
@@ -59,7 +60,13 @@ const visiblePosts = posts
             <BookGrid />
           </aside>
         </div>
-        <aside class="col-span-full md:col-span-1">
+        <aside class="col-span-full md:col-span-1 flex flex-col gap-8">
+          {import.meta.env.DISCORD_ID &&
+          <LanyardStatus
+            discordId={import.meta.env.DISCORD_ID}
+            client:load
+          />
+          }
           <SpotifySidebar />
           <!-- <KindleSidebar /> -->
         </aside>
