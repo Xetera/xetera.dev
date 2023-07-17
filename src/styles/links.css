@@ -15,21 +15,6 @@ a:where(.underlined),
   color: var(--brand-500);
 }
 
-a.underlined::before,
-.article-grid a::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--body-400);
-  opacity: 0;
-  transition:
-    opacity 300ms,
-    transform 300ms;
-}
-
 a.underlined:hover,
 .article-grid a:not(.external-link):hover {
   transform: translateY(-0.1em);
