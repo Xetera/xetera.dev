@@ -1,5 +1,5 @@
 import { Data as LanyardData, Spotify, useLanyardWS } from "use-lanyard";
-import { RiSpotifyFill, RiSmartphoneFill } from "react-icons/ri/index.js";
+import { RiSpotifyFill } from "react-icons/ri/index.js";
 import { useEffect, ReactNode, useState } from "react";
 import { SongSkeletonDetails } from "🧱/spotify/SpotifySongSkeleton";
 import { resizeSpotifyImageTo } from "🧱/spotify/resizer";
@@ -92,8 +92,16 @@ function SpotifyPresence({ spotify }: { spotify: Spotify }) {
 
 function Presence({ data }: { data: LanyardData }) {
   if (data.spotify) {
-    return <SpotifyPresence spotify={data.spotify} />;
+    return (
+      <div>
+        <span className="color-text-500">
+          <SpotifyPresence spotify={data.spotify} />
+        </span>
+      </div>
+    );
   }
+
+  return null;
   // else if (data.active_on_discord_mobile) {
   //   return (
   //     <PresenceHeader icon={<RiSmartphoneFill />}>
@@ -117,11 +125,5 @@ export function LanyardStatus(opts: { discordId: `${bigint}` }) {
     return null;
   }
 
-  return (
-    <div>
-      <span className="color-text-500">
-        <Presence data={data} />
-      </span>
-    </div>
-  );
+  return <Presence data={data} />;
 }

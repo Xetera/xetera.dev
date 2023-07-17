@@ -1,6 +1,6 @@
 import cls from "classnames";
 import { ReactNode, useState } from "react";
-import "./style.css";
+import "./style.module.css";
 
 export function Byte(props: {
   char: number;
@@ -16,7 +16,7 @@ export function Byte(props: {
     <div className="byte flex flex-col gap-2 relative flex-grow-0 snap-center">
       <div className="flex flex gap-2">
         {hex.map((point, i) => (
-          <Binary point={point} key={i} className={props.cellBackground} />
+          <Binary point={point} key={i} />
         ))}
       </div>
       {props.showChar && <div>{props.char}</div>}
@@ -34,6 +34,7 @@ export function ByteGroup({
   spacing?: boolean;
   showChar?: boolean;
   highlighted?: boolean;
+  className?: string;
 }) {
   let bytes: ReactNode[] = [];
   let i = 0;
@@ -50,7 +51,7 @@ export function ByteGroup({
         cellBackground={
           highlighted && i % 2 === 0 ? "bg-body-700" : "bg-body-800"
         }
-      />
+      />,
     );
     i++;
   }
@@ -58,7 +59,7 @@ export function ByteGroup({
     <div
       className={cls(
         "col-span-full flex flex-wrap gap-2 font-mono snap-x snap-mandatory overflow-x-auto max-w-fit mx-auto w-full xl:w-fit",
-        spacing ? "gap-8" : "gap-2"
+        spacing ? "gap-8" : "gap-2",
       )}
     >
       {bytes}
@@ -77,7 +78,7 @@ export function Binary({
     <div
       className={cls(
         "w-9 lg:w-10 text-lg lg:text-xl h-full flex justify-center items-center aspect-ratio-1 rounded outline outline-1 outline-body-800 font-mono",
-        className
+        className,
       )}
     >
       {point}
@@ -87,7 +88,6 @@ export function Binary({
 
 export function BinaryNotepad({ value = "" }) {
   const [text, setText] = useState(value);
-  console.log(text);
   return (
     <div className="flex gap-8 aspect-ratio-[7/4]">
       <textarea
