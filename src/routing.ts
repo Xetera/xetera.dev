@@ -1,5 +1,6 @@
 export const routes = {
-	article(slug: string) {
-		return `article/${slug}`;
-	},
+  home: () => "/",
+  article(slug: string) {
+    return `/article/${slug}`;
+  },
 };

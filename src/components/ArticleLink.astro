@@ -18,9 +18,9 @@ const readingTime = getReadingTime(body);
   data-is-new={isNew ? "true" : "false"}
   href={routes.article(slug)}
   rel="prefetch"
-  class="article-entry flex group h-full transition-transform duration-300 transform-gpu hover:-translate-y-1 rounded overflow-hidden outline outline-1 outline-body-700 bg-body-900"
+  class="article-entry flex group h-full transition-transform duration-300 transform-gpu hover:-translate-y-1 rounded outline outline-1 outline-body-700 bg-body-900"
 >
-  <div class="flex flex-row flex-1 relative">
+  <div class="flex flex-row flex-1 relative h-full">
     <div class="z-1 flex-1">
       <div class="flex flex-col gap-2 px-4 py-4">
         <h2 class="text-lg font-medium leading-5">

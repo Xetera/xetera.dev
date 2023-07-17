@@ -2,7 +2,6 @@
 import ArticleLink from "🧱/ArticleLink.astro";
 import Bio from "🧱/Bio.astro";
 import Navbar from "🧱/Navbar.astro";
-import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Rss from "🧱/icons/Rss.astro";
 import { sub } from "date-fns";
@@ -12,11 +11,9 @@ import BookGrid from "🧱/kindle/BookGrid.astro";
 import Ultrawide from "🧱/misc/Ultrawide.astro";
 import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
 import { LanyardStatus } from "🧱/lanyard/LanyardStatus"
+import { getAllContent } from "🛠️/content";
 
-const posts = await getCollection("blog");
-const visiblePosts = posts
-  .flatMap((post) => (post.data.draft ? [] : [post]))
-  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
+const visiblePosts = await getAllContent()
 ---
 
 <Layout title="Xetera">

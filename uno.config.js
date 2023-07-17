@@ -10,7 +10,7 @@ import { kebabCase } from "lodash";
  */
 function createMapping(label, sizes) {
   return Object.fromEntries(
-    sizes.map((size) => [size, `var(--${label}-${size})`])
+    sizes.map((size) => [size, `var(--${label}-${size})`]),
   );
 }
 
@@ -21,7 +21,7 @@ function createMapping(label, sizes) {
  */
 function variables(variables) {
   return Object.fromEntries(
-    variables.map((a) => [a, `var(--${kebabCase(a)})`])
+    variables.map((a) => [a, `var(--${kebabCase(a)})`]),
   );
 }
 
@@ -48,27 +48,13 @@ export default unocss({
           "line-height": "150%",
         },
         p: {
-          "line-height": "200%",
+          "line-height": "1.8",
         },
       },
     }),
   ],
   rules: [["text-wrap-balance", { "text-wrap": "balance" }]],
   theme: {
-    extend: {
-      typography: {
-        DEFAULT: {
-          css: {
-            "code::before": {
-              content: '""',
-            },
-            "code::after": {
-              content: '""',
-            },
-          },
-        },
-      },
-    },
     fontFamily: {
       display: "var(--font-family-sans)",
       sans: "var(--font-family-sans)",
@@ -91,19 +77,19 @@ export default unocss({
         "discordReactionReactedBackground",
         "discordReactionReactedBorder",
         "discordEmbedBackground",
-        "discordPrimary500"
+        "discordPrimary500",
       ]),
       brand: createMapping(
         "brand",
-        [100, 200, 300, 400, 500, 600, 700, 800, 900]
+        [100, 200, 300, 400, 500, 600, 700, 800, 900],
       ),
       body: createMapping(
         "body",
-        [100, 200, 300, 400, 500, 600, 700, 800, 900]
+        [100, 200, 300, 400, 500, 600, 700, 800, 900],
       ),
       text: createMapping(
         "text",
-        [100, 200, 300, 400, 500, 600, 700, 800, 900]
+        [100, 200, 300, 400, 500, 600, 700, 800, 900],
       ),
       gap: createMapping("gap", [1, 2, 3, 4, 5]),
     },

@@ -4,8 +4,8 @@ import { HiChevronDoubleUp } from "react-icons/hi/index.js";
 import type { BlogSchema } from "src/content/config";
 import Layout from "🗺️/Layout.astro";
 import Navbar from "🧱/Navbar.astro";
+import NextArticleLinks from "🧱/NextArticleLinks.astro";
 import TwitterCTA from "🧱/TwitterCTA.astro";
-import Callout from "🧱/article/Callout.astro";
 import PostHeader from "🧱/article/PostHeader.astro";
 
 export const getStaticPaths = async () => {
@@ -71,8 +71,9 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
       <hr
         class="mt-2 mb-2 border-top-1 w-full h-[1px] bg-body-800 col-span-full transition-all"
       />
-      <div class="article-grid z-2 py-12">
+      <div class="article-grid relative z-2 py-12">
         <TwitterCTA class="z-2" />
+        {Astro.params.article && <NextArticleLinks slug={Astro.params.article} />}
       </div>
       <div class="overlay rotate-180 z-0"></div>
     </div>

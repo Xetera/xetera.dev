@@ -8,7 +8,8 @@ a:where(.underlined),
     transform 300ms;
 }
 
-.article-grid :where(a:not(.external-link)) {
+.article-grid
+  :where(a:not(.external-link)):not(:where(.not-prose, .not-prose *)) {
   display: inline-flex;
   align-items: flex-start;
   word-break: keep-all;
@@ -16,7 +17,7 @@ a:where(.underlined),
 }
 
 a.underlined:hover,
-.article-grid a:not(.external-link):hover {
+.article-grid a:not(.external-link):not(.not-prose, .not-prose *):hover {
   transform: translateY(-0.1em);
 }
 
