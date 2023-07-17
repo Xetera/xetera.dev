@@ -21,7 +21,7 @@ export function SongSkeletonDetails(props: {
       </h2>
       <h3
         aria-label="Track artist"
-        className="color-text-100 whitespace-nowrap overflow-hidden text-ellipsis"
+        className="color-text-300 text-sm whitespace-nowrap overflow-hidden text-ellipsis"
       >
         {props.artist}
       </h3>

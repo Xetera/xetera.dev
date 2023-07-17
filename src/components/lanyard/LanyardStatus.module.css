@@ -1,6 +1,5 @@
 .progress {
   -webkit-appearance: none;
-  outline: var(--body-700) 3px;
   appearance: none;
 }
 

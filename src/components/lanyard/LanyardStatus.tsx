@@ -21,6 +21,18 @@ function PresenceHeader({
   );
 }
 
+function formatSeconds(seconds: number): string {
+  const minutes: number = Math.floor(seconds / 60);
+  seconds = seconds % 60;
+
+  const formattedMinutes: string =
+    minutes < 10 ? "0" + minutes : minutes.toString();
+  const formattedSeconds: string =
+    seconds < 10 ? "0" + seconds : seconds.toString();
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
+
 function SpotifyProgress({
   start,
   end,
@@ -32,6 +44,9 @@ function SpotifyProgress({
 }) {
   const [progress, setProgress] = useState(Date.now());
 
+  // this isn't the best way to do timers but it works ok
+  // since we're working with time based boundaries and
+  // not doing seconds += 1
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress(Date.now());
@@ -40,12 +55,24 @@ function SpotifyProgress({
     return () => clearInterval(timer);
   }, [setProgress]);
 
+  const current = Math.floor((progress - start) / 1000);
+  const max = Math.floor((end - start) / 1000);
+
   return (
-    <progress
-      value={progress - start}
-      max={end - start}
-      className={cls("w-full h-[4px]", styles.progress, className)}
-    />
+    <div className="flex flex-wrap items-center gap-4">
+      <progress
+        value={current}
+        max={max}
+        className={cls(
+          "flex-1 min-w-70% h-[4px] rounded overflow-hidden",
+          styles.progress,
+          className,
+        )}
+      />
+      <span className="text-xs font-mono color-text-200 whitespace-nowrap">
+        {formatSeconds(current)}/{formatSeconds(max)}
+      </span>
+    </div>
   );
 }
 
@@ -80,7 +107,6 @@ function SpotifyPresence({ spotify }: { spotify: Spotify }) {
             {/* <RiPlayCircleFill size={32} className="me-4" /> */}
           </div>
           <SpotifyProgress
-            className="overflow-hidden rounded"
             start={spotify.timestamps.start}
             end={spotify.timestamps.end}
           />
