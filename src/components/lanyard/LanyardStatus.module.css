@@ -4,7 +4,10 @@
   background: var(--body-800);
 }
 
-.progress[value]::-webkit-progress-value,
+.progress[value]::-webkit-progress-value {
+  background-color: var(--brand-900);
+}
+
 .progress[value]::-moz-progress-bar {
   background-color: var(--brand-900);
 }
