@@ -1,9 +1,11 @@
 .progress {
   -webkit-appearance: none;
   appearance: none;
+  background: var(--body-800);
 }
 
-.progress[value]::-webkit-progress-value {
+.progress[value]::-webkit-progress-value,
+.progress[value]::-moz-progress-bar {
   background-color: var(--brand-900);
 }
 

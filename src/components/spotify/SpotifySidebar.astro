@@ -7,6 +7,10 @@ import HomepageSection from "🧱/HomepageSection.astro";
 import SectionHeader from "🧱/SectionHeader.astro";
 import { meQuery } from "🛠️/me";
 
+interface Props {
+  class?: string;
+}
+
 const { likedSongs } = await meQuery;
 
 const augmented = groupBy(
@@ -16,11 +20,11 @@ const augmented = groupBy(
       addSuffix: true,
     }),
   })),
-  (val) => val.distance
+  (val) => val.distance,
 );
 ---
 
-<HomepageSection class="flex">
+<HomepageSection class:list={["flex", Astro.props.class]}>
   <SectionHeader>Liked Spotify Tracks 🎧</SectionHeader>
 
   <aside class="grid gap-6">

@@ -116,10 +116,16 @@ function SpotifyPresence({ spotify }: { spotify: Spotify }) {
   );
 }
 
-function Presence({ data }: { data: LanyardData }) {
+function Presence({
+  data,
+  className,
+}: {
+  data: LanyardData;
+  className?: string | undefined;
+}) {
   if (data.spotify) {
     return (
-      <div>
+      <div className={className}>
         <span className="color-text-500">
           <SpotifyPresence spotify={data.spotify} />
         </span>
@@ -128,28 +134,17 @@ function Presence({ data }: { data: LanyardData }) {
   }
 
   return null;
-  // else if (data.active_on_discord_mobile) {
-  //   return (
-  //     <PresenceHeader icon={<RiSmartphoneFill />}>
-  //       <h2>Online on my phone</h2>
-  //     </PresenceHeader>
-  //   );
-  // }
-  // else if (data.active_on_discord_desktop || data.active_on_discord_web) {
-  //   return (
-  //     <PresenceHeader icon={<RiComputerFill />}>
-  //       <h2>Online</h2>
-  //     </PresenceHeader>
-  //   );
-  // }
 }
 
-export function LanyardStatus(opts: { discordId: `${bigint}` }) {
+export function LanyardStatus(opts: {
+  discordId: `${bigint}`;
+  className?: string;
+}) {
   const data = useLanyardWS(opts.discordId);
 
   if (!data) {
     return null;
   }
 
-  return <Presence data={data} />;
+  return <Presence className={opts.className} data={data} />;
 }

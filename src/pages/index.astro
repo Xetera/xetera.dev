@@ -10,10 +10,10 @@ import HomepageSection from "🧱/HomepageSection.astro";
 import BookGrid from "🧱/kindle/BookGrid.astro";
 import Ultrawide from "🧱/misc/Ultrawide.astro";
 import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
-import { LanyardStatus } from "🧱/lanyard/LanyardStatus"
+import { LanyardStatus } from "🧱/lanyard/LanyardStatus";
 import { getAllContent } from "🛠️/content";
 
-const visiblePosts = await getAllContent()
+const visiblePosts = await getAllContent();
 ---
 
 <Layout title="Xetera">
@@ -25,50 +25,78 @@ const visiblePosts = await getAllContent()
       <div class="mb-8">
         <Bio />
       </div>
-      <div class="grid grid-cols-3 gap-4 sm:gap-8">
-        <div class="col-span-full md:col-span-2 flex flex-col gap-8">
-          <HomepageSection class="col-span-full md:col-span-2 flex">
-            <SectionHeader>
-              {visiblePosts.length} Articles 📝
-              <a
-                slot="aside"
-                href="/rss.xml"
-                class="underlined inline-flex items-center gap-2 color-text-500"
-              >
-                <p>Subscribe to the RSS feed</p>
-                <Rss />
-              </a>
-            </SectionHeader>
-            <div class="posts flex flex-col gap-3">
-              {
-                visiblePosts.map((post) => {
-                  const isNew = sub(new Date(), { days: 30 }) < post.data.date;
+      <div class="grid homepage-grid gap-8">
+        <HomepageSection
+          class="col-span-full md:col-span-2 flex grid-area-[articles]"
+        >
+          <SectionHeader>
+            {visiblePosts.length} Articles 📝
+            <a
+              slot="aside"
+              href="/rss.xml"
+              class="underlined inline-flex items-center gap-2 color-text-500"
+            >
+              <p>Subscribe to the RSS feed</p>
+              <Rss />
+            </a>
+          </SectionHeader>
+          <div class="posts flex flex-col gap-3">
+            {
+              visiblePosts.map((post) => {
+                const isNew = sub(new Date(), { days: 30 }) < post.data.date;
 
-                  return (
-                    <div class="post">
-                      <ArticleLink {...post} isNew={isNew} />
-                    </div>
-                  );
-                })
-              }
-            </div>
-          </HomepageSection>
-          <aside>
-            <BookGrid />
-          </aside>
-        </div>
-        <aside class="col-span-full md:col-span-1 flex flex-col gap-8">
-          {import.meta.env.DISCORD_ID &&
+                return (
+                  <div class="post">
+                    <ArticleLink {...post} isNew={isNew} />
+                  </div>
+                );
+              })
+            }
+          </div>
+        </HomepageSection>
+        <BookGrid class="grid-area-[books]" />
+        {
+          import.meta.env.DISCORD_ID && (
             <LanyardStatus
+              className="grid-area-[lanyard]"
               discordId={import.meta.env.DISCORD_ID}
-              client:load
+              client:idle
             />
-          }
-          <SpotifySidebar />
-        </aside>
+          )
+        }
+        <SpotifySidebar class="grid-area-[spotify]" />
       </div>
+      <aside class="col-span-full md:col-span-1 flex flex-col gap-8"></aside>
     </div>
   </main>
 </Layout>
 
 <Ultrawide />
+
+<style>
+  .homepage-grid {
+    grid-template-columns: 1fr;
+    /* this is total hackery, I can probably remove this in like 2025
+       when grid-template-rows: masonry is widely supported */
+    grid-template-rows: 120px;
+    grid-template-areas:
+      "lanyard"
+      "articles"
+      "books"
+      "spotify";
+  }
+  @supports (grid-template-rows: masonry) {
+    .homepage-grid {
+      grid-template-rows: masonry;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .homepage-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "articles articles lanyard"
+        "articles articles spotify"
+        "books books spotify";
+    }
+  }
+</style>

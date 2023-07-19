@@ -5,6 +5,10 @@ import SectionHeader from "🧱/SectionHeader.astro";
 import Book from "./Book.astro";
 import { meQuery } from "🛠️/me";
 
+interface Props {
+  class?: string;
+}
+
 function skewer(word: string) {
   return word.replace(/\s+/g, "-");
 }
@@ -14,7 +18,7 @@ const showing = books.slice(0, SHOW_COUNT) ?? [];
 const className = "book-item rounded";
 ---
 
-<div class="grid gap-4">
+<div class:list={["grid gap-4", Astro.props.class]}>
   <HomepageSection class="grid">
     <SectionHeader>
       My Reading List 📚
@@ -34,7 +38,7 @@ const className = "book-item rounded";
         showing.map((book) => {
           const { author } = book;
           const link = `https://www.amazon.com/${skewer(book.title)}-${skewer(
-            author
+            author,
           )}/dp/${book.asin}`;
           const render = <Book {...book} class={className} />;
           return (

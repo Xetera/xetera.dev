@@ -18,12 +18,12 @@ const readingTime = getReadingTime(body);
   data-is-new={isNew ? "true" : "false"}
   href={routes.article(slug)}
   rel="prefetch"
-  class="article-entry flex group h-full transition-transform duration-300 transform-gpu hover:-translate-y-1 rounded outline outline-1 outline-body-700 bg-body-900"
+  class="article-entry flex group @container h-full transition-transform duration-300 transform-gpu rounded outline outline-1 outline-body-700 bg-body-900"
 >
   <div class="flex flex-row flex-1 relative h-full">
     <div class="z-1 flex-1">
       <div class="flex flex-col gap-2 px-4 py-4">
-        <h2 class="text-lg font-medium leading-5">
+        <h2 class="article-title text-lg font-medium leading-5 w-fit">
           {data.title}
         </h2>
         <p class="color-text-100 text-wrap-balance leading-6">
@@ -48,7 +48,7 @@ const readingTime = getReadingTime(body);
       banner && (
         <div
           style={{ aspectRatio: "16/9" }}
-          class="display-none lg:display-block ml-auto overflow-hidden rounded overflow-hidden z-2 max-w-[200px] w-full object-cover h-full ml-auto flex-shrink-0"
+          class="display-none @xl:display-block ml-auto overflow-hidden rounded overflow-hidden z-2 max-w-[200px] w-full object-cover h-full ml-auto flex-shrink-0"
         >
           {isNew && (
             <div class="new-tag display-none z-2 tracking-wider font-bold text-xs absolute right-0 top-0 text-center rounded m-2 px-2 bg-brand-900 color-white">
@@ -69,8 +69,35 @@ const readingTime = getReadingTime(body);
 </a>
 
 <script>
+  import { annotate } from "rough-notation";
+
+  type Annotation = ReturnType<typeof annotate>;
+  const highlightColor = getComputedStyle(
+    document.documentElement,
+  ).getPropertyValue("--text-100");
+
   document.querySelectorAll(".article-entry").forEach((article) => {
     if (article instanceof HTMLElement) {
+      let annotation: Annotation | undefined;
+      article.addEventListener("mouseenter", (event) => {
+        if (event.target instanceof HTMLElement) {
+          const title = event.target?.querySelector(".article-title");
+          if (!title) return;
+
+          annotation = annotate(title as HTMLElement, {
+            type: "underline",
+            color: highlightColor,
+          });
+          annotation.show();
+        }
+      });
+
+      article.addEventListener("mouseleave", () => {
+        if (annotation) {
+          annotation.remove();
+        }
+      });
+
       if (article.dataset.isNew === "false") {
         return;
       }
@@ -82,6 +109,15 @@ const readingTime = getReadingTime(body);
     }
   });
 </script>
+
+<!-- We still want some nice animation on hover for people without js -->
+<noscript>
+  <style>
+    .article-entry:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</noscript>
 
 <style>
   .article-bottom-border {
