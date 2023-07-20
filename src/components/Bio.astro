@@ -63,22 +63,20 @@ import avatarMj from "@assets/avatars/xetera_mj_2.jpeg";
               noIcon
               href=""
               target="_blank"
-              class="email-target hover:color-text-900"
+              class="email-target hover:color-text-900 relative"
             >
+              <div
+                class="obfuscated-email display-none"
+                data-email={JSON.stringify(
+                  import.meta.env.SOCIAL_EMAIL.split("").map((char: string) =>
+                    char.codePointAt(0),
+                  ),
+                )}
+              />
               <Email />
             </ExternalLink>
           )
         }
-        <noscript
-          class="obfuscated-email text-xs flex color-text-200 font-400"
-          data-email={JSON.stringify(
-            import.meta.env.SOCIAL_EMAIL.split("").map((char: string) =>
-              char.codePointAt(0),
-            ),
-          )}
-        >
-          Javascript must be enabled for email
-        </noscript>
       </div>
     </div>
   </div>
@@ -102,6 +100,14 @@ import avatarMj from "@assets/avatars/xetera_mj_2.jpeg";
     <ItsMe />
   </div>
 </div>
+
+<noscript>
+  <style>
+    .email-target {
+      display: none;
+    }
+  </style>
+</noscript>
 
 <script>
   const email = document.querySelector(

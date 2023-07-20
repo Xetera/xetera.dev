@@ -85,3 +85,16 @@ const { title, description, themeColor } = Astro.props;
   addThemeChangeListener(setKnownTheme);
   setThemeDisplay(theme);
 </script>
+
+<noscript>
+  <style>
+    /* We want some nice animation on hover for article cards for people without js */
+    .article-entry:hover {
+      transform: translateY(-5px);
+    }
+    /* can't get last read date without js */
+    .last-read {
+      display: none;
+    }
+  </style>
+</noscript>
