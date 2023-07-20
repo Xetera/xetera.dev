@@ -20,7 +20,8 @@ const { title, description, themeColor } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<meta name="view-transition" content="same-origin" />
+<!-- view transitions crash browsers when the option is force toggled on :( -->
+<!-- <meta name="view-transition" content="same-origin" /> -->
 <link
   href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;900&display=swap"
   rel="stylesheet"
