@@ -1,9 +1,16 @@
 ---
 interface Props {
   class?: string;
+  "class:list"?: (string | undefined)[];
 }
 ---
 
-<div class:list={[Astro.props.class, "flex flex-col gap-4"]}>
+<div
+  class:list={[
+    Astro.props.class,
+    ...(Astro.props["class:list"] || []),
+    "flex flex-col gap-4",
+  ]}
+>
   <slot />
 </div>
