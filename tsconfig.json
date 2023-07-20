@@ -4,6 +4,7 @@
     "strict": true,
     "strictNullChecks": true,
     "baseUrl": ".",
+    "exactOptionalPropertyTypes": false,
     "paths": {
       "💅/*": ["src/styles/*"],
       "🛠️/*": ["src/scripts/*"],
