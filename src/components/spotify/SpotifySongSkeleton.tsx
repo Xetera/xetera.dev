@@ -38,7 +38,7 @@ export function SongSkeleton(
 ) {
   return (
     <article className="flex gap-3 justify-between items-center">
-      <div className="items-center flex gap-3">
+      <div className="items-center flex gap-3 w-full">
         {props.image}
         <SongSkeletonDetails title={props.title} artist={props.artist} />
       </div>

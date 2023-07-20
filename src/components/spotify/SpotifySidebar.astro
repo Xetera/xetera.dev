@@ -13,6 +13,8 @@ interface Props {
 
 const { likedSongs } = await meQuery;
 
+const { class: className } = Astro.props;
+
 const augmented = groupBy(
   likedSongs.map((track) => ({
     ...track,
@@ -24,10 +26,10 @@ const augmented = groupBy(
 );
 ---
 
-<HomepageSection class:list={["flex", Astro.props.class]}>
+<HomepageSection class:list={[className, "overflow-hidden"]}>
   <SectionHeader>Liked Spotify Tracks 🎧</SectionHeader>
 
-  <aside class="grid gap-6">
+  <aside class="grid gap-6 overflow-hidden grid-cols-1">
     {
       Object.entries(augmented).map(([distance, songs]) => {
         return (
