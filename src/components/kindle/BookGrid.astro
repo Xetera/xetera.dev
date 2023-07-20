@@ -13,7 +13,7 @@ function skewer(word: string) {
   return word.replace(/\s+/g, "-");
 }
 const { books } = await meQuery;
-const SHOW_COUNT = 8;
+const SHOW_COUNT = 10;
 const showing = books.slice(0, SHOW_COUNT) ?? [];
 const className = "book-item rounded";
 ---
@@ -54,7 +54,7 @@ const className = "book-item rounded";
 
 <style>
   .book-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
   .book-grid .book-item {
     transition: all 0.2s ease-in-out;
