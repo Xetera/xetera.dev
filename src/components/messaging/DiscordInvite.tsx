@@ -47,10 +47,14 @@ export function DiscordInvite(props: DiscordInviteProps) {
       </h1>
       <div className="flex flex-wrap justify-between gap-5 items-center">
         <img
-          className="m-0 rounded-lg h-full aspect-square"
-          src={`https://cdn.discordapp.com/icons/${props.serverId}/${inviteCounts?.guild.icon}.webp`}
-          width="56"
+          className="h-[56px] w-[56px] m-0 rounded-lg h-full aspect-square"
+          src={
+            inviteCounts
+              ? `https://cdn.discordapp.com/icons/${props.serverId}/${inviteCounts?.guild.icon}.webp`
+              : "https://cdn.discordapp.com/embed/avatars/0.png"
+          }
           height="56"
+          width="56"
           loading="lazy"
         />
         <div className="flex flex-col grow basis-auto">
@@ -61,16 +65,20 @@ export function DiscordInvite(props: DiscordInviteProps) {
             <div className="flex gap-2 items-center">
               <div className="bg-green-700 w-2 h-2 rounded-full"></div>
               <p className="m-0 not-prose text-sm">
-                {formatter.format(
-                  inviteCounts?.approximate_presence_count ?? 0,
-                )}{" "}
+                {inviteCounts
+                  ? formatter.format(inviteCounts?.approximate_presence_count)
+                  : "?"}{" "}
                 Online
               </p>
             </div>
             <div className="flex gap-2 items-center">
               <div className="bg-gray-500 w-2 h-2 rounded-full"></div>
               <p className="m-0 not-prose text-sm">
-                {formatter.format(inviteCounts?.approximate_member_count ?? 0)}{" "}
+                {inviteCounts
+                  ? formatter.format(
+                      inviteCounts?.approximate_member_count ?? 0,
+                    )
+                  : "?"}{" "}
                 Members
               </p>
             </div>
