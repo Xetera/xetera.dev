@@ -1,0 +1,131 @@
+---
+import { Image } from "astro:assets";
+import ExternalLink from "./ExternalLink.astro";
+import Email from "./icons/Email.astro";
+import Github from "./icons/Github.astro";
+import Twitter from "./icons/Twitter.astro";
+import ItsMe from "./ItsMe.astro";
+import avatarMj from "@assets/avatars/xetera_mj_2.jpeg";
+---
+
+<div class="flex flex-col md:flex-row justify-between w-full gap-8">
+  <div class="flex flex-col gap-4 flex-grow-0 max-w-[44rem] text-xl leading-8">
+    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-900 mb-2">
+      Hi, I'm Xetera.
+    </h1>
+
+    <div class="color-text-400 flex flex-col gap-4">
+      <p>
+        I love making ideas come to life with code. I'm a huge fan of functional
+        programming and anti-abuse + trust & safety.
+      </p>
+      <p>
+        I've recently been learning about reverse engineering, security, and
+        internet censorship. I like both kpop and metal, and think pineapple
+        belongs on pizza.
+      </p>
+      <p>
+        I'm currently based in <del class="color-text-100 -rotate-9 inline-flex"
+          >Turkey</del
+        >
+         Türkiye, Istanbul but also in general as well.
+      </p>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="flex gap-4 text-3xl color-text-700">
+        {
+          import.meta.env.SOCIAL_GITHUB && (
+            <ExternalLink
+              noIcon
+              href={`https://github.com/${import.meta.env.SOCIAL_GITHUB}`}
+              target="_blank"
+              class="hover:color-text-900"
+            >
+              <Github />
+            </ExternalLink>
+          )
+        }
+        {
+          import.meta.env.SOCIAL_TWITTER && (
+            <ExternalLink
+              noIcon
+              href={`https://twitter.com/${import.meta.env.SOCIAL_TWITTER}`}
+              target="_blank"
+              class="hover:color-text-900"
+            >
+              <Twitter />
+            </ExternalLink>
+          )
+        }
+        {
+          import.meta.env.SOCIAL_EMAIL && (
+            <ExternalLink
+              noIcon
+              href=""
+              target="_blank"
+              class="email-target hover:color-text-900 relative"
+            >
+              <div
+                class="obfuscated-email display-none"
+                data-email={JSON.stringify(
+                  import.meta.env.SOCIAL_EMAIL.split("").map((char: string) =>
+                    char.codePointAt(0),
+                  ),
+                )}
+              />
+              <Email />
+            </ExternalLink>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="relative w-full lg:max-w-[390px] max-w-[300px] aspect-ratio-1 flex-shrink-0 group relative h-min"
+  >
+    <span
+      class="rounded-md image-container -z-1 outline outline-1 outline-body-800"
+    ></span>
+    <Image
+      id="custom-avatar"
+      alt="Profile picture"
+      quality={100}
+      class="rounded-md z-2 outline outline-1 rounded outline-body-500 h-full bg-body-900"
+      src={avatarMj}
+      width={400}
+      height={400}
+      sizes=""
+    />
+    <ItsMe />
+  </div>
+</div>
+
+<noscript>
+  <style>
+    .email-target {
+      display: none;
+    }
+  </style>
+</noscript>
+
+<script>
+  const email = document.querySelector(
+    ".obfuscated-email",
+  )! as HTMLAnchorElement;
+  const emailTarget = document.querySelector(
+    ".email-target",
+  )! as HTMLDivElement;
+
+  const myEmail: number[] = JSON.parse(email.dataset.email ?? "[]");
+  emailTarget.setAttribute("href", `mailto:${String.fromCharCode(...myEmail)}`);
+
+  const avatar = document.querySelector("#custom-avatar") as HTMLImageElement;
+  avatar!.addEventListener("load", () => {
+    avatar!.classList.add("fade-in");
+  });
+
+  if (avatar!.complete) {
+    avatar!.classList.add("fade-in");
+  }
+</script>

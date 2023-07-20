@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+}
+---
+
+<div
+  class:list={[
+    "flex items-center color-text-200 uppercase font-medium text-xs tracking-widest",
+    Astro.props.class,
+  ]}
+>
+  <span class="min-w-[24px] h-[1px] bg-body-700"></span>
+  <div class="px-2 whitespace-nowrap">
+    <slot />
+  </div>
+  <span class="w-full h-[1px] bg-body-700"></span>
+</div>

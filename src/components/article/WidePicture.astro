@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  src: ImageMetadata;
+  aspectRatio: number | `${number}:${number}`;
+  alt: string;
+}
+
+const { props } = Astro;
+---
+
+<Image
+  class="w-full rounded"
+  style={{
+    aspectRatio:
+      typeof props.aspectRatio === "string"
+        ? props.aspectRatio.replace(":", "/")
+        : props.aspectRatio,
+  }}
+  src={props.src}
+  width={1024}
+  format="webp"
+  sizes="(min-width: 500px) 1024px, 500px"
+  alt={props.alt ?? ""}
+/>

@@ -1,0 +1,82 @@
+---
+import ArticleLink from "🧱/ArticleLink.astro";
+import Bio from "🧱/Bio.astro";
+import Navbar from "🧱/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+import Rss from "🧱/icons/Rss.astro";
+import { sub } from "date-fns";
+import SectionHeader from "🧱/SectionHeader.astro";
+import HomepageSection from "🧱/HomepageSection.astro";
+import BookGrid from "🧱/kindle/BookGrid.astro";
+import Ultrawide from "🧱/misc/Ultrawide.astro";
+import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
+import { LanyardStatus } from "🧱/lanyard/LanyardStatus";
+import { getAllContent } from "🛠️/content";
+
+const visiblePosts = await getAllContent();
+---
+
+<Layout title="Xetera">
+  <Navbar />
+  <main class="flex justify-center w-full my-7xl lg:my-[10%] homepage mx-6">
+    <div
+      class="flex flex-col gap-8 md:gap-12 mx-auto max-w-7xl w-full px-4 md:px-6"
+    >
+      <div class="mb-8">
+        <Bio />
+      </div>
+      <div class="grid grid-cols-3 gap-8">
+        <div
+          class="col-span-full lg:col-span-2 homepage-grid gap-8 flex flex-col"
+        >
+          <HomepageSection>
+            <SectionHeader>
+              {visiblePosts.length} Articles 📝
+              <a
+                slot="aside"
+                href="/rss.xml"
+                class="underlined inline-flex items-center gap-2 color-text-500"
+              >
+                <p>Subscribe to the RSS feed</p>
+                <Rss />
+              </a>
+            </SectionHeader>
+            <div class="posts flex flex-col gap-3">
+              {
+                visiblePosts.map((post) => {
+                  const isNew = sub(new Date(), { days: 30 }) < post.data.date;
+
+                  return (
+                    <div class="post">
+                      <ArticleLink {...post} isNew={isNew} />
+                    </div>
+                  );
+                })
+              }
+            </div>
+          </HomepageSection>
+          <BookGrid />
+          <p class="color-text-300 text-sm">
+            Looking for the old site? It's still up on <a
+              class="color-brand-500"
+              href="https://old.xetera.dev">old.xetera.dev</a
+            >
+          </p>
+        </div>
+        <div class="col-span-full lg:col-span-1 flex flex-col gap-8">
+          {
+            import.meta.env.DISCORD_ID && (
+              <LanyardStatus
+                discordId={import.meta.env.DISCORD_ID}
+                client:idle
+              />
+            )
+          }
+          <SpotifySidebar />
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<Ultrawide />

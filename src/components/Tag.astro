@@ -1,0 +1,14 @@
+---
+interface Props {
+  class?: string;
+}
+---
+
+<span
+  class:list={[
+    "rounded-sm outline outline-1 outline-body-700",
+    Astro.props.class,
+  ]}
+>
+  <slot />
+</span>

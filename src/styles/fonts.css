@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Canela Text";
+  src: url("/fonts/canela/canela-text-light-compressed.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela Deck";
+  src: url("/fonts/canela/canela-deck-bold-compressed.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: "Jetbrains Mono";
+  font-style: normal;
+  src: local("JetBrains Mono Regular"), local("JetBrainsMono-Regular"),
+    url("/fonts/jetbrains-mono/regular-compressed.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: "Jetbrains Mono";
+  font-style: normal;
+  src: local("JetBrains Mono Regular"), local("JetBrainsMono-Regular"),
+    url("/fonts/jetbrains-mono/medium-compressed.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mackinac";
+  src: url("/fonts/mackinac/mackinac-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Soleil";
+  src: url("/fonts/soleil/SoleilLight.otf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Soleil";
+  src: url("/fonts/soleil/SoleilLight.otf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}

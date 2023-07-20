@@ -1,0 +1,30 @@
+---
+interface Props {
+  contain?: boolean;
+}
+---
+
+<article
+  class:list={[
+    "wide-media col-span-full max-w-5xl w-full mx-auto rounded overflow-hidden",
+    Astro.props.contain ? "object-fit-contain" : "object-fit-cover",
+  ]}
+>
+  <slot />
+</article>
+
+<style>
+  .wide-media:not(.object-fit-contain) :global(> *) {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+  }
+  /* applying the object-fit filter to descendants too */
+  .wide-media.object-fit-contain :global(> *) {
+    object-fit: contain;
+  }
+  .wide-media.object-fit-cover :global(> *) {
+    object-fit: cover;
+  }
+</style>

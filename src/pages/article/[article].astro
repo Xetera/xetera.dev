@@ -1,0 +1,116 @@
+---
+import { getCollection, getEntryBySlug } from "astro:content";
+import { HiChevronDoubleUp } from "react-icons/hi/index.js";
+import type { BlogSchema } from "src/content/config";
+import Layout from "🗺️/Layout.astro";
+import Navbar from "🧱/Navbar.astro";
+import NextArticleLinks from "🧱/NextArticleLinks.astro";
+import TwitterCTA from "🧱/TwitterCTA.astro";
+import PostHeader from "🧱/article/PostHeader.astro";
+
+export const getStaticPaths = async () => {
+  const articles = await getCollection("blog");
+  return articles.map((article) => {
+    return {
+      params: { article: article.slug },
+      props: { article },
+    };
+  });
+};
+
+type ArticleType = Awaited<ReturnType<typeof getCollection<"blog">>>[number];
+
+let article: ArticleType;
+
+if (Astro.props.article) {
+  article = Astro.props.article;
+} else if (Astro.params.article) {
+  const { article: articleSlug } = Astro.params;
+  article = (await getEntryBySlug("blog", articleSlug)) as ArticleType;
+} else {
+  throw Error("Invalid render condition");
+}
+
+const frontmatter = article.data as BlogSchema;
+
+const { Content, remarkPluginFrontmatter } = await article.render();
+const minutesRead = remarkPluginFrontmatter.minutesRead;
+---
+
+<Layout title={frontmatter.title}>
+  <link
+    slot="head"
+    rel="preload"
+    href="/fonts/canela/canela-deck-bold-compressed.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+  <Navbar />
+  <article
+    class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base w-full"
+  >
+    <header class="w-full px-6 pt-6xl pb-3xl article-grid">
+      <PostHeader
+        banner={frontmatter.banner}
+        date={new Date(frontmatter.date)}
+        title={frontmatter.title}
+        readingTime={String(minutesRead)}
+        subtitle={frontmatter.description}
+        topImage={frontmatter?.imageTop?.src}
+        tags={frontmatter.tags}
+        type="article"
+      />
+    </header>
+    <main
+      class="main-article article-grid px-6 lg:px-0 larger-line-height text-xl lg:text-2xl leading-10 my-2xl color-text-700 leading-looser w-full"
+    >
+      <Content />
+    </main>
+    <div class="w-full h-full relative">
+      <hr
+        class="mt-2 mb-2 border-top-1 w-full h-[1px] bg-body-800 col-span-full transition-all"
+      />
+      <div class="article-grid relative z-2 py-12">
+        <TwitterCTA class="z-2" />
+        {Astro.params.article && <NextArticleLinks slug={Astro.params.article} />}
+      </div>
+      <div class="overlay rotate-180 z-0"></div>
+    </div>
+  </article>
+</Layout>
+
+<div class="article-data display-none" data-article-id={article.slug}></div>
+
+<button
+  class="z-1 to-top-button items-center gap-2 opacity-0 transition-all appearance-none display-none xl:display-flex fixed bottom-4 left-16 color-text-200 duration-300 hover:color-brand-900 font-sans"
+>
+  <HiChevronDoubleUp />
+  <span>Go Up</span>
+</button>
+
+<script>
+  import throttle from "lodash/throttle";
+  const articleElement = document.querySelector(".article-data");
+  if (articleElement instanceof HTMLElement) {
+    localStorage.setItem(`article-${articleElement.dataset.articleId}`, "1");
+  }
+  const toTop = document.querySelector(".to-top-button") as HTMLButtonElement;
+  document.addEventListener(
+    "scroll",
+    throttle(() => {
+      if (window.scrollY > 1000) {
+        toTop.classList.remove("opacity-0");
+      } else {
+        toTop.classList.add("opacity-0");
+      }
+    }, 200)
+  );
+  toTop.addEventListener("click", () => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: 0,
+      left: 0,
+    });
+  });
+</script>

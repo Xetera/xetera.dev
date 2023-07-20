@@ -1,0 +1,230 @@
+---
+title: "Why does school suck so much?"
+# using an iso string here to disambiguate
+# it from another post on the same date
+date: "2021-08-21T10:07:10.635Z"
+description: It's ok bro just power through it and you'll be free after you graduate.
+tags:
+  - Rant
+  - Exploration
+slug: why-does-school-suck-so-much
+banner: "./assets/banner.png"
+---
+
+import WideMedia from "🧱/article/WideMedia.astro"
+import WidePicture from "🧱/article/WidePicture.astro"
+import T from "🧱/T.astro"
+import Callout from "🧱/article/Callout.astro"
+import ExternalLink from "🧱/ExternalLink.astro"
+
+export const Toastable = ({ text }) => <span>{text}</span>
+
+export const Definition = ({ title }) => <span>{title}</span>
+
+There's a quote that every breathing human ever has either heard of before or recited for themselves that goes:
+
+> Give a man a fish and you feed him for a day; teach a man to fish and you feed him for a lifetime.
+
+And I agree with the premise, but I think this is a pretty outdated saying and I'd like to propose a third alternative that is inspired by the words of the famous philosopher Ron Swanson.
+
+<WideMedia>
+
+<video
+  class="rounded w-full"
+  src="https://media.vlipsy.com/vlips/GqLsYMoQ/480p.mp4"
+  muted
+  playsinline
+  controls
+/>
+
+</WideMedia>
+
+Don't teach a man to fish. He's a grown man; he can learn to fish on his own. Instead, show him why he might be interested in it over something else. Show him why you're passionate about fishing. Take him out for a boat ride, and get him excited about how good it feels when you catch something after patiently waiting for hours. Describe to him the details of fishing that make it feel so rewarding to sit with a pole in your hand for a whole day. But <T>please</T>, for the love of God, don't teach him how to fish. He doesn't need you for that.
+
+Admittedly, this version doesn't quite roll off the tongue, so I'm probably not going to be remembered for it when I die, but I think it touches on an important idea that I want to discuss.
+
+## Why we teach
+
+For a very long time, most of teaching was something we had to do out of necessity. If you wanted to survive, you had to learn how to hunt, how to avoid predators, how to gather supplies for your tribe; someone was equally as obligated to teach those things to you. You learned what you had to learn, so you could do what you need to do. Sure, even in the early days, people were concerned with arts and other non-essential skills, but they were not much more than side projects. Something you did when you were free from the work someone or something forced you into doing. If little Ugubwe wanted to eat that night, he had to hunt with the men of the tribe, and then he could learn to paint on the cave walls from the tribe elders later if he wanted to.
+
+As of fairly recently --specifically during the time of the industrial revolution-- we learned to channel this idea into institutions capable of growing a large population of little people into skilled factory workers years down the line. This wasn't so much based on necessity; we realized that like... I don't know man like this learning thing might be a good idea I don't know... So we went ahead and set up schools to actually be usable by the general public and came up with the <T>incredible idea</T> that being born into a family that has multiple servants should not be a pre-requisite to learning how to read. You still didn't get to paint on the cave walls on your own terms though. You learned the absolute basics of literacy and whatever skills you needed to become a good, obedient factory worker.
+
+<WideMedia caption="A classroom of girls in the Victorian era wishing they could be doing literally anything else right now." >
+
+import victorian from "./assets/victorian.jpg"
+
+<WidePicture
+  src={victorian}
+  alt="victorian girls in captivity"
+  aspectRatio="736:465"
+/>
+
+</WideMedia>
+
+This way of learning worked well for its intended purpose for many <T>thousands</T> of years, but because it was motivated by necessity or covering the absolute basics, you were never asked about what it was that you wanted to learn. You weren't nudged into discovering a passion for yourself. You were either given a task you had to do for a lifetime or had to find out what that was if you wanted to survive.
+
+export const SecondarySector = () => (
+  <Definition
+    text="secondary sector"
+    type="Noun"
+    title="Secondary Sector"
+    color="orange.500"
+    whiteSpace="nowrap"
+  >
+    In the <T>three-sector model</T>, the secondary sector refers to an economy
+    that is based around the conversion of raw material to products through
+    factories and processing.
+  </Definition>
+)
+
+export const TertiarySector = () => (
+  <Definition
+    text="tertiary and quaternary sector"
+    type="Noun"
+    title="Tertiary Sector"
+    color="blue.400"
+    whiteSpace="nowrap"
+  >
+    In the <T>three-sector model</T>, the tertiary sector and above refer to an
+    economy that is primarily focused around the sales and marketing of goods
+    produced in the secondary sector, as well as the creation and sharing of
+    information.
+  </Definition>
+)
+
+export const CurrentYear = () => (
+  <time>
+    {/* I'm incredible at predicting the future of global economies */}
+    {Math.max(Math.min(new Date().getFullYear(), 2030), 2021)}
+  </time>
+)
+
+Now in <CurrentYear />, as our global economies are transitioning out of the <SecondarySector /> and into the <TertiarySector />, we're finding that there is objectively a more diverse pool of work to be done compared to what our parents and grandparents had to do. Statistically speaking, if you're in middle school today, by the time you're ready to join the workforce, you're most likely going to be working a job that doesn't even exist yet. When it comes to career choice, we can now choose from a plethora of options, and we live in an era where all the information we need to learn new things is at our fingertips. Yet, for some reason, the fisherman is **still trying to teach us to fish** even though we have the option to do anything else.
+
+## What if I don't want to become a fisherman?
+
+Remember when you were a kid and you heard _that_ question? You know the one I'm talking about...
+
+<div class="text-center color-text-900 mb-6 font-black text-lg md:text-xl">
+  So Jakey, what do you want to be when you grow up?
+</div>
+
+export const VideoGames = () => (
+  <Toastable text="Video games" color="purple.400">
+    I'm assuming that the people who'd be interested in reading my blog were
+    kids when video games were a thing.
+  </Toastable>
+)
+
+Every kid's nightmare. Of the million things you could choose as a profession, chances are you had no idea what you wanted to be when you grew up. What were you even interested in? <VideoGames />? Art? Chatting with your friends about random nonsense on Skype late on a school night until your dad finally walked into your room at 3 AM and confiscated your phone while muttering something under his breath about how irresponsible you are? Were you ever given an opportunity where you could discover new things you liked that fell outside your comfort zone of interests as a kid? Probably not. We have so little time to explore ourselves, the world, and our interests while going through school. Yet, for some reason, we assume that kids will have some idea about what they're going to be doing for a living after high school or college when we never bother to allow them to discover their passions. This phenomenon did not use to be relevant in the past, but I would like to argue it certainly is now.
+
+> Hope you didn't forget about your homework of figuring out what you want to do in life. You had 12 years to hand it in!
+
+When we were still hunter and gatherers, at least after you learned to hunt, you had all the skills necessary to become a hunter. How does this translate to school now? Do students end up developing an interest in the fields they spend a long time learning? Do all kids want to become English teachers and biologists? Do these courses prepare them for the future where they might have an opportunity to work in a field they actually enjoy? Oh, I'm sorry, were you sleeping in your <T>investment banking</T> class? Maybe you should pay more attention in your <T>forensic investigation</T> class next time because not only do you not have any of the skills necessary to work in these fields; you probably don't even know what it means to do those things as a career.
+
+The bottom line is that school does **absolutely nothing** to expose you to different fields you could be interested in exploring. Even though educational institutions are capable of helping you explore various interests with an educator who could help guide you into discovering a passion, that's rarely ever the case. You will learn the basics of a few subjects some boomers decided you should know many years ago --with a few revisions here and there-- and you will be released into the wild with no valuable knowledge to further your career or your desire to learn.
+
+Also, I don't mean valuable knowledge in the same way an annoying middle-schooler would talk about it in science class going:
+
+I'm referring to the kind of information **YOU** consider to be valuable. Whether
+that's the knowledge that will help you succeed in life, like writing a good resume,
+or knowledge you find fun and engaging just for the sake of it. If you want to find
+something you're interested in pursuing in the long term and you think school is
+going to help you with that, I have some bad news for you.
+
+All of this happens because there's one important thing that's changed in the last few decades that educational institutions have not managed to keep up with, which is that information is now easily accessible online. The benefits of "giving" someone knowledge aren't as pronounced when you can simply learn those things yourself with little effort. Combined with the increase of the "surface area" of information you need to know, it's clear that students need guidance and mentorship to navigate their way to what will work well for them, not knowledge. You can learn things from anywhere; that's not the issue anymore.
+
+## How we enjoy being taught
+
+The reason I feel so strongly about this topic is that I know most people --if not all-- are interested in learning and are curious by nature. School does a terrible job at bringing out this incredible quality in us, but it's there. One of the best places to witness this is in the comments section of educational [math and science videos](https://www.youtube.com/watch?v=OxGsU8oIWjY) on YouTube, which many people still label as <T>procrastination</T> and <T>not real learning</T> to this day.
+
+![Youtube comment that reads "I can't believe I'm watching this video for entertainment"](./assets/youtube-comment.png)
+
+You can see the amazement in people as they realize that learning is an incredible feeling and that **school doesn't have to be synonymous with education**. Unfortunately, that is the way most of us feel, as we get put through this system starting as early as age 5, and it leads to a painful internal conflict for kids who realize the current education system isn't their cup of tea and they don't perform well in school because of it. They often think that they are just too dumb to understand concepts like math and science and arrive at the inevitable conclusion that they don't like <T>learning</T>.
+
+import { Conversation } from "./components/discord"
+import thisArrow from "@assets/_emotes/thisarrow.gif"
+import tzuyu from "@assets/avatars/tzuyu.png"
+import xetera from "@assets/avatars/xetera_mj_2.jpeg"
+
+
+<Conversation
+  thisArrow={thisArrow}
+  tzuyuAvatar={tzuyu}
+  xeteraAvatar={xetera}
+/>
+
+Obviously this isn't specific to YouTube, but there's clearly something about
+this style of learning and exposure of new concepts that touches people's hearts
+to the point where those who don't see themselves as an average school fan find themselves
+to be an average YouTube enjoyer. So what is it about this medium that feels so different
+from school? Let's look at that question by exploring the differences between what
+it means to be educator in the school system vs online media.
+
+### Educational Differences
+
+YouTube forces content creators to compete for your attention at any given moment. If the video you're looking at is not enticing enough, chances are you're just going to click on the next recommended video. Content creators win customers over by getting them to subscribe, but they still need to work hard to make sure that the videos that they're putting out continue to be engaging for their audience. As a viewer, you have the opportunity to explore a tremendous amount of alternative content with little work on your end. You can also choose not to watch YouTube anymore, at which point the content creator still loses a customer. There's no single point where a creator gets to relax and stop caring about how engaging their audience thinks their work is because the customer lifecycle can break at any moment.
+
+Teaching online is also difficult work, and naturally, the people who choose to go through with it are those who have a special knack for teaching and content creation. I can only think of a single one of my college professors who could even imagine of doing what they do at school on the internet where you have to actually be good at explaining ideas to see any amount of success.
+
+{<Callout>
+
+  <p class="color-text-400">
+    Shoutout to my man Henry Carnie, one of the only college professors I had who was actually good at what he does and got me interested in History.
+  </p>
+</Callout>}
+
+Things go a little differently for formal education.
+
+First, society expects you to attend school. <T>Don't believe me?</T> What's the kind of reaction do you think you get after you tell a family member that you don't want to go to university?
+
+You need a reason to choose not to go to school, and a good one at that too. That's an <T>incredible</T> leverage for educational institutions. For that reason, schools have to do relatively little to ensure that new students keep coming in year after year in terms of enticing students other than existing in a convenient physical location and not having a bad reputation.
+
+They also win over customers when students enroll, and that's generally where the effort they have to put in ends. Schools don't have to care about how engaging you feel the education is because they have no reason to. An enrolled student will continue attending unless the school does something catastrophic, and when that does happen, it's usually not an education-related issue either.
+
+Wait, what's that? You're saying that you always have the power to choose to attend a better school as a customer/student? <T>Uhuh</T>, which school are you going to move to, the one that's the **second** closest to your house? Gosh, I hope the education style there is better than the previous, even though that school has no reason to care either. Fine, you could choose to attend an online school, so you're not restricted by the physical location, but how are you supposed to tell apart an online school with a teaching style that resonates with you? There's no metric for this kind of thing. Schools get classified by prestige and cost, and we all know prestige is not an indicator of whether or not a school sucks to attend by any means.
+
+There's an industry standard set by traditional schools where, as a student of the school you attend, your opinions and satisfaction of these institutions are nowhere to be found in the list of things that influence their decision making. The schools make themselves look good doing the exact same thing they've done for the past 200 years, just with different curriculums. Your aunts and uncles, along with the rest of society, continue to pressure you to attend them year after year.
+
+> Your mom also went to UCI sweetie; you should apply there too.
+
+<hr mb={6} />
+
+This stark contrast between the two types of education goes a long way to explain why students have been desperate for an alternative but haven't been able to push for any meaningful change to get what <T>they</T> want to be prioritized. I believe that as remote learning starts to become more common and the importance of having a degree begins to decrease, there's going to be a major shift in how we do education at the undergraduate level and below. Students, for the first time in a long while, are going to start looking for an alternative way of learning that satisfies their own needs instead of someone else's.
+
+I can assure you that schools have done less to drive interest in civil engineering on a per-capita basis than this YouTube channel has. These viewers and educators are the ones who will be leading the slow transformation of the education standards around the world in the next 50 years.
+
+<WideMedia>
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube-nocookie.com/embed/yZwfcMSDBHs"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</WideMedia>
+
+As some final thoughts, if you're still in school, I highly encourage you to do your best to explore different fields you might be interested in by yourself instead of waiting for school to do it for you. One of the most liberating feelings in the world is knowing that you can learn anything you need without being dependent on someone teaching you the curriculum. When you have the freedom to explore the things <T>you</T> like, learning no longer becomes a chore.
+
+If you know you like eating fish, don't wait for someone to give you a fish or teach you fishing. Just Google it and learn it by yourself.
+
+import { RiChat1Fill } from "react-icons/ri/index.js"
+
+{<Callout icon={<RiChat1Fill />} title="Footnote">
+
+  <p text="color-text-300">
+    Try to take what I've written here with a grain of salt. I never finished my
+    degree and I'm obviously projecting my own experiences in the education
+    system. I'm also heavily biased towards a way of learning that works for me
+    and isn't compatible with the traditional school education system.
+  </p>
+  <p color="color-text-300">
+    I recognize that this isn't the case for everyone out there and that
+    everyone has their way of learning that works with or without a formal
+    education system. I'm only interested in helping people find out what that
+    style is for themselves and not necessarily pushing my preferred method onto
+    anyone else.
+  </p>
+</Callout>}

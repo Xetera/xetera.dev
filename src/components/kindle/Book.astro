@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+import type { Book } from "generated/gql/graphql";
+
+interface Props
+  extends Pick<Book, "title" | "author" | "coverUrl" | "progress" | "readAt"> {
+  class?: string;
+}
+
+const { props } = Astro;
+
+const percentageRead = Math.round(Number(props.progress.toFixed(1)));
+const isUnfinished = percentageRead < 100;
+---
+
+<article class:list={[props.class, "relative group"]}>
+  <div
+    class="z-2 rounded outline outline-1 outline-body-600 group-hover:-translate-y-6 transition-250 overflow-hidden group-hover:shadow-xl"
+  >
+    <Image
+      alt={`Book cover image for ${props.title}`}
+      width={500}
+      height={750}
+      sizes=""
+      loading="lazy"
+      class="z-2 w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
+      src={props.coverUrl}
+    />
+    {
+      isUnfinished && (
+        <progress
+          class="book-progress-bar transition-all w-full h-[3px] absolute bottom-0"
+          max={100}
+          value={percentageRead}
+        />
+      )
+    }
+  </div>
+  <div
+    class="z-0 flex text-sm w-full color-text-400 justify-between items-baseline absolute opacity-0 bottom-0 transition-300 ease-in-out group-hover:opacity-100"
+  >
+    <p class="mr-2 color-text-200 font-semibold text-xs font-mono">
+      {isUnfinished ? `${percentageRead}%` : "Read"}
+    </p>
+    <p data-sync-date={props.readAt} class="last-read">loading...</p>
+  </div>
+</article>
+
+<script>
+  import formatDistance from "date-fns/formatDistance";
+  const lastReadAll = document.querySelectorAll(".last-read");
+  lastReadAll.forEach((lastRead) => {
+    if (lastRead instanceof HTMLParagraphElement) {
+      const readTime = formatDistance(
+        new Date(lastRead.dataset.syncDate as string),
+        new Date(),
+        {
+          addSuffix: true,
+        }
+      ).replace("about ", "~");
+      lastRead.textContent = readTime;
+    }
+  });
+</script>
+
+<style>
+  .book-progress-bar,
+  .book-progress-bar[value] {
+    appearance: none;
+    background: transparent;
+
+    /* Get rid of default border in Firefox. */
+    border: none;
+  }
+
+  .book-progress-bar[value]::-moz-progress-bar {
+    background: var(--brand-900);
+  }
+  .book-progress-bar[value]::-webkit-progress-bar {
+    background: transparent;
+  }
+  .book-progress-bar[value]::-webkit-progress-value {
+    background: var(--brand-900);
+  }
+</style>

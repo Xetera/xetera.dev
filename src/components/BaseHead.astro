@@ -1,0 +1,101 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  themeColor?: string;
+}
+
+const { title, description, themeColor } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content={description ?? "Xetera's Blog"} />
+<link rel="icon" type="image/png" href="/xetera_favicon.png" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
+<meta name="theme-color" content={themeColor ?? "#f5c4c6"} />
+<meta name="generator" content={Astro.generator} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- view transitions crash browsers when the option is force toggled on :( -->
+<!-- <meta name="view-transition" content="same-origin" /> -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;900&display=swap"
+  rel="stylesheet"
+/>
+<slot name="head" />
+<title>{title}</title>
+<!-- Repeating a little bit of code here to make sure this is inlined properly -->
+<script is:inline>
+  const modes = ["dark", "light", "system"];
+
+  const DEFAULT_THEME_MODE = "system";
+  const THEME_KEY = "theme";
+
+  function isMode(input) {
+    return modes.includes(input);
+  }
+
+  function getColorMode() {
+    const preferenceRaw = localStorage.getItem(THEME_KEY);
+    const isValid = preferenceRaw && isMode(preferenceRaw);
+
+    let preference = isValid ? preferenceRaw : DEFAULT_THEME_MODE;
+
+    if (!isValid) {
+      setThemeDisplay(DEFAULT_THEME_MODE);
+    }
+
+    return preference;
+  }
+
+  function setKnownTheme(theme) {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem(THEME_KEY, theme);
+  }
+
+  function setThemeDisplay(mode) {
+    // if (mode === "system") {
+    //   const shouldBeDark = window.matchMedia(
+    //     "(prefers-color-scheme: dark)"
+    //   ).matches
+    //   setKnownTheme(shouldBeDark ? "dark" : "light")
+    // } else {
+    // }
+    setKnownTheme(mode === "system" ? "light" : mode);
+  }
+
+  function addThemeChangeListener(f) {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        console.info(`Theme was changed`);
+        const darkModeOn = e.matches;
+        f(darkModeOn ? "dark" : "light");
+      });
+  }
+
+  const theme = getColorMode();
+  addThemeChangeListener(setKnownTheme);
+  setThemeDisplay(theme);
+</script>
+
+<noscript>
+  <style>
+    /* We want some nice animation on hover for article cards for people without js */
+    .article-entry:hover {
+      transform: translateY(-5px);
+    }
+    /* can't get last read date without js */
+    .last-read {
+      display: none;
+    }
+  </style>
+</noscript>

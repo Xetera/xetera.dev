@@ -1,0 +1,189 @@
+---
+title: "Whatsapp doesn't deserve your business"
+date: "2020-12-09"
+description: Or at least not mine.
+tags:
+  - Rant
+slug: whatsapp-sucks
+banner: "./assets/banner.png"
+---
+
+import WideMedia from '🧱/article/WideMedia.astro'
+import Callout from '🧱/article/Callout.astro'
+import T from '🧱/T.astro'
+
+<WideMedia contain>
+  <Callout title="2023 Update">
+    <span class="mb-3">
+      Whatsapp has been focusing a lot on creating new features since I wrote this article, and has even updated the web app to work independently of the phone which was by far my biggest complaint with the app.
+    </span>
+    I'm still not its biggest fan but it's a much more usable app than it used to be. So take my opinions here with a grain of salt.
+  </Callout>
+</WideMedia>
+
+<h3>
+  <a
+    href="https://www.wired.com/2015/09/whatsapp-serves-900-million-users-50-engineers/"
+    target="_blank"
+    rel="noopener external"
+  >
+    Why WhatsApp Only Needs 50 Engineers for Its 900M Users
+  </a>
+</h3>
+
+This was one of the headlines that WhatsApp was praised for in 2015, attributing it to their use of Erlang. The engineer inside me still feels giddy at the thought of this since I'm a big fan of functional programming fan myself, but something about this headline doesn't sit right with me anymore. Every time I go to [https://web.whatsapp.com](https://web.whatsapp.com) to check my messages from the last 3 people in my friend circle who still use this app, and I wait for the page to load for 10 minutes only to realize that my phone hasn't been turned on for some time --and that I need to enter my password on my phone to use a chat app on desktop-- I think of this headline and it makes me angrier every time.
+
+# Laziness
+
+The last time I was using this app regularly was around 4 years ago. That was back in the olden times when there were no stickers and ehh... uhm... yeah that's it actually. Everything else was exactly the same. WhatsApp, with their team of the last 50 Erlang developers on Earth, have been busy doing absolutely nothing, at least on the user-facing side. Meanwhile they've been growing to a mind-blowing scale of [100 billion messages sent per day](https://techcrunch.com/2020/10/29/whatsapp-is-now-delivering-roughly-100-billion-messages-a-day/), which is more messages that gets sent through the global SMS infrastructure. This is even more impressive considering that they don't allow consumer bots on their platform the way Slack or Discord does, but perhaps less so, when you realize that there is still widespread businesses automation.
+
+The reason why this bothers me is because WhatsApp enjoys the leisure of a term I'm about to coin right now on the spot, called privacy-oriented laziness. Which is where your design decisions as a tech company based on privacy are a form of marketing for your users and a way of doing less work for your engineers. Building a system that tracks all of its users, while potentially very useful for growing a business, is a huge hassle engineering wise. Duckduckgo for example, doesn't have to deal with the work that goes into building a personalized search engine because that's just not what they do. WhatsApp doesn't store any messages from users for the sake of being privacy focused but that also means they have a lot less to worry about. Of course, when you're at the scale of WhatsApp, every technical problem is a massive challenge that requires completely rethinking the problem itself and not having to store messages doesn't end up being as big of a win. But the domain of problems that you're solving ends up being significantly smaller than if you had to worry about storing trillions of data points a month just for user messages alone.
+
+import { Conversation } from "./components/discord"
+import angry from "@assets/_emotes/angery.png"
+import prolly from "@assets/_emotes/prollynod.gif"
+import uhuh from "@assets/_emotes/uhuh.png"
+import whatsapp from "@assets/_emotes/whatsapp.png"
+import downvote from "@assets/_emotes/downvote.png"
+import xetera from "@assets/avatars/xetera_mj_2.jpeg"
+import peepoBoomer from "@assets/_emotes/peepoboomer.png"
+
+<Conversation
+  angry={angry}
+  prolly={prolly}
+  uhuh={uhuh}
+  whatsappAvatar={whatsapp}
+  downvote={downvote}
+  xeteraAvatar={xetera}
+  peepoBoomer={peepoBoomer}
+/>
+
+# It's just messaging app bro, why feature?
+
+Every time someone says this, the WhatsApp product manager drools all over his office desk. Why would a messaging app be subject
+to lesser standards you expect from other apps? I have 3 ideas for why I think this
+might be the case.
+
+1. **You haven't experienced the features available in other, better, apps and don't know there's something else out there.**
+
+This is certainly
+possible, I didn't have problems with WhatsApp before I discovered what Discord lets
+you do, now it's indistinguishable from SMS to me.
+
+2. **You haven't experienced the pain of the problems that exist in the current app.**
+
+No app is perfect, there's
+always something to fix and make life easier for the users. WhatsApp is certainly
+in this stage and the problems it has are painfully obvious.
+
+3. **You are over the age of 65.**
+
+Somehow, this app found itself to be extremely popular with the older generation, which is great. I know my grandma and grandpa were baffled by Skype and thought they couldn't do technology at all until they switched to WhatsApp and found it significantly easier and now they're tapping away and I'm able to talk to them at a moment's notice. Part of this coziness though, comes from the fact that WhatsApp just doesn't change anything. Something that's annoying enough for me to write a blog post on, is a feature in and of itself for older folks, and I of course have to recognize that.
+
+So what are some of the things that WhatsApp is missing?
+
+- Channels
+- Stickers that don't suck
+- Web app that doesn't suck
+- Arbitrary 256 member limit for group chats
+- Getting your phone number (and probably your identity later) doxxed is a part of how the app works which is absolutely insane
+
+Some of these are tied into my expectations of what I expect a chat app to do vs what some other expect it to do. It seems like for a lot of people, these things don't matter.
+
+> Why does it matter if there are no channels if I'm just talking to my mom?
+
+> Why does it matter if there's a group chat if I'm not in groups?
+
+> I trust everyone I use this app with so getting my phone number leaked isn't an issue.
+
+I understand where these arguments are coming from, you don't have to use group chats on WhatsApp. I don't have to use them either, but wouldn't it be nice if there was just one app that was good that we could use for all types of chatting instead of one shitty one that sucks and another actual good one with all the features?
+
+# Alternatives
+
+So what do you think we should use instead? Allow me to introduce you to Discord!
+
+Actually don't, just go look it up yourself instead, but chances are you already know about it and it's undisputably amazing.
+
+Maybe you might claim that
+
+import { DiscordMessage, DiscordMessageContainer } from "🧱/messaging/Discord"
+
+<DiscordMessageContainer>
+  <DiscordMessage
+    p={4}
+    message="Yeah but like these apps don't really do the same thing, Discord isn't a chatting app."
+    username="My last 2 brain cells"
+    roleColor="green.300"
+    date="Today at 9:51 AM"
+    avatar={"./assets/weSmart.png"}
+  />
+</DiscordMessageContainer>
+
+<p class="mb-4 text-sm color-text-400 align-center">
+  I know it's a little ridiculous to do this joke the style of a Discord chat
+  but someone on Discord unironically argued this with me.
+</p>
+
+Other than not storing messages on a server, —which I can guarantee the people you're talking with, including yourself don't actually care about— Discord a superset of WhatsApp in terms of features.
+
+Another one you could be getting into is Telegram
+
+![telegram](./assets/telegram_logo.jpg)
+
+It too, has all the features WhatsApp has and addresses every single one of the issues above, with its cool sticker sets, 20k person group limit, hidden phone numbers and more. I feel comfortable using Telegram if Discord is indeed seen as a "not a chatting app", which it totally isn't but whatever.
+
+So if all these apps have so many better features, why are people not using them? What's the _real_ reason people are hanging onto WhatsApp, not wanting to let go? Simply put, it's:
+
+
+import { WhatsappContainer, WhatsappMessage } from "🧱/messaging/Whatsapp"
+
+
+<WhatsappContainer>
+  <WhatsappMessage
+    color="rgb(120, 159, 115)"
+    time="9:18 AM"
+    messages={["Hey Discord is really cool you guys", "You wanna switch?"]}
+  />
+  <WhatsappMessage
+    wrapFirst
+    username="Billy"
+    other={true}
+    number="+1 (234) 567-8910"
+    color="rgb(230, 159, 115)"
+    time="9:21 AM"
+    messages={[
+      "Man it's just like",
+      "...",
+      "I'm already using whatsapp",
+      "and so are all my other friends",
+      ".......",
+      "fuck off",
+    ]}
+  />
+  <WhatsappMessage
+    wrapFirst
+    username="John"
+    other={true}
+    number="+42 (069) 1337-420"
+    color="#bd88eb"
+    time="9:23 AM"
+    messages={["Lmaooo", "Yeah dude we're not switching to Discord"]}
+  />
+</WhatsappContainer>
+
+The truth is, if you've been using WhatsApp for a long time and all your friends are on it it's kind of difficult to coordinate everyone to jump ship at the same time. That's the vendor lock-in effect that WhatsApp has as its biggest feature...
+
+So while it's true that WhatsApp revolutionized the way we do instant messaging, it just hasn't been keeping up. Just because you're at the top doesn't meaan you can stop trying because someone else (**cough** discord, telegram **cough**) will be catching up with features you should've implemented 5 years ago.
+
+<hr />
+
+import { RiChat1Fill } from "react-icons/ri/index.js"
+
+{<Callout title="Funny footnote" icon={<RiChat1Fill />}>
+  <p color="text.300">
+    While writing this post I sent something in WhatsApp that I had to delete
+    later but accidentally ended up pressing <T>delete for me</T> instead of{" "}
+    <T>delete for everyone</T> and completely lost the ability to delete it for
+    everyone. Fuck this app AAAAAAAAAAAAAAAAAAAAAA.
+  </p>
+</Callout>}

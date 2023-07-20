@@ -1,0 +1,80 @@
+---
+import "💅/theme.css";
+import "💅/fonts.css";
+import "💅/links.css";
+import "💅/article.css";
+import BaseHead, { Props as BaseHeadProps } from "🧱/BaseHead.astro";
+
+export interface Props extends BaseHeadProps {
+  class?: string;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead {...rest}>
+      <slot name="head" slot="head" />
+    </BaseHead>
+  </head>
+  <body
+    class:list={[
+      "h-full flex bg-body-900 color-text-800 transition-colors",
+      className,
+    ]}
+  >
+    <script is:inline>
+      0;
+    </script>
+    <div class="overlay z-0"></div>
+    <div class="flex flex-col items-center w-full z-1">
+      <slot />
+    </div>
+    <style is:global>
+      * {
+        word-break: break-word;
+      }
+
+      @media only screen and (min-width: 768px) {
+        code {
+          counter-reset: step;
+          counter-increment: step 0;
+        }
+
+        code .line::before {
+          content: counter(step);
+          counter-increment: step;
+          width: 1rem;
+          margin-right: 1.5rem;
+          display: inline-flex;
+          white-space: nowrap;
+          text-align: right;
+          color: var(--astro-code-token-comment);
+        }
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        stroke: var(--grid-color);
+        -webkit-mask-image: linear-gradient(0deg, transparent, black);
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'><path d='M0 .5H31.5V32'/></svg>");
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, "Jetbrains Mono", Menlo, Monaco,
+          Lucida Console, Liberation Mono, DejaVu Sans Mono,
+          Bitstream Vera Sans Mono, Courier New, monospace !important;
+      }
+      iframe {
+        max-width: 100%;
+      }
+    </style>
+  </body>
+</html>
