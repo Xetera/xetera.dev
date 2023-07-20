@@ -8,3 +8,5 @@
   Cache-Control: "public, max-age=360000"
 /rss.xml
   Cache-Control: "public, max-age=3600"
+/_astro/*
+  Cache-Control: public, max-age=604800, immutable
