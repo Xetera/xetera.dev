@@ -55,19 +55,24 @@ const visiblePosts = await getAllContent();
               }
             </div>
           </HomepageSection>
-          <BookGrid class="grid-area-[books]" />
+          <BookGrid />
+          <p class="color-text-300 text-sm">
+            Looking for the old site? It's still up on <a
+              class="color-brand-500"
+              href="https://old.xetera.dev">old.xetera.dev</a
+            >
+          </p>
         </div>
         <div class="col-span-full lg:col-span-1 flex flex-col gap-8">
           {
             import.meta.env.DISCORD_ID && (
               <LanyardStatus
-                className="grid-area-[lanyard]"
                 discordId={import.meta.env.DISCORD_ID}
                 client:idle
               />
             )
           }
-          <SpotifySidebar class="grid-area-[spotify]" />
+          <SpotifySidebar />
         </div>
       </div>
     </div>
