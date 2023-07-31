@@ -4,8 +4,8 @@ import { GRAPHQL_URL, executeOperation } from "./graphql";
 import type { MeQuery } from "generated/gql/graphql";
 
 const query = graphql(`
-  query Me {
-    books: kindleBooks {
+  query Me($filter: KindleFilterType) {
+    books: kindleBooks(filter: $filter) {
       title
       author
       asin
@@ -37,7 +37,9 @@ const query = graphql(`
   }
 `);
 
-export const meQuery = executeOperation(GRAPHQL_URL, query).then((r) => {
+export const meQuery = executeOperation(GRAPHQL_URL, query, {
+  filter: "PURCHASED",
+}).then((r) => {
   if (r.errors) {
     console.log(inspect(r.errors, { depth: Infinity, colors: true }));
     throw new Error("Failed to execute GraphQL query");

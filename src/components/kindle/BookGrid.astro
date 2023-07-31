@@ -5,6 +5,10 @@ import SectionHeader from "🧱/SectionHeader.astro";
 import Book from "./Book.astro";
 import { meQuery } from "🛠️/me";
 
+const booksMyGfWasReadingOnMyKindleThatIDontWantShowingOnMySite = [
+  "Tall Tales & Witchy Fails (A Witch on the Rocks Cozy Mystery Book 1)",
+];
+
 interface Props {
   class?: string;
 }
@@ -14,7 +18,14 @@ function skewer(word: string) {
 }
 const { books } = await meQuery;
 const SHOW_COUNT = 10;
-const showing = books.slice(0, SHOW_COUNT) ?? [];
+const showing =
+  books
+    .filter((book) =>
+      booksMyGfWasReadingOnMyKindleThatIDontWantShowingOnMySite.every(
+        (title) => title !== book.title,
+      ),
+    )
+    .slice(0, SHOW_COUNT) ?? [];
 const className = "book-item rounded";
 ---
 
