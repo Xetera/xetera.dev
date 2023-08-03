@@ -59,6 +59,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
         subtitle={frontmatter.description}
         topImage={frontmatter?.imageTop?.src}
         tags={frontmatter.tags}
+        slug={article.slug}
         type="article"
       />
     </header>
@@ -73,7 +74,11 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
       />
       <div class="article-grid relative z-2 py-12">
         <TwitterCTA class="z-2" />
-        {Astro.params.article && <NextArticleLinks slug={Astro.params.article} />}
+        {
+          Astro.params.article && (
+            <NextArticleLinks slug={Astro.params.article} />
+          )
+        }
       </div>
       <div class="overlay rotate-180 z-0"></div>
     </div>
@@ -104,7 +109,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
       } else {
         toTop.classList.add("opacity-0");
       }
-    }, 200)
+    }, 200),
   );
   toTop.addEventListener("click", () => {
     window.scrollTo({

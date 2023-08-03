@@ -13,14 +13,16 @@ interface Props {
   tags: string[];
   date: Date;
   topImage?: string | undefined;
+  slug: string;
 }
 
-const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
+const { readingTime, title, subtitle, tags, date, banner, slug } = Astro.props;
 ---
 
 <div class="flex gap-4 font-sans items-center">
   <div
     class="flex gap-6 items-center text-sm lg:text-base font-sans whitespace-nowrap inline-flex items-center color-brand-900 font-800 uppercase tracking-wider"
+    transition:name={`reading-time-${slug}`}
   >
     {readingTime}
   </div>
@@ -28,6 +30,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
 
 <h1
   class="m-0 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl font-900 z-1 leading-relaxed font-article-title"
+  transition:name={`title-${slug}`}
 >
   {title}
 </h1>
@@ -42,12 +45,14 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
       src={banner}
       loading="eager"
       class="article-banner my-10 aspect-ratio-[16/9] shadow-lg w-full rounded-lg outline outline-1 outline-body-800 object-cover"
+      transition:name={`splash-${slug}`}
     />
   )
 }
 
 <h2
   class="mt-0 color-text-300 text-xl lg:text-2xl z-1 mb-8 text-center font-article"
+  transition:name={`subtitle-${slug}`}
 >
   {subtitle}
 </h2>
@@ -68,7 +73,7 @@ const { readingTime, title, subtitle, tags, date, banner } = Astro.props;
       ))
     }
   </div>
-  <span class="font-400">
+  <span class="font-400" transition:name={`date-${slug}`}>
     Published <time datetime={date.toISOString()} class="color-text-800"
       >{format(date, "PP")}</time
     >

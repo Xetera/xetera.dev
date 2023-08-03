@@ -12,7 +12,7 @@ import rehypeSlug from "rehype-slug";
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: { assets: true },
+  experimental: { assets: true, viewTransitions: true },
   site: process.env.SITE_URL,
   markdown: {
     remarkPlugins: [

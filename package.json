@@ -25,7 +25,7 @@
     "@types/react-dom": "^18.2.7",
     "@unocss/preset-icons": "^0.53.5",
     "@unocss/transformer-variant-group": "^0.53.5",
-    "astro": "^2.8.4",
+    "astro": "^2.10.0",
     "autoprefixer": "^10.4.14",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
