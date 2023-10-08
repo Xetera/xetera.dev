@@ -33,7 +33,7 @@
     "graphql": "^16.8.1",
     "lodash": "^4.17.21",
     "mdast-util-to-string": "^4.0.0",
-    "postcss": "^8.4.26",
+    "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
