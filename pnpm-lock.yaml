@@ -43,7 +43,7 @@ dependencies:
     version: 0.53.5
   astro:
     specifier: ^2.10.0
-    version: 2.10.0(@types/node@18.16.19)(sharp@0.32.3)
+    version: 2.10.0(@types/node@18.16.19)(sharp@0.32.6)
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.31)
@@ -96,8 +96,8 @@ dependencies:
     specifier: ^0.5.1
     version: 0.5.1
   sharp:
-    specifier: ^0.32.3
-    version: 0.32.3
+    specifier: ^0.32.6
+    version: 0.32.6
   unocss:
     specifier: 0.49.1
     version: 0.49.1(rollup@3.26.3)(vite@4.4.12)
@@ -251,7 +251,7 @@ packages:
       astro: ^2.5.0
     dependencies:
       '@astrojs/prism': 2.1.2
-      astro: 2.10.0(@types/node@18.16.19)(sharp@0.32.3)
+      astro: 2.10.0(@types/node@18.16.19)(sharp@0.32.6)
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -359,7 +359,7 @@ packages:
       '@astrojs/webapi': 2.2.0
       '@vercel/analytics': 0.1.11(react@18.2.0)
       '@vercel/nft': 0.22.6
-      astro: 2.10.0(@types/node@18.16.19)(sharp@0.32.3)
+      astro: 2.10.0(@types/node@18.16.19)(sharp@0.32.6)
       esbuild: 0.17.19
       fast-glob: 3.3.0
       set-cookie-parser: 2.6.0
@@ -3148,7 +3148,7 @@ packages:
     hasBin: true
     dev: false
 
-  /astro@2.10.0(@types/node@18.16.19)(sharp@0.32.3):
+  /astro@2.10.0(@types/node@18.16.19)(sharp@0.32.6):
     resolution: {integrity: sha512-0XgsWdN3tVcxzjC8amXXRc4bxzCnwiEnAaUtz73Rmb9sW9nPFtajNTWeM+9R2xIIk0PH27aVcXJWJPzQ+rtUEA==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
@@ -3204,7 +3204,7 @@ packages:
       rehype: 12.0.1
       semver: 7.5.4
       server-destroy: 1.0.1
-      sharp: 0.32.3
+      sharp: 0.32.6
       shiki: 0.14.3
       string-width: 5.1.2
       strip-ansi: 7.1.0
@@ -3878,6 +3878,11 @@ packages:
 
   /detect-libc@2.0.1:
     resolution: {integrity: sha512-463v3ZeIrcWtdgIg6vI6XUncguvr2TnGl4SzDXinkt9mSLpBJKXT3mW6xT3VQdDN11+WVs29pgvivTc4Lp8v+w==}
+    engines: {node: '>=8'}
+    dev: false
+
+  /detect-libc@2.0.2:
+    resolution: {integrity: sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw==}
     engines: {node: '>=8'}
     dev: false
 
@@ -6458,7 +6463,7 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      detect-libc: 2.0.1
+      detect-libc: 2.0.2
       expand-template: 2.0.3
       github-from-package: 0.0.0
       minimist: 1.2.8
@@ -7002,13 +7007,13 @@ packages:
     resolution: {integrity: sha512-MATJdZp8sLqDl/68LfQmbP8zKPLQNV6BIZoIgrscFDQ+RsvK/BxeDQOgyxKKoh0y/8h3BqVFnCqQ/gd+reiIXA==}
     dev: true
 
-  /sharp@0.32.3:
-    resolution: {integrity: sha512-i1gFPiNqyqxC4ouVvCKj5G8WfPIMeeSxpKcMrjic6NY4e8zktW7bIdqHPc3FCG+pNKU/XCEabKA57hhvZi8UmQ==}
+  /sharp@0.32.6:
+    resolution: {integrity: sha512-KyLTWwgcR9Oe4d9HwCwNM2l7+J0dUQwn/yf7S0EnTtb0eVS4RxO0eUSvxPtzT4F3SY+C4K6fqdv/DO27sJ/v/w==}
     engines: {node: '>=14.15.0'}
     requiresBuild: true
     dependencies:
       color: 4.2.3
-      detect-libc: 2.0.1
+      detect-libc: 2.0.2
       node-addon-api: 6.1.0
       prebuild-install: 7.1.1
       semver: 7.5.4
