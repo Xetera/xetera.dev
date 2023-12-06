@@ -43,7 +43,7 @@
     "rehype-slug": "^5.1.0",
     "remark-mdx-code-meta": "^2.0.0",
     "rough-notation": "^0.5.1",
-    "sharp": "^0.32.3",
+    "sharp": "^0.32.6",
     "unocss": "0.49.1",
     "use-lanyard": "^1.4.4",
     "vite": "^4.4.12"
