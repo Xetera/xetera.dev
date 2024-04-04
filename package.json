@@ -46,7 +46,7 @@
     "sharp": "^0.32.6",
     "unocss": "0.49.1",
     "use-lanyard": "^1.4.4",
-    "vite": "^4.5.2"
+    "vite": "^4.5.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^4.0.1",
