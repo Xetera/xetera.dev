@@ -29,7 +29,7 @@ export default function WatchedTvShow({ show, selected }: Props) {
   >
     <img
       src={show.coverUrl}
-      className={cls("rounded mb-2 w-full max-h-[280px] object-cover h-full ease-out transition-all", (selected === show.simklId || typeof selected === "undefined") ? "opacity-100" : "opacity-20%")}
+      className={cls("rounded mb-2 w-full max-h-[280px] aspect-ratio-[47/70] object-cover h-full w-full ease-out transition-all", (selected === show.simklId || typeof selected === "undefined") ? "opacity-100" : "opacity-20%")}
     />
     <div className="flex flex-col gap-1">
       <h3 className="color-text-800 font-medium whitespace-nowrap overflow-hidden">
