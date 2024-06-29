@@ -76,16 +76,20 @@ export type QueryKindleBooksArgs = {
 
 export type Song = {
   __typename?: 'Song';
+  /** Album of the song */
   album: Scalars['String']['output'];
+  /** Artist of the song */
   artist: Scalars['String']['output'];
   /** Album art of the song */
   coverUrl: Scalars['String']['output'];
+  /** Duration of the song in milliseconds */
   durationMs: Scalars['Int']['output'];
   id: Scalars['ID']['output'];
   /** A 30 second preview of the song */
   previewUrl?: Maybe<Scalars['String']['output']>;
   /** Spotify URL of the song */
   spotifyUrl?: Maybe<Scalars['String']['output']>;
+  /** Title of the song */
   title: Scalars['String']['output'];
 };
 
