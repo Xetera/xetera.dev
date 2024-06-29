@@ -1,10 +1,8 @@
 ---
 import "💅/article.css";
-import { Image } from "astro:assets";
 import PostHeader from "🧱/article/PostHeader.astro";
 import Navbar from "🧱/Navbar.astro";
 import type { MarkdownLayoutProps } from "astro";
-import Layout from "./Layout.astro";
 import type { BlogSchema } from "src/content/config";
 
 type Props = MarkdownLayoutProps<BlogSchema> & {
@@ -12,7 +10,6 @@ type Props = MarkdownLayoutProps<BlogSchema> & {
 };
 
 const { frontmatter, content } = Astro.props;
-console.log("frontmatter", frontmatter);
 const { minutesRead } = content;
 ---
 

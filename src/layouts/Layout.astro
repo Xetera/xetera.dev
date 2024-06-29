@@ -1,9 +1,10 @@
 ---
+import "@unocss/reset/tailwind-compat.css";
 import "💅/theme.css";
 import "💅/fonts.css";
 import "💅/links.css";
 import "💅/article.css";
-import BaseHead, { Props as BaseHeadProps } from "🧱/BaseHead.astro";
+import BaseHead, { type Props as BaseHeadProps } from "🧱/BaseHead.astro";
 
 export interface Props extends BaseHeadProps {
   class?: string;
@@ -12,7 +13,7 @@ export interface Props extends BaseHeadProps {
 const { class: className, ...rest } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead {...rest}>
@@ -68,9 +69,17 @@ const { class: className, ...rest } = Astro.props;
 
       code,
       pre {
-        font-family: ui-monospace, "Jetbrains Mono", Menlo, Monaco,
-          Lucida Console, Liberation Mono, DejaVu Sans Mono,
-          Bitstream Vera Sans Mono, Courier New, monospace !important;
+        font-family:
+          ui-monospace,
+          "Jetbrains Mono",
+          Menlo,
+          Monaco,
+          Lucida Console,
+          Liberation Mono,
+          DejaVu Sans Mono,
+          Bitstream Vera Sans Mono,
+          Courier New,
+          monospace !important;
       }
       iframe {
         max-width: 100%;

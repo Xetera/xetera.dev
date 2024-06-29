@@ -1,7 +1,7 @@
 import unocss from "unocss/astro";
 import presetUno from "unocss/preset-uno";
 import presetTypography from "unocss/preset-typography";
-import { kebabCase } from "lodash";
+import kebabCase from "lodash/kebabCase.js";
 
 /**
  * @param {string} label

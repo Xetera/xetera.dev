@@ -3,8 +3,6 @@ import { defineConfig } from "astro/config";
 import unocss from "./uno.config.js";
 import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from "./markdown-utils.mjs";
-import UnoCss from "@unocss/astro";
-import prefetch from "@astrojs/prefetch";
 import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -12,7 +10,6 @@ import rehypeSlug from "rehype-slug";
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: { assets: true, viewTransitions: true },
   site: process.env.SITE_URL,
   markdown: {
     remarkPlugins: [
@@ -35,7 +32,7 @@ export default defineConfig({
       wrap: true,
     },
   },
-  integrations: [unocss, mdx(), prefetch({ throttle: 3 }), react()],
+  integrations: [unocss, mdx(), react()],
   output: "static",
   // adapter: vercel(),
   image: {

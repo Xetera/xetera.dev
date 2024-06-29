@@ -1,6 +1,10 @@
-import { Data as LanyardData, Spotify, useLanyardWS } from "use-lanyard";
-import { RiSpotifyFill } from "react-icons/ri/index.js";
-import { useEffect, ReactNode, useState } from "react";
+import {
+  type Data as LanyardData,
+  type Spotify,
+  useLanyardWS,
+} from "use-lanyard";
+import { RiSpotifyFill } from "react-icons/ri";
+import { useEffect, type ReactNode, useState } from "react";
 import { SongSkeletonDetails } from "🧱/spotify/SpotifySongSkeleton";
 import { resizeSpotifyImageTo } from "🧱/spotify/resizer";
 import cls from "classnames";
@@ -120,20 +124,20 @@ function Presence({
   data,
   className,
 }: {
-  data: LanyardData;
+  data?: LanyardData;
   className?: string | undefined;
 }) {
-  if (data.spotify) {
-    return (
-      <div className={className}>
-        <span className="color-text-500">
-          <SpotifyPresence spotify={data.spotify} />
-        </span>
-      </div>
-    );
+  if (!data?.spotify) {
+    return null
   }
 
-  return null;
+  return (
+    <div className={className}>
+      <span className="color-text-500">
+        <SpotifyPresence spotify={data.spotify} />
+      </span>
+    </div>
+  );
 }
 
 export function LanyardStatus(opts: {
@@ -141,10 +145,6 @@ export function LanyardStatus(opts: {
   className?: string;
 }) {
   const data = useLanyardWS(opts.discordId);
-
-  if (!data) {
-    return null;
-  }
 
   return <Presence className={opts.className} data={data} />;
 }
