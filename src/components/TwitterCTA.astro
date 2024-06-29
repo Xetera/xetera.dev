@@ -1,22 +1,39 @@
 ---
-import { RiTwitterFill } from "react-icons/ri/index.js";
+import { RiTwitterFill } from "react-icons/ri";
 
 const TWITTER_HANDLE = import.meta.env.SOCIAL_TWITTER;
-const link = `https://twitter.com/intent/follow?screen_name=${TWITTER_HANDLE}&twterm=follow`
+const link = `https://twitter.com/intent/follow?screen_name=${TWITTER_HANDLE}&twterm=follow`;
 
 interface Props {
   class?: string;
 }
 ---
 
-{TWITTER_HANDLE && <div class:list={["not-prose bg-body-800 p-6 lg:p-8 md:rounded-lg flex justify-between items-center flex-wrap gap-6", Astro.props.class]}>
-  <div class="inline-flex flex-col flex-1 min-w-70%">
-    <h1 class="text-2xl lg:text-3xl font-black mb-4">Enjoyed reading?</h1>
-    <p class="max-w-2xl text-lg color-text-400 text-wrap-balance">Feel free to follow or reach out to me on Twitter 1 before it dies and I have to move to a different Twitter.</p>
-  </div>
-  <div class="flex-1">
-    <a href={link} target="_blank" rel="noreferrer noopener" class="w-full external-link bg-body-900 rounded-full text-xl font-medium w-full flex justify-center items-center whitespace-nowrap h-fit py-2 px-6 outline-1 outline outline-body-700 transition-transform -hover:translate-y-1 decoration-none">
-      <RiTwitterFill className="me-4" /> Follow Me
-    </a>
-  </div>
-</div>}
+{
+  TWITTER_HANDLE && (
+    <div
+      class:list={[
+        "not-prose bg-body-800 p-6 lg:p-8 md:rounded-lg flex justify-between items-center flex-wrap gap-6",
+        Astro.props.class,
+      ]}
+    >
+      <div class="inline-flex flex-col flex-1 min-w-70%">
+        <h1 class="text-2xl lg:text-3xl font-black mb-4">Enjoyed reading?</h1>
+        <p class="max-w-2xl text-lg color-text-400 text-wrap-balance">
+          Feel free to follow or reach out to me on Twitter 1 before it dies and
+          I have to move to a different Twitter.
+        </p>
+      </div>
+      <div class="flex-1">
+        <a
+          href={link}
+          target="_blank"
+          rel="noreferrer noopener"
+          class="w-full external-link bg-body-900 rounded-full text-xl font-medium w-full flex justify-center items-center whitespace-nowrap h-fit py-2 px-6 outline-1 outline outline-body-700 transition-transform -hover:translate-y-1 decoration-none"
+        >
+          <RiTwitterFill className="me-4" /> Follow Me
+        </a>
+      </div>
+    </div>
+  )
+}
