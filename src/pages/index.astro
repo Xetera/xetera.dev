@@ -11,8 +11,20 @@ import BookGrid from "🧱/kindle/BookGrid.astro";
 import Ultrawide from "🧱/misc/Ultrawide.astro";
 import SpotifySidebar from "🧱/spotify/SpotifySidebar.astro";
 import { LanyardStatus } from "🧱/lanyard/LanyardStatus";
+import Simkl from "🧱/tv/simkl";
+import { meQuery } from "🛠️/me";
+
 import { getAllContent } from "🛠️/content";
 const visiblePosts = await getAllContent();
+
+const SPLIT_1 = 3;
+const SPLIT_2 = 8;
+
+// A good programmer refactors, a great programmer copy pastes
+const chunk_1 = visiblePosts.slice(0, SPLIT_1);
+const chunk_2 = visiblePosts.slice(SPLIT_1, SPLIT_1 + SPLIT_2);
+const chunk_3 = visiblePosts.slice(SPLIT_1 + SPLIT_2);
+const { tv } = await meQuery;
 ---
 
 <Layout title="Xetera">
@@ -42,7 +54,35 @@ const visiblePosts = await getAllContent();
             </SectionHeader>
             <div class="posts flex flex-col gap-3">
               {
-                visiblePosts.map((post) => {
+                chunk_1.map((post) => {
+                  const isNew = sub(new Date(), { days: 30 }) < post.data.date;
+
+                  return (
+                    <div class="post">
+                      <ArticleLink {...post} isNew={isNew} />
+                    </div>
+                  );
+                })
+              }
+              <div class="my-4">
+                <Simkl client:load tv={tv} />
+              </div>
+              {
+                chunk_2.map((post) => {
+                  const isNew = sub(new Date(), { days: 30 }) < post.data.date;
+
+                  return (
+                    <div class="post">
+                      <ArticleLink {...post} isNew={isNew} />
+                    </div>
+                  );
+                })
+              }
+              <div class="my-4">
+                <BookGrid />
+              </div>
+              {
+                chunk_3.map((post) => {
                   const isNew = sub(new Date(), { days: 30 }) < post.data.date;
 
                   return (
@@ -54,7 +94,6 @@ const visiblePosts = await getAllContent();
               }
             </div>
           </HomepageSection>
-          <BookGrid />
           <p class="color-text-300 text-sm">
             Looking for the old site? It's still up on <a
               class="color-brand-500"
