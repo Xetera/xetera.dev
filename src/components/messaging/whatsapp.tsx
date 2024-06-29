@@ -1,4 +1,4 @@
-import { PropsWithChildren, forwardRef } from "react";
+import { type PropsWithChildren, forwardRef } from "react";
 import WhatsappImage from "../../assets/_media/whatsapp_background.png";
 
 export const WhatsappContainer = forwardRef<
@@ -56,19 +56,16 @@ export function WhatsappMessage({
 
   return (
     <div
-      className={`${
-        other ? "justify-self-start" : "justify-self-end"
-      } flex flex-col gap-1 opacity-100 text-sm w-max text-whatsapp-chat-text`}
+      className={`${other ? "justify-self-start" : "justify-self-end"
+        } flex flex-col gap-1 opacity-100 text-sm w-max text-whatsapp-chat-text`}
     >
       <div
-        className={`${bubbleColor} px-2 py-[5px] flex flex-col relative rounded-b-lg w-max ${
-          other ? "rounded-r-lg" : "rounded-l-lg"
-        }`}
+        className={`${bubbleColor} px-2 py-[5px] flex flex-col relative rounded-b-lg w-max ${other ? "rounded-r-lg" : "rounded-l-lg"
+          }`}
       >
         <svg
-          className={`${bubbleColorText} absolute top-0 w-2.5 h-2.5 ${
-            other ? "right-full" : "left-full"
-          }`}
+          className={`${bubbleColorText} absolute top-0 w-2.5 h-2.5 ${other ? "right-full" : "left-full"
+            }`}
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           fill="currentColor"
@@ -103,9 +100,8 @@ export function WhatsappMessage({
       </div>
       {tail.map((message, i) => (
         <div
-          className={`${bubbleColor} flex w-max h-max px-2 py-[5px] relative rounded-md ${
-            other ? "align-start" : "align-end"
-          } `}
+          className={`${bubbleColor} flex w-max h-max px-2 py-[5px] relative rounded-md ${other ? "align-start" : "align-end"
+            } `}
           key={i}
         >
           <span className={`${textStyle} m-0 leading-5 text-sm lg:text-base`}>

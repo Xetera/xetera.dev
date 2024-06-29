@@ -1,5 +1,5 @@
 import cls from "classnames";
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import "./style.module.css";
 
 export function Byte(props: {

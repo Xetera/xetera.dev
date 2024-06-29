@@ -5,8 +5,8 @@ import {
   useEffect,
   forwardRef,
   Fragment,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
 } from "react";
 import cls from "classnames";
 import type { ImageMetadata } from "astro";
@@ -81,11 +81,10 @@ export function DiscordReaction({
     // closeOnClick={false}
     >
       <div
-        className={`flex border-subtle items-center rounded-md cursor-pointer px-2 py-0.5 border border-1 ${
-          reacted
+        className={`flex border-subtle items-center rounded-md cursor-pointer px-2 py-0.5 border border-1 ${reacted
             ? "bg-discord-reaction-reacted-background border-discord-reaction-reacted-border"
             : "bg-discord-reaction-background border-transparent"
-        }`}
+          }`}
         onClick={react}
       >
         {typeof image !== "string" ? (
