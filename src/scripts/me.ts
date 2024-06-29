@@ -30,6 +30,7 @@ const query = graphql(`
       simklId
       title
       lastWatchedAt
+      coverUrl
       episode
       nextEpisode
       simklLink

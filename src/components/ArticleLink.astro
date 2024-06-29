@@ -57,10 +57,10 @@ const readingTime = getReadingTime(body);
       banner && (
         <div
           style={{ aspectRatio: "16/9" }}
-          class="display-none @xl:display-block ml-auto overflow-hidden rounded overflow-hidden z-2 max-w-[200px] w-full object-cover h-full ml-auto flex-shrink-0"
+          class="hidden @xl:block ml-auto overflow-hidden rounded overflow-hidden z-2 max-w-[200px] w-full object-cover h-full ml-auto flex-shrink-0"
         >
           {isNew && (
-            <div class="new-tag display-none z-2 tracking-wider font-bold text-xs absolute right-0 top-0 text-center rounded m-2 px-2 bg-brand-900 color-white">
+            <div class="new-tag hidden z-2 tracking-wider font-bold text-xs absolute right-0 top-0 text-center rounded m-2 px-2 bg-brand-900 color-white">
               NEW
             </div>
           )}
