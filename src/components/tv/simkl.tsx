@@ -20,8 +20,8 @@ export default function Simkl({ tv }: { tv: Awaited<typeof meQuery>['tv'] }) {
 
     <div className={cls(styles.simklGrid, "simkl-grid gap-4 lg:gap-6 flex-wrap")} onMouseLeave={() => setSelected(undefined)}>
       {firstFourShows.map((show) =>
-        <div onMouseEnter={() => setSelected(show.simklId)}>
-          <WatchedTvShow key={show.simklId} show={show} selected={selected} />
+        <div onMouseEnter={() => setSelected(show.simklId)} key={show.simklId}>
+          <WatchedTvShow show={show} selected={selected} />
         </div>
       )}
     </div>
@@ -32,8 +32,8 @@ export default function Simkl({ tv }: { tv: Awaited<typeof meQuery>['tv'] }) {
 
     <div className={cls(styles.simklGrid, "simkl-grid gap-4 lg:gap-6 flex-wrap")} onMouseLeave={() => setSelected(undefined)}>
       {secondFourShows.map((show) =>
-        <div onMouseEnter={() => setSelected(show.simklId)}>
-          <WatchedTvShow key={show.simklId} show={show} selected={selected} />
+        <div onMouseEnter={() => setSelected(show.simklId)} key={show.simklId} >
+          <WatchedTvShow show={show} selected={selected} />
         </div>
       )}
     </div>
