@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { defineConfig } from "astro/config";
+import { defineConfig, sharpImageService } from "astro/config";
 import unocss from "./uno.config.js";
 import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from "./markdown-utils.mjs";
@@ -36,6 +36,6 @@ export default defineConfig({
   output: "static",
   // adapter: vercel(),
   image: {
-    service: { entrypoint: "astro/assets/services/sharp" },
+    service: sharpImageService()
   },
 });
