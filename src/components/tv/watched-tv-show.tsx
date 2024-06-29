@@ -24,12 +24,12 @@ export default function WatchedTvShow({ show, selected }: Props) {
   return <a
     href={show.simklLink ?? "#"}
     rel="nofollower noopener external"
-    className={cls("flex flex-col gap-1 w-full",)}
+    className={cls("flex flex-col gap-1 w-full h-full",)}
 
   >
     <img
       src={show.coverUrl}
-      className={cls("rounded mb-2 w-full max-h-[280px] object-cover w-full h-full ease-out transition-all", (selected === show.simklId || typeof selected === "undefined") ? "opacity-100" : "opacity-20%")}
+      className={cls("rounded mb-2 w-full max-h-[280px] object-cover h-full ease-out transition-all", (selected === show.simklId || typeof selected === "undefined") ? "opacity-100" : "opacity-20%")}
     />
     <div className="flex flex-col gap-1">
       <h3 className="color-text-800 font-medium whitespace-nowrap overflow-hidden">
