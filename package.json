@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "build:preview": "yarn build && python3 -m http.server 8000 dist",
     "astro": "astro",
-    "generate": "graphql-codegen-esm --config codegen.js"
+    "generate": "NODE_OPTIONS='-r dotenv/config' graphql-codegen-esm --config codegen.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.2",
