@@ -3,23 +3,13 @@ import presetUno from "unocss/preset-uno";
 import presetTypography from "unocss/preset-typography";
 import kebabCase from "lodash/kebabCase.js";
 
-/**
- * @param {string} label
- * @param {number} sizes
- * @returns
- */
-function createMapping(label, sizes) {
+function createMapping(label: string, sizes: number[]) {
   return Object.fromEntries(
     sizes.map((size) => [size, `var(--${label}-${size})`]),
   );
 }
 
-/**
- *
- * @param {Array<string>} vars
- * @returns
- */
-function variables(variables) {
+function variables(variables: string[]) {
   return Object.fromEntries(
     variables.map((a) => [a, `var(--${kebabCase(a)})`]),
   );

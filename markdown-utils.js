@@ -7,7 +7,7 @@ export function astReadingTime(md) {
 }
 
 export function remarkReadingTime() {
-  return function (tree, ctx) {
+  return (tree, ctx) => {
     const { data } = ctx;
     const readingTime = astReadingTime(tree);
     // readingTime.text will give us minutes read as a friendly string,

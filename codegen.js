@@ -1,5 +1,3 @@
-require("dotenv/config");
-
 const config = {
   schema: process.env.ME_API_GRAPHQL_URL,
   documents: ["src/**/*.ts", "src/**/*.tsx"],
@@ -14,4 +12,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config;

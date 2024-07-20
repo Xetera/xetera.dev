@@ -1,8 +1,8 @@
 import "dotenv/config";
 import { defineConfig, sharpImageService } from "astro/config";
-import unocss from "./uno.config.js";
+import unocss from "./uno.config";
 import mdx from "@astrojs/mdx";
-import { remarkReadingTime } from "./markdown-utils.mjs";
+import { remarkReadingTime } from "./markdown-utils";
 import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -14,8 +14,11 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkReadingTime,
+      // @ts-expect-error | markdown plugin types are weird
       rehypeSlug,
+      // @ts-expect-error | markdown plugin types are weird
       rehypeAutolinkHeadings,
+      // @ts-expect-error | markdown plugin types are weird
       rehypeExternalLinks,
     ],
     extendDefaultPlugins: true,
@@ -27,6 +30,7 @@ export default defineConfig({
       // Add custom languages
       // Note: Shiki has countless langs built-in, including .astro!
       // https://github.com/shikijs/shiki/blob/main/docs/languages.md
+      // @ts-expect-error | the types here are wrong for some reason
       langs: ["ts", "js", "haskell", "rust"],
       // Enable word wrap to prevent horizontal scrolling
       wrap: true,
@@ -34,7 +38,6 @@ export default defineConfig({
   },
   integrations: [unocss, mdx(), react()],
   output: "static",
-  // adapter: vercel(),
   image: {
     service: sharpImageService()
   },
