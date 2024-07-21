@@ -37,6 +37,14 @@ const { class: className, ...rest } = Astro.props;
       * {
         word-break: break-word;
       }
+      .prose :where(:not(pre) > code):not(:where(.not-prose,.not-prose *))::before, .prose :where(:not(pre) > code):not(:where(.not-prose,.not-prose *))::after {
+        content: "";
+      }
+      .prose :where(:not(pre) > code):not(:where(.astro-code,.not-prose,.not-prose *)) {
+        padding: 0 8px;
+        border-radius: 4px;
+        background: var(--inline-code);
+      }
 
       @media only screen and (min-width: 768px) {
         code {

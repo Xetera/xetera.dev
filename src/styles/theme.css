@@ -80,6 +80,8 @@
     --astro-code-token-string-expression: #22863a;
     --astro-code-token-punctuation: #24292eff;
     --astro-code-token-link: honeydew;
+
+    --inline-code:  oklch(0.96 0.08 135 / 0.78);
   }
 
   html.dark {
@@ -145,6 +147,8 @@
     --astro-code-token-string-expression: #c3e88d;
     --astro-code-token-punctuation: linen;
     --astro-code-token-link: honeydew;
+    
+    --inline-code: oklch(0.43 0.11 236.31 / 0.69);
   }
 
   .astro-code {
