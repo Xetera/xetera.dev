@@ -1,5 +1,5 @@
 import type { meQuery } from "🛠️/me";
-import cls from "classnames";
+import cls from "clsx";
 import minBy from "lodash/minBy";
 import { sub } from "date-fns/sub";
 import { differenceInDays } from "date-fns/differenceInDays";

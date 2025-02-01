@@ -30,7 +30,7 @@
     "@unocss/transformer-variant-group": "^65.4.3",
     "astro": "^5.2.3",
     "autoprefixer": "^10.4.20",
-    "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.7",
     "graphql": "^16.10.0",

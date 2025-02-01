@@ -8,7 +8,7 @@ import {
 	type ReactElement,
 	type ReactNode,
 } from "react";
-import cls from "classnames";
+import cls from "clsx";
 import type { ImageMetadata } from "astro";
 
 export function DiscordMessageContainer({

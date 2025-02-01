@@ -1,4 +1,4 @@
-import cls from "classnames";
+import cls from "clsx";
 import type { meQuery } from "🛠️/me";
 import styles from "./simkl.module.css";
 import WatchedTvShow from "./watched-tv-show";

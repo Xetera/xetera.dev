@@ -9,7 +9,7 @@ import {
 	useReactTable,
 	type Row,
 } from "@tanstack/react-table";
-import clsx from "classnames";
+import clsx from "clsx";
 
 type IndividualPacket = (typeof PcapType)[number];
 

@@ -1,4 +1,4 @@
-import cls from "classnames";
+import cls from "clsx";
 import type { meQuery } from "🛠️/me";
 
 export interface Props {

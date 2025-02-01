@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import cls from "classnames";
+import cls from "clsx";
 
 export type DiscordInviteProps = {
 	serverName: string;
