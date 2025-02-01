@@ -58,7 +58,7 @@
     "@unocss/astro": "^0.61.5",
     "@unocss/preset-typography": "0.61.5",
     "@unocss/reset": "0.61.5",
-    "pnpm": "^9.4.0",
+    "pnpm": "^9.15.0",
     "typescript": "^5.5.2"
   },
   "packageManager": "pnpm@9.4.0"
