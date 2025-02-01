@@ -6,8 +6,8 @@ import { differenceInDays } from "date-fns/differenceInDays";
 import { formatDistance } from "date-fns/formatDistance";
 
 export interface Props {
-	shows: Awaited<typeof meQuery>["tv"];
-	selected?: number;
+  shows: Awaited<typeof meQuery>["tv"];
+  selected?: number
 }
 
 export default function Timeline(props: Props) {
