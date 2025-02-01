@@ -1,0 +1,1833 @@
+[
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.173280000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.173280000 UTC",
+          "frame.time_epoch": "1722733342.173280000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000000000",
+          "frame.time_delta_displayed": "0.000000000",
+          "frame.time_relative": "0.000000000",
+          "frame.number": "1",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoed"
+        },
+        "eth": {
+          "eth.dst": "34:6e:9d:91:a9:ba",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "Ericsson_91:a9:ba",
+            "eth.dst.oui": "3436189",
+            "eth.dst.oui_resolved": "Ericsson AB",
+            "eth.addr": "34:6e:9d:91:a9:ba",
+            "eth.addr_resolved": "Ericsson_91:a9:ba",
+            "eth.addr.oui": "3436189",
+            "eth.addr.oui_resolved": "Ericsson AB",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8863"
+        },
+        "pppoed": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0xa7",
+          "pppoe.session_id": "0x000a",
+          "pppoe.payload_length": "0"
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.173672000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.173672000 UTC",
+          "frame.time_epoch": "1722733342.173672000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000392000",
+          "frame.time_delta_displayed": "0.000392000",
+          "frame.time_relative": "0.000392000",
+          "frame.number": "2",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoed"
+        },
+        "eth": {
+          "eth.dst": "ff:ff:ff:ff:ff:ff",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "Broadcast",
+            "eth.dst.oui": "16777215",
+            "eth.addr": "ff:ff:ff:ff:ff:ff",
+            "eth.addr_resolved": "Broadcast",
+            "eth.addr.oui": "16777215",
+            "eth.dst.lg": "1",
+            "eth.lg": "1",
+            "eth.dst.ig": "1",
+            "eth.ig": "1"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8863"
+        },
+        "pppoed": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x09",
+          "pppoe.session_id": "0x0000",
+          "pppoe.payload_length": "12",
+          "pppoed.tags": {
+            "pppoed.tags.host_uniq": "1a:12:00:00"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.173870000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.173870000 UTC",
+          "frame.time_epoch": "1722733342.173870000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000198000",
+          "frame.time_delta_displayed": "0.000198000",
+          "frame.time_relative": "0.000590000",
+          "frame.number": "3",
+          "frame.len": "74",
+          "frame.cap_len": "74",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoed"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8863"
+        },
+        "pppoed": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x07",
+          "pppoe.session_id": "0x0000",
+          "pppoe.payload_length": "50",
+          "pppoed.tags": {
+            "pppoed.tags.ac_name": "pfSense.home.arpa",
+            "pppoed.tags.service_name": "*",
+            "pppoed.tags.host_uniq": "1a:12:00:00",
+            "pppoed.tags.ac_cookie": "00:68:6f:60:00:f8:ff:ff"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.174274000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.174274000 UTC",
+          "frame.time_epoch": "1722733342.174274000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000404000",
+          "frame.time_delta_displayed": "0.000404000",
+          "frame.time_relative": "0.000994000",
+          "frame.number": "4",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoed"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8863"
+        },
+        "pppoed": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x19",
+          "pppoe.session_id": "0x0000",
+          "pppoe.payload_length": "24",
+          "pppoed.tags": {
+            "pppoed.tags.host_uniq": "1a:12:00:00",
+            "pppoed.tags.ac_cookie": "00:68:6f:60:00:f8:ff:ff"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.174314000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.174314000 UTC",
+          "frame.time_epoch": "1722733342.174314000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000040000",
+          "frame.time_delta_displayed": "0.000040000",
+          "frame.time_relative": "0.001034000",
+          "frame.number": "5",
+          "frame.len": "69",
+          "frame.cap_len": "69",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoed"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8863"
+        },
+        "pppoed": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x65",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "45",
+          "pppoed.tags": {
+            "pppoed.tags.ac_name": "pfSense.home.arpa",
+            "pppoed.tags.host_uniq": "1a:12:00:00",
+            "pppoed.tags.ac_cookie": "00:68:6f:60:00:f8:ff:ff"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.174392000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.174392000 UTC",
+          "frame.time_epoch": "1722733342.174392000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000078000",
+          "frame.time_delta_displayed": "0.000078000",
+          "frame.time_relative": "0.001112000",
+          "frame.number": "6",
+          "frame.len": "46",
+          "frame.cap_len": "46",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "22"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "1",
+          "ppp.identifier": "1",
+          "ppp.length": "20",
+          "Options: (16 bytes), Protocol Field Compression, Maximum Receive Unit, Magic Number, Authentication Protocol": {
+            "lcp.opt.field_compress": "07:02",
+            "lcp.opt.field_compress_tree": {
+              "lcp.opt.type": "7",
+              "lcp.opt.length": "2"
+            },
+            "lcp.opt.mtu_bytes": "01:04:05:d4",
+            "lcp.opt.mtu_bytes_tree": {
+              "lcp.opt.type": "1",
+              "lcp.opt.length": "4",
+              "lcp.opt.mru": "1492"
+            },
+            "lcp.opt.magic_number_bytes": "05:06:3b:67:d5:b0",
+            "lcp.opt.magic_number_bytes_tree": {
+              "lcp.opt.type": "5",
+              "lcp.opt.length": "6",
+              "lcp.opt.magic_number": "0x3b67d5b0"
+            },
+            "lcp.opt.auth_protocol_bytes": "03:04:c0:23",
+            "lcp.opt.auth_protocol_bytes_tree": {
+              "lcp.opt.type": "3",
+              "lcp.opt.length": "4",
+              "lcp.opt.auth_protocol": "0xc023"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.178222000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.178222000 UTC",
+          "frame.time_epoch": "1722733342.178222000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.003830000",
+          "frame.time_delta_displayed": "0.003830000",
+          "frame.time_relative": "0.004942000",
+          "frame.number": "7",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "16"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "1",
+          "ppp.identifier": "1",
+          "ppp.length": "14",
+          "Options: (10 bytes), Maximum Receive Unit, Magic Number": {
+            "lcp.opt.mtu_bytes": "01:04:05:d4",
+            "lcp.opt.mtu_bytes_tree": {
+              "lcp.opt.type": "1",
+              "lcp.opt.length": "4",
+              "lcp.opt.mru": "1492"
+            },
+            "lcp.opt.magic_number_bytes": "05:06:1b:98:3c:97",
+            "lcp.opt.magic_number_bytes_tree": {
+              "lcp.opt.type": "5",
+              "lcp.opt.length": "6",
+              "lcp.opt.magic_number": "0x1b983c97"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:22.178354000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:22.178354000 UTC",
+          "frame.time_epoch": "1722733342.178354000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000132000",
+          "frame.time_delta_displayed": "0.000132000",
+          "frame.time_relative": "0.005074000",
+          "frame.number": "8",
+          "frame.len": "40",
+          "frame.cap_len": "40",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "16"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "2",
+          "ppp.identifier": "1",
+          "ppp.length": "14",
+          "Options: (10 bytes), Maximum Receive Unit, Magic Number": {
+            "lcp.opt.mtu_bytes": "01:04:05:d4",
+            "lcp.opt.mtu_bytes_tree": {
+              "lcp.opt.type": "1",
+              "lcp.opt.length": "4",
+              "lcp.opt.mru": "1492"
+            },
+            "lcp.opt.magic_number_bytes": "05:06:1b:98:3c:97",
+            "lcp.opt.magic_number_bytes_tree": {
+              "lcp.opt.type": "5",
+              "lcp.opt.length": "6",
+              "lcp.opt.magic_number": "0x1b983c97"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.175083000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.175083000 UTC",
+          "frame.time_epoch": "1722733344.175083000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "1.996729000",
+          "frame.time_delta_displayed": "1.996729000",
+          "frame.time_relative": "2.001803000",
+          "frame.number": "9",
+          "frame.len": "46",
+          "frame.cap_len": "46",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "22"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "1",
+          "ppp.identifier": "2",
+          "ppp.length": "20",
+          "Options: (16 bytes), Protocol Field Compression, Maximum Receive Unit, Magic Number, Authentication Protocol": {
+            "lcp.opt.field_compress": "07:02",
+            "lcp.opt.field_compress_tree": {
+              "lcp.opt.type": "7",
+              "lcp.opt.length": "2"
+            },
+            "lcp.opt.mtu_bytes": "01:04:05:d4",
+            "lcp.opt.mtu_bytes_tree": {
+              "lcp.opt.type": "1",
+              "lcp.opt.length": "4",
+              "lcp.opt.mru": "1492"
+            },
+            "lcp.opt.magic_number_bytes": "05:06:3b:67:d5:b0",
+            "lcp.opt.magic_number_bytes_tree": {
+              "lcp.opt.type": "5",
+              "lcp.opt.length": "6",
+              "lcp.opt.magic_number": "0x3b67d5b0"
+            },
+            "lcp.opt.auth_protocol_bytes": "03:04:c0:23",
+            "lcp.opt.auth_protocol_bytes_tree": {
+              "lcp.opt.type": "3",
+              "lcp.opt.length": "4",
+              "lcp.opt.auth_protocol": "0xc023"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.175931000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.175931000 UTC",
+          "frame.time_epoch": "1722733344.175931000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000848000",
+          "frame.time_delta_displayed": "0.000848000",
+          "frame.time_relative": "2.002651000",
+          "frame.number": "10",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "8"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "4",
+          "ppp.identifier": "2",
+          "ppp.length": "6",
+          "Options: (2 bytes), Protocol Field Compression": {
+            "lcp.opt.field_compress": "07:02",
+            "lcp.opt.field_compress_tree": {
+              "lcp.opt.type": "7",
+              "lcp.opt.length": "2"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.176019000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.176019000 UTC",
+          "frame.time_epoch": "1722733344.176019000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000088000",
+          "frame.time_delta_displayed": "0.000088000",
+          "frame.time_relative": "2.002739000",
+          "frame.number": "11",
+          "frame.len": "44",
+          "frame.cap_len": "44",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "20"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "1",
+          "ppp.identifier": "3",
+          "ppp.length": "18",
+          "Options: (14 bytes), Maximum Receive Unit, Magic Number, Authentication Protocol": {
+            "lcp.opt.mtu_bytes": "01:04:05:d4",
+            "lcp.opt.mtu_bytes_tree": {
+              "lcp.opt.type": "1",
+              "lcp.opt.length": "4",
+              "lcp.opt.mru": "1492"
+            },
+            "lcp.opt.magic_number_bytes": "05:06:3b:67:d5:b0",
+            "lcp.opt.magic_number_bytes_tree": {
+              "lcp.opt.type": "5",
+              "lcp.opt.length": "6",
+              "lcp.opt.magic_number": "0x3b67d5b0"
+            },
+            "lcp.opt.auth_protocol_bytes": "03:04:c0:23",
+            "lcp.opt.auth_protocol_bytes_tree": {
+              "lcp.opt.type": "3",
+              "lcp.opt.length": "4",
+              "lcp.opt.auth_protocol": "0xc023"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.176645000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.176645000 UTC",
+          "frame.time_epoch": "1722733344.176645000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000626000",
+          "frame.time_delta_displayed": "0.000626000",
+          "frame.time_relative": "2.003365000",
+          "frame.number": "12",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "20"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "2",
+          "ppp.identifier": "3",
+          "ppp.length": "18",
+          "Options: (14 bytes), Maximum Receive Unit, Magic Number, Authentication Protocol": {
+            "lcp.opt.mtu_bytes": "01:04:05:d4",
+            "lcp.opt.mtu_bytes_tree": {
+              "lcp.opt.type": "1",
+              "lcp.opt.length": "4",
+              "lcp.opt.mru": "1492"
+            },
+            "lcp.opt.magic_number_bytes": "05:06:3b:67:d5:b0",
+            "lcp.opt.magic_number_bytes_tree": {
+              "lcp.opt.type": "5",
+              "lcp.opt.length": "6",
+              "lcp.opt.magic_number": "0x3b67d5b0"
+            },
+            "lcp.opt.auth_protocol_bytes": "03:04:c0:23",
+            "lcp.opt.auth_protocol_bytes_tree": {
+              "lcp.opt.type": "3",
+              "lcp.opt.length": "4",
+              "lcp.opt.auth_protocol": "0xc023"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.177045000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.177045000 UTC",
+          "frame.time_epoch": "1722733344.177045000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000400000",
+          "frame.time_delta_displayed": "0.000400000",
+          "frame.time_relative": "2.003765000",
+          "frame.number": "13",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "10"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "9",
+          "ppp.identifier": "0",
+          "ppp.length": "8",
+          "lcp.magic_number": "0x1b983c97"
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.177065000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.177065000 UTC",
+          "frame.time_epoch": "1722733344.177065000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000020000",
+          "frame.time_delta_displayed": "0.000020000",
+          "frame.time_relative": "2.003785000",
+          "frame.number": "14",
+          "frame.len": "34",
+          "frame.cap_len": "34",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "10"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "10",
+          "ppp.identifier": "0",
+          "ppp.length": "8",
+          "lcp.magic_number": "0x3b67d5b0"
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.177359000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.177359000 UTC",
+          "frame.time_epoch": "1722733344.177359000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000294000",
+          "frame.time_delta_displayed": "0.000294000",
+          "frame.time_relative": "2.004079000",
+          "frame.number": "15",
+          "frame.len": "61",
+          "frame.cap_len": "61",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:pap"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "37"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc023"
+        },
+        "pap": {
+          "pap.code": "1",
+          "pap.identifier": "1",
+          "pap.length": "35",
+          "pap.data": {
+            "pap.peer_id.length": "19",
+            "pap.peer_id": "ak69517242@vodafone",
+            "pap.password.length": "10",
+            "pap.password": "mrJz6vCar3"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.177676000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.177676000 UTC",
+          "frame.time_epoch": "1722733344.177676000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000317000",
+          "frame.time_delta_displayed": "0.000317000",
+          "frame.time_relative": "2.004396000",
+          "frame.number": "16",
+          "frame.len": "46",
+          "frame.cap_len": "46",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:pap"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "22"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc023"
+        },
+        "pap": {
+          "pap.code": "3",
+          "pap.identifier": "1",
+          "pap.length": "20",
+          "pap.data": {
+            "pap.message.length": "15",
+            "pap.message": "Login incorrect"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.177726000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.177726000 UTC",
+          "frame.time_epoch": "1722733344.177726000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000050000",
+          "frame.time_delta_displayed": "0.000050000",
+          "frame.time_relative": "2.004446000",
+          "frame.number": "17",
+          "frame.len": "30",
+          "frame.cap_len": "30",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "6"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "5",
+          "ppp.identifier": "4",
+          "ppp.length": "4"
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.185101000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.185101000 UTC",
+          "frame.time_epoch": "1722733344.185101000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.007375000",
+          "frame.time_delta_displayed": "0.007375000",
+          "frame.time_relative": "2.011821000",
+          "frame.number": "18",
+          "frame.len": "70",
+          "frame.cap_len": "70",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "46"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "5",
+          "ppp.identifier": "2",
+          "ppp.length": "44",
+          "ppp.data": "46:61:69:6c:65:64:20:74:6f:20:61:75:74:68:65:6e:74:69:63:61:74:65:20:6f:75:72:73:65:6c:76:65:73:20:74:6f:20:70:65:65:72"
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.185134000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.185134000 UTC",
+          "frame.time_epoch": "1722733344.185134000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000033000",
+          "frame.time_delta_displayed": "0.000033000",
+          "frame.time_relative": "2.011854000",
+          "frame.number": "19",
+          "frame.len": "30",
+          "frame.cap_len": "30",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "6"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "6",
+          "ppp.identifier": "5",
+          "ppp.length": "4"
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.186063000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.186063000 UTC",
+          "frame.time_epoch": "1722733344.186063000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000929000",
+          "frame.time_delta_displayed": "0.000929000",
+          "frame.time_relative": "2.012783000",
+          "frame.number": "20",
+          "frame.len": "60",
+          "frame.cap_len": "60",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoes:ppp:lcp"
+        },
+        "eth": {
+          "eth.dst": "60:be:b4:11:e9:df",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "SBluetech_11:e9:df",
+            "eth.dst.oui": "6340276",
+            "eth.dst.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "78:8c:b5:04:cf:02",
+          "eth.src_tree": {
+            "eth.src_resolved": "TPLink_04:cf:02",
+            "eth.src.oui": "7900341",
+            "eth.src.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8864"
+        },
+        "pppoes": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0x00",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "6"
+        },
+        "ppp": {
+          "ppp.protocol": "0xc021"
+        },
+        "lcp": {
+          "ppp.code": "6",
+          "ppp.identifier": "4",
+          "ppp.length": "4"
+        }
+      }
+    }
+  },
+  {
+    "_index": "packets-2024-08-04",
+    "_type": "doc",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.section_number": "1",
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_name": "/dev/fd/14"
+          },
+          "frame.encap_type": "1",
+          "frame.time": "Aug  4, 2024 04:02:24.186139000 +03",
+          "frame.time_utc": "Aug  4, 2024 01:02:24.186139000 UTC",
+          "frame.time_epoch": "1722733344.186139000",
+          "frame.offset_shift": "0.000000000",
+          "frame.time_delta": "0.000076000",
+          "frame.time_delta_displayed": "0.000076000",
+          "frame.time_relative": "2.012859000",
+          "frame.number": "21",
+          "frame.len": "42",
+          "frame.cap_len": "42",
+          "frame.marked": "0",
+          "frame.ignored": "0",
+          "frame.protocols": "eth:ethertype:vlan:ethertype:pppoed"
+        },
+        "eth": {
+          "eth.dst": "78:8c:b5:04:cf:02",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "TPLink_04:cf:02",
+            "eth.dst.oui": "7900341",
+            "eth.dst.oui_resolved": "TP-Link Corporation Limited",
+            "eth.addr": "78:8c:b5:04:cf:02",
+            "eth.addr_resolved": "TPLink_04:cf:02",
+            "eth.addr.oui": "7900341",
+            "eth.addr.oui_resolved": "TP-Link Corporation Limited",
+            "eth.dst.lg": "0",
+            "eth.lg": "0",
+            "eth.dst.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.src": "60:be:b4:11:e9:df",
+          "eth.src_tree": {
+            "eth.src_resolved": "SBluetech_11:e9:df",
+            "eth.src.oui": "6340276",
+            "eth.src.oui_resolved": "S-Bluetech co., limited",
+            "eth.addr": "60:be:b4:11:e9:df",
+            "eth.addr_resolved": "SBluetech_11:e9:df",
+            "eth.addr.oui": "6340276",
+            "eth.addr.oui_resolved": "S-Bluetech co., limited",
+            "eth.src.lg": "0",
+            "eth.lg": "0",
+            "eth.src.ig": "0",
+            "eth.ig": "0"
+          },
+          "eth.type": "0x8100"
+        },
+        "vlan": {
+          "vlan.priority": "0",
+          "vlan.dei": "0",
+          "vlan.id": "35",
+          "vlan.etype": "0x8863"
+        },
+        "pppoed": {
+          "pppoe.version": "1",
+          "pppoe.type": "1",
+          "pppoe.code": "0xa7",
+          "pppoe.session_id": "0x0007",
+          "pppoe.payload_length": "18",
+          "pppoed.tags": {
+            "pppoed.tags.generic_error": "session closed"
+          }
+        }
+      }
+    }
+  }
+]

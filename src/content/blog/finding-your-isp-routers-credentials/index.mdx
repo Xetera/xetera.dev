@@ -1,0 +1,102 @@
+---
+title: Finding your ISP router's credentials
+date: "2024-08-05"
+draft: true
+description: "Sorry, we can't tell you the password for security reasons 🤪"
+tags:
+  - Guide
+---
+
+import Callout from '🧱/article/Callout.astro'
+
+For the past two years, I've been using all the time I don't spend writing new articles setting up a homelab. That includes getting a new small server that I use for home-assistant, a cool access point, a network switch, and of course, my own router. I've also somehow ended up with a 64TB Plex collection now sitting in a data center and thousands of dollars sunk in completely unnecessary hardware for it. I didn't *have* to do any of these, but once you go down this rabbit hole there's no coming back.
+
+My setup was working great until I had to move to a new apartment and realized that my current ISP couldn't guarantee gigabit speeds there. I was being demoted from gigabit speeds to a mere 100mbps, that's 1/10ths the speed I was getting at my old place! You can argue I don't need gigabit but.. I mean I clearly *need* gigabit. How am I supposed to repeated run `docker pull xetera/abandoned-project` with a measly 100 mbit/s internet?
+
+I started looking around for a new ISP I could switch to, and when I found one that told me my building has fiber support, I learned an important lesson about what "fiber internet" means for ISPs. There's this incredible marketing hype around fiber, as if customers care what material their cables are made of. Every neighborhood is being upgraded to fiber connections, and these ISPs are mentioning incredible technological advancements with it. But what they won't tell you, or will do so reluctantly, is that their fancy new fiber is usually limited to asymmetric VDSL speeds. 100 mb/s down 10 mb/s up. All these companies seem to have found a way to turn their long term cost-saving investment —laying fiber for new customers instead of copper— into some hype most people don't even understand. I certainly didn't at first.
+
+After some more digging, I saw that an ISP promising gigabit speeds had their flyer hung on my apartment entrance the whole time I was doing my little online hunt, along with the phone number of the fiber manager guy in charge. At that moment, I somehow immediately got over my milennial fear of making phone calls through sheer willpower alone, and rung the guy up. He said he could promise 500mbps speeds, but not anything higher because my apartment had `Fiber to the Building` (FTTB) meaning there'd have to be a potential long run of ethernet cabling from the ONTs in the basement, reducing top speeds. I'm not quite sure how I responded to him after that. I might have passed out from shock after talking to someone with technical knowledge instead of getting random buzzwords thrown at me. When I came to, the next day, the guy and his crew were already over to hook up my internet. Everything was looking great.
+
+Once I had my new internet working, I asked this new “director of fiber internet” how I could go about getting the PPPoE password of the router so I can swap it out with my own router, the way I did with my previous ISP. He then casually dropped a complete bombshell on me. "Oh I don't know, they don't even tell me my own router's password. Let me know if you figure out how to find it."
+
+That scared me when I heard it since I didn't know how to do it at the time. But after some digging and experimenting I ended up figuring it out later that day.
+
+Mr. Director of Fiber Internet, if you're reading this, here's how:
+
+## Changing your router
+
+Your first option for digging up that password is to just see if your router shows it to you in its Web UI. A lot of ISPs I'm familiar with ship custom firmware with their routers that disable options like custom DNS configuration for epic government surveillance, among things like not showing that field. And the ones that don't ship with custom firmware, often have a write-only field for it and don't send the plaintext password to the UI. So I only mention this option in passing. It will probably not work.
+
+An alternative is to hack the router and maybe use some kind of vulnerability to get access into the router and its configuration, but honestly that sounds like a lot of work. Besides, I wouldn't know how.
+
+Thankfully, there is a much better third option, which is to MITM the router and find out its juicy secrets. For this, instead of connecting a device you own to your router, you'll be connecting your router to a device you control. But to get there, you'll first need to become familiar with the different protocols used for getting a router online.
+
+### PPPoE
+
+Without getting into too much detail —not because it's irrelevant, I just don't know any better— your router connects to the network of your provider with a literal cable. But they can't have just anyone who plugs in a cable connecting to their network, and chances are they don't plug up their switch ports with glue to prevent unauthorized usage. Instead, they likely use a technology called Point-to-Point over Ethernet (PPPoE), capable of doing device authentication through PPP. Though this could be a different protocol for you, I'm not a networking expert by any means.
+
+When your router turns on, it broadcasts a packet to order to discover if there's a PPPoE server on the other end to authenticate itself against. This authentication happens with a username and password, but ISPs often also take the device MAC address into account and won't authorize your device if it's coming from a device they didn't give you. Or at least that's what they like to tell themselves.
+
+### Asking for the password politely
+
+There are two ways routers authenticate themselves against whatever they're connected to based on what the server asks for after a session has been established over PPPoE. There's CHAP, where a 3 way handshake between the client and server is used to solve a challenge, similar to what you'd expect from a modern login method. Then there's PAP, where your device essentially yells all of its secrets into the void and hopes nobody is listening. Similar to a dispute between two cavemen in 1200 B.C. This is what we'll use to find the password.
+
+I actually don't think the latter is necessarily dangerous even though it's obviously insecure. You need to have physical access to a router to do any damage and, as far as I know, there aren't many recorded cases of customers getting their devices hijacked through this route, though I'm sure there are at least a few. Which makes me even angrier that ISPs say they can't give you that password for safety purposes. Bullshit.
+
+Let's connect the router to the computer you're running.
+
+I already have an external router running pfsense, so I've connected the ISP router to the `igc3` interface on my pfsense machine.
+
+If you're also a pfsense user, you can tell which interface you've connected to by going
+
+import interface_ from "./assets/interface.png"
+import WidePicture from "🧱/article/WidePicture.astro"
+import WideMedia from "🧱/article/WideMedia.astro"
+
+<WideMedia>
+  <WidePicture
+    noBorder
+    alt="screenshot of pfsense showing interface assignments"
+    aspectRatio="10:4"
+    src={interface_}
+  />
+</WideMedia>
+
+Before the router powers up, we want to already be dumping all the network communication on that interface with wireshark. Assuming you already have ssh access to your machine, running this command lets us pipe tcpdump into wireshark and take a look under the hood.
+
+<WideMedia contain>
+```shell
+wireshark -k -i <(ssh root@10.0.0.1 tcpdump -i igc3 -U -w -)
+```
+</WideMedia>
+
+I personally use `10.0.0.0/8` for my home subnet because I'm awesome. If you haven't done this kind of thing before or don't know what a subnet is, you're most likely set up with `192.168.1.1` by default.
+
+After powering on the router and waiting a bit for it to wake up, we should start seeing `PADI` packets that the router sends to initiate the PPPoE handshake. We haven't set up a PPPoE server on the other side yet so these packets falls into the void with no response. Most routers are set up to retry discovery to prevent falling into a do-nothing state. In my case, you can see it retries every 30 seconds.
+
+import padi from "./assets/padi.png"
+
+<WideMedia contain>
+  <WidePicture
+    noBorder
+    alt="screenshot of pfsense showing interface assignments"
+    src={padi}
+  />
+</WideMedia>
+
+Here's what the steps of an average conversation over PPPoE looks like:
+
+- `PADI` Your router's broadcast over the network it's connected to see if there's a server out there.
+- `PADO` The server response to the broadcast. This is basically the pong to the router's ping that contains extra information like the name of the server, and a session cookie used to keep track of the conversation.
+- `PADR` The request your router sends to establish a connection using the existing session it received from the previous step.
+- `PADS` The server acknowledgement of `PADR` packets. After this step your server can start sending PPP configuration packets to negotiate the settings that will be used to go online.
+- `PADT` The termination packet. I've seen one of my routers sending this before sending a `PADI` packet, probably to make sure any potentially existing sessions are dropped? It can also be sent by the server if they want to take you offline for whatever reason.
+
+The part we're interested in happens after this handshake is successfully completed, once the router and server agree on the PPP configuration.
+
+import a from "./assets/_turktelekom.json"
+import { Timeline } from "🧱/Pcap.tsx"
+
+<WideMedia extraWide>
+  <Timeline client:visible pcap={a}></Timeline>
+</WideMedia>

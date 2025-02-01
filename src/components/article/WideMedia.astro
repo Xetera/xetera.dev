@@ -1,12 +1,14 @@
 ---
 interface Props {
   contain?: boolean;
+  extraWide?: boolean;
 }
 ---
 
 <article
   class:list={[
-    "wide-media col-span-full max-w-5xl w-full mx-auto rounded overflow-hidden",
+    "wide-media col-span-full w-full mx-auto rounded overflow-hidden",
+    Astro.props.extraWide ? "max-w-7xl" : "max-w-5xl",
     Astro.props.contain ? "object-fit-contain" : "object-fit-cover",
   ]}
 >
