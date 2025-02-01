@@ -1,22 +1,18 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { routes } from "src/routing";
 import { formatDistance } from "date-fns";
-import getReadingTime from "reading-time";
 
 export type Props = CollectionEntry<"blog"> & {
   isNew: boolean;
 };
-const { data, slug, isNew, body } = Astro.props;
-const { banner } = data;
-const readingTime = getReadingTime(body);
+const { data, id, isNew } = Astro.props;
 ---
 
 <a
-  data-article-id={slug}
+  data-article-id={id}
   data-is-new={isNew ? "true" : "false"}
-  href={routes.article(slug)}
+  href={routes.article(id)}
   rel="prefetch"
   class="article-entry flex group @container h-full transition-transform duration-300 transform-gpu rounded"
 >
@@ -25,7 +21,7 @@ const readingTime = getReadingTime(body);
       <div class="flex flex-col gap-2">
         <h2
           class="article-title text-lg font-medium leading-5 w-fit"
-          transition:name={`title-${slug}`}
+          transition:name={`title-${id}`}
         >
           {data.title}
         </h2>
@@ -38,7 +34,7 @@ const readingTime = getReadingTime(body);
         <time
           class="text-sm color-text-300 leading-3"
           datetime={data.date.toString()}
-          transition:name={`date-${slug}`}
+          transition:name={`date-${id}`}
           >Posted {
             formatDistance(data.date, new Date(), { addSuffix: true })
           }</time

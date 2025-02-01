@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from "astro:transitions";
 export interface Props {
   title: string;
   description?: string;
@@ -27,6 +26,12 @@ const { title, description, themeColor } = Astro.props;
 />
 <slot name="head" />
 <title>{title}</title>
+<link
+    rel="alternate"
+    type="application/rss+xml"
+    title={title}
+    href={new URL("rss.xml", Astro.site)}
+/>
 <!-- Repeating a little bit of code here to make sure this is inlined properly -->
 <script is:inline>
   const modes = ["dark", "light", "system"];
@@ -99,4 +104,4 @@ const { title, description, themeColor } = Astro.props;
   </style>
 </noscript>
 
-<!-- <ViewTransitions /> -->
+<!-- <ClientRouter /> -->

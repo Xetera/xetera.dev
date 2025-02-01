@@ -37,7 +37,7 @@ const isUnfinished = percentageRead < 100;
     }
   </div>
   <div
-    class="z-0 flex text-sm w-full color-text-400 justify-between items-baseline absolute opacity-0 bottom-0 transition-300 ease-in-out group-hover:opacity-100"
+    class="z-0 flex text-xs w-full color-text-400 justify-between items-baseline absolute opacity-0 bottom-0 transition-300 ease-in-out group-hover:opacity-100"
   >
     <p class="mr-2 color-text-200 font-semibold text-xs font-mono">
       {isUnfinished ? `${percentageRead}%` : "Read"}
@@ -47,7 +47,7 @@ const isUnfinished = percentageRead < 100;
 </article>
 
 <script>
-  import formatDistance from "date-fns/formatDistance";
+  import { formatDistance } from "date-fns/formatDistance";
   const lastReadAll = document.querySelectorAll(".last-read");
   lastReadAll.forEach((lastRead) => {
     if (lastRead instanceof HTMLParagraphElement) {

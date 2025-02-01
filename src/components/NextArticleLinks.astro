@@ -3,26 +3,33 @@ import ArticleLink from "./ArticleLink.astro";
 import { getAllContent } from "🛠️/content";
 
 interface Props {
-  slug: string;
+	id: string;
 }
 
 const RECOMMENDATION_LENGTH = 3;
 
-const posts = (await getAllContent()).reverse()
-const currentPostPosition = posts.findIndex(post => post.slug === Astro.props.slug)
-let nextPosts = posts.slice(currentPostPosition + 1, currentPostPosition + RECOMMENDATION_LENGTH)
+const posts = (await getAllContent()).reverse();
+const currentPostPosition = posts.findIndex(
+	(post) => post.id === Astro.props.id,
+);
+let nextPosts = posts.slice(
+	currentPostPosition + 1,
+	currentPostPosition + RECOMMENDATION_LENGTH,
+);
 
 if (nextPosts.length < RECOMMENDATION_LENGTH) {
-  nextPosts.push(...posts.slice(currentPostPosition - (RECOMMENDATION_LENGTH - nextPosts.length), currentPostPosition))
+	nextPosts.push(
+		...posts.slice(
+			currentPostPosition - (RECOMMENDATION_LENGTH - nextPosts.length),
+			currentPostPosition,
+		),
+	);
 }
-
 ---
 
 <section class="px-4 md:p-0">
-  <h3>Next up</h3>
-
-<div class="flex flex-col gap-3 not-prose">
-  {nextPosts.map(post => <ArticleLink {...post} isNew={false} />)}
-</div>
-
+  <h3 class="mb-4">Next up</h3>
+  <div class="flex flex-col gap-10 not-prose">
+    {nextPosts.map(post => <ArticleLink {...post} isNew={false} />)}
+  </div>
 </section>

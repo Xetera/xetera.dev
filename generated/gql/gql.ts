@@ -11,8 +11,12 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
-const documents = {
+type Documents = {
+    "\n  query Me($filter: KindleFilterType) {\n    books: kindleBooks(filter: $filter) {\n      title\n      author\n      asin\n      coverUrl\n      progress\n      readAt\n    }\n\n    likedSongs: spotifyLikedSongs {\n      likedAt\n      song {\n        title\n        artist\n        coverUrl\n        spotifyUrl\n        previewUrl\n        durationMs\n      }\n    }\n\n    tv {\n      simklId\n      title\n      lastWatchedAt\n      coverUrl\n      episode\n      nextEpisode\n      simklLink\n    }\n  }\n": typeof types.MeDocument,
+};
+const documents: Documents = {
     "\n  query Me($filter: KindleFilterType) {\n    books: kindleBooks(filter: $filter) {\n      title\n      author\n      asin\n      coverUrl\n      progress\n      readAt\n    }\n\n    likedSongs: spotifyLikedSongs {\n      likedAt\n      song {\n        title\n        artist\n        coverUrl\n        spotifyUrl\n        previewUrl\n        durationMs\n      }\n    }\n\n    tv {\n      simklId\n      title\n      lastWatchedAt\n      coverUrl\n      episode\n      nextEpisode\n      simklLink\n    }\n  }\n": types.MeDocument,
 };
 

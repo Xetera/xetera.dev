@@ -5,6 +5,7 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "exactOptionalPropertyTypes": false,
+    "verbatimModuleSyntax": true,
     "paths": {
       "💅/*": ["src/styles/*"],
       "🛠️/*": ["src/scripts/*"],
@@ -18,5 +19,7 @@
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
-  }
+  },
+  "include": [".astro/types.d.ts","**/*"],
+  "exclude": ["dist"]
 }

@@ -8,7 +8,8 @@ export const Conversation = ({
   angry,
   xeteraAvatar,
   uhuh,
-}) => {
+// biome-ignore lint/suspicious/noExplicitAny: type this
+}: any) => {
   return (
     <DiscordMessageContainer>
       <DiscordMessage

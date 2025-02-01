@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntryBySlug } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import { HiChevronDoubleUp } from "react-icons/hi";
 import type { BlogSchema } from "src/content/config";
 import Layout from "🗺️/Layout.astro";
@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
   const articles = await getCollection("blog");
   return articles.map((article) => {
     return {
-      params: { article: article.slug },
+      params: { article: article.id },
       props: { article },
     };
   });
@@ -26,14 +26,14 @@ if (Astro.props.article) {
   article = Astro.props.article;
 } else if (Astro.params.article) {
   const { article: articleSlug } = Astro.params;
-  article = (await getEntryBySlug("blog", articleSlug)) as ArticleType;
+  article = (await getEntry("blog", articleSlug)) as ArticleType;
 } else {
   throw Error("Invalid render condition");
 }
 
 const frontmatter = article.data as BlogSchema;
 
-const { Content, remarkPluginFrontmatter } = await article.render();
+const { Content, remarkPluginFrontmatter } = await render(article);
 const minutesRead = remarkPluginFrontmatter.minutesRead;
 ---
 
@@ -58,7 +58,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
         readingTime={String(minutesRead)}
         subtitle={frontmatter.description}
         topImage={frontmatter?.imageTop?.src}
-        slug={article.slug}
+        id={article.id}
         type="article"
       />
     </header>
@@ -75,7 +75,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
         <TwitterCTA class="z-2" />
         {
           Astro.params.article && (
-            <NextArticleLinks slug={Astro.params.article} />
+            <NextArticleLinks id={Astro.params.article} />
           )
         }
       </div>
@@ -84,7 +84,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
   </article>
 </Layout>
 
-<div class="article-data hidden" data-article-id={article.slug}></div>
+<div class="article-data hidden" data-article-id={article.id}></div>
 
 <button
   class="z-1 to-top-button items-center gap-2 opacity-0 transition-all appearance-none hidden xl:display-flex fixed bottom-4 left-16 color-text-200 duration-300 hover:color-brand-900 font-sans"
