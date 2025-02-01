@@ -52,7 +52,7 @@ const { tv } = await meQuery;
                 <Rss />
               </a>
             </SectionHeader>
-            <div class="posts flex flex-col gap-3">
+            <div class="posts flex flex-col gap-10">
               {
                 chunk_1.map((post) => {
                   const isNew = sub(new Date(), { days: 30 }) < post.data.date;

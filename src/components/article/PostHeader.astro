@@ -2,21 +2,20 @@
 import { Image } from "astro:assets";
 import { format } from "date-fns";
 import type { BlogSchema } from "src/content/config";
-import Tag from "🧱/Tag.astro";
 
 interface Props {
   banner?: BlogSchema["banner"];
   type: "article";
+  draft?: boolean;
   readingTime: string;
   title: string;
   subtitle: string;
-  tags: string[];
   date: Date;
   topImage?: string | undefined;
   slug: string;
 }
 
-const { readingTime, title, subtitle, tags, date, banner, slug } = Astro.props;
+const { readingTime, title, subtitle, date, banner, slug } = Astro.props;
 ---
 
 <div class="flex gap-4 font-sans items-center">
@@ -29,7 +28,7 @@ const { readingTime, title, subtitle, tags, date, banner, slug } = Astro.props;
 </div>
 
 <h1
-  class="m-0 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl font-900 z-1 leading-relaxed font-article-title"
+  class="m-0 mb-4 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl font-900 z-1 leading-relaxed font-article-title"
   transition:name={`title-${slug}`}
 >
   {title}
@@ -51,29 +50,16 @@ const { readingTime, title, subtitle, tags, date, banner, slug } = Astro.props;
 }
 
 <h2
-  class="mt-0 color-text-300 text-xl lg:text-2xl z-1 mb-8 text-center font-article"
+  class="mt-0 color-text-300 text-xl lg:text-2xl z-1 mb-6 font-article"
   transition:name={`subtitle-${slug}`}
 >
   {subtitle}
 </h2>
 
-<hr
-  class="mt-2 mb-2 border-top-1 w-full h-[1px] bg-body-800 col-span-full transition-all"
-/>
-
 <div
-  class="flex gap-3 color-text-400 items-baseline justify-between flex-wrap text-xs md:text-sm lg:text-base font-sans"
+  class="flex color-text-200 items-baseline justify-end flex-wrap text-xs md:text-sm lg:text-base font-sans"
 >
-  <div
-    class="list-none m-0 p-0 font-medium flex gap-4 uppercase z-1 flex-wrap text-xs"
-  >
-    {
-      tags.map((tag) => (
-        <Tag class="bg-body-800 color-text-600 px-5 py-2 rounded">{tag}</Tag>
-      ))
-    }
-  </div>
-  <span class="font-400" transition:name={`date-${slug}`}>
+  <span class="font-400 flex gap-2" transition:name={`date-${slug}`}>
     Published <time datetime={date.toISOString()} class="color-text-800"
       >{format(date, "PP")}</time
     >

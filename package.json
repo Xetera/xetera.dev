@@ -9,6 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "build:preview": "yarn build && python3 -m http.server 8000 dist",
+    "sync": "astro sync",
     "astro": "astro",
     "generate": "NODE_OPTIONS='-r dotenv/config' graphql-codegen-esm --config codegen.js"
   },
@@ -20,6 +21,7 @@
     "@graphql-typed-document-node/core": "^3.2.0",
     "@iconify-json/twemoji": "^1.1.15",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@tanstack/react-table": "^8.20.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@unocss/preset-icons": "^0.61.0",

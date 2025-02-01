@@ -7,10 +7,10 @@ interface Props {
 <div
   class:list={[
     Astro.props.class,
-    "flex justify-between items-center flex-wrap gap-2",
+    "flex justify-between items-center flex-wrap gap-2 text-base",
   ]}
 >
-  <h1 class="text-lg color-text-500 font-semibold flex gap-2 items-center">
+  <h1 class="color-text-500 font-semibold flex gap-2 items-center">
     <slot />
   </h1>
   <slot name="aside" />

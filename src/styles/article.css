@@ -66,4 +66,9 @@
     list-style-type: disc;
     list-style-type: japanese-formal;
   }
+
+  /* don't render the last empty line on code snippets */
+  .astro-code .line:last-child:empty {
+    display: none;
+  }
 }
