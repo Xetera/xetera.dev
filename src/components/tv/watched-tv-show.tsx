@@ -50,10 +50,10 @@ export default function WatchedTvShow({ show, selected, i }: Props) {
 						isSelected ? "color-text-300" : "color-text-100",
 					)}
 				>
-					{season !== undefined && <p>Season {season}</p>}
+					{season !== undefined && <p>S{season}</p>}
 					{episode !== undefined && (
 						<>
-							{season && "·"} <p>Episode {episode}</p>
+							{season && "·"} <p>E{episode}</p>
 						</>
 					)}
 				</span>
