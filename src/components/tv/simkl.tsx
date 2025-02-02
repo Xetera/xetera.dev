@@ -7,8 +7,6 @@ import SectionHeader from "🧱/section-header";
 import HomepageSection from "🧱/homepage-section";
 import { useEffect, useMemo, useState } from "react";
 
-const DIVIDER = 5;
-
 type SSRMediaMatch = {
 	matches: boolean;
 	addEventListener?(key: string, f: (val: MediaQueryListEvent) => void): void;
