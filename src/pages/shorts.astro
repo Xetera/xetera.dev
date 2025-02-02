@@ -1,0 +1,119 @@
+---
+import { getAllShorts } from "@scripts/content";
+import { render } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Navbar from "@components/Navbar.astro";
+import { format } from "date-fns";
+import { formatDistance } from "date-fns/formatDistance";
+import { differenceInDays } from "date-fns/differenceInDays";
+
+const visibleShorts = await getAllShorts();
+
+const shorts = await Promise.all(
+  visibleShorts.map(async (short, i, arr) => {
+    return {
+      post: await render(short),
+      short,
+      prev: i > 0 ? arr[i - 1] : undefined,
+    };
+  }),
+);
+---
+
+<Layout
+  title="Shorts"
+  class="overflow-x-hidden"
+  style="--skew: 5deg; --rotate: 9deg; --scale: 1.2"
+>
+  <Navbar />
+  <main class="flex justify-center w-full mt-xl lg:mt-[3%] homepage mx-6">
+    {
+      shorts.length === 0 && (
+        <div class="flex flex-col gap-2">
+          <h1>
+            Looks like the person who cloned this website deleted the existing
+            shorts and never wrote any new ones.
+          </h1>
+          <a href="/" class="color-highlight font-500">
+            Go back home
+          </a>
+        </div>
+      )
+    }
+    <div>
+      <header class="article-grid w-full mx-auto px-8 mb-24">
+        <h1 class="font-600 text-4xl lg:text-5xl xl:text-7xl mb-6 ps-0 md:ps-8">
+          Shorts
+        </h1>
+        <p class="text-xl ps-0 md:ps-8 leading-relaxed">
+          This is where I keep small thoughts and updates I want to share that
+          don't belong in complete articles.
+        </p>
+      </header>
+      <ol class="flex flex-col">
+        {
+          shorts.map(({ post, short, prev }) => (
+            <li class="shorts-section flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base w-full">
+              <header class="w-full px-8 article-grid">
+                <li class="shorts-timeline ps-0 md:ps-8 !max-md:list-none">
+                  <div class="shorts-outline border-body-600 max-md:hidden" />
+                  <div class="text-sm md:text-base color-text-600 font-mono">
+                    <time datetime={short.data.date.toISOString()}>
+                      {format(short.data.date, "LLL d, yyyy")}
+                    </time>
+                    {prev &&
+                      differenceInDays(prev.data.date, short.data.date) > 0 && (
+                        <span class="text-sm md:text-base color-text-300">
+                          ({formatDistance(prev.data.date, short.data.date)}{" "}
+                          before)
+                        </span>
+                      )}
+                  </div>
+
+                  <h2 class="shorts-title font-500 lg:text-4xl mt-8">
+                    {short.data.title}
+                  </h2>
+                </li>
+              </header>
+
+              <main class="main-article article-grid px-8 lg:px-0 text-base lg:text-xl leading-10 color-text-700 leading-loose w-full">
+                <div class="shorts-timeline ps-0 md:ps-8 pb-20">
+                  <div class="shorts-outline border-body-600 max-md:hidden" />
+                  <post.Content />
+                </div>
+              </main>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .shorts-title {
+    font-family: var(--font-family-article-title);
+  }
+  .shorts-outline {
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    border-width: 1px;
+    border-style: dashed;
+    margin-left: -17.5px;
+    width: 0px;
+    height: 100%;
+  }
+  .shorts-outline.first {
+    border-style: dashed;
+  }
+  .shorts-timeline {
+    z-index: 1;
+    position: relative;
+    list-style-type: disc;
+  }
+  .shorts-timeline::marker {
+    color: var(--body-200);
+    font-size: 1.5rem;
+  }
+</style>

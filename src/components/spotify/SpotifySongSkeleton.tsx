@@ -7,7 +7,12 @@ export function SongSkeletonDetails(props: {
 	className?: string;
 }) {
 	return (
-		<div className={cls("flex flex-col justify-center", props.className)}>
+		<div
+			className={cls(
+				"flex flex-col justify-center overflow-hidden",
+				props.className,
+			)}
+		>
 			<h2
 				aria-label="Track name"
 				className="color-text-800 font-medium whitespace-nowrap overflow-hidden text-ellipsis"

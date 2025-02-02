@@ -22,10 +22,18 @@ export type BlogSchema = z.infer<ReturnType<typeof blogSchema>>;
 const blogCollection = defineCollection({
 	loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
 	schema: ({ image }) => blogSchema({ image }),
-	/* ... */
 });
-// 3. Export a single `collections` object to register your collection(s)
-//    This key should match your collection directory name in "src/content"
+
+const shortsCollection = defineCollection({
+	loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/shorts" }),
+	schema: z.object({
+		title: z.string(),
+		date: z.coerce.date(),
+		draft: z.boolean().default(false),
+	}),
+});
+
 export const collections = {
 	blog: blogCollection,
+	shorts: shortsCollection,
 };

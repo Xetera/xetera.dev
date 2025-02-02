@@ -1,25 +1,27 @@
 {
-  "extends": "astro/tsconfigs/strictest",
-  "compilerOptions": {
-    "strict": true,
-    "strictNullChecks": true,
-    "baseUrl": ".",
-    "exactOptionalPropertyTypes": false,
-    "verbatimModuleSyntax": true,
-    "paths": {
-      "💅/*": ["src/styles/*"],
-      "🛠️/*": ["src/scripts/*"],
-      "🧱/*": ["src/components/*"],
-      "@article-components/*": ["src/components/article-specific/*"],
-      "📸/*": ["src/assets/*"],
-      "@assets/*": ["src/assets/*"],
-      "@article/*": ["src/components/article*"],
-      "🗺️/*": ["src/layouts/*"],
-      "@layouts/*": ["src/layouts/*"]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  },
-  "include": [".astro/types.d.ts","**/*"],
-  "exclude": ["dist"]
+	"extends": "astro/tsconfigs/strictest",
+	"compilerOptions": {
+		"strict": true,
+		"strictNullChecks": true,
+		"baseUrl": ".",
+		"exactOptionalPropertyTypes": false,
+		"verbatimModuleSyntax": true,
+		"paths": {
+			"💅/*": ["src/styles/*"],
+			"🛠️/*": ["src/scripts/*"],
+			"@scripts/*": ["src/scripts/*"],
+			"🧱/*": ["src/components/*"],
+			"@components/*": ["src/components/*"],
+			"@article-components/*": ["src/components/article-specific/*"],
+			"📸/*": ["src/assets/*"],
+			"@assets/*": ["src/assets/*"],
+			"@article/*": ["src/components/article*"],
+			"🗺️/*": ["src/layouts/*"],
+			"@layouts/*": ["src/layouts/*"]
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
+	},
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"]
 }

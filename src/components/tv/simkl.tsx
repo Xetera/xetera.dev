@@ -96,7 +96,7 @@ export default function Simkl({ tv }: { tv: Awaited<typeof meQuery>["tv"] }) {
 
 function calculateDivider(conditions: Array<[{ matches: boolean }, number]>) {
 	if (typeof window === "undefined") {
-		return 6;
+		return 5;
 	}
 	for (let i = conditions.length - 1; i >= 0; i--) {
 		const condition = conditions[i];

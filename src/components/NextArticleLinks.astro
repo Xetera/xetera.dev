@@ -1,6 +1,6 @@
 ---
 import ArticleLink from "./ArticleLink.astro";
-import { getAllContent } from "🛠️/content";
+import { getAllBlogs } from "🛠️/content";
 
 interface Props {
 	id: string;
@@ -8,7 +8,7 @@ interface Props {
 
 const RECOMMENDATION_LENGTH = 3;
 
-const posts = (await getAllContent()).reverse();
+const posts = (await getAllBlogs()).reverse();
 const currentPostPosition = posts.findIndex(
 	(post) => post.id === Astro.props.id,
 );

@@ -8,9 +8,10 @@ import BaseHead, { type Props as BaseHeadProps } from "🧱/BaseHead.astro";
 
 export interface Props extends BaseHeadProps {
   class?: string;
+  style?: string;
 }
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, style, ...rest } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,27 +21,35 @@ const { class: className, ...rest } = Astro.props;
       <slot name="head" slot="head" />
     </BaseHead>
   </head>
-  <body
-    class:list={[
-      "h-full flex bg-body-900 color-text-800 transition-colors",
-      className,
-    ]}
-  >
+  <body style={style} class="overflow-x-hidden">
     <script is:inline>
       0;
     </script>
-    <div class="overlay z-0"></div>
-    <div class="flex flex-col items-center w-full z-1">
-      <slot />
+    <div
+      class:list={[
+        "overflow-hidden h-full flex bg-body-900 color-text-800 transition-colors",
+        className,
+      ]}
+    >
+      <div class="overlay z-0"></div>
+      <div class="flex flex-col items-center w-full z-1">
+        <slot />
+      </div>
     </div>
-    <style is:global>
+    <style is:global transition:persist>
       * {
         word-break: break-word;
       }
-      .prose :where(:not(pre) > code):not(:where(.not-prose,.not-prose *))::before, .prose :where(:not(pre) > code):not(:where(.not-prose,.not-prose *))::after {
+      .prose
+        :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::before,
+      .prose
+        :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::after {
         content: "";
       }
-      .prose :where(:not(pre) > code):not(:where(.astro-code,.not-prose,.not-prose *)) {
+      .prose
+        :where(:not(pre) > code):not(
+          :where(.astro-code, .not-prose, .not-prose *)
+        ) {
         padding: 0 8px;
         border-radius: 4px;
         background: var(--inline-code);
@@ -73,6 +82,9 @@ const { class: className, ...rest } = Astro.props;
         stroke: var(--grid-color);
         -webkit-mask-image: linear-gradient(0deg, transparent, black);
         background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'><path d='M0 .5H31.5V32'/></svg>");
+        transform: skew(var(--skew, 0deg)) rotate(var(--rotate, 0deg))
+          scale(var(--scale, 1));
+        transition: all 1s;
       }
 
       code,

@@ -6,6 +6,10 @@ import Github from "./icons/Github.astro";
 import Twitter from "./icons/Twitter.astro";
 import ItsMe from "./ItsMe.astro";
 import avatarMj from "@assets/avatars/xetera_mj_2.jpeg";
+import { getAllShorts } from "@scripts/content";
+import { format } from "date-fns";
+
+const latestShort = (await getAllShorts())[0];
 ---
 
 <div class="flex flex-col md:flex-row justify-between w-full gap-8">
@@ -79,6 +83,27 @@ import avatarMj from "@assets/avatars/xetera_mj_2.jpeg";
         }
       </div>
     </div>
+    {
+      latestShort && (
+        <div class="flex flex-col gap-2 items-center mt-6 group self-start max-md:w-full">
+          <div class="md:hidden self-start flex gap-2 justify-between w-full text-base">
+            <span class="color-text-500">Latest Short</span>
+            <time datetime={latestShort.data.date.toISOString()}>
+              {format(latestShort.data.date, "LLL do yyyy")}
+            </time>
+          </div>
+          <a
+            class="inline-flex flex-col max-md:w-full md:flex-row transition-all gap-3 md:items-center outline outline-1 outline-body-500 group-hover:outline-body-300 md:rounded-[20px] ps-[10px] pe-[20px] py-1 text-base"
+            href="/shorts"
+          >
+            <h3 class="text-sm transition-all bg-body-600 group-hover:bg-body-300 rounded-[10px] px-3 text-nowrap max-md:hidden">
+              Shorts
+            </h3>
+            {latestShort.data.title}
+          </a>
+        </div>
+      )
+    }
   </div>
 
   <div

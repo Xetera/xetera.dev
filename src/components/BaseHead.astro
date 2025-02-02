@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 export interface Props {
   title: string;
   description?: string;
@@ -12,28 +14,8 @@ const { title, description, themeColor } = Astro.props;
 <meta name="viewport" content="width=device-width" />
 <meta name="description" content={description ?? "Xetera's Blog"} />
 <link rel="icon" type="image/png" href="/xetera_favicon.png" />
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-  rel="stylesheet"
-/>
-<meta name="theme-color" content={themeColor ?? "#f5c4c6"} />
-<meta name="generator" content={Astro.generator} />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;900&display=swap"
-  rel="stylesheet"
-/>
-<slot name="head" />
-<title>{title}</title>
-<link
-    rel="alternate"
-    type="application/rss+xml"
-    title={title}
-    href={new URL("rss.xml", Astro.site)}
-/>
 <!-- Repeating a little bit of code here to make sure this is inlined properly -->
-<script is:inline>
+<script is:inline transition:persist>
   const modes = ["dark", "light", "system"];
 
   const DEFAULT_THEME_MODE = "system";
@@ -66,13 +48,6 @@ const { title, description, themeColor } = Astro.props;
   }
 
   function setThemeDisplay(mode) {
-    // if (mode === "system") {
-    //   const shouldBeDark = window.matchMedia(
-    //     "(prefers-color-scheme: dark)"
-    //   ).matches
-    //   setKnownTheme(shouldBeDark ? "dark" : "light")
-    // } else {
-    // }
     setKnownTheme(mode === "system" ? "light" : mode);
   }
 
@@ -90,6 +65,26 @@ const { title, description, themeColor } = Astro.props;
   addThemeChangeListener(setKnownTheme);
   setThemeDisplay(theme);
 </script>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
+<meta name="theme-color" content={themeColor ?? "#f5c4c6"} />
+<meta name="generator" content={Astro.generator} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;900&display=swap"
+  rel="stylesheet"
+/>
+<slot name="head" />
+<title>{title}</title>
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={title}
+  href={new URL("rss.xml", Astro.site)}
+/>
 
 <noscript>
   <style>
@@ -103,5 +98,3 @@ const { title, description, themeColor } = Astro.props;
     }
   </style>
 </noscript>
-
-<!-- <ClientRouter /> -->

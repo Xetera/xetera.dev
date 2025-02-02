@@ -39,7 +39,7 @@ export default function WatchedTvShow({ show, selected, i }: Props) {
 				<h3
 					className={cls(
 						"font-medium whitespace-nowrap overflow-hidden",
-						isSelected ? "color-text-800" : "color-text-100",
+						isSelected ? "color-text-800" : "color-text-100 opacity-50%",
 					)}
 				>
 					{show.title}
@@ -47,7 +47,7 @@ export default function WatchedTvShow({ show, selected, i }: Props) {
 				<span
 					className={cls(
 						"text-xs flex gap-1",
-						isSelected ? "color-text-300" : "color-text-100",
+						isSelected ? "color-text-300" : "color-text-100 opacity-50%",
 					)}
 				>
 					{season !== undefined && <p>S{season}</p>}
