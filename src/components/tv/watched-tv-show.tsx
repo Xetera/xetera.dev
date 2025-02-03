@@ -31,7 +31,7 @@ export default function WatchedTvShow({ show, selected, i }: Props) {
 				src={show.coverUrl}
 				alt={`Cover for ${show.title}`}
 				className={cls(
-					"rounded mb-2 max-h-[200px] object-cover h-full w-full ease-out transition-all",
+					"rounded mb-2 max-h-[200px] object-cover h-full w-full ease-out transition-all aspect-ratio-[9/16]",
 					isSelected ? "opacity-100" : "opacity-20%",
 				)}
 			/>
