@@ -3,17 +3,17 @@ const modes = ["dark", "light", "system"] as const;
 const DEFAULT_THEME_MODE = "system";
 const THEME_KEY = "theme";
 
-export type Mode = typeof modes[number];
+export type Mode = (typeof modes)[number];
 
 function isMode(input: string): input is Mode {
 	return modes.includes(input as Mode);
 }
 
 export function getColorMode(): Mode {
-	const preferenceRaw = localStorage.getItem(THEME_KEY);
+	const preferenceRaw = document.cookie.match(/theme=(.+);?/)?.[1];
 	const isValid = preferenceRaw && isMode(preferenceRaw);
 
-	let preference = isValid ? preferenceRaw : DEFAULT_THEME_MODE;
+	const preference = isValid ? preferenceRaw : DEFAULT_THEME_MODE;
 
 	if (!isValid) {
 		setThemeDisplay(DEFAULT_THEME_MODE);
@@ -28,10 +28,7 @@ function setKnownTheme(theme: "dark" | "light") {
 	} else {
 		document.documentElement.classList.remove("dark");
 	}
-}
-
-export function persistTheme(mode: Mode): void {
-	localStorage.setItem(THEME_KEY, mode);
+	document.cookie = `${THEME_KEY}=${theme}; SameSite=lax; Path=/; Max-Age=31536000`;
 }
 
 export function setThemeDisplay(mode: Mode): void {
@@ -42,7 +39,6 @@ export function setThemeDisplay(mode: Mode): void {
 		setKnownTheme(shouldBeDark ? "dark" : "light");
 	} else {
 		setKnownTheme(mode);
-		persistTheme(mode);
 	}
 }
 

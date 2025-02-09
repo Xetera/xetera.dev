@@ -57,11 +57,8 @@ import avatar from "../assets/avatars/xetera.png";
 </style>
 
 <script>
-  import { persistTheme, toggleTheme } from "src/scripts/theme-switcher";
+  import { toggleTheme } from "src/scripts/theme-switcher";
 
   const switcher = document.querySelector("#theme-switcher")!;
-  switcher.addEventListener("click", () => {
-    const nextTheme = toggleTheme();
-    persistTheme(nextTheme);
-  });
+  switcher.addEventListener("click", toggleTheme);
 </script>
