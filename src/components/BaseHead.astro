@@ -24,7 +24,7 @@ const { title, description, themeColor } = Astro.props;
   }
 
   function getColorMode() {
-    const preferenceRaw = localStorage.getItem(THEME_KEY);
+    const preferenceRaw = document.cookie.match(/theme=(.+);?/)?.[1];
     const isValid = preferenceRaw && isMode(preferenceRaw);
 
     let preference = isValid ? preferenceRaw : DEFAULT_THEME_MODE;
@@ -42,7 +42,7 @@ const { title, description, themeColor } = Astro.props;
     } else {
       document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem(THEME_KEY, theme);
+    document.cookie = `${THEME_KEY}=${theme}; Max-Age=31536000`;
   }
 
   function setThemeDisplay(mode) {
