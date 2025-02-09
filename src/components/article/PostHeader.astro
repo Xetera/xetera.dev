@@ -15,7 +15,7 @@ interface Props {
   id: string;
 }
 
-const { readingTime, title, subtitle, date, banner,id } = Astro.props;
+const { readingTime, title, subtitle, date, banner, id } = Astro.props;
 ---
 
 <div class="flex gap-4 font-sans items-center">
@@ -50,7 +50,7 @@ const { readingTime, title, subtitle, date, banner,id } = Astro.props;
 }
 
 <h2
-  class="mt-0 color-text-300 text-xl lg:text-2xl z-1 mb-6 font-article"
+  class="mt-0 color-text-300 font-500 text-xl lg:text-2xl z-1 mb-6 font-article"
   transition:name={`subtitle-${id}`}
 >
   {subtitle}
