@@ -12,6 +12,24 @@ const { title, description, themeColor } = Astro.props;
 <meta name="viewport" content="width=device-width" />
 <meta name="description" content={description ?? "Xetera's Blog"} />
 <link rel="icon" type="image/png" href="/xetera_favicon.png" />
+<!--
+This is a tracking script for selfhosted, privacy-conscious https://umami.is analytics.
+Feel free to block it if you want but the data collected is stored locally on my cluster and not by a 3rd party.
+-->
+<script
+  is:inline
+  defer
+  data-domains={Astro.site ? Astro.site.host : ""}
+  src="https://overtime-contingency.xetera.dev/selfhosted-umami"
+  data-website-id="fb997c11-6572-43df-bddf-9a64b1f2812d"></script>
+{
+  // ignoring local visit + forks
+  import.meta.env.DEV && (
+    <script is:inline type="module">
+      localStorage.setItem('umami.disabled', 1)
+    </script>
+  )
+}
 <!-- Repeating a little bit of code here to make sure this is inlined properly -->
 <script is:inline transition:persist>
   const modes = ["dark", "light", "system"];
