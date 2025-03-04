@@ -53,7 +53,13 @@ const className = "book-item rounded";
           )}/dp/${book.asin}`;
           const render = <Book {...book} class={className} />;
           return (
-            <a href={link} target="_blank">
+            <a
+              rel="noopener noreferrer"
+              href={link}
+              target="_blank"
+              data-umami-event="book-timeline:poster-click"
+              data-umami-event-book={book.title}
+            >
               {render}
             </a>
           );

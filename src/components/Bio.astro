@@ -44,6 +44,7 @@ const latestShort = (await getAllShorts())[0];
               href={`https://github.com/${import.meta.env.SOCIAL_GITHUB}`}
               target="_blank"
               class="hover:color-text-900"
+              data-umami-event="social:github"
             >
               <Github />
             </ExternalLink>
@@ -56,6 +57,7 @@ const latestShort = (await getAllShorts())[0];
               href={`https://twitter.com/${import.meta.env.SOCIAL_TWITTER}`}
               target="_blank"
               class="hover:color-text-900"
+              data-umami-event="social:bsky"
             >
               <Twitter />
             </ExternalLink>
@@ -68,6 +70,7 @@ const latestShort = (await getAllShorts())[0];
               href=""
               target="_blank"
               class="email-target hover:color-text-900 relative"
+              data-umami-event="social:email"
             >
               <div
                 class="obfuscated-email hidden"
