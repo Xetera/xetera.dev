@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
-# caching assets that we don't need to save.
-# going to need to clear this periodically to make sure
-# that the saved books and spotify playlists dont clog the build folder
-# mkdir -p /opt/build/cache/personal
-# mkdir -p /opt/build/cache/build
-
-# cp -r .astro/cache /opt/build/cache/personal
-# cp -r dist/_astro /opt/build/cache/build
+set -o errexit
+set -o pipefail
+set -o nounset
 
 # these files have to be accessible to netlify in the build folder
 cp _headers _redirects dist
+
+if [ -n "$CLOUDFLARE_API_KEY" ] && [ -n "$CLOUDFLARE_EMAIL" ] && [ -n "$CLOUDFLARE_ZONE_ID" ] ; then
+  # upload to cloudflare
+  result=$(curl -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+    -H "X-Auth-Key: $CLOUDFLARE_API_KEY" \
+    -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \
+    -H "Content-Type: application/json" \
+    --data '{"purge_everything":true}')
+  echo $result
+else
+  echo "CLOUDFLARE_API_KEY and CLOUDFLARE_EMAIL and CLOUDFLARE_ZONE_ID are not set, skipping cloudflare purge"
+fi
