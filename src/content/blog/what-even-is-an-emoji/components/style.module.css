@@ -1,7 +1,0 @@
-.byte {
-  transition: all 0.3s ease-in-out;
-}
-
-.byte:snapped {
-  background: var(--body-400);
-}
