@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# this is run by netlify. Feel free to delete if you're forking
 
 set -o errexit
 set -o pipefail
@@ -10,7 +11,7 @@ cp _headers _redirects dist
 if [ -n "$CLOUDFLARE_API_KEY" ] && [ -n "$CLOUDFLARE_EMAIL" ] && [ -n "$CLOUDFLARE_ZONE_ID" ] ; then
   # upload to cloudflare
   result=$(curl -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
-    -H "X-Auth-Key: $CLOUDFLARE_API_KEY" \
+    -H "Authorization: Bearer $CLOUDFLARE_API_KEY" \
     -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \
     -H "Content-Type: application/json" \
     --data '{"purge_everything":true}')
