@@ -28,7 +28,7 @@
     "@types/react-dom": "^18.3.5",
     "@unocss/preset-icons": "^65.4.3",
     "@unocss/transformer-variant-group": "^65.4.3",
-    "astro": "^5.3.0",
+    "astro": "^5.15.1",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
@@ -56,12 +56,11 @@
     "@graphql-codegen/client-preset": "^4.6.1",
     "@graphql-codegen/typescript-urql": "^4.0.0",
     "@types/lodash": "^4.17.15",
-    "@types/node": "^22.13.0",
+    "@types/node": "^24.8.0",
     "@unocss/astro": "^65.4.3",
     "@unocss/preset-typography": "^65.4.3",
     "@unocss/reset": "^65.4.3",
-    "pnpm": "^10.1.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.0.0"
+  "packageManager": "pnpm@10.19.0"
 }
