@@ -54,16 +54,12 @@ const { tv } = await meQuery;
                 <Rss />
               </a>
             </SectionHeader>
-            <div class="posts flex flex-col gap-10">
+            <div class="posts flex flex-col gap-4">
               {
                 chunk_1.map((post) => {
                   const isNew = sub(new Date(), { days: 30 }) < post.data.date;
 
-                  return (
-                    <div class="post">
-                      <ArticleLink {...post} isNew={isNew} />
-                    </div>
-                  );
+                  return <ArticleLink {...post} isNew={isNew} />;
                 })
               }
               <div class="my-4">
@@ -73,16 +69,10 @@ const { tv } = await meQuery;
                 chunk_2.map((post) => {
                   const isNew = sub(new Date(), { days: 30 }) < post.data.date;
 
-                  return (
-                    <div class="post">
-                      <ArticleLink {...post} isNew={isNew} />
-                    </div>
-                  );
+                  return <ArticleLink {...post} isNew={isNew} />;
                 })
               }
-              <div class="my-4">
-                <BookGrid />
-              </div>
+              <BookGrid />
               {
                 chunk_3.map((post) => {
                   const isNew = sub(new Date(), { days: 30 }) < post.data.date;

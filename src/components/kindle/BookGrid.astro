@@ -29,45 +29,47 @@ const showing =
 const className = "book-item rounded";
 ---
 
-<div class:list={["grid gap-4", Astro.props.class]}>
-  <HomepageSection class="grid">
-    <SectionHeader>
-      My Reading List 📚
-
-      <span slot="aside" class="color-text-500 text-sm"
-        >Generated <ExternalLink
-          href="https://github.com/xetera/kindle-api"
-          target="_blank"
-          class="color-brand-500 underlined inline-flex"
-        >
-          automatically
-        </ExternalLink></span
-      >
-    </SectionHeader>
-    <div class="grid gap-4 book-grid">
-      {
-        showing.map((book) => {
-          const { author } = book;
-          const link = `https://www.amazon.com/${skewer(book.title)}-${skewer(
-            author,
-          )}/dp/${book.asin}`;
-          const render = <Book {...book} class={className} />;
-          return (
-            <a
-              rel="noopener noreferrer"
-              href={link}
+{
+  showing.length > 0 && (
+    <div class:list={["mt-4 grid gap-4", Astro.props.class]}>
+      <HomepageSection class="grid">
+        <SectionHeader>
+          My Reading List 📚
+          <span slot="aside" class="color-text-500 text-sm">
+            Generated{" "}
+            <ExternalLink
+              href="https://github.com/xetera/kindle-api"
               target="_blank"
-              data-umami-event="book-timeline:poster-click"
-              data-umami-event-book={book.title}
+              class="color-brand-500 underlined inline-flex"
             >
-              {render}
-            </a>
-          );
-        })
-      }
+              automatically
+            </ExternalLink>
+          </span>
+        </SectionHeader>
+        <div class="grid gap-4 book-grid">
+          {showing.map((book) => {
+            const { author } = book;
+            const link = `https://www.amazon.com/${skewer(book.title)}-${skewer(
+              author,
+            )}/dp/${book.asin}`;
+            const render = <Book {...book} class={className} />;
+            return (
+              <a
+                rel="noopener noreferrer"
+                href={link}
+                target="_blank"
+                data-umami-event="book-timeline:poster-click"
+                data-umami-event-book={book.title}
+              >
+                {render}
+              </a>
+            );
+          })}
+        </div>
+      </HomepageSection>
     </div>
-  </HomepageSection>
-</div>
+  )
+}
 
 <style>
   .book-grid {
