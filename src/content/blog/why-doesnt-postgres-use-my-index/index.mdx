@@ -1,0 +1,222 @@
+---
+title: "Why doesn't Postgres use my index?"
+description: "Sending my favorite database into therapy"
+date: "2026-02-15"
+tags:
+  - Databases
+draft: true
+---
+
+import T from '🧱/T.astro'
+import Callout from '🧱/article/Callout.astro'
+import Caption from '🧱/Caption.astro'
+
+This is a question that confuses both beginners and experienced devs. It's partly due to inexperience with how databases work under the hood, and partly Postgres's fault, though maybe not in the way you think.
+
+Let me explain it with an example using Discord's backend if they were using a [relational database](https://discord.com/blog/how-discord-stores-trillions-of-messages).
+
+```sql
+create table users(
+  id                    bigint primary key,
+  username              text unique not null,
+  avatar_url            text,
+  face_scan             vector(128),
+  real_id_scan_date     timestamp with time zone,
+  real_id_share_revenue numeric(7, 5)
+);
+```
+
+Let's look at how we can get data for a hypothetical dashboard that management asked us to build for the trust & safety team:
+
+```sql
+select id, username, real_id_share_revenue
+  from users
+where real_id_share_revenue is not null
+limit 100;
+```
+
+Of course, Discord has billions of accounts so we will need an index to help speed up the process.
+
+```sql
+create index on users(real_id_share_revenue);
+```
+
+Fun fact: an index like can speed up `is null` and `is not null` checks too, because nulls have a specific spot in indexes that can be binary searched. By default, they go at the end of the index, but we could change that layout depending on how we want nulls showing up in the query.
+
+```sql
+create index on users(real_id_share_revenue nulls first);
+```
+
+Maybe it's not the greatest idea ever, but in production you could just run the query again and see if it's noticeably faster after creating an index. In development though, it's surprisingly difficult to tell whether an index you've created has an impact because you probably don't have millions and billions of records on your test/staging table and it's hard to tell the difference between a query that takes 2ms, and one that takes 1ms. There are ways to find out explicitly using an <T>explain plan</T>, where the database shows you what it's doing, but explain plans come with many footguns and secrets.
+
+```sql
+explain (format json)
+select id, username, real_id_share_revenue
+  from users
+where real_id_share_revenue is not null
+limit 100;
+                    QUERY PLAN
+-----------------------------------------------------------
+ [                                                        +
+   {                                                      +
+     "Plan": {                                            +
+       "Node Type": "Limit",                              +
+       "Parallel Aware": false,                           +
+       "Async Capable": false,                            +
+       "Startup Cost": 0.00,                              +
+       "Total Cost": 2.53,                                +
+       "Plan Rows": 100,                                  +
+       "Plan Width": 54,                                  +
+       "Plans": [                                         +
+         {                                                +
+           "Node Type": "Seq Scan",                       +
+           "Parent Relationship": "Outer",                +
+           "Parallel Aware": false,                       +
+           "Async Capable": false,                        +
+           "Relation Name": "users",                      +
+           "Alias": "users",                              +
+           "Startup Cost": 0.00,                          +
+           "Total Cost": 16.60,                           +
+           "Plan Rows": 657,                              +
+           "Plan Width": 54,                              +
+           "Filter": "(real_id_share_revenue IS NOT NULL)"+
+         }                                                +
+       ]                                                  +
+     }                                                    +
+   }                                                      +
+ ]
+```
+
+<Caption>We use the JSON format for explains in this household. Get over it.</Caption>
+
+Despite creating an index, the db refuses to use it. How come? It turns out Postgres is quite intelligent and it looks at a LOT more information about the database before it decides how to produce the desired result. As they say, there's more than one way to pet a dog.
+
+# Planning
+
+Every modern database today has a planning step where the database weighs the different paths it has to get to the data it needs. But they need more information than just "which indexes exist?" Specifically statistics that can answer questions like:
+
+- "What are the top most frequent values in each column?"
+- "What percentage of the rows have a null value?"
+- "What does the distribution/cardinality of this data look like?"
+
+Postgres will look for the answers to these questions before it figures out the best plan for a query. All of these statistics are quietly kept up to date with a mechanism called autovacuum, and along with cleaning up dead space in your db, it also goes and collects important statistics. One of which is called reltuples; the amount of tuples (rows) in a relation (table), and it has a big impact on deciding whether to use an index to pull data from a table.
+
+This one makes a big impact on planning for our query, because going through an index is not free. Yes, it speeds up most searches but there's a cost to reading the index header, doing binary search, pulling up index pages out of order, filtering leaf pages and following pointers to more pages where your table rows are stored, cost that isn't there if you go through the table sequentially. If you don't have enough rows in the table to justify doing that predictable amount of work, the planner will decide that simply going through your entire table will be much faster. And when it does so, you will see `Seq Scan` in your explain plan instead of `Index Scan` just like in the example above. But unless you're working with a very simple query, it's hard to tell whether:
+
+1. Your migration didn't work and your index doesn't even exist.
+2. Postgres decided your index is completely ineligible for the query you're running.
+3. Your index was eliminated as an option for having a higher cost than an alternative.
+
+You'll be forgiven for not knowing the culprit here. Postgres just doesn't tell you any of this. There are ways to glean some of that information by running an insert statement like this that adds a bunch of rows to your table and get around the reltuples check.
+
+```sql
+insert into users (id, username)
+  select id, 'testing' || id
+  from generate_series(2, 10_000) id;
+```
+
+But that only predictably tweaks one statistic and breaks a bunch of others (you now have a bunch of null columns with repeated values). Ideally, you should be able to figure out why this is happening as if you were in prod but without having to create the indexes you want to test. There's an excellent tool called [hypopg](https://github.com/HypoPG/hypopg) that can help you test what running a query with an index would look like without actually creating it, which is super useful in production. But even with hypopog you can run into situations where the db <T>still</T> doesn't use an index you expect it to.
+
+If only there was a way to compel the database to spill its secrets.
+
+# Forking Postgres
+
+I've spent the past couple of weeks going through the codebase for the postgres planner to do this exact thing and have managed to pull some of these planner meta-decisions into the explain plan. Wait STOP don't close the tab yet, I promise you don't have to deploy a postgres fork into production to use it.
+
+I first want to talk a bit about my findings. Turns out there's a process to how pg sheds its pool of unwanted indexes per query similar to how pieces of a rocket with depleted fuel fall apart after takeoff.
+
+When first reading all viable indexes it looks to get rid of globally unusable indexes that are either:
+
+- Broken. I'm not even sure what this is but I guess the db does a good enough job of this that I've never run into it
+- Still building. with `create index concurrently` being the main culprit.
+
+{/* <code> */}
+
+For each stage of a plan where reading from a table is required, postgres evaluates the cost of using (and not using) these indexes, and adds them into a list based on fuzzy cost, parallel capability and order (well get to this in a bit). If any one plan is found to be strictly better than the other in all of these categories the old plan is discarded, or vice versa if an old plan is strictly better. Only after that does postgres finally pick a plan to use based on a stricter cost comparison. My fork logs all these eliminated alternatives to give better insight.
+
+
+
+This is where your beloved index might be eliminated for having a higher cost. But why exactly does it have a higher cost? This is another piece of the planner enigma that I address in my changes.
+
+{/*<image>*/}
+
+```sql
+postgres=# explain (format json) select id from users
+  where username = 'test';
+                   QUERY PLAN
+------------------------------------------------
+ [                                             +
+   {                                           +
+     "Plan": {                                 +
+       "Node Type": "Seq Scan",                +
+       "Parallel Aware": false,                +
+       "Async Capable": false,                 +
+       "Relation Name": "users",               +
+       "Alias": "users",                       +
+       "Startup Cost": 0.00,                   +
+       "Total Cost": 1.01,                     +
+       "Plan Rows": 1,                         +
+       "Plan Width": 8,                        +
+       "Cost Breakdown": [                     +
+         {                                     +
+           "Reason": "RUNTIME:DISK_IO",        +
+           "Cost": 1.00                        +
+         },                                    +
+         {                                     +
+           "Reason": "RUNTIME:HEAP_FILTER",    +
+           "Cost": 0.01                        +
+         }                                     +
+       ],                                      +
+       "Ineligible Indexes": ["users_pkey"],   +
+       "Alternative Plans": [                  +
+         {                                     +
+           "Node Type": "Index Scan",          +
+           "Index Name": "users_username_key", +
+           "Prune Reason": "HIGHER_COST",      +
+           "Total Cost": 8.14,                 +
+           "Cost Breakdown": [                 +
+             {                                 +
+               "Reason": "STARTUP:INDEX_SETUP",+
+               "Cost": 0.12                    +
+             },                                +
+             {                                 +
+               "Reason": "RUNTIME:INDEX_USAGE",+
+               "Cost": 4.01                    +
+             },                                +
+             {                                 +
+               "Reason": "RUNTIME:DISK_IO",    +
+               "Cost": 4.00                    +
+             },                                +
+             {                                 +
+               "Reason": "RUNTIME:HEAP_FILTER",+
+               "Cost": 0.01                    +
+             }                                 +
+           ]                                   +
+         },                                    +
+         {                                     +
+           "Node Type": "Bitmap Heap Scan",    +
+           "Prune Reason": "HIGHER_COST",      +
+           "Total Cost": 8.15,                 +
+           "Cost Breakdown": [                 +
+             {                                 +
+               "Reason": "RUNTIME:INDEX_USAGE",+
+               "Cost": 4.13                    +
+             },                                +
+             {                                 +
+               "Reason": "RUNTIME:DISK_IO",    +
+               "Cost": 4.00                    +
+             },                                +
+             {                                 +
+               "Reason": "RUNTIME:HEAP_FILTER",+
+               "Cost": 0.01                    +
+             }                                 +
+           ]                                   +
+         }                                     +
+       ],                                      +
+       "Filter": "(username = 'test'::text)"   +
+     }                                         +
+   }                                           +
+ ]
+```
+
+This applies to alternative stages that were unpicked as well. So you can
