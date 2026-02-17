@@ -47,9 +47,8 @@ const { class: className, style, ...rest } = Astro.props;
         content: "";
       }
       .prose
-        :where(:not(pre) > code):not(
-          :where(.astro-code, .not-prose, .not-prose *)
-        ) {
+        :not(pre)
+        > code:not(:where(.astro-code, .not-prose, .not-prose *)) {
         padding: 0 8px;
         border-radius: 4px;
         background: var(--inline-code);
