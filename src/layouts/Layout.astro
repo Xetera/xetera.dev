@@ -81,8 +81,8 @@ const { class: className, style, ...rest } = Astro.props;
         stroke: var(--grid-color);
         -webkit-mask-image: linear-gradient(0deg, transparent, black);
         background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'><path d='M0 .5H31.5V32'/></svg>");
-        transform: skew(var(--skew, 0deg)) rotate(var(--rotate, 0deg))
-          scale(var(--scale, 1));
+        transform: skew(var(--un-skew, 0deg)) rotate(var(--un-rotate, 0deg))
+          scale(var(--un-scale, 1));
         transition: all 1s;
       }
 
