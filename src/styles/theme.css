@@ -68,6 +68,7 @@
     --discord-embed-background: var(--discord-reaction-background);
     --discord-primary-500: hsl(228 6% 32.5%);
 
+    --astro-code-background: var(--body-900);
     --astro-code-color-text: rgb(34, 34, 34);
     --astro-code-color-background: white;
     --astro-code-token-constant: #1976d2;
@@ -146,7 +147,7 @@
     --astro-code-token-string-expression: #c3e88d;
     --astro-code-token-punctuation: linen;
     --astro-code-token-link: honeydew;
-    
+
     --inline-code: oklch(0.43 0.11 236.31 / 0.69);
   }
 
@@ -165,7 +166,6 @@
   @media (color-gamut: p3) {
     html {
       --brand-900: color(display-p3 0.785 0.071 0.547);
-      --astro-code-token-keyword: color(display-p3 0.96 0.299 0.264);
       --astro-code-token-string-expression: color(display-p3 0.034 0.53 0.034);
     }
     html.dark {
