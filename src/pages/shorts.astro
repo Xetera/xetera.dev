@@ -65,7 +65,7 @@ const shorts = await Promise.all(
                       differenceInDays(prev.data.date, short.data.date) > 0 && (
                         <span class="text-sm md:text-base color-text-300">
                           ({formatDistance(prev.data.date, short.data.date)}{" "}
-                          before)
+                          earlier)
                         </span>
                       )}
                   </div>
@@ -100,7 +100,8 @@ const shorts = await Promise.all(
     left: 0;
     border-width: 1px;
     border-style: dashed;
-    margin-left: -17.5px;
+    margin-left: -20.5px;
+    margin-top: 10px;
     width: 0px;
     height: 100%;
   }
