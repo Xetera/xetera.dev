@@ -1,0 +1,29 @@
+---
+title: "Making a Hantavirus Tracker"
+date: "2026-05-10T00:00:00"
+---
+
+Any of you played Pandemic 2 on Crazy Monkey games as a kid? I used to love flash game sites and there are a few games that still live rent free in my head:
+
+- Sonny
+- Age of War
+- Super Crazy Guitar Maniac Deluxe
+- Pandemic 2
+
+import screenshot from "./screenshot.jpg"
+
+I've been thinking about that last one a lot ever since covid. Making an outbreak tracker using its UI felt like such a cool idea and it's even been in my [ideas list for devs](https://www.notion.so/xetera/Project-Ideas-for-Devs-079a80edd23748c897e9e47835ad6b4a) over at notion for years. So I've finally done it, though with hantavirus since covid isn't really relevant anymore.
+
+This project was deceptively simple considering I had to both decompile flash assets and do dynamic instrumentation by forking ruffle and logging values to figure out how the original game was positioning assets in-game. I'd forgotten that flash games at the time were basically all about opening up photoshop and dragging assets into your IDE. The entire game menu in the intro is one big image with invisible buttons 😂.
+
+import WideMedia from "🧱/article/WideMedia.astro"
+import WidePicture from "🧱/article/WidePicture.astro"
+
+<a href="https://hantavirus.xetera.dev?utm_source=shorts" target="_blank" rel="noopener" class="flex flex-col" >
+  Pandemic 2 style Covid Tracker
+  <WideMedia>
+    <WidePicture src={screenshot} />
+  </WideMedia>
+</a>
+
+Should I open source this and do updates through contributions or just rely on open data? I guess the popularity will tell but I doubt many people even remember this game anymore :')
