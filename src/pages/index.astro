@@ -29,6 +29,24 @@ const { tv } = await meQuery;
 ---
 
 <Layout title="Xetera's Site" description="I like hacking around on computers">
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://xetera.dev/#person",
+      name: "Xetera",
+      url: "https://xetera.dev",
+      jobTitle: "Full Stack Engineer",
+      sameAs: [
+        "https://github.com/xetera",
+        "https://bsky.app/profile/xetera.dev",
+        "https://twitter.com/_Xetera",
+      ],
+    })}
+  />
   <Navbar />
   <main class="flex justify-center w-full my-7xl lg:my-[10%] homepage mx-6">
     <div

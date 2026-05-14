@@ -46,6 +46,27 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
     type="font/woff2"
     crossorigin
   />
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: frontmatter.title,
+      description: frontmatter.description,
+      datePublished: frontmatter.date.toISOString(),
+      keywords: frontmatter.tags,
+      url: Astro.url.href,
+      author: {
+        "@type": "Person",
+        "@id": "https://xetera.dev/#person",
+        name: "Xetera",
+        url: "https://xetera.dev",
+      },
+      ...frontmatter.seo,
+    })}
+  />
   <Navbar />
   <article
     class="flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base w-full"
@@ -73,11 +94,7 @@ const minutesRead = remarkPluginFrontmatter.minutesRead;
       />
       <div class="article-grid relative z-2 py-12">
         <TwitterCTA class="z-2" />
-        {
-          Astro.params.article && (
-            <NextArticleLinks id={Astro.params.article} />
-          )
-        }
+        {Astro.params.article && <NextArticleLinks id={Astro.params.article} />}
       </div>
       <div class="overlay rotate-180 z-0"></div>
     </div>
