@@ -8,20 +8,19 @@ import avatar from "../assets/avatars/xetera.png";
     <li>
       {
         Astro.url.pathname !== "/" && (
-          <a href="/" rel="prefetch">
+          <a href="/" rel="prefetch" role="button">
             <Image
               class="hover:scale-110 transition-all w-[50px]"
               src={avatar}
               alt="Home button"
-              quality="high"
-              height={140}
-              width={140}
+              quality="max"
+              width={75}
             />
           </a>
         )
       }
     </li>
-    <li role="button" id="theme-switcher" aria-label="Switch theme">
+    <li id="theme-switcher" aria-label="Switch theme">
       <div
         class="p-2 rounded-lg bg-body-800 hover:bg-body-700 outline outline-1 outline-body-700 transition-all"
       >
