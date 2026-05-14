@@ -93,10 +93,6 @@ https://github.com/xetera/infra
   addThemeChangeListener(setKnownTheme);
   setThemeDisplay(theme);
 </script>
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-  rel="stylesheet"
-/>
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description ?? "Xetera's Blog"} />
 <meta property="og:url" content={Astro.url.href} />
@@ -110,12 +106,6 @@ https://github.com/xetera/infra
 <meta name="twitter:image" content={new URL(avatarMj.src, Astro.site).href} />
 <meta name="theme-color" content={themeColor ?? "#f5c4c6"} />
 <meta name="generator" content={Astro.generator} />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;900&display=swap"
-  rel="stylesheet"
-/>
 <slot name="head" />
 <title>{title}</title>
 <link

@@ -22,6 +22,7 @@ const shorts = await Promise.all(
 
 <Layout
   title="Shorts"
+  description="Small thoughts and updates on my life that aren't worthy of full articles"
   class="overflow-x-hidden"
   style="--skew: 5deg; --rotate: 9deg; --scale: 1.2"
 >
@@ -54,7 +55,7 @@ const shorts = await Promise.all(
         {
           shorts.map(({ post, short, prev }) => (
             <li class="shorts-section flex flex-col mx-auto prose max-w-full prose-code:before:content-none prose-code:after:content-none text-base w-full">
-              <header class="w-full px-8 article-grid">
+              <header class="w-full px-8 article-grid" id={short.id}>
                 <li class="shorts-timeline ps-0 md:ps-8 !max-md:list-none">
                   <div class="shorts-outline border-body-600 max-md:hidden" />
                   <div class="text-sm md:text-base color-text-600 font-mono">
@@ -71,7 +72,7 @@ const shorts = await Promise.all(
                   </div>
 
                   <h2 class="shorts-title font-500 lg:text-4xl mt-8">
-                    {short.data.title}
+                    <a href={`#${short.id}`}>{short.data.title}</a>
                   </h2>
                 </li>
               </header>
