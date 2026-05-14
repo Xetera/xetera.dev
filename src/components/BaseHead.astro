@@ -1,4 +1,6 @@
 ---
+import avatarMj from "@assets/avatars/xetera_mj_2.jpeg";
+
 export interface Props {
   title: string;
   description?: string;
@@ -9,9 +11,11 @@ const { title, description, themeColor } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
+<link rel="canonical" href={Astro.url.href} />
 <meta name="viewport" content="width=device-width" />
 <meta name="description" content={description ?? "Xetera's Blog"} />
 <link rel="icon" type="image/png" href="/xetera_favicon.png?v=2" />
+<link rel="sitemap" href="/sitemap-index.xml" />
 <!--
 This is a tracking script for selfhosted, privacy-conscious https://umami.is analytics.
 Feel free to block it if you want but the data collected is stored locally on my cluster and not by a 3rd party.
@@ -20,6 +24,7 @@ https://github.com/xetera/infra
 <script
   is:inline
   defer
+  data-performance="true"
   src="https://overtime-contingency.xetera.dev/selfhosted-umami"
   data-website-id="fb997c11-6572-43df-bddf-9a64b1f2812d"></script>
 {
@@ -92,6 +97,17 @@ https://github.com/xetera/infra
   href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
   rel="stylesheet"
 />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description ?? "Xetera's Blog"} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:type" content="website" />
+<meta property="og:image" content={new URL(avatarMj.src, Astro.site).href} />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="1024" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description ?? "Xetera's Blog"} />
+<meta name="twitter:image" content={new URL(avatarMj.src, Astro.site).href} />
 <meta name="theme-color" content={themeColor ?? "#f5c4c6"} />
 <meta name="generator" content={Astro.generator} />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
