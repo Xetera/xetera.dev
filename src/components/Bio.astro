@@ -44,6 +44,7 @@ const latestShort = (await getAllShorts())[0];
           import.meta.env.SOCIAL_GITHUB && (
             <ExternalLink
               noIcon
+              aria-label="Xetera's Github"
               href={`https://github.com/${import.meta.env.SOCIAL_GITHUB}`}
               target="_blank"
               class="hover:color-text-900"
@@ -57,6 +58,7 @@ const latestShort = (await getAllShorts())[0];
           import.meta.env.SOCIAL_TWITTER && (
             <ExternalLink
               noIcon
+              aria-label="Xetera's Twitter"
               href={`https://twitter.com/${import.meta.env.SOCIAL_TWITTER}`}
               target="_blank"
               class="hover:color-text-900"
@@ -71,6 +73,7 @@ const latestShort = (await getAllShorts())[0];
             <ExternalLink
               noIcon
               href=""
+              aria-label="Xetera's Email"
               target="_blank"
               class="email-target hover:color-text-900 relative"
               data-umami-event="social:email"
