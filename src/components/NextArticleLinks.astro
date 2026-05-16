@@ -28,7 +28,7 @@ if (nextPosts.length < RECOMMENDATION_LENGTH) {
 ---
 
 <section class="px-4 md:p-0">
-  <h1 class="mb-4">Next up</h1>
+  <h2 class="mb-4">Next up</h2>
   <div class="flex flex-col gap-10 not-prose">
     {nextPosts.map((post) => <ArticleLink {...post} isNew={false} />)}
   </div>

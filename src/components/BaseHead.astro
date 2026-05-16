@@ -107,7 +107,7 @@ https://github.com/xetera/infra
 <meta name="theme-color" content={themeColor ?? "#f5c4c6"} />
 <meta name="generator" content={Astro.generator} />
 <slot name="head" />
-<title>{title}</title>
+<title>{title === "Xetera" ? title : `${title} | Xetera`}</title>
 <link
   rel="alternate"
   type="application/rss+xml"

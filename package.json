@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
+    "dev": "NODE_OPTIONS=--max-old-space-size=4096 astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
