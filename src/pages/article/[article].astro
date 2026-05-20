@@ -37,7 +37,7 @@ const { Content, remarkPluginFrontmatter } = await render(article);
 const minutesRead = remarkPluginFrontmatter.minutesRead;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} description={frontmatter.seo?.description ?? frontmatter.description}>
   <link
     slot="head"
     rel="preload"

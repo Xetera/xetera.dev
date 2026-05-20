@@ -14,7 +14,7 @@ const blogSchema = ({ image }: { image: ImageFunction }) => {
 				src: z.string(),
 			})
 			.optional(),
-		seo: z.record(z.string(), z.unknown()).optional(),
+		seo: z.object({ description: z.string().optional() }).and(z.record(z.string(), z.unknown())).optional(),
 	});
 };
 

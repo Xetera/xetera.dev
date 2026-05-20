@@ -7,6 +7,8 @@ imageTop:
 tags:
   - Censorship
   - Investigation
+seo:
+  description: How the Indian government (probably accidentally) blocked docs.top.gg for a couple of days in 2021 and how I figured out why that happened.
 ---
 
 import * as React from "react"
@@ -177,4 +179,3 @@ As for the reason for the censor itself, I'm still not sure but my team and I ar
 ## Solution
 
 If you're being affected by this, the easiest solution is to change your DNS server your device or preferably your router uses to <CloudflareDns /> or any other public DNS server that isn't limited by Indian censorship. You do **not** need a VPN as it doesn't seem like the DoT uses packet inspection and relies only on DNS lookups. If you're using GitHub Pages to host your site, switch over to an alternative like [Cloudflare Pages](https://pages.cloudflare.com/) or [Netlify](https://netlify.com) to make sure you don't run into the ~~great~~ mediocre firewall of India.
-

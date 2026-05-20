@@ -7,6 +7,8 @@ tags:
   - TypeScript
   - Types
   - Guide
+seo:
+  description: Building a typescript permissions system that encodes information about the permissions of users in the type system, making it impossible to forget permission checks.
 ---
 
 import Callout from '🧱/article/Callout.astro'
@@ -61,7 +63,7 @@ This type parameter is known as a <T>Phantom Type</T> in Haskell (and probably i
 
 The idea is that an `AuthorizedUser<T>` should always be a valid `User` but not the other way around. Authorized users are defined with `User`, making them compatible (or easily convertible in the case of other languages). But `User` is distinct from `AuthorizedUser<T>`, so it cannot be used interchangeably with it. Phantom types help us fine-tune this subtyping relationship using the constraint of permissions.
 
-Unfortunately for us, TypeScript does not care that `AuthorizedUser` has a different name from `User` because it uses a structural type system. The name you give a type is not taken into account by the typechecker when comparing two types, only the definition itself. If the fields of any two types match, TS considers those two to be compatible. So we're actually forced to use `T` in the definition in order to distinguish it from `User`. You could argue this makes it not a phantom type anymore, but I could argue that you're dumb and win the argument immediately.
+Unfortunately for us, TypeScript does not care that `AuthorizedUser` has a different name from `User` because it uses a structural type system. The name you give a type is not taken into account by the typechecker when comparing two types, only the definition itself. If the fields of any two types match, TS considers those two to be compatible. So we're actually forced to use `T` in the definition in order to distinguish it from `User`. You could argue this makes it not a phantom type anymore, but that's how you'd would refer to it in many languages.
 
 ```ts {lines:true,h: 3}
 type AuthorizedUser<T extends Partial<Permissions>> = User & {
@@ -256,7 +258,7 @@ This system we set up can work for more complex situations and is capable of dea
 
 Here's a playground link of a complete implementation if you want to try this out with an editor that displays the correct compiler errors [https://tsplay.dev/WK8Zzw](https://tsplay.dev/WK8Zzw).
 
-{/* 
+{/*
 Stupid typescript playground instantly steals focus from
 the website as soon as this loads, scrolling the user
 halfway down the page once they click on the article...

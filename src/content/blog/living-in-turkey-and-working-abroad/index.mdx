@@ -1,10 +1,12 @@
 ---
 title: "Living in Turkey and Working at an American Company"
 date: 2023-07-16
-description: A small walkthrough of what it's like to work remote
+description: A small walkthrough of what it's like to work remote.
 tags:
   - Life
   - Guide
+seo:
+  description: A showcase of what working remote in Turkey is like, specifically what the process of running your own company entails like filing taxes and signing contracts.
 ---
 
 export const year = "2023"
@@ -52,6 +54,13 @@ import { DiscordInvite } from "🧱/messaging/DiscordInvite"
 />
 
 # Taxes
+
+import Callout from '🧱/article/Callout.astro'
+
+<Callout title="2026 update" color="var(--highlight)">
+  Believe it or not, there's a <b>100%</b> tax break for income earned overseas now! Some of this information in this section is now outdated. Though you still need an accountant to pay other types of taxes not tied to your income, and a separate CPA that works with the government who will audit whether you're eligibile for the tax break. However both of those a drop in the bucket compared to paying income taxes.
+</Callout>
+
 If you do get to start working abroad here, taxes —along with death— is something you will inevitably have to face with no matter where you live. Here in Turkey, income taxes for contractor salaries are seen as... optional... to say the least. The general consensus seems to be that if you don't have a salary in the larger end of 6 figures in USD, you can just ignore income taxes. As they're not taken out of your paycheck and the government doesn't seem to dedicate the necessary resources to chase down small-scale tax evasion. That being said, I would never advocate for tax evasion. Taxes are an important part of a functioning modern democracy, and as a society we need the government to pool our taxpayer money to pay for services that benefit us all that we couldn't otherwise. Like building bridges, presidential palaces, filing SLAPP suits against political dissidents, and imprisoning journalists.
 
 Because of that, I do all my taxes by the book with the help of an accountant. I bet this process is different for foreigners, so I can only offer advice for Turks in this situation. If you're gonna be working remote with a decent salary, especially in the software field, my (non-legally binding) advice is to find an accountant ASAP (I might be able to get you in touch with a good one if you contact me on Twitter) and start a limited company to benefit from reduced taxes and further deductions. As of 2023, software developers earning foreign currencies benefit from a 50% tax reduction on foreign income. This is absolutely huge considering you'll be earning money at a much higher leverage due to the exchange rate that won't be going down any time soon, thanks to bad economic policies most Turks voted to keep around {year === "2023" ? "this" : "that"} year.
@@ -59,7 +68,7 @@ Because of that, I do all my taxes by the book with the help of an accountant. I
 ## Invoices
 If you're familiar with the American tax system, there, income declaration is based on the W8 or 1099 forms you sign with an employer depending on whether you're a contractor. But in Turkey, things are done through invoices you submit to the Turkish equivalent of the IRS. They're filed monthly through a government website called IVD (Interaktif Vergi Dairesi - Interactive Tax Office) based on the monthly amount on your contract. You generally pay your taxes at the end of every season, 4 times a year, (depending on the type of taxes you're liable for) and they get calculated based on the invoices you've submitted, after deducting any business expenses. Although in your case an accountant should be doing most of this for you.
 
-Business expenses are crucial here, since as a sole proprietor magically turning keystrokes into money, you will most likely not be paying any salaries other than your own or purchasing any raw materials other than good old çay and kahve. Which means you will get hit with the biggest taxes you could possibly pay with nothing deducted from your net salary. You will need to pull quite a few expenses out of a hat to avoid singlehandedly funding a golden toilet in the presidential bathroom. A golden toilet in your own bathroom might be a valid expense to deduct from your taxes, for example. Although you would need to consult your account before making that purchase. As the proud owner of Just Myself Ltd., everything you purchase, from a cup of coffee to a mini fridge, becomes a matter of deductable expenses you have to think about. 
+Business expenses are crucial here, since as a sole proprietor magically turning keystrokes into money, you will most likely not be paying any salaries other than your own or purchasing any raw materials other than good old çay and kahve. Which means you will get hit with the biggest taxes you could possibly pay with nothing deducted from your net salary. You will need to pull quite a few expenses out of a hat to avoid singlehandedly funding a golden toilet in the presidential bathroom. A golden toilet in your own bathroom might be a valid expense to deduct from your taxes, for example. Although you would need to consult your account before making that purchase. As the proud owner of Just Myself Ltd., everything you purchase, from a cup of coffee to a mini fridge, becomes a matter of deductable expenses you have to think about.
 
 There are 2 systems companies use for doing their taxes here, e-arşiv (electronic archive) and e-fatura (electronic invoice). The former is based around an archaic jsp app where everything is a manual process, and the latter is the more modern system with slightly more automation (or so I've heard). You're required to switch to the new version if you're making upwards of ~$150k/year, and the switch involves some fun trips to the notary. I don't make that much money and I'm a lazy boy so I decided to stick with e-arşiv and automate the entire invoice flow with playwright instead. You can submit invoices through a GitHub action [here] too if you can't even be bothered to spend 3 minutes of your day on a single form once a month like me. Normally, 2 Turkish companies doing business with each other will require that one bill the other and send that invoice, but American companies will never ask for this. Partly because most Americans don't even know what an invoice is or why you'd need one for full time work. Unfortunately you're still required to fill these out every month for tax purposes even if you're not actually sending them to the company you're working for.
 
@@ -78,8 +87,8 @@ The US is also an option but life is absolutely brutal for immigrants who aren't
 
 At the end of the day, if you're not in Turkey, you may want to come work from home here if:
 
+- You want to pay 0% in income taxes
 - You're interested in exploring this beautiful country with its rich history and gorgeous geography
 - You want to increase your purchasing power multiple fold and make even more money doing nothing while corruption collapses the economy around you in real time
 - Women's rights is not something you often find yourself thinking about
-- You maybe have half a million dollars to buy a house here and get instant citizenship
 - You've never heard of the Global Freedom Index
