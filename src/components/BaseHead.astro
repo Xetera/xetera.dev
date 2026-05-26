@@ -11,10 +11,27 @@ const { title, description, themeColor } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
-<link rel="preload" href="/fonts/hanken-grotesk/HankenGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/mackinac/mackinac-bold.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/jetbrains-mono/regular-compressed.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="canonical" href={Astro.url.href} />
+<link
+  rel="preload"
+  href="/fonts/hanken-grotesk/HankenGrotesk-Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/mackinac/mackinac-bold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/jetbrains-mono/regular-compressed.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
 <meta name="viewport" content="width=device-width" />
 <meta name="description" content={description ?? "Xetera's Blog"} />
 <link rel="icon" type="image/png" href="/xetera_favicon.png?v=2" />

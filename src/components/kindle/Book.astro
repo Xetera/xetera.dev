@@ -1,9 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import type { Book } from "generated/gql/graphql";
+import type { Book } from "../../../generated/gql/graphql";
 
-interface Props
-  extends Pick<Book, "title" | "author" | "coverUrl" | "progress" | "readAt"> {
+interface Props extends Pick<
+  Book,
+  "title" | "author" | "coverUrl" | "progress" | "readAt"
+> {
   class?: string;
 }
 
@@ -56,7 +58,7 @@ const isUnfinished = percentageRead < 100;
         new Date(),
         {
           addSuffix: true,
-        }
+        },
       ).replace("about ", "~");
       lastRead.textContent = readTime;
     }
