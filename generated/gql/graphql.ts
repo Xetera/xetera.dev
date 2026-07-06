@@ -21,22 +21,22 @@ export type Scalars = {
 export type Book = {
   __typename?: 'Book';
   /** Amazon Standard Identification Number */
-  asin: Scalars['String']['output'];
+  asin?: Maybe<Scalars['String']['output']>;
   /** Author of the book */
-  author: Scalars['String']['output'];
+  author?: Maybe<Scalars['String']['output']>;
   /** URL to the cover image */
-  coverUrl: Scalars['String']['output'];
+  coverUrl?: Maybe<Scalars['String']['output']>;
   device?: Maybe<Scalars['String']['output']>;
   /** The first time this book was seen on the Kindle API */
-  firstSeenAt: Scalars['Date']['output'];
+  firstSeenAt?: Maybe<Scalars['Date']['output']>;
   /** Whether this book was purchased */
-  isPurchased: Scalars['Boolean']['output'];
+  isPurchased?: Maybe<Scalars['Boolean']['output']>;
   /** Percentage of the book read. Books with 0 percentage reads are not shown. */
-  progress: Scalars['Float']['output'];
+  progress?: Maybe<Scalars['Float']['output']>;
   /** The last date this book was read */
   readAt?: Maybe<Scalars['Date']['output']>;
   /** Title of the book */
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 export enum ImageSize {
@@ -59,14 +59,14 @@ export type LikedSong = {
   __typename?: 'LikedSong';
   /** The date the song was liked */
   likedAt?: Maybe<Scalars['Date']['output']>;
-  song: Song;
+  song?: Maybe<Song>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  kindleBooks: Array<Book>;
-  spotifyLikedSongs: Array<LikedSong>;
-  tv: Array<Tv>;
+  kindleBooks?: Maybe<Array<Book>>;
+  spotifyLikedSongs?: Maybe<Array<LikedSong>>;
+  tv?: Maybe<Array<Tv>>;
 };
 
 
@@ -77,20 +77,20 @@ export type QueryKindleBooksArgs = {
 export type Song = {
   __typename?: 'Song';
   /** Album of the song */
-  album: Scalars['String']['output'];
+  album?: Maybe<Scalars['String']['output']>;
   /** Artist of the song */
-  artist: Scalars['String']['output'];
+  artist?: Maybe<Scalars['String']['output']>;
   /** Album art of the song */
-  coverUrl: Scalars['String']['output'];
+  coverUrl?: Maybe<Scalars['String']['output']>;
   /** Duration of the song in milliseconds */
-  durationMs: Scalars['Int']['output'];
-  id: Scalars['ID']['output'];
+  durationMs?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   /** A 30 second preview of the song */
   previewUrl?: Maybe<Scalars['String']['output']>;
   /** Spotify URL of the song */
   spotifyUrl?: Maybe<Scalars['String']['output']>;
   /** Title of the song */
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -101,14 +101,14 @@ export type SongCoverUrlArgs = {
 export type Tv = {
   __typename?: 'TV';
   coverUrl?: Maybe<Scalars['String']['output']>;
-  createdAt: Scalars['Date']['output'];
-  episode: Scalars['String']['output'];
+  createdAt?: Maybe<Scalars['Date']['output']>;
+  episode?: Maybe<Scalars['String']['output']>;
   lastWatchedAt?: Maybe<Scalars['Date']['output']>;
   nextEpisode?: Maybe<Scalars['String']['output']>;
-  simklId: Scalars['String']['output'];
+  simklId?: Maybe<Scalars['String']['output']>;
   simklLink?: Maybe<Scalars['String']['output']>;
-  title: Scalars['String']['output'];
-  updatedAt: Scalars['Date']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['Date']['output']>;
 };
 
 export type MeQueryVariables = Exact<{
@@ -116,7 +116,7 @@ export type MeQueryVariables = Exact<{
 }>;
 
 
-export type MeQuery = { __typename?: 'Query', books: Array<{ __typename?: 'Book', title: string, author: string, asin: string, coverUrl: string, progress: number, readAt?: any | null }>, likedSongs: Array<{ __typename?: 'LikedSong', likedAt?: any | null, song: { __typename?: 'Song', title: string, artist: string, coverUrl: string, spotifyUrl?: string | null, previewUrl?: string | null, durationMs: number } }>, tv: Array<{ __typename?: 'TV', simklId: string, title: string, lastWatchedAt?: any | null, coverUrl?: string | null, episode: string, nextEpisode?: string | null, simklLink?: string | null }> };
+export type MeQuery = { __typename?: 'Query', books?: Array<{ __typename?: 'Book', title?: string | null, author?: string | null, asin?: string | null, coverUrl?: string | null, progress?: number | null, readAt?: any | null }> | null, likedSongs?: Array<{ __typename?: 'LikedSong', likedAt?: any | null, song?: { __typename?: 'Song', title?: string | null, artist?: string | null, coverUrl?: string | null, spotifyUrl?: string | null, previewUrl?: string | null, durationMs?: number | null } | null }> | null, tv?: Array<{ __typename?: 'TV', simklId?: string | null, title?: string | null, lastWatchedAt?: any | null, coverUrl?: string | null, episode?: string | null, nextEpisode?: string | null, simklLink?: string | null }> | null };
 
 
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Me"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"KindleFilterType"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"books"},"name":{"kind":"Name","value":"kindleBooks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"asin"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"}},{"kind":"Field","name":{"kind":"Name","value":"progress"}},{"kind":"Field","name":{"kind":"Name","value":"readAt"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"likedSongs"},"name":{"kind":"Name","value":"spotifyLikedSongs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"likedAt"}},{"kind":"Field","name":{"kind":"Name","value":"song"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"artist"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"}},{"kind":"Field","name":{"kind":"Name","value":"spotifyUrl"}},{"kind":"Field","name":{"kind":"Name","value":"previewUrl"}},{"kind":"Field","name":{"kind":"Name","value":"durationMs"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"tv"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"simklId"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"lastWatchedAt"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"}},{"kind":"Field","name":{"kind":"Name","value":"episode"}},{"kind":"Field","name":{"kind":"Name","value":"nextEpisode"}},{"kind":"Field","name":{"kind":"Name","value":"simklLink"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;

@@ -1,17 +1,17 @@
 ---
 import { Image } from "astro:assets";
-import type { MeQuery } from "../../../generated/gql/graphql";
+import type { meQuery } from "🛠️/me";
 import { SongSkeleton } from "./SpotifySongSkeleton";
 import { resizeSpotifyImageTo } from "./resizer";
 
-type SingleSong = MeQuery["likedSongs"][number]["song"];
+type SingleSong = Awaited<typeof meQuery>["likedSongs"][number]["song"];
 
 interface Props extends SingleSong {}
 
 const { props } = Astro;
 ---
 
-<SongSkeleton title={props.title} artist={props.artist}>
+<SongSkeleton title={props.title ?? ""} artist={props.artist ?? ""}>
   {
     props.coverUrl && (
       <Image

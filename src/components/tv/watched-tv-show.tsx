@@ -15,7 +15,7 @@ function parseEpisode(text: string) {
 }
 
 export default function WatchedTvShow({ show, selected, i }: Props) {
-	const { episode, season } = parseEpisode(show.episode);
+	const { episode, season } = parseEpisode(show.episode ?? "");
 	if (!show.coverUrl) {
 		throw new Error("Invalid coverUrl, empty");
 	}

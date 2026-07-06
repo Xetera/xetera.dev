@@ -11,7 +11,7 @@ interface Props extends Pick<
 
 const { props } = Astro;
 
-const percentageRead = Math.round(Number(props.progress.toFixed(1)));
+const percentageRead = Math.round(Number((props.progress ?? 0).toFixed(1)));
 const isUnfinished = percentageRead < 100;
 ---
 
@@ -19,15 +19,19 @@ const isUnfinished = percentageRead < 100;
   <div
     class="z-2 rounded outline outline-1 outline-body-600 group-hover:-translate-y-6 transition-250 overflow-hidden group-hover:shadow-xl"
   >
-    <Image
-      alt={`Book cover image for ${props.title}`}
-      width={500}
-      height={750}
-      sizes=""
-      loading="lazy"
-      class="z-2 w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
-      src={props.coverUrl}
-    />
+    {
+      props.coverUrl && (
+        <Image
+          alt={`Book cover image for ${props.title}`}
+          width={500}
+          height={750}
+          sizes=""
+          loading="lazy"
+          class="z-2 w-full h-full object-cover aspect-ratio-[2/3] opacity-100 outline outline-1 outline-body-800"
+          src={props.coverUrl}
+        />
+      )
+    }
     {
       isUnfinished && (
         <progress

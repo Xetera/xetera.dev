@@ -49,8 +49,8 @@ const className = "book-item rounded";
         <div class="grid gap-4 book-grid">
           {showing.map((book) => {
             const { author } = book;
-            const link = `https://www.amazon.com/${skewer(book.title)}-${skewer(
-              author,
+            const link = `https://www.amazon.com/${skewer(book.title ?? "")}-${skewer(
+              author ?? "",
             )}/dp/${book.asin}`;
             const render = <Book {...book} class={className} />;
             return (

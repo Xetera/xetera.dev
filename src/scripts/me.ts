@@ -47,5 +47,13 @@ export const meQuery = executeOperation(GRAPHQL_URL, query, {
     );
     throw new Error("Failed to execute GraphQL query");
   }
-  return r.data as MeQuery;
+  const data = r.data as MeQuery;
+  return {
+    books: data.books ?? [],
+    likedSongs: (data.likedSongs ?? []).filter(
+      (liked): liked is typeof liked & { song: NonNullable<typeof liked.song> } =>
+        liked.song != null,
+    ),
+    tv: data.tv ?? [],
+  };
 });
