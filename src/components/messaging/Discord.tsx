@@ -35,7 +35,7 @@ export function DiscordReaction({
 }: DiscordReactionProps) {
 	const [reacts, setReacts] = useState(reactCount);
 	const [reacted, setReacted] = useState(_reacted);
-	const mounted = useRef<boolean>();
+	const mounted = useRef<boolean>(undefined);
 	useEffect(() => {
 		mounted.current = true;
 	}, []);

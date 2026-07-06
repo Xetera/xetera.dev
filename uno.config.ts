@@ -1,6 +1,9 @@
 import unocss from "unocss/astro";
-import presetUno from "unocss/preset-uno";
-import presetTypography from "unocss/preset-typography";
+import {
+	type PresetWind3Theme,
+	presetTypography,
+	presetWind3,
+} from "unocss";
 import kebabCase from "lodash/kebabCase.js";
 
 function createMapping(label: string, sizes: number[]) {
@@ -15,9 +18,9 @@ function variables(variables: string[]) {
 	);
 }
 
-export default unocss({
+export default unocss<PresetWind3Theme>({
 	presets: [
-		presetUno(),
+		presetWind3(),
 		presetTypography({
 			cssExtend: {
 				"pre>code": {

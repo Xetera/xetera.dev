@@ -3,8 +3,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const MAX_FAILED_CONNECTIONS = 5;
 
 export function useLanyard(discordId: string) {
-	const heartBeatInterval = useRef<NodeJS.Timeout | undefined>();
-	const socket = useRef<WebSocket | undefined>();
+	const heartBeatInterval = useRef<NodeJS.Timeout | undefined>(undefined);
+	const socket = useRef<WebSocket | undefined>(undefined);
 	const reconnectAttempts = useRef<number>(0);
 	const [data, setData] = useState({});
 

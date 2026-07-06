@@ -1,8 +1,4 @@
-import {
-	type Data as LanyardData,
-	type Spotify,
-	useLanyardWS,
-} from "use-lanyard";
+import { Types, useLanyardWS } from "use-lanyard";
 import { RiSpotifyFill } from "react-icons/ri";
 import { useEffect, type ReactNode, useState } from "react";
 import { SongSkeletonDetails } from "🧱/spotify/SpotifySongSkeleton";
@@ -79,7 +75,7 @@ function SpotifyProgress({
 	);
 }
 
-function SpotifyPresence({ spotify }: { spotify: Spotify }) {
+function SpotifyPresence({ spotify }: { spotify: Types.Spotify }) {
 	return (
 		<div className="flex flex-col gap-4">
 			<PresenceHeader icon={<RiSpotifyFill size={20} />}>
@@ -104,7 +100,7 @@ function SpotifyPresence({ spotify }: { spotify: Spotify }) {
 							<SongSkeletonDetails
 								className="px-3 py-1"
 								title={spotify.song}
-								artist={spotify.artist}
+								artist={spotify.artist ?? ""}
 							/>
 						</div>
 						{/* <RiPlayCircleFill size={32} className="me-4" /> */}
@@ -123,7 +119,7 @@ function Presence({
 	data,
 	className,
 }: {
-	data?: LanyardData;
+	data?: Types.Presence;
 	className?: string | undefined;
 }) {
 	if (!data?.spotify) {
