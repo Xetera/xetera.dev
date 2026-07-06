@@ -1,4 +1,4 @@
-import { Types, useLanyardWS } from "use-lanyard";
+import { type Types, useLanyardWS } from "use-lanyard";
 import { RiSpotifyFill } from "react-icons/ri";
 import { useEffect, type ReactNode, useState } from "react";
 import { SongSkeletonDetails } from "🧱/spotify/SpotifySongSkeleton";

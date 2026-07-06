@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { defineConfig, sharpImageService } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import unocss from "./uno.config";
 import mdx from "@astrojs/mdx";
 import { remarkReadingTime } from "./markdown-utils";
@@ -12,18 +13,13 @@ import rehypeSlug from "rehype-slug";
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL,
+  compressHTML: true,
   markdown: {
-    smartypants: false,
-    remarkPlugins: [
-      remarkReadingTime,
-      // @ts-expect-error | markdown plugin types are weird
-      rehypeSlug,
-      // @ts-expect-error | markdown plugin types are weird
-      rehypeAutolinkHeadings,
-      // @ts-expect-error | markdown plugin types are weird
-      rehypeExternalLinks,
-    ],
-    extendDefaultPlugins: true,
+    processor: unified({
+      smartypants: false,
+      remarkPlugins: [remarkReadingTime],
+      rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypeExternalLinks],
+    }),
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
       // https://github.com/shikijs/shiki/blob/main/docs/themes.md

@@ -19,10 +19,6 @@
     font-family: var(--font-family-article-title);
   }
 
-  prose-code:before:hidden prose-code:after:hidden {
-    content: none;
-  }
-
   @media screen and (max-width: 500px) {
     .article-grid>blockquote {
       padding-left: 0;
