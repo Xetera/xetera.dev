@@ -1,4 +1,5 @@
 User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 
 Sitemap: https://xetera.dev/sitemap-index.xml
