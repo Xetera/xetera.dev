@@ -35,6 +35,14 @@ export default defineConfig({
     },
   },
   integrations: [unocss, mdx(), react(), sitemap()],
+  vite: {
+    server: {
+      watch: {
+        ignored: ["**/.devenv/**", "**/.direnv/**", "**/.nix/**"],
+        followSymlinks: false,
+      },
+    },
+  },
   output: "static",
   image: {
     service: sharpImageService(),
