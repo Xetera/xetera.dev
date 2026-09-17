@@ -73,7 +73,7 @@ Network/Database/SQL/c4id;string;select lastactive, username from users where c4
 Network/Database/SQL/CheckC4ID;string;select c4now(), username, lastactive from users where c4id=%i
 ```
 
-The game makes raw SQL queries! Not the multiplayer server, to be clear, the game client itself. After looking through the decompiled code, it's clear there's actually no multiplayer server at all. It was all just an online leaderboard people could post their scores on by adding rows to a database directly from the client... terrifying. The Steam release replaces that link with `activision.com`, but I was able to find the original link by going through the Caesar 4 Heaven <ExternalLink href="https://caesar4.heavengames.com/archives/december-2007/">archived news posts from 2007</ExternalLink>. Plugging that into the [Wayback Machine](https://web.archive.org/web/20260000000000*/http://caesarivonline.com), we can see there was a website dating back to 2006 that was uh, no doubt made in 2006.
+The game makes raw SQL queries! Not the multiplayer server, to be clear, the game client itself. After looking through the decompiled code, it's clear there's actually no multiplayer server at all. It was all just an online leaderboard people could post their scores on by adding rows to a database directly from the client... terrifying. The Steam release replaces that link with `activision.com`, but I was able to find the original link by going through the Caesar 4 Heaven <ExternalLink href="https://caesar4.heavengames.com/archives/december-2007/">archived news posts from 2007</ExternalLink>. Plugging that into the [Wayback Machine](https://web.archive.org/web/20260000000000*/http://caesarivonline.com), we can see there was a website dating back to 2006 that was, uh, no doubt made in 2006.
 
 ![A very old looking website www.caesarivonline.com showing a leaderboard of scores](./online_leaderboards.png)
 
@@ -89,7 +89,7 @@ import mainMenu from "./main_menu.jpeg";
 
 {<Caption>There's supposed to be a "Caesar IV Online" button in there...</Caption>}
 
-Cleverly, the game loads almost all UI elements from `.dat` files in the installation directory, which was modified for Steam to not include the Online button at all. By tinkering with the file format, we can figure out how to add it back, as all the menus are still in the game. It's just the buttons that are missing. Though this is yet another extra step required to re-enable online play.
+Cleverly, the game loads almost all UI elements from `.dat` files in the installation directory, which were modified for Steam to not include the Online button at all. By tinkering with the file format, we can figure out how to add it back, as all the menus are still in the game. It's just the buttons that are missing. Though this is yet another extra step required to re-enable online play.
 
 The next step is to run an ancient MySQL (or MariaDB in my case) database for the game to connect to. This step is easy to prototype since the queries the game makes are already all out in the open. I just had to get a clanker to create the db schema based on the queries. If anything does go wrong in this process, you get very unhelpful error messages.
 
@@ -142,7 +142,7 @@ import challengeLeaderboard from "./challenge_leaderboard.png";
 
 The bottom shows you the goal you're working towards; mine happens to be population for this scenario. Clicking on the `+` button shows you the top leaderboard. If you're not in the top 10, it also shows you the people ranked around you. You can upload a screenshot of your current screen (insert a blob to the database), and open the leaderboard which currently sends you to the Activision homepage.
 
-The game also periodically sends data about its current state, the stats and the list of all buildings you've built, separated by semicolons:
+The game also periodically sends data about its current state: the stats and the list of all buildings you've built, separated by semicolons:
 
 ```{nolines}
 <building_id>(x, y, elevation, rotation, state);
@@ -156,18 +156,18 @@ That lets the backend receiving it overlay all the buildings you've built on top
 
 ![](minimap.png)
 
-This is more or less what <T>Caesar IV Online</T> is. A leaderboard you tried to reach the top of before it reset two years later. I've taken everything I learned here to revive a new leaderboard at <ExternalLink
+This is more or less what <T>Caesar IV Online</T> is: a leaderboard you tried to reach the top of before it reset two years later. I've taken everything I learned here to revive a new leaderboard at <ExternalLink
 target="_blank"
 referrer
 class="text-blue-400 underline"
 href="https://c4.xetera.dev/?utm_source=blog">https://c4.xetera.dev</ExternalLink> (the original domain is sadly squatted). Unlike the original game, you won't be connecting directly to a MySQL database. I've set up a Go webserver to proxy connections without `delete`/`drop` permissions, whitelist only the queries the game makes, and check to make sure users only send requests for the username they've logged in as.
 
-I've also made a small patcher to automate all of the setup discussed, as well as fix weird bugs about the game that require patching the executable.
+I've also made a small patcher to automate all of the setup discussed, as well as fix weird bugs in the game that require patching the executable.
 
 ![A screenshot showing the list of patches available in the published desktop application](image.png)
 
-Please take a look and play a game for yourself. Because there are a total of like 4 people including myself who still play this game, Caesar's Challenges are active for an entire year instead of the 2 weeks they were originally implemented as.
+Please take a look and play a game for yourself. Because there are a total of like 4 people including myself who still play this game, Caesar's Challenges are active for an entire year instead of the 2 weeks they were originally implemented with.
 
 ---
 
-† _I'm interested in working on an open-source reimplementation of Caesar IV, similar to the Julius project. Sadly, the game is built with C++, using a newer compiler with modern optimizations (that [reccmp](https://github.com/isledecomp/reccmp) does not officially support), as well as external dependencies. This is going to be much more difficult project than the original Julius project, but I'm interested in giving it a shot by letting a bunch of AI agents loose on the problem to see if I can get an identical binary output and make the game truly cross-platform compatible._
+† _I'm interested in working on an open-source reimplementation of Caesar IV, similar to the Julius project. Sadly, the game is built with C++, using a newer compiler with modern optimizations (that [reccmp](https://github.com/isledecomp/reccmp) does not officially support), as well as external dependencies. This is going to be a much more difficult project than the original Julius project, but I'm interested in giving it a shot by letting a bunch of AI agents loose on the problem to see if I can get an identical binary output and make the game truly cross-platform compatible._
