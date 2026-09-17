@@ -11,17 +11,33 @@ seo:
   description: A guide on extracting your ISP router's PPPoE username and passwords by pretending to be the ISP. Including a free open source desktop app to do it automatically.
 ---
 
-import Callout from '🧱/article/Callout.astro'
-import T from '🧱/T.astro'
-import ExternalLink from '🧱/ExternalLink.astro'
+import Callout from "🧱/article/Callout.astro";
+import T from "🧱/T.astro";
+import ExternalLink from "🧱/ExternalLink.astro";
 
 <Callout title="TLDR">
-  I've made <ExternalLink class="inline-flex text-blue-400 underline" href="https://github.com/xetera/router-freedom">a cross-platform desktop app</ExternalLink> that can help you find the credentials if you're not interested in the technical details.
+  <span>I've made </span>
+  {
+    <span>
+      <ExternalLink
+        class="inline-flex text-blue-400 underline"
+        href="https://github.com/xetera/router-freedom"
+      >
+        a cross-platform desktop app
+      </ExternalLink>{" "}
+    </span>
+  }
+  {
+    <span>
+      that can help you find the credentials if you're not interested in the
+      technical details.
+    </span>
+  }
 </Callout>
 
-For the past few years, I've been using all the time I don't spend writing new articles setting up a homelab. That includes getting a new small server that I use for home-assistant, a cool access point, a network switch, and of course, my own router. I've also somehow ended up with a 100TB Plex collection now sitting in a data center and thousands of dollars sunk in completely unnecessary hardware for it. I didn't *have* to do any of these, but once you go down this rabbit hole there's no coming back.
+For the past few years, I've been using all the time I don't spend writing new articles setting up a homelab. That includes getting a new small server that I use for home-assistant, a cool access point, a network switch, and of course, my own router. I've also somehow ended up with a 100TB Plex collection now sitting in a data center and thousands of dollars sunk in completely unnecessary hardware for it. I didn't _have_ to do any of these, but once you go down this rabbit hole there's no coming back.
 
-My setup was working great until I had to move to a new apartment and realized that my current ISP couldn't guarantee gigabit speeds there. I was being demoted from gigabit speeds to a mere 100mbps, that's 1/10th the speed I was getting at my old place! You can argue I don't need gigabit but.. I mean I clearly *need* gigabit. How am I supposed to repeatedly run `docker pull xetera/abandoned-project` with a measly 100 mbit/s internet?
+My setup was working great until I had to move to a new apartment and realized that my current ISP couldn't guarantee gigabit speeds there. I was being demoted from gigabit speeds to a mere 100mbps, that's 1/10th the speed I was getting at my old place! You can argue I don't need gigabit but.. I mean I clearly _need_ gigabit. How am I supposed to repeatedly run `docker pull xetera/abandoned-project` with a measly 100 mbit/s internet?
 
 I started looking around for a new ISP I could switch to, and when I found one that told me my building has fiber support, I learned an important lesson about what "fiber internet" means for ISPs. There's this incredible marketing hype around fiber, as if customers care what material their cables are made of. Every neighborhood is being upgraded to fiber connections, and these ISPs are mentioning incredible technological advancements with it. But what they won't tell you, or will do so reluctantly, is that their fancy new fiber is limited to asymmetric VDSL speeds. 100 mb/s down 10 mb/s up. All these companies seem to have found a way to turn government subsidies and a long term cost-saving investment —laying fiber for new customers instead of copper— into some hype most people don't even understand. I certainly didn't at first.
 
@@ -59,9 +75,9 @@ Let's connect the router to the computer you're running. An important thing to n
 
 I already have an external router running pfsense, so I've connected the ISP router to the `igc3` interface on my pfsense machine. If you're also a pfsense user, you can tell which interface you've connected to by going
 
-import interface_ from "./assets/interface.png"
-import WidePicture from "🧱/article/WidePicture.astro"
-import WideMedia from "🧱/article/WideMedia.astro"
+import interface_ from "./assets/interface.png";
+import WidePicture from "🧱/article/WidePicture.astro";
+import WideMedia from "🧱/article/WideMedia.astro";
 
 <WideMedia>
   <WidePicture
@@ -84,7 +100,7 @@ I personally use `10.0.0.0/8` for my home subnet because I'm awesome. If you hav
 
 After powering on the router and waiting a bit for it to wake up, we should start seeing `PADI` packets that the router sends to initiate the PPPoE handshake. We haven't set up a PPPoE server on the other side yet so these packets falls into the void with no response. Most routers are set up to retry discovery to prevent falling into a do-nothing state. In my case, you can see it retries every 30 seconds.
 
-import padi from "./assets/padi.png"
+import padi from "./assets/padi.png";
 
 <WideMedia contain>
   <WidePicture
@@ -104,8 +120,8 @@ Here's what the steps of an average conversation over PPPoE looks like:
 
 Here's a full interactive wireshark exchange between the router and the PPPoE server.
 
-import a from "./assets/_turktelekom.json"
-import { Timeline } from "🧱/Pcap.tsx"
+import a from "./assets/_turktelekom.json";
+import { Timeline } from "🧱/Pcap.tsx";
 
 <WideMedia extraWide>
   <Timeline client:visible pcap={a}></Timeline>
@@ -115,9 +131,7 @@ Obviously the authentication fails because we don't have a real PPPoE server and
 
 Create a new VLAN with the right configuration and attach it to the WAN interface:
 
-<WideMedia>
-  ![VLAN configuration in pfSense](./assets/vlan.jpg)
-</WideMedia>
+<WideMedia>![VLAN configuration in pfSense](./assets/vlan.jpg)</WideMedia>
 
 If you're using Superonline or another ISP that sets its VLAN to 0, you're going to need to do this by manually editing config files in pfSense since that's not a valid tag there.
 

@@ -8,17 +8,23 @@ interface Props {
 const { title, color } = Astro.props;
 ---
 
-<aside class="bg-body-800 p-6 not-prose rounded-lg flex gap-4 overflow-hidden relative" style={color ? `--callout-color: ${color}` : undefined}>
-  {color && <span class="absolute left-0 top-0 bottom-0 w-1" style="background-color: var(--callout-color)"></span>}
+<aside
+  class="bg-body-800 p-6 not-prose rounded-lg flex gap-4 overflow-hidden relative"
+  style={color ? `--callout-color: ${color}` : undefined}
+>
+  {color && (
+    <span
+      class="absolute left-0 top-0 bottom-0 w-1"
+      style="background-color: var(--callout-color)"
+    ></span>
+  )}
   <p>💡</p>
   <div class="flex flex-col color-text-500 text-lg">
-    {
-      title && (
-        <h2 class="font-sans font-medium text-xl color-text-800 mb-1">
-          {title}
-        </h2>
-      )
-    }
-    <slot />
+    {title && (
+      <h2 class="font-sans font-medium text-xl color-text-800 mb-1">{title}</h2>
+    )}
+    <div>
+      <slot />
+    </div>
   </div>
 </aside>
