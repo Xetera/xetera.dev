@@ -44,11 +44,12 @@ File formats are another portion of that puzzle. Not all formats were created th
 
 WebP is one of those file formats that allow for lossy compression in a way that (on average) makes high resolution images look better than what JPEG provides.
 
+import handongPng from "./assets/handong.png"
 import handongWebp from "./assets/handong.webp"
 
 <div class="flex flex-wrap mb-4 gap-4">
   <ExampleImage
-    src="./assets/handong.png"
+    src={handongPng.src}
     title="😔 Virgin PNG"
     size="7.1MB"
     text="That's crazy. Nobody wants to download this file and you don't want to serve

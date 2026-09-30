@@ -89,7 +89,7 @@ export function DiscordReaction({
 				onKeyDown={react}
 			>
 				{typeof image !== "string" ? (
-					<img alt="" src={image.src} width="16" height="16" className="mb-0" />
+					<img alt="" src={image.src} width="16" height="16" className="my-0" />
 				) : (
 					<div className="w-4 h-4">{image}</div>
 				)}
@@ -137,7 +137,7 @@ const DiscordMessageAvatar = ({
 					alt={`Avatar for ${username}`}
 					height="40"
 					width="40"
-					className="object-cover"
+					className="object-cover m-0"
 					src={typeof avatar === "string" ? avatar : avatar.src}
 					onLoad={() => setLoaded(true)}
 				/>
