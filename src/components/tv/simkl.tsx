@@ -3,6 +3,7 @@ import type { meQuery } from "🛠️/me";
 import styles from "./simkl.module.css";
 import WatchedTvShow from "./watched-tv-show";
 import Timeline from "./timeline";
+import { groupShows } from "./group";
 import SectionHeader from "🧱/section-header";
 import HomepageSection from "🧱/homepage-section";
 import { useEffect, useMemo, useState } from "react";
@@ -51,40 +52,44 @@ export default function Simkl({ tv }: { tv: Awaited<typeof meQuery>["tv"] }) {
 		};
 	}, [conditions]);
 
-	const firstFourShows = tv.slice(0, divider);
-	const secondFourShows = tv.slice(divider, divider * 2);
+	const groups = useMemo(() => groupShows(tv), [tv]);
+	const firstFourShows = groups.slice(0, divider);
+	const secondFourShows = groups.slice(divider, divider * 2);
+	const gridStyle = {
+		gridTemplateColumns: `repeat(${divider}, minmax(0, 1fr))`,
+	};
 	return (
 		<HomepageSection>
 			<SectionHeader>Shows I've recently watched 👀</SectionHeader>
 
 			<div
 				className={cls(styles.simklGrid, "gap-4 lg:gap-6 flex-wrap")}
+				style={gridStyle}
 				onMouseLeave={() => setSelected(undefined)}
 			>
-				{firstFourShows.map((show, i) => (
-					<div
-						onMouseEnter={() => setSelected(i)}
-						key={`${show.simklId}-${show.episode}`}
-					>
-						<WatchedTvShow show={show} selected={selected} i={i} />
+				{firstFourShows.map((group, i) => (
+					<div onMouseEnter={() => setSelected(i)} key={group.key}>
+						<WatchedTvShow group={group} selected={selected} i={i} />
 					</div>
 				))}
 			</div>
 
 			<div className="mt-10 mb-4 hidden sm:block">
-				<Timeline shows={tv.slice(0, divider * 2)} selected={selected} />
+				<Timeline groups={groups.slice(0, divider * 2)} selected={selected} />
 			</div>
 
 			<div
 				className={cls(styles.simklGrid, "gap-4 lg:gap-6 flex-wrap")}
+				style={gridStyle}
 				onMouseLeave={() => setSelected(undefined)}
 			>
-				{secondFourShows.map((show, i) => (
-					<div
-						onMouseEnter={() => setSelected(divider + i)}
-						key={`${show.simklId}-${show.episode}`}
-					>
-						<WatchedTvShow show={show} selected={selected} i={divider + i} />
+				{secondFourShows.map((group, i) => (
+					<div onMouseEnter={() => setSelected(divider + i)} key={group.key}>
+						<WatchedTvShow
+							group={group}
+							selected={selected}
+							i={divider + i}
+						/>
 					</div>
 				))}
 			</div>
