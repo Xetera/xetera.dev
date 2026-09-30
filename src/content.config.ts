@@ -9,6 +9,7 @@ const blogSchema = ({ image }: { image: ImageFunction }) => {
 		description: z.string(),
 		tags: z.array(z.string()),
 		draft: z.boolean().default(false),
+		icon: z.string().optional(),
 		banner: image().optional(),
 		imageTop: z
 			.object({

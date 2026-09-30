@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { routes } from "src/routing";
 import { formatDistance } from "date-fns";
+import ArticleIcon from "./ArticleIcon.astro";
 
 export type Props = CollectionEntry<"blog"> & {
   isNew: boolean;
@@ -16,7 +17,8 @@ const { data, id, isNew } = Astro.props;
   rel="prefetch"
   class="article-entry flex group @container h-full transition-transform duration-300 transform-gpu rounded"
 >
-  <div class="flex flex-row flex-1 relative h-full">
+  <div class="flex flex-row flex-1 items-center gap-4 relative h-full">
+    {data.icon && <ArticleIcon name={data.icon} id={id} />}
     <div class="z-1 flex-1">
       <div class="flex flex-col gap-2">
         <h2

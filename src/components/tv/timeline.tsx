@@ -32,16 +32,13 @@ export default function Timeline(props: Props) {
 			})
 		: undefined;
 	return (
-		<div className="relative flex items-center">
-			<p className="absolute -left-4 whitespace-nowrap bottom-4 -rotate-8 text-sm">
-				Today
-			</p>
-			<div className="bg-body-300 w-3 h-3 rounded-full absolute left-0" />
+		<div className="relative flex items-center color-text-200 uppercase font-medium text-xs tracking-widest">
+			<p className="absolute left-0 whitespace-nowrap bottom-3">Today</p>
 
-			<div className="h-[2px] w-full bg-body-300" />
+			<div className="h-[1px] w-full bg-body-700" />
 
 			{currentWatched && (
-				<p className="text-sm absolute left-50% -translate-x-50% bottom-4">
+				<p className="absolute left-50% -translate-x-50% bottom-3 whitespace-nowrap color-text-400">
 					Watched {currentWatched}
 				</p>
 			)}
@@ -58,14 +55,13 @@ export default function Timeline(props: Props) {
 						key={`${show.simklId}-${show.episode}`}
 						style={{ right: `${offset}%` }}
 						className={cls(
-							"transition-all w-3 h-3 absolute right-0 rounded",
-							hovering ? "bg-text-700" : "bg-body-300",
+							"transition-all duration-250 w-2 h-2 absolute right-0 translate-x-1/2 rounded-full",
+							hovering ? "bg-brand-900 scale-150" : "bg-body-400",
 						)}
 					/>
 				);
 			})}
-			<div className="bg-body-300 w-3 h-3 rounded-full absolute right-0" />
-			<p className="absolute bottom-4 -right-4 rotate-4 text-sm">Earlier</p>
+			<p className="absolute bottom-3 right-0">Earlier</p>
 		</div>
 	);
 }

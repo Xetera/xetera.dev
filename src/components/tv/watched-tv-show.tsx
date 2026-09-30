@@ -25,7 +25,7 @@ export default function WatchedTvShow({ show, selected, i }: Props) {
 		<a
 			href={show.simklLink ?? "#"}
 			rel="nofollower noopener external"
-			className={cls("flex flex-col gap-1 w-full h-full")}
+			className={cls("group flex flex-col gap-1 w-full h-full")}
 			data-umami-event="media-timeline:poster-click"
 			data-umami-event-title={show.title}
 		>
@@ -33,8 +33,8 @@ export default function WatchedTvShow({ show, selected, i }: Props) {
 				src={show.coverUrl}
 				alt={`Cover for ${show.title}`}
 				className={cls(
-					"rounded mb-2 max-h-[200px] object-cover h-full w-full ease-out transition-all aspect-ratio-[9/16]",
-					isSelected ? "opacity-100" : "opacity-20%",
+					"rounded mb-2 max-h-[200px] object-cover h-full w-full ease-out transition-all duration-250 aspect-ratio-[9/16] outline outline-1 outline-body-700 group-hover:-translate-y-1 group-hover:shadow-lg",
+					isSelected ? "opacity-100" : "opacity-40%",
 				)}
 			/>
 			<div className="flex flex-col gap-1">

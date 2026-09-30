@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { format } from "date-fns";
 import type { BlogSchema } from "src/content.config";
+import ArticleIcon from "🧱/ArticleIcon.astro";
 
 interface Props {
   banner?: BlogSchema["banner"];
@@ -13,9 +14,10 @@ interface Props {
   date: Date;
   topImage?: string | undefined;
   id: string;
+  icon?: string;
 }
 
-const { readingTime, title, subtitle, date, banner, id } = Astro.props;
+const { readingTime, title, subtitle, date, banner, id, icon } = Astro.props;
 ---
 
 <div class="flex gap-4 font-sans items-center">
@@ -31,7 +33,16 @@ const { readingTime, title, subtitle, date, banner, id } = Astro.props;
   class="m-0 mb-4 article-title color-text-700 text-2xl sm:text-3xl md:text-5xl font-900 z-1 leading-relaxed font-article-title"
   transition:name={`title-${id}`}
 >
-  {title}
+  {
+    icon && (
+      <ArticleIcon
+        name={icon}
+        id={id}
+        variant="bare"
+        class="inline-block w-[0.9em] h-[0.9em] mr-[0.25em] align-[-0.1em]"
+      />
+    )
+  }{title}
 </h1>
 
 {
