@@ -5,9 +5,12 @@ export interface Props {
   title: string;
   description?: string;
   themeColor?: string;
+  ogType?: "website" | "article";
+  publishedTime?: Date;
 }
 
-const { title, description, themeColor } = Astro.props;
+const { title, description, themeColor, ogType = "website", publishedTime } =
+  Astro.props;
 const canonical = new URL(
   Astro.url.pathname.replace(/(\/index)?\.html$/, ""),
   Astro.site,
@@ -121,7 +124,15 @@ https://github.com/xetera/infra
 <meta property="og:description" content={description ?? "Xetera's Blog"} />
 <link rel="canonical" href={canonical} />
 <meta property="og:url" content={canonical} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
+{
+  publishedTime && (
+    <meta
+      property="article:published_time"
+      content={publishedTime.toISOString()}
+    />
+  )
+}
 <meta property="og:image" content={new URL(avatarMj.src, Astro.site).href} />
 <meta property="og:image:width" content="1024" />
 <meta property="og:image:height" content="1024" />

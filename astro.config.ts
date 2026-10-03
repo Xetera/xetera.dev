@@ -9,6 +9,20 @@ import react from "@astrojs/react";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
+import { globSync, readFileSync } from "node:fs";
+import { basename, dirname, extname } from "node:path";
+
+const draftSlugs = new Set(
+  globSync("src/content/blog/**/*.{md,mdx}").flatMap((file) => {
+    const frontmatter = readFileSync(file, "utf8").split(/^---$/m)[1] ?? "";
+    if (!/^draft:\s*true\s*$/m.test(frontmatter)) return [];
+    const name = basename(file, extname(file));
+    return [
+      frontmatter.match(/^slug:\s*"?([^"\s]+)"?\s*$/m)?.[1] ??
+        (name === "index" ? basename(dirname(file)) : name),
+    ];
+  }),
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -38,7 +52,15 @@ export default defineConfig({
       wrap: true,
     },
   },
-  integrations: [unocss, mdx(), react(), sitemap()],
+  integrations: [
+    unocss,
+    mdx(),
+    react(),
+    sitemap({
+      filter: (page) =>
+        !draftSlugs.has(new URL(page).pathname.replace(/^\/article\//, "")),
+    }),
+  ],
   vite: {
     server: {
       watch: {
