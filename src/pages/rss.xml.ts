@@ -13,6 +13,7 @@ export async function GET(context: APIContext) {
 		description: "My humble rambles",
 		site: context.site.origin,
 		stylesheet: "/pretty-feed-v3.xsl",
+		trailingSlash: false,
 		items: blog
 			.flatMap((post) => {
 				if (post.data.draft) {

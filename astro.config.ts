@@ -14,6 +14,10 @@ import rehypeSlug from "rehype-slug";
 export default defineConfig({
   site: process.env.SITE_URL,
   compressHTML: true,
+  trailingSlash: "never",
+  build: {
+    format: "file",
+  },
   markdown: {
     processor: unified({
       smartypants: false,
